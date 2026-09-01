@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bristol, In Progress</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --ground:#f9f9f7;
+    --surface:#ffffff;
+    --ink:#0b0b0b;
+    --ink-2:#52514e;
+    --muted:#898781;
+    --rule:#e1e0d9;
+    --rule-strong:#c3c2b7;
+    --accent:#eb6834;
+    --signal:#2a78d6;
+    --live:#1baf7a;
+
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground:#0d0d0d;
+      --surface:#1a1a19;
+      --ink:#ffffff;
+      --ink-2:#c3c2b7;
+      --muted:#898781;
+      --rule:#2c2c2a;
+      --rule-strong:#3d3d3a;
+      --accent:#e5713f;
+      --signal:#3987e5;
+      --live:#22b581;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground:#0d0d0d;
+    --surface:#1a1a19;
+    --ink:#ffffff;
+    --ink-2:#c3c2b7;
+    --muted:#898781;
+    --rule:#2c2c2a;
+    --rule-strong:#3d3d3a;
+    --accent:#e5713f;
+    --signal:#3987e5;
+    --live:#22b581;
+  }
+
+  * { box-sizing:border-box; }
+
+  body {
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page {
+    max-width:880px;
+    margin:0 auto;
+    padding:0 26px 92px;
+  }
+
+  a { color:inherit; }
+  a:focus-visible,
+  button:focus-visible {
+    outline:2px solid var(--signal);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    padding:58px 0 0;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .kicker {
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:0.13em;
+    text-transform:uppercase;
+    color:var(--muted);
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+  }
+  .kicker .dot {
+    width:5px; height:5px; border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  h1 {
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(42px, 8vw, 68px);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+    margin:0;
+    text-wrap:balance;
+  }
+  h1 em { font-style:italic; }
+
+  .standfirst {
+    font-family:var(--display);
+    font-size:clamp(18px, 2.4vw, 21px);
+    line-height:1.5;
+    color:var(--ink-2);
+    max-width:34em;
+    margin:0;
+  }
+
+  .notice {
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--rule);
+    padding:16px 0 18px;
+    margin-top:8px;
+  }
+  .notice .flag {
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:500;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--accent);
+    padding-top:3px;
+    white-space:nowrap;
+  }
+  .notice p {
+    margin:0;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink-2);
+    max-width:52em;
+  }
+  .notice a { color:var(--signal); text-underline-offset:2px; }
+
+  /* ---------- sections ---------- */
+
+  section { margin-top:64px; }
+
+  .sec-head {
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    border-bottom:1px solid var(--rule-strong);
+    padding-bottom:9px;
+    margin-bottom:26px;
+  }
+  .sec-head h2 {
+    font-family:var(--body);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.11em;
+    text-transform:uppercase;
+    margin:0;
+  }
+  .sec-head .aside {
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted);
+  }
+
+  .lede {
+    font-size:15.5px;
+    color:var(--ink-2);
+    max-width:60ch;
+    margin:-8px 0 26px;
+  }
+
+  /* ---------- tools ---------- */
+
+  .tools {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(268px, 1fr));
+    gap:16px;
+  }
+
+  .tool {
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:20px 20px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  a.tool {
+    text-decoration:none;
+    transition:border-color .13s ease, transform .13s ease;
+  }
+  a.tool:hover {
+    border-color:var(--ink);
+    transform:translateY(-1px);
+  }
+  a.tool h3 {
+    text-decoration:underline;
+    text-decoration-color:var(--rule-strong);
+    text-decoration-thickness:1px;
+    text-underline-offset:3px;
+  }
+  a.tool:hover h3 { text-decoration-color:var(--accent); }
+  @media (prefers-reduced-motion: reduce) {
+    a.tool { transition:none; }
+    a.tool:hover { transform:none; }
+  }
+
+  .tool h3 {
+    font-family:var(--display);
+    font-size:23px;
+    font-weight:500;
+    line-height:1.2;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .tool p {
+    margin:0;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink-2);
+  }
+  .tool .foot {
+    margin-top:auto;
+    padding-top:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .chip {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:500;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-2);
+  }
+  .chip::before {
+    content:"";
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  .chip.live::before { background:var(--live); }
+
+  /* ---------- work ledger ---------- */
+
+  .group { margin-bottom:34px; }
+  .group:last-child { margin-bottom:0; }
+
+  .group h3 {
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 4px;
+  }
+
+  .items { border-top:1px solid var(--rule); }
+
+  .item {
+    display:grid;
+    grid-template-columns:1fr auto;
+    column-gap:24px;
+    row-gap:3px;
+    align-items:baseline;
+    padding:15px 0 16px;
+    border-bottom:1px solid var(--rule);
+  }
+  .item .name {
+    font-size:16.5px;
+    font-weight:600;
+    letter-spacing:-0.005em;
+    margin:0;
+  }
+  .item .stage {
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    white-space:nowrap;
+    text-align:right;
+  }
+  .item .what {
+    grid-column:1 / -1;
+    margin:0;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink-2);
+    max-width:64ch;
+  }
+  .item .ref {
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted);
+    letter-spacing:0.02em;
+  }
+
+  @media (max-width: 560px) {
+    .item { grid-template-columns:1fr; }
+    .item .stage { text-align:left; margin-top:2px; }
+  }
+
+  /* ---------- directory ---------- */
+
+  .dir {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:0 34px;
+  }
+  .dir-col { display:flex; flex-direction:column; }
+  .dir-col h3 {
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 2px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--rule);
+  }
+  .dir-col a {
+    padding:11px 0;
+    border-bottom:1px solid var(--rule);
+    font-size:15px;
+    color:var(--ink);
+    text-decoration:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+  }
+  .dir-col a:hover { color:var(--signal); }
+  .dir-col a span {
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    margin-top:72px;
+    border-top:2px solid var(--ink);
+    padding-top:22px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  footer p {
+    margin:0;
+    font-size:14px;
+    line-height:1.6;
+    color:var(--ink-2);
+    max-width:62ch;
+  }
+  footer .meta {
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  footer a { color:var(--signal); text-underline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="dot"></span>
+      <span>Bristol, Vermont</span>
+      <span>&middot;</span>
+      <span>Ian Albinson, Selectboard</span>
+    </div>
+
+    <h1>Bristol,<br><em>In Progress</em></h1>
+
+    <p class="standfirst">
+      An open file on what I'm actually working on as one of five Selectboard members,
+      plus the tools I'm building to make town data easier to look at.
+    </p>
+
+    <div class="notice">
+      <span class="flag">Please note</span>
+      <p>
+        This is my own page. It's not an official Town of Bristol publication, and nothing here
+        speaks for the Selectboard. For warned agendas, adopted minutes and official notices, go to
+        <a href="https://www.bristolvt.org">bristolvt.org</a>.
+      </p>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>Tools</h2>
+      <span class="aside">Public data, made readable</span>
+    </div>
+    <p class="lede">
+      Small standalone pages built from public records. Each one shows its sources and the date the
+      data was pulled. More go up here as they're finished.
+    </p>
+
+    <div class="tools">
+      <a class="tool" href="crashes/">
+        <h3>Police calls and the district line</h3>
+        <p>
+          Bristol's police district covers the village core, not the whole town. This maps where the
+          department actually responds against that boundary.
+        </p>
+        <div class="foot">
+          <span class="chip live">Live</span>
+          <span>VTrans &amp; Bristol PD records</span>
+        </div>
+      </a>
+
+      <a class="tool" href="appropriations/">
+        <h3>Where the appropriations go</h3>
+        <p>
+          Every nonprofit Bristol voters fund at Town Meeting, next to what that organization's
+          public IRS filings show about its size and finances.
+        </p>
+        <div class="foot">
+          <span class="chip live">Live</span>
+          <span>IRS Form 990 filings</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>What I'm working on</h2>
+      <span class="aside">14 open files</span>
+    </div>
+    <p class="lede">
+      Not everything the Town is doing. Just the files I'm personally carrying or pushing on right
+      now. Some are mine to draft, some are board decisions I'm working toward.
+    </p>
+
+    <div class="group">
+      <h3>Policy and ordinance</h3>
+      <div class="items">
+
+        <div class="item">
+          <p class="name">Conflict of interest rules</p>
+          <span class="stage">In drafting</span>
+          <p class="what">
+            What town officials have to disclose, and when they have to step back from a vote.
+            Still in revision, with several open questions to settle before it goes to readings.
+            <span class="ref">SB-2026-01</span>
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Petitioned articles and non-binding business</p>
+          <span class="stage">In drafting</span>
+          <p class="what">
+            How the Town handles citizen-petitioned articles and advisory questions at Town Meeting.
+            <span class="ref">POL-2026-03</span>
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Town Meeting rules of procedure</p>
+          <span class="stage">In drafting</span>
+          <p class="what">
+            The ground rules for how Town Meeting itself runs.
+            <span class="ref">POL-2026-04</span>
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Public comment at Selectboard meetings</p>
+          <span class="stage">In drafting</span>
+          <p class="what">
+            When residents get to speak, for how long, and how the board handles it.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Selectboard rules of procedure</p>
+          <span class="stage">In drafting</span>
+          <p class="what">
+            How the board runs its own meetings. Companion to the public comment policy.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Personnel policy</p>
+          <span class="stage">Second reading</span>
+          <p class="what">
+            Town employment rules. Scheduled for a second reading on September 14.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Buildings and infrastructure</h3>
+      <div class="items">
+
+        <div class="item">
+          <p class="name">Holley Hall energy retrofit</p>
+          <span class="stage">Underway</span>
+          <p class="what">
+            Heating and efficiency work at Holley Hall, funded by a state Municipal Energy
+            Resilience Program grant of $325,853.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Lawrence Memorial Library hazmat abatement</p>
+          <span class="stage">Underway</span>
+          <p class="what">
+            Asbestos and PCB removal ahead of the library renovation, paid for with ARPA funds.
+            Confirmation sampling is still running.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Mountain Street stormwater</p>
+          <span class="stage">Scoping</span>
+          <p class="what">
+            Stormwater and drainage improvements on Mountain Street.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">EV charging on the Town Green</p>
+          <span class="stage">Quote in hand</span>
+          <p class="what">
+            Level 2 public chargers at the Town Green. There's a quote on the table with a
+            near-term expiration.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Fast EV charging</p>
+          <span class="stage">On hold</span>
+          <p class="what">
+            A DC fast charger for Bristol. Site and scope are still open, and it's waiting on
+            utility interconnection.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Town technology at the Hub</p>
+          <span class="stage">Scoping</span>
+          <p class="what">
+            Network and IT work at the Hub Teen Center.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Getting around downtown</h3>
+      <div class="items">
+
+        <div class="item">
+          <p class="name">Downtown access and circulation study</p>
+          <span class="stage">Grant request</span>
+          <p class="what">
+            A regional planning grant request to study parking, walking and traffic downtown.
+            Pulls in the West Street work and a possible 25 mph speed reduction. Pitch is
+            September 16.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Police services</h3>
+      <div class="items">
+
+        <div class="item">
+          <p class="name">Town-wide police services</p>
+          <span class="stage">Board work session</span>
+          <p class="what">
+            Residents outside the village core pay for a police district they aren't in. The board
+            is working through whether to put town-wide coverage to the voters, and in which year.
+          </p>
+        </div>
+
+        <div class="item">
+          <p class="name">Fall Middlebury interns</p>
+          <span class="stage">Starting September</span>
+          <p class="what">
+            Two Middlebury College interns this fall, working on the town-wide police question:
+            resident survey and analysis on one side, public information on the other.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="group">
+      <h3>Longer range</h3>
+      <div class="items">
+
+        <div class="item">
+          <p class="name">The Bristol Pivot</p>
+          <span class="stage">Board process</span>
+          <p class="what">
+            The Town Administrator's five-year strategy for Bristol. The board is still working out
+            how to take it up.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Where to find things</h2>
+      <span class="aside">The official record</span>
+    </div>
+    <p class="lede">
+      Everything above is my summary. These are the actual sources, all on the Town's own site.
+    </p>
+
+    <div class="dir">
+      <div class="dir-col">
+        <h3>Meetings</h3>
+        <a href="https://bristolvt.org/meeting-minutes/">Agendas and minutes <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/calendar/">Town calendar <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/2026-meetings/">2026 meeting schedule <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/boards-commissions-committees/selectboard/">Selectboard <span>bristolvt.org</span></a>
+      </div>
+
+      <div class="dir-col">
+        <h3>Documents</h3>
+        <a href="https://bristolvt.org/documents-and-forms/">Documents and forms <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/towndepartments/planning-zoning/">Planning and zoning <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/boards-commissions-committees/planning-commission/">Planning Commission <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/development-review-board/">Development Review Board <span>bristolvt.org</span></a>
+      </div>
+
+      <div class="dir-col">
+        <h3>Property</h3>
+        <a href="https://bristolvt.org/parcel-map/">Parcel map <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/land-records/">Land records <span>bristolvt.org</span></a>
+        <a href="https://bristolvt.org/make-a-payment/">Pay a bill <span>bristolvt.org</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      <strong>Bristol, In Progress</strong> is written and maintained by Ian Albinson, one of five
+      members of the Bristol Selectboard. It is not an official Town of Bristol publication, it has
+      not been reviewed or adopted by the Selectboard, and it does not speak for the board, Town
+      staff, or any Town department.
+    </p>
+    <p>
+      Everything here is a snapshot. Dates move, projects change, and the official record lives at
+      <a href="https://www.bristolvt.org">bristolvt.org</a> and in the adopted minutes. If something
+      on this page is wrong, I'd like to know.
+    </p>
+    <p class="meta">Last updated September 1, 2026</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
