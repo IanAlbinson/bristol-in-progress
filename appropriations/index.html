@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bristol Appropriations — Nonprofit Financial Dashboard (2026 Town Meeting)</title>
+<style>
+  :root{
+    --green:#2f5d34; --green-dark:#234727; --gold:#b9892f; --ink:#1c1c1a;
+    --muted:#6b6b63; --line:#e3e0d6; --bg:#f6f4ec; --card:#fffdf8;
+    --chip:#eef0e6; --warn:#8a5a00; --warnbg:#fbf3df;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;font-size:15px}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
+  header h1{font-size:25px;margin:0 0 4px;color:var(--green-dark);letter-spacing:-.2px}
+  header .sub{color:var(--muted);font-size:14px;margin:0 0 2px}
+  header .src{color:var(--muted);font-size:12.5px;margin-top:6px}
+
+  .tabs{display:flex;gap:8px;margin:20px 0 4px;border-bottom:2px solid var(--line)}
+  .tab{padding:10px 16px;border:none;background:none;font-size:14px;font-weight:600;color:var(--muted);
+    cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+  .tab:hover{color:var(--green-dark)}
+  .tab.active{color:var(--green-dark);border-bottom-color:var(--gold)}
+  .tab .c{font-weight:500;color:var(--muted);font-size:12.5px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 8px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .n{font-size:23px;font-weight:700;color:var(--green-dark);letter-spacing:-.3px}
+  .stat .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+  .note{background:var(--warnbg);border:1px solid #ecd9a8;color:var(--warn);
+    border-radius:10px;padding:11px 14px;font-size:13px;margin:16px 0 4px}
+  .note b{color:#6e4800}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 12px}
+  .controls input[type=search]{flex:1;min-width:220px;padding:9px 12px;border:1px solid var(--line);
+    border-radius:9px;font-size:14px;background:var(--card)}
+  .controls select{padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:13.5px}
+  .controls .count{color:var(--muted);font-size:13px;margin-left:auto}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;font-size:13.5px}
+  thead th{background:var(--green);color:#fff;text-align:left;padding:10px 12px;font-weight:600;
+    font-size:12.5px;cursor:pointer;white-space:nowrap;user-select:none}
+  thead th.num{text-align:right}
+  thead th span{opacity:.6;font-size:10px}
+  tbody td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+  tbody td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tbody tr:hover{background:#faf8f0}
+  .org{font-weight:600;color:var(--ink)}
+  .org a{color:var(--green-dark);text-decoration:none}
+  .org a:hover{text-decoration:underline}
+  .meta{color:var(--muted);font-size:11.5px;margin-top:2px}
+  .chip{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:20px;background:var(--chip);
+    color:#4a4a40;margin-right:4px;white-space:nowrap}
+  .chip.art{background:#e7eee0;color:#3a5a32}
+  .badge{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
+  .b-data{background:#e2efe1;color:#2c6b3a}
+  .b-reg{background:#eef0e6;color:#6b6b40}
+  .b-none{background:#f1e6e6;color:#9a5454}
+  .b-pend{background:#e7eaf2;color:#4a5573}
+  .dash{color:#c7c3b6}
+  .appro{font-weight:700;color:var(--gold)}
+
+  .bs-caret{display:inline-block;width:14px;margin-right:5px;color:var(--gold);font-size:11px;
+    cursor:pointer;transition:transform .15s ease;user-select:none;transform:translateY(-1px)}
+  .bs-caret.open{transform:translateY(-1px) rotate(90deg)}
+  tr.bs-row>td{background:#faf8f0;border-top:none;padding:0 12px 14px}
+  .bs-panel{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);max-width:640px}
+  .bs-title{font-size:12px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.4px;margin-bottom:9px}
+  .bs-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin-bottom:10px;border:1px solid var(--line)}
+  .bs-bar span{display:block;height:100%}
+  .bs-legend{display:flex;flex-wrap:wrap;gap:4px 18px}
+  .bs-legend .row{display:flex;align-items:center;gap:7px;font-size:12.5px;min-width:180px}
+  .bs-legend .row .amt{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+  .bs-legend .row.total{border-top:1px solid var(--line);margin-top:5px;padding-top:6px;width:100%;font-weight:700;color:var(--green-dark)}
+  .bs-dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
+  .bs-note{font-size:11.5px;color:var(--muted);margin-top:8px}
+  footer{margin-top:26px;color:var(--muted);font-size:12px;line-height:1.6}
+  footer a{color:var(--green-dark)}
+  @media(max-width:760px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .hide-sm{display:none}
+    .wrap{padding:18px 14px 50px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Bristol Appropriations &mdash; Nonprofit Financial Dashboard</h1>
+    <p class="sub">Two views: organizations requesting a Town appropriation at the March 2, 2026 Annual Town Meeting (FY2027), and other local-area nonprofits that do <b>not</b> receive an appropriation. Each shows the latest IRS Form 990 financials from ProPublica's Nonprofit Explorer.</p>
+    <p class="src">Appropriations source: Town of Bristol FY2025 Annual Report, Articles 11&ndash;15. Financial source: ProPublica Nonprofit Explorer (IRS Form 990 extracts). Compiled June 21, 2026.</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="appro">Appropriation recipients <span class="c" id="tc-appro"></span></button>
+    <button class="tab" data-tab="local">Local organizations &mdash; no appropriation <span class="c" id="tc-local"></span></button>
+  </div>
+
+  <section class="stats" id="stats"></section>
+
+  <div class="note">
+    <b>Reading the data.</b> Financial figures are each org's most recent IRS Form 990 with a data extract (mostly FY2023; a few FY2024). Many file on a June or August fiscal year, so a FY2024 return may exist but not yet be extracted. Regional nonprofits (Middlebury, Colchester, etc.) serve all of Addison County, not Bristol alone, so their totals reflect their full operation. <b>Verify:</b> "Addison County Restorative Justice Services" maps to the registered entity <i>Addison County Court Diversion &amp; Community Justice Projects Inc</i>. Small local groups marked <i>No 990 on file</i> are likely 990-N (e-postcard) filers or operate under a parent/church and file no public financials.
+  </div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search organizations…" autocomplete="off">
+    <select id="fArticle">
+      <option value="">All articles</option>
+      <option value="11">Art. 11 — Library</option>
+      <option value="12">Art. 12 — Rescue</option>
+      <option value="13">Art. 13 — Bristol-based</option>
+      <option value="14">Art. 14 — Restorative Justice</option>
+      <option value="15">Art. 15 — Regional</option>
+    </select>
+    <select id="fData">
+      <option value="">All data status</option>
+      <option value="data">Has 990 financials</option>
+      <option value="reg">Registered, no extract</option>
+      <option value="none">No 990 on file</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th data-k="name">Organization <span>&#8597;</span></th>
+        <th data-k="loc">Town <span>&#8597;</span></th>
+        <th data-k="kind" class="hide-sm">Kind <span>&#8597;</span></th>
+        <th data-k="article" class="hide-sm">Art. <span>&#8597;</span></th>
+        <th data-k="appro" class="num">Appropriation <span>&#8597;</span></th>
+        <th data-k="year" class="num hide-sm">FY <span>&#8597;</span></th>
+        <th data-k="rev" class="num">Revenue <span>&#8597;</span></th>
+        <th data-k="exp" class="num hide-sm">Expenses <span>&#8597;</span></th>
+        <th data-k="assets" class="num hide-sm">Total Assets (EOY) <span>&#8597;</span></th>
+        <th data-k="comp" class="num hide-sm">Officer Comp <span>&#8597;</span></th>
+        <th data-k="status">990 Status <span>&#8597;</span></th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <footer>
+    <p><b>Notes &amp; caveats.</b> EINs verified against ProPublica's organization endpoint. "Net Assets/EOY" shown is total assets at end of year. Officer comp is "compensation of current officers" as reported on the 990; $0 often means an all-volunteer board or comp reported elsewhere. Lawrence Memorial Library is a municipal town library and files no Form 990. Have-a-Heart Food Shelf operates through St. Ambrose Catholic Church. Addison County River Watch Collaborative and RSVP/Foster Grandparent are programs under parent organizations (ACRPC and a regional volunteer center, respectively) and have no standalone 990. Open Door Clinic, Bristol CORE, Bristol Little League, and Addison County Readers are active nonprofits that do not surface a public 990 extract (likely 990-N filers).</p>
+    <p>Click an organization name to open its full record on ProPublica. To refresh, re-run the data pull in Cowork (figures update as the IRS releases new 990 extracts).</p>
+  </footer>
+</div>
+
+<script>
+const DATA = [
+ {name:"Lawrence Memorial Library", article:11, appro:265275.44, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Public library", kind:"Municipal", status:"none", note:"Municipal town library — no Form 990", phone:"802-453-2366", web:"lawrencelibraryvt.org"},
+ {name:"Bristol Rescue Squad", article:12, appro:37820, ein:"23-7083861", year:2024, rev:1009198, exp:1091369, assets:604056, comp:0, loc:"Bristol, VT", cat:"Emergency medical", kind:"501(c)(3)", status:"data", phone:"802-453-2472", web:"bristolrescuevt.org"},
+ {name:"Bristol Cemetery Association", article:13, appro:29000, ein:"03-0107682", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Cemetery", kind:"501(c)(13)", status:"reg", note:"Registered, no financial extract", phone:"802-453-3034", web:null},
+ {name:"Bristol CORE", article:13, appro:10000, ein:"20-3718929", year:2024, rev:81456, exp:82622, assets:-1166, comp:20815, loc:"Bristol, VT", cat:"Downtown organization", kind:"501(c)(3)", status:"data", note:"Files as Bristol Downtown Community Partnership Inc. FY ending June 2025: net income -$1,166; net assets -$1,166", phone:"802-453-7378", web:"bristolcore.org"},
+ {name:"Bristol Family Center", article:13, appro:4000, ein:"22-3172076", year:2024, rev:817925, exp:898777, assets:435427, comp:157987, loc:"Bristol, VT", cat:"Childcare / early ed", kind:"501(c)(3)", status:"data", note:"FY ending Aug 2024", phone:"802-453-5659", web:"bristolfamilycenter.org"},
+ {name:"Bristol Fourth of July Committee", article:13, appro:8500, ein:"03-0346880", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Community events", kind:"501(c)(3)", status:"reg", note:"Bristol VT 501(c)(3), exempt since 2000; 990-N filer — no financial extract", phone:"802-453-4877", web:"bristol4th.com"},
+ {name:"Bristol Historical Society", article:13, appro:2500, ein:"41-3912608", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"History", kind:"501(c)(3)", status:"reg", note:"501(c)(3) recognized Feb 2026, no extract yet", phone:"802-453-3526", web:null},
+ {name:"Bristol Little League Baseball & Softball", article:13, appro:2000, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Youth sports", kind:"—", status:"none", note:"Likely 990-N filer", phone:"802-453-3614", web:null},
+ {name:"Bristol Recreation Club", article:13, appro:15000, ein:"03-0258860", year:2024, rev:36437, exp:30564, assets:263153, comp:0, loc:"Bristol, VT", cat:"Recreation (990-EZ)", kind:"—", status:"data", phone:"802-777-1968", web:"bristolrecclub.org"},
+ {name:"Bristol Town Band", article:13, appro:1200, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Music / arts", kind:"—", status:"none", note:"Likely no 990", phone:"802-377-7335", web:null},
+ {name:"Have-a-Heart Food Shelf", article:13, appro:6000, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Food security", kind:"—", status:"none", note:"Operates through St. Ambrose Church — no own 990", phone:"802-453-4577", web:null},
+ {name:"Northeast Addison Television (NEAT)", article:13, appro:3500, ein:"01-0621878", year:2025, rev:103539, exp:104204, assets:196246, comp:42000, loc:"Bristol, VT", cat:"Public access media (990-EZ)", kind:"501(c)(3)", status:"data", phone:"802-453-8562", web:"neatbristol.com"},
+ {name:"Addison County Restorative Justice Services", article:14, appro:2000, ein:"03-0276943", year:2024, rev:402548, exp:437632, assets:198370, comp:82527, loc:"Middlebury, VT", cat:"Restorative justice", kind:"501(c)(3)", status:"data", note:"Filed as Addison County Court Diversion & Community Justice Projects Inc — verify match", phone:"802-388-3888", web:"acrjs.org"},
+ {name:"Addison County Home Health & Hospice", article:15, appro:4700, ein:"23-7032401", year:2024, rev:3843059, exp:4143224, assets:8677339, comp:317998, loc:"Middlebury, VT", cat:"Home health / hospice", kind:"501(c)(3)", status:"data", phone:"802-388-7259", web:"achhh.org"},
+ {name:"Addison County Parent/Child Center", article:15, appro:4800, ein:"03-0280370", year:2024, rev:2948431, exp:2865539, assets:4093882, comp:94745, loc:"Middlebury, VT", cat:"Family services", kind:"501(c)(3)", status:"data", note:"Filed as Parent Child Center Inc", phone:"802-388-3171", web:"addisoncountypcc.org"},
+ {name:"Addison County Readers", article:15, appro:2000, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Addison County, VT", cat:"Early literacy", kind:"—", status:"none", note:"All-volunteer; likely 990-N filer", phone:"802-758-2218", web:"addisoncountyreaders.org"},
+ {name:"Addison County River Watch Collaborative", article:15, appro:300, ein:"87-2663950", year:2024, rev:92593, exp:83814, assets:33236, comp:0, loc:"New Haven, VT", cat:"Water quality", kind:"501(c)(3)", status:"data", note:"Now a standalone 501(c)(3) (incorporated 2022), no longer a program under ACRPC; FY ending Dec 2024, 990-EZ", phone:"802-434-3236", web:"acrpc.org/acrwc"},
+ {name:"Age Well", article:15, appro:2700, ein:"22-2474636", year:2024, rev:13399762, exp:13854842, assets:4734239, comp:204814, loc:"Colchester, VT", cat:"Senior services", kind:"501(c)(3)", status:"data", note:"Formerly CVAA", phone:"802-865-0360", web:"agewellvt.org"},
+ {name:"Atria Collective", article:15, appro:3500, ein:"22-2921518", year:2024, rev:792881, exp:828164, assets:1008249, comp:81976, loc:"Middlebury, VT", cat:"Anti-violence services", kind:"501(c)(3)", status:"data", note:"Formerly WomenSafe", phone:"802-388-4205", web:"atriavt.org"},
+ {name:"Counseling Service of Addison County", article:15, appro:3875, ein:"03-0212396", year:2024, rev:30448100, exp:29159251, assets:20889182, comp:321933, loc:"Middlebury, VT", cat:"Mental health", kind:"501(c)(3)", status:"data", phone:"802-388-7641", web:"csac-vt.org"},
+ {name:"Elderly Services", article:15, appro:2200, ein:"03-0280968", year:2024, rev:5002588, exp:2718918, assets:11736755, comp:115000, loc:"Middlebury, VT", cat:"Adult day health", kind:"501(c)(3)", status:"data", phone:"802-388-3983", web:"elderlyservices.org"},
+ {name:"Homeward Bound (Addison County Humane Society)", article:15, appro:1000, ein:"03-0264068", year:2025, rev:6627051, exp:1148090, assets:9548167, comp:66395, loc:"Middlebury, VT", cat:"Animal welfare", kind:"501(c)(3)", status:"data", phone:"802-388-1100", web:"homewardboundanimals.org"},
+ {name:"Habitat for Humanity Addison County", article:15, appro:1500, ein:"03-0361510", year:2024, rev:424178, exp:42890, assets:2233002, comp:0, loc:"Middlebury, VT", cat:"Affordable housing", kind:"501(c)(3)", status:"data", phone:"802-388-0400", web:"addisonhabitat.org"},
+ {name:"HOPE (Helping Overcome Poverty's Effects)", article:15, appro:3250, ein:"23-7393720", year:2025, rev:2689063, exp:2430414, assets:3676785, comp:0, loc:"Middlebury, VT", cat:"Anti-poverty", kind:"501(c)(3)", status:"data", note:"Filed as Addison County Community Action Group Inc dba HOPE", phone:"802-388-3608", web:"hope-vt.org"},
+ {name:"John W. Graham Shelter", article:15, appro:1400, ein:"03-0275219", year:2024, rev:2163112, exp:1594797, assets:3859299, comp:216011, loc:"Vergennes, VT", cat:"Shelter / housing", kind:"501(c)(3)", status:"data", note:"John W Graham Emergency Shelter Services Inc", phone:"802-877-2677", web:"johngrahamshelter.org"},
+ {name:"Open Door Clinic", article:15, appro:1000, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Middlebury, VT", cat:"Free health care", kind:"—", status:"none", note:"No public 990 extract — likely 990-N / fiscal sponsor", phone:"802-388-0137", web:"opendoormidd.org"},
+ {name:"RSVP / Green Mountain Foster Grandparent", article:15, appro:750, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Addison County, VT", cat:"Senior volunteers", kind:"—", status:"none", note:"Program under a regional parent org — no own 990", phone:"802-388-7044", web:"volunteersinvt.org"},
+ {name:"Tri-Valley Transit", article:15, appro:11306, ein:"03-0335768", year:2024, rev:9777144, exp:9182298, assets:12734056, comp:184400, loc:"Middlebury, VT", cat:"Public transit", kind:"501(c)(3)", status:"data", note:"Formerly ACTR", phone:"802-388-2287", web:"trivalleytransit.org"},
+ {name:"Turning Point Center of Addison County", article:15, appro:3000, ein:"20-4934608", year:2024, rev:1324056, exp:617770, assets:892240, comp:92304, loc:"Middlebury, VT", cat:"Recovery center", kind:"501(c)(3)", status:"data", phone:"802-388-4249", web:"turningpointaddisonvt.org"},
+ {name:"Vermont Adult Learning", article:15, appro:1650, ein:"03-0276755", year:2024, rev:5448550, exp:5654943, assets:3155660, comp:121761, loc:"Burlington, VT", cat:"Adult education", kind:"501(c)(3)", status:"data", phone:"802-388-4392", web:"vtadultlearning.org"}
+];
+
+const LOCAL = [
+ {name:"Lincoln Cemetery Association", appro:null, ein:"03-0183641", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Lincoln, VT", cat:"Cemetery", kind:"501(c)(13)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Evergreen Cemetery Association (New Haven)", appro:null, ein:"03-0217237", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Cemetery", kind:"501(c)(13)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Theatre Group Ltd", appro:null, ein:"03-0231251", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Lincoln, VT", cat:"Theatre / arts", kind:"501(c)(3)", status:"reg", note:"Last 990-EZ FY2008; now 990-N, no extract"},
+ {name:"Lincoln Co-operative Pre-School", appro:null, ein:"03-0233379", year:2023, rev:294530, exp:195299, assets:240385, comp:70584, loc:"Lincoln, VT", cat:"Preschool", kind:"501(c)(3)", status:"data"},
+ {name:"Lincoln Volunteer Fire Company", appro:null, ein:"03-0277058", year:2023, rev:98581, exp:91563, assets:457625, comp:0, loc:"Lincoln, VT", cat:"Fire / emergency", kind:"—", status:"data"},
+ {name:"Lincoln Library Inc", appro:null, ein:"03-0301455", year:2023, rev:171285, exp:68974, assets:1768523, comp:39455, loc:"Lincoln, VT", cat:"Library", kind:"501(c)(3)", status:"data"},
+ {name:"Lincoln Historical Society Inc", appro:null, ein:"03-0311151", year:2012, rev:4841, exp:5014, assets:14399, comp:0, loc:"Lincoln, VT", cat:"History", kind:"501(c)(3)", status:"data", note:"Only FY2012 extracted; now a 990-N filer (figures are stale)"},
+ {name:"Vajra Dakini Nunnery Inc", appro:null, ein:"20-1894712", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Lincoln, VT", cat:"Religious (Buddhist)", kind:"501(c)(3)", status:"reg", note:"Religious org — exempt from filing Form 990"},
+ {name:"Weathervane United Inc", appro:null, ein:"22-2525440", year:2023, rev:139668, exp:71942, assets:1076847, comp:0, loc:"Lincoln, VT", cat:"Community", kind:"—", status:"data"},
+ {name:"Lincoln Sports Inc", appro:null, ein:"23-7045910", year:2025, rev:198823, exp:171735, assets:344479, comp:0, loc:"Lincoln, VT", cat:"Sports / recreation (990-EZ)", kind:"—", status:"data"},
+ {name:"Metta Earth Institute Inc", appro:null, ein:"27-0695274", year:2022, rev:73264, exp:44106, assets:370674, comp:0, loc:"Lincoln, VT", cat:"Education / environment (990-EZ)", kind:"501(c)(3)", status:"data"},
+ {name:"Cheshire Project", appro:null, ein:"37-1497662", year:2023, rev:1434343, exp:694136, assets:2576857, comp:0, loc:"Lincoln, VT", cat:"Charitable", kind:"501(c)(3)", status:"data", note:"FY2024 990 filed, not yet extracted"},
+ {name:"Nick Mayer Aquatic Wildlife Conservation Corp", appro:null, ein:"39-2392379", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Lincoln, VT", cat:"Wildlife conservation", kind:"501(c)(3)", status:"reg", note:"Recognized Jul 2025 — no filings yet"},
+ {name:"Zeno Mountain Farm Limited", appro:null, ein:"20-5570858", year:2023, rev:1015136, exp:1128118, assets:565872, comp:151091, loc:"Lincoln, VT", cat:"Camp / disability inclusion", kind:"501(c)(3)", status:"data", note:"ProPublica lists legal name 'Zeno' with a Seattle, WA mailing address — same entity; FY2024 990 filed, not yet extracted"},
+ {name:"Bald Hill Foundation Inc", appro:null, ein:"46-4637588", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Lincoln, VT", cat:"Foundation", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Friends For A Dog Ltd", appro:null, ein:"47-2923750", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Lincoln, VT", cat:"Animal welfare", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Central Mesa Inc", appro:null, ein:"86-1215370", year:2024, rev:6681034, exp:2962675, assets:8494238, comp:148411, loc:"Lincoln, VT", cat:"Social welfare", kind:"501(c)(4)", status:"data"},
+ {name:"River Peaces Foundation", appro:null, ein:"99-4014357", year:2025, rev:200058, exp:315666, assets:1091727, comp:44000, loc:"Lincoln, VT", cat:"Foundation", kind:"501(c)(3)", status:"data"},
+ {name:"Vermont Council of Teachers of Mathematics", appro:null, ein:"03-0265855", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Education", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Sunray Meditation Society", appro:null, ein:"03-0277947", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Religious / meditation", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Addison County Church of Christ", appro:null, ein:"03-0278700", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Church", kind:"501(c)(3)", status:"reg", note:"Religious org — exempt from filing Form 990"},
+ {name:"Grace Baptist Church", appro:null, ein:"03-0280612", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Church", kind:"501(c)(3)", status:"reg", note:"IRS-designated church — exempt from filing Form 990"},
+ {name:"East Monkton Church Association Inc", appro:null, ein:"03-0285191", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Monkton, VT", cat:"Religious association", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Green Mountain Baptist Association", appro:null, ein:"03-0285577", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Religious association", kind:"501(c)(3)", status:"reg", note:"Religious association — likely exempt/990-N"},
+ {name:"American Legion Post 19", appro:null, ein:"03-0301106", year:2024, rev:349056, exp:354414, assets:2092362, comp:26905, loc:"Bristol, VT", cat:"Veterans", kind:"501(c)(19)", status:"data", note:"Files Form 990 as American Legion Post 19, Bristol VT. FY ending June 2024"},
+ {name:"Addison Otters Swim Team", appro:null, ein:"03-0310807", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Youth sports", kind:"—", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Bristol Friends of the Arts Inc", appro:null, ein:"03-0326386", year:2024, rev:76101, exp:86054, assets:107093, comp:0, loc:"Bristol, VT", cat:"Arts", kind:"501(c)(3)", status:"data", note:"990-EZ"},
+ {name:"Knights of Columbus", appro:null, ein:"03-0328452", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Fraternal", kind:"501(c)(8)", status:"reg", note:"Council 10535 Bishop Robert F Joyce, Bristol VT. Form 990/990-EZ PDFs on file FY2004-2008 (scanned, not extracted); 990-N since"},
+ {name:"Federated Church of Bristol", appro:null, ein:"03-0332459", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Church", kind:"501(c)(3)", status:"reg", note:"Religious org — exempt from filing Form 990"},
+ {name:"Tari Shattuck Education Foundation", appro:null, ein:"03-0337943", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Education foundation", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Addison County Firefighters Association Inc", appro:null, ein:"03-0342049", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Fire / emergency", kind:"—", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Sunray Peace Village Land Trust", appro:null, ein:"03-0349064", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Land trust", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Watershed Center", appro:null, ein:"03-0349697", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Environment / retreat", kind:"501(c)(3)", status:"reg", note:"Bristol VT 501(c)(3). Form 990 PDFs on file FY2001-2005 (scanned, not extracted); no extracted financials any year"},
+ {name:"NH Munsill Hose & Hook & Ladder Co", appro:null, ein:"03-0357276", year:2024, rev:9400, exp:10091, assets:92677, comp:0, loc:"Bristol, VT", cat:"Fire / emergency", kind:"501(c)(3)", status:"data", note:"Files Form 990; FY ending Dec 2024"},
+ {name:"Vermont Dairy Industry Association", appro:null, ein:"03-6005787", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Agriculture", kind:"—", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Partners of the Americas Vermont-Honduras", appro:null, ein:"03-6013223", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"International", kind:"501(c)(3)", status:"reg", note:"Page exists; no Form 990 data extracted"},
+ {name:"One World Library Project Corporation", appro:null, ein:"16-1699298", year:2011, rev:2893, exp:1569, assets:3211, comp:0, loc:"Bristol, VT", cat:"Library / education", kind:"501(c)(3)", status:"data", note:"Only FY2011 extracted; now a 990-N filer (figures are stale)"},
+ {name:"Vermont Family Forests Foundation", appro:null, ein:"20-3294728", year:2024, rev:566826, exp:475764, assets:2208145, comp:76303, loc:"Bristol, VT", cat:"Conservation", kind:"501(c)(3)", status:"data", note:"Filing entity; duplicate BMF stub 03-0367215 exists"},
+ {name:"Wells Mountain Initiative Inc", appro:null, ein:"20-3823604", year:2024, rev:956818, exp:1097957, assets:2069417, comp:286810, loc:"Bristol, VT", cat:"International scholarships", kind:"501(c)(3)", status:"data", note:"Formerly Wells Mountain Foundation"},
+ {name:"The Global Diversity Foundation Inc", appro:null, ein:"20-8772517", year:2024, rev:69335, exp:104616, assets:74096, comp:0, loc:"Bristol, VT", cat:"Environment / culture", kind:"501(c)(3)", status:"data", note:"990-EZ; VT entity (same-named WI/WA orgs exist)"},
+ {name:"Red Cedar School Inc", appro:null, ein:"22-3126831", year:2024, rev:726058, exp:529250, assets:995886, comp:0, loc:"Bristol, VT", cat:"Independent school", kind:"501(c)(3)", status:"data", note:"Form 990 FY ending June 2024; officer comp reported under salaries"},
+ {name:"Free & Accepted Masons of Vermont", appro:null, ein:"23-7121391", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Fraternal", kind:"501(c)(10)", status:"reg", note:"Libanus Lodge No. 47, Bristol VT; 990-N filer — no financial extract"},
+ {name:"Trinity Yard", appro:null, ein:"26-0541695", year:2024, rev:109091, exp:122170, assets:160289, comp:0, loc:"Bristol, VT", cat:"International / education", kind:"501(c)(3)", status:"data", note:"Files as Trinity Yard School; 990-EZ"},
+ {name:"Addison United Soccer League", appro:null, ein:"26-2089572", year:2018, rev:111270, exp:101463, assets:39556, comp:0, loc:"Bristol, VT", cat:"Youth sports", kind:"—", status:"data", note:"Files Form 990/990-EZ (FY2018 IRS data, latest retrievable this run). Prior '990-N, no extract' note was incorrect."},
+ {name:"Five-Town Health Alliance Inc", appro:null, ein:"26-3010066", year:2024, rev:5855500, exp:6168254, assets:5040396, comp:477897, loc:"Bristol, VT", cat:"Health (dba Mountain Health Center)", kind:"501(c)(3)", status:"data", note:"FQHC dba Mountain Health Center; FY ending Sept 2024"},
+ {name:"Friends of the Lincoln Community School Inc", appro:null, ein:"27-2277523", year:2011, rev:32336, exp:27174, assets:55650, comp:0, loc:"Lincoln, VT", cat:"School support", kind:"501(c)(3)", status:"data", note:"Only FY2011 990-EZ extracted; 990-N filer since (figures are stale)"},
+ {name:"Addison Northeast Education Association", appro:null, ein:"27-3532425", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Teachers' union", kind:"501(c)(5)", status:"reg", note:"Bristol VT 501(c)(5); 990-N filer — no financial extract"},
+ {name:"A Piece of Kansas Ltd", appro:null, ein:"33-3057248", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Conservation", kind:"—", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"American Legion Auxiliary", appro:null, ein:"35-2345592", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Veterans auxiliary", kind:"501(c)(19)", status:"reg", note:"Unit 19 American Legion Bristol Inc; 990-N filer — no financial extract"},
+ {name:"Mount Abe Music Association", appro:null, ein:"47-1096613", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Music / arts", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Brendon Cousino Memorial Fund", appro:null, ein:"47-5461200", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Memorial fund", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Liberal Arts Career Network", appro:null, ein:"61-1478032", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Education / career", kind:"501(c)(3)", status:"reg", note:"Bristol VT 501(c)(3). Form 990-EZ PDFs on file FY2005-2006 (scanned, not extracted); 990-N since"},
+ {name:"Magicians Without Borders", appro:null, ein:"75-3144325", year:2019, rev:72523, exp:99372, assets:-30299, comp:25000, loc:"Lincoln, VT", cat:"International / arts", kind:"501(c)(3)", status:"data", note:"Files Form 990-EZ (FY2019 IRS data, latest retrievable this run); president comp $25,000."},
+ {name:"Interlace Commons Inc", appro:null, ein:"82-3600860", year:2024, rev:529513, exp:479660, assets:338269, comp:0, loc:"Bristol, VT", cat:"Community / agriculture", kind:"501(c)(3)", status:"data", note:"ED comp ($114,183) reported under salaries, not officer-comp line"},
+ {name:"Starksboro Historical Society", appro:null, ein:"86-1145473", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"History", kind:"501(c)(3)", status:"reg", note:"990-N filer — no financial extract"},
+ {name:"Friends of Bristol Elementary", appro:null, ein:"86-1254495", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"School support", kind:"501(c)(3)", status:"reg", note:"Bristol VT parent/teacher group, exempt since 2021; 990-N filer — no financial extract"},
+ {name:"People & Plants International Inc", appro:null, ein:"90-0147624", year:2023, rev:197596, exp:222642, assets:17513, comp:0, loc:"Bristol, VT", cat:"Environment / culture", kind:"501(c)(3)", status:"data", note:"Files Form 990-EZ; FY ending Dec 2023. FY2024 990 filed, not yet extracted"},
+ {name:"Poodle Rescue of Vermont Inc", appro:null, ein:"90-0629395", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Animal welfare", kind:"501(c)(3)", status:"reg", note:"Bristol VT, exempt since 2011; 990-N filer — no financial extract"},
+ {name:"Pawsitive Connection", appro:null, ein:"93-1917034", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Animal / therapy", kind:"501(c)(3)", status:"reg", note:"Bristol VT, exempt since Feb 2024; no 990 extract yet (990-N / too new)"},
+ {name:"Michelle Kilbreth Legacy Foundation for Hope", appro:null, ein:"99-0853125", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Foundation", kind:"501(c)(3)", status:"reg", note:"Bristol VT, exempt since March 2024; no 990 extract yet (990-N / too new)"},
+ {name:"Erminea Inc", appro:null, ein:"99-1175457", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Education", kind:"501(c)(3)", status:"reg", note:"Bristol VT (Four Mad Stoats), exempt since March 2024; no 990 extract yet (990-N / too new)"},
+ {name:"Vermont Tax Practitioners Association", appro:null, ein:"03-0260596", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Monkton, VT", cat:"Professional association", kind:"501(c)(6)", status:"reg", note:"Monkton VT 501(c)(6); 990-N filer — no financial extract"},
+ {name:"South Starksboro Friends Meeting Inc", appro:null, ein:"03-0285871", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"Church (Quaker meeting)", kind:"501(c)(3)", status:"reg", note:"Religious org (Quaker meeting) — exempt from filing Form 990"},
+ {name:"Todo Institute", appro:null, ein:"03-0335931", year:2023, rev:133504, exp:109279, assets:330890, comp:26000, loc:"Monkton, VT", cat:"Education / wellness", kind:"501(c)(3)", status:"data", note:"990-EZ, FY ending June 2023"},
+ {name:"Monkton Ridge Church Association Inc", appro:null, ein:"36-4903761", year:2024, rev:4311, exp:12513, assets:815, comp:0, loc:"Monkton, VT", cat:"Religious foundation (990-PF)", kind:"501(c)(3)", status:"data", note:"Files Form 990-PF; FY ending Dec 2024; net assets book value $815"},
+ {name:"Vermont Cider Makers Association", appro:null, ein:"81-1565144", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Monkton, VT", cat:"Trade association", kind:"501(c)(3)", status:"reg", note:"Monkton VT, exempt since 2016; 990-N filer — no financial extract"},
+ {name:"Friends of Mount Abraham Fall Musicals Inc", appro:null, ein:"83-1762319", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Monkton, VT", cat:"Arts / school support", kind:"501(c)(3)", status:"reg", note:"Monkton VT, exempt since 2018; 990-N filer — no financial extract"},
+ {name:"New Haven Community Library", appro:null, ein:"03-0283164", year:2025, rev:69701, exp:78518, assets:27646, comp:46158, loc:"New Haven, VT", cat:"Library (990-EZ)", kind:"501(c)(3)", status:"data", note:"FY ending Sept 2025; Library Director comp $46,158"},
+ {name:"Willowell Foundation Inc", appro:null, ein:"03-0366363", year:2025, rev:723006, exp:706497, assets:1844354, comp:0, loc:"Monkton, VT", cat:"Education / arts / environment", kind:"501(c)(3)", status:"data", note:"990-PF, FY ending June 2025"},
+ {name:"New Haven Volunteer Fire Department Inc", appro:null, ein:"03-6016319", year:2025, rev:123348, exp:53813, assets:872596, comp:0, loc:"New Haven, VT", cat:"Fire / emergency", kind:"501(c)(3)", status:"data", note:"FY ending Dec 2025; all-volunteer"},
+ {name:"New Haven United Reformed Church Inc", appro:null, ein:"04-3349833", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Church", kind:"501(c)(3)", status:"reg", note:"Religious org — exempt from filing Form 990"},
+ {name:"New Haven First Response", appro:null, ein:"16-1625802", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Emergency services", kind:"501(c)(3)", status:"reg", note:"New Haven VT, exempt since 2018; 990-N filer — no financial extract"},
+ {name:"New Haven River Anglers Inc", appro:null, ein:"22-3181413", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Conservation / recreation", kind:"501(c)(3)", status:"reg", note:"New Haven VT, exempt since 2019; 990-N filer — no financial extract"},
+ {name:"Addison County Sporting Club", appro:null, ein:"39-3168186", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Recreation / sporting", kind:"501(c)(7)", status:"reg", note:"New Haven VT, exempt since Oct 2025; no 990 extract yet (990-N / too new)"},
+ {name:"Janelia Foundation", appro:null, ein:"54-1446162", year:2024, rev:138940, exp:140621, assets:2150340, comp:14000, loc:"New Haven, VT", cat:"Foundation", kind:"501(c)(3)", status:"data", note:"990-PF"},
+ {name:"A Revolutionary Press", appro:null, ein:"81-4722451", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Arts / publishing", kind:"501(c)(3)", status:"reg", note:"990-N filer (EIN per GuideStar)"},
+ {name:"Rising Action Mustang Society Inc", appro:null, ein:"87-3073900", year:null, rev:null, exp:null, assets:null, comp:null, loc:"New Haven, VT", cat:"Animal welfare", kind:"501(c)(3)", status:"reg", note:"990-N filer (EIN per GuideStar)"},
+ {name:"Starksboro Cooperative Preschool Inc", appro:null, ein:"03-0259397", year:2024, rev:376334, exp:293557, assets:245614, comp:70743, loc:"Starksboro, VT", cat:"Preschool", kind:"501(c)(3)", status:"data", note:"FY ending June 2024"},
+ {name:"Common Ground Center Inc", appro:null, ein:"03-0343966", year:2024, rev:582077, exp:699777, assets:377631, comp:76506, loc:"Starksboro, VT", cat:"Education / retreat", kind:"501(c)(3)", status:"data", note:"FY ending Dec 2024"},
+ {name:"Starksboro Volunteer Fire Dept Inc", appro:null, ein:"03-6010866", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"Fire / emergency", kind:"501(c)(4)", status:"reg", note:"Starksboro VT, exempt since June 2024; no 990 extract yet (990-N / too new)"},
+ {name:"Starksboro Meeting House", appro:null, ein:"03-6025525", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"Historic / community", kind:"501(c)(3)", status:"reg", note:"Starksboro VT, exempt since 2019; 990-N filer — no financial extract"},
+ {name:"Unbound Grace Inc", appro:null, ein:"26-0870231", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"Ministry / charitable", kind:"501(c)(3)", status:"reg", note:"Sentinel Farms; 990-N filer (EIN per GuideStar)"},
+ {name:"Hollow Creek Foundation Inc", appro:null, ein:"83-3897713", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Vermont", cat:"Foundation", kind:"501(c)(3)", status:"reg", note:"990-N filer (EIN per GuideStar)"},
+ {name:"Friends of Robinson Inc", appro:null, ein:"84-3610177", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"School support", kind:"501(c)(3)", status:"reg", note:"Robinson Elementary Starksboro parent/teacher group, exempt since 2019; 990-N filer — no financial extract"},
+ {name:"Wellness on Wheels", appro:null, ein:"87-1553136", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Starksboro, VT", cat:"Health / mobile services", kind:"501(c)(3)", status:"reg", note:"990-N filer (EIN per GuideStar)"},
+ {name:"Vermont State Grange Inc", appro:null, ein:"23-7590239", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Bristol, VT", cat:"Fraternal / agriculture", kind:"501(c)(8)", status:"reg", note:"Ferrisburg Grange #539 (Bristol) under VT State Grange group exemption; fraternal — no 990 extract"},
+ {name:"La Leche League International Inc", appro:null, ein:"36-3001480", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Waterbury, VT", cat:"Health / family", kind:"501(c)(3)", status:"reg", note:"LLL Central Vermont chapter under La Leche League International group exemption; likely 990-N — no financial extract"},
+ {name:"Sons of Union Veterans of the Civil War", appro:null, ein:"03-6011461", year:null, rev:null, exp:null, assets:null, comp:null, loc:"Newport, VT", cat:"Veterans", kind:"501(c)(4)", status:"reg", note:"Department of Vermont (statewide); 990-N filer — no financial extract"},
+ {name:"18Hz Arts Collective Inc", appro:null, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Vermont", cat:"Arts", kind:"—", status:"none", note:"Not found in ProPublica — likely unregistered, 990-N, or fiscally sponsored"}
+];
+
+// Form 990 Part X balance-sheet asset breakdown for appropriation recipients.
+// Buckets (integers, dollars) always sum to total. Source: IRS e-file XML (Tax Exempt Org Search bulk data),
+// most-recent e-filed return per org. cash = cash + savings/temp investments; other = total - (cash+receivables+landBldg+investments).
+const BS = {
+    "23-7083861": {year:2024, form:"990", cash:126042, receivables:0, landBldg:458964, investments:19050, other:0, total:604056},
+    "20-3718929": {year:2024, form:"990", cash:-1166, receivables:0, landBldg:0, investments:0, other:0, total:-1166},
+    "22-3172076": {year:2024, form:"990", cash:112850, receivables:0, landBldg:322577, investments:0, other:0, total:435427},
+    "03-0258860": {year:2024, form:"990EZ", cash:75428, receivables:0, landBldg:0, investments:0, other:187725, total:263153},
+    "01-0621878": {year:2025, form:"990EZ", cash:196246, receivables:0, landBldg:0, investments:0, other:0, total:196246},
+    "03-0276943": {year:2024, form:"990", cash:192652, receivables:4413, landBldg:722, investments:0, other:583, total:198370},
+    "23-7032401": {year:2024, form:"990", cash:1710573, receivables:1422093, landBldg:1112995, investments:3176147, other:1255531, total:8677339},
+    "03-0280370": {year:2024, form:"990", cash:1333685, receivables:210336, landBldg:754744, investments:1790636, other:4481, total:4093882},
+    "87-2663950": {year:2024, form:"990EZ", cash:33236, receivables:0, landBldg:0, investments:0, other:0, total:33236},
+    "22-2474636": {year:2024, form:"990", cash:140800, receivables:1545561, landBldg:1215852, investments:1517279, other:314747, total:4734239},
+    "22-2921518": {year:2024, form:"990", cash:144504, receivables:110070, landBldg:525371, investments:13916, other:214388, total:1008249},
+    "03-0212396": {year:2024, form:"990", cash:6338585, receivables:4831946, landBldg:4526781, investments:4364107, other:827763, total:20889182},
+    "03-0280968": {year:2024, form:"990", cash:2452625, receivables:992334, landBldg:5582443, investments:2699953, other:9400, total:11736755},
+    "03-0264068": {year:2025, form:"990", cash:373027, receivables:0, landBldg:1051199, investments:8092335, other:31606, total:9548167},
+    "03-0361510": {year:2024, form:"990", cash:315087, receivables:896228, landBldg:4755, investments:0, other:1016932, total:2233002},
+    "23-7393720": {year:2025, form:"990", cash:1461152, receivables:308995, landBldg:1862269, investments:0, other:44369, total:3676785},
+    "03-0275219": {year:2024, form:"990", cash:544765, receivables:201712, landBldg:2669106, investments:429563, other:14153, total:3859299},
+    "03-0335768": {year:2024, form:"990", cash:881906, receivables:1149762, landBldg:10052249, investments:0, other:650139, total:12734056},
+    "20-4934608": {year:2024, form:"990", cash:306573, receivables:58749, landBldg:524518, investments:0, other:2400, total:892240},
+    "03-0276755": {year:2024, form:"990", cash:750555, receivables:1525835, landBldg:0, investments:0, other:879270, total:3155660}
+  };
+
+const fmt0 = n => n==null ? null : "$"+Math.round(n).toLocaleString("en-US");
+const fmtA = n => "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const pp = ein => "https://projects.propublica.org/nonprofits/organizations/"+ein.replace("-","");
+
+const badgeFor = s => s==="data"
+  ? '<span class="badge b-data">990 on file</span>'
+  : s==="reg" ? '<span class="badge b-reg">Registered</span>'
+  : s==="pending" ? '<span class="badge b-pend">Financials pending</span>'
+  : '<span class="badge b-none">No 990</span>';
+
+const BS_BUCKETS = [
+  ["cash","Cash & savings","#3a5a32"],
+  ["receivables","Receivables","#7a9b5e"],
+  ["landBldg","Land, buildings & equipment (net)","#b9892f"],
+  ["investments","Investments","#cdae6a"],
+  ["other","Other assets","#cfc7ac"]
+];
+function bsPanelHtml(bs){
+  const segs = BS_BUCKETS.filter(b=>bs[b[0]]>0);
+  const barTotal = segs.reduce((s,b)=>s+bs[b[0]],0);
+  const bar = (bs.total>0 && barTotal>0)
+    ? `<div class="bs-bar">${segs.map(b=>`<span style="width:${(bs[b[0]]/barTotal*100).toFixed(2)}%;background:${b[2]}" title="${b[1]}"></span>`).join("")}</div>`
+    : "";
+  const legend = BS_BUCKETS.filter(b=>bs[b[0]]!==0).map(b=>
+    `<div class="row"><span class="bs-dot" style="background:${b[2]}"></span>${b[1]}<span class="amt">${fmt0(bs[b[0]])}</span></div>`).join("");
+  const note = bs.total<=0 ? `<div class="bs-note">This filing reports net total assets at or below zero; no proportional bar is shown.</div>` : "";
+  return `<div class="bs-panel">
+    <div class="bs-title">Assets breakdown &mdash; FY${bs.year} (Form ${bs.form})</div>
+    ${bar}
+    <div class="bs-legend">${legend}
+      <div class="row total">Total assets<span class="amt">${fmt0(bs.total)}</span></div>
+    </div>${note}
+  </div>`;
+}
+
+const datasets = {appro:DATA, local:LOCAL};
+let activeTab="appro", sortK="appro", sortDir=-1;
+
+document.getElementById("tc-appro").textContent = "("+DATA.length+")";
+document.getElementById("tc-local").textContent = "("+LOCAL.length+")";
+
+function computeStats(){
+  const set = datasets[activeTab];
+  const withData = set.filter(d=>d.status==="data");
+  const combRev = withData.reduce((s,d)=>s+(d.rev||0),0);
+  let cards;
+  if(activeTab==="appro"){
+    const total = set.reduce((s,d)=>s+(d.appro||0),0);
+    cards = [
+      [set.length, "Organizations"],
+      [fmtA(total), "Total appropriations"],
+      [withData.length+" of "+set.length, "With 990 financials"],
+      [fmt0(combRev), "Combined revenue (reporting orgs)"]
+    ];
+  } else {
+    cards = [
+      [set.length, "Organizations"],
+      ["None", "Town appropriation"],
+      [withData.length+" of "+set.length, "With 990 financials"],
+      [fmt0(combRev), "Combined revenue (reporting orgs)"]
+    ];
+  }
+  document.getElementById("stats").innerHTML = cards.map(c=>
+    `<div class="stat"><div class="n">${c[0]}</div><div class="l">${c[1]}</div></div>`).join("");
+}
+
+function render(){
+  const set = datasets[activeTab];
+  const q = document.getElementById("q").value.toLowerCase().trim();
+  const fa = document.getElementById("fArticle").value;
+  const fd = document.getElementById("fData").value;
+  let rows = set.filter(d=>{
+    if(q && !(d.name.toLowerCase().includes(q) || (d.cat||"").toLowerCase().includes(q) || (d.loc||"").toLowerCase().includes(q))) return false;
+    if(activeTab==="appro" && fa && String(d.article)!==fa) return false;
+    if(fd && d.status!==fd) return false;
+    return true;
+  });
+  rows.sort((a,b)=>{
+    let x=a[sortK], y=b[sortK];
+    if(sortK==="name"){ return a.name.localeCompare(b.name)*sortDir; }
+    x = x==null?-1:x; y = y==null?-1:y;
+    return (x<y?-1:x>y?1:0)*sortDir;
+  });
+  document.getElementById("count").textContent = rows.length+" shown";
+  const dash='<span class="dash">&mdash;</span>';
+  document.getElementById("rows").innerHTML = rows.map(d=>{
+    const ppSearch = "https://projects.propublica.org/nonprofits/search?q="+encodeURIComponent(d.name);
+    const nameCell = `<a href="${d.ein?pp(d.ein):ppSearch}" target="_blank" rel="noopener">${d.name}</a>`;
+    const einLine = d.ein ? `EIN ${d.ein}` : "no EIN";
+    const apprCell = d.appro!=null ? `<span class="appro">${fmtA(d.appro)}</span>` : dash;
+    const artCell = d.article!=null ? `<span class="chip art">${d.article}</span>` : dash;
+    const town = d.loc ? d.loc.replace(/,\s*VT$/,"") : dash;
+    const bs = (d.ein && BS[d.ein]) ? BS[d.ein] : null;
+    const rowId = bs ? d.ein.replace("-","") : "";
+    const caret = bs ? `<span class="bs-caret" data-bs="${rowId}" role="button" tabindex="0" aria-label="Toggle asset breakdown" title="Asset breakdown">&#9656;</span>` : "";
+    const detailRow = bs ? `<tr class="bs-row" id="bs-${rowId}" style="display:none"><td colspan="11">${bsPanelHtml(bs)}</td></tr>` : "";
+    return `<tr>
+      <td><div class="org">${caret}${nameCell}</div>
+        <div class="meta"><span class="chip">${d.cat}</span>${einLine}${d.web?` &middot; ${d.web}`:""}${d.note?`<br><i>${d.note}</i>`:""}</div></td>
+      <td>${town}</td>
+      <td class="hide-sm">${d.kind||dash}</td>
+      <td class="hide-sm">${artCell}</td>
+      <td class="num">${apprCell}</td>
+      <td class="num hide-sm">${d.year||dash}</td>
+      <td class="num">${fmt0(d.rev)||dash}</td>
+      <td class="num hide-sm">${fmt0(d.exp)||dash}</td>
+      <td class="num hide-sm">${fmt0(d.assets)||dash}</td>
+      <td class="num hide-sm">${fmt0(d.comp)||dash}</td>
+      <td>${badgeFor(d.status)}</td>
+    </tr>${detailRow}`;
+  }).join("");
+}
+
+function toggleBs(id){
+  const row = document.getElementById("bs-"+id);
+  const caret = document.querySelector('.bs-caret[data-bs="'+id+'"]');
+  if(!row) return;
+  const open = row.style.display==="none";
+  row.style.display = open ? "table-row" : "none";
+  if(caret) caret.classList.toggle("open", open);
+}
+document.getElementById("rows").addEventListener("click", e=>{
+  const c = e.target.closest(".bs-caret");
+  if(c){ e.preventDefault(); toggleBs(c.dataset.bs); }
+});
+document.getElementById("rows").addEventListener("keydown", e=>{
+  if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("bs-caret")){
+    e.preventDefault(); toggleBs(e.target.dataset.bs);
+  }
+});
+
+function setTab(tab){
+  activeTab = tab;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===tab));
+  document.getElementById("fArticle").style.display = (tab==="appro") ? "" : "none";
+  if(tab==="appro"){ document.getElementById("fArticle").value=""; }
+  sortK = (tab==="appro") ? "appro" : "rev";
+  sortDir = -1;
+  computeStats();
+  render();
+}
+
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setTab(t.dataset.tab)));
+document.querySelectorAll("thead th").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const k=th.dataset.k;
+    if(sortK===k) sortDir*=-1; else { sortK=k; sortDir = (k==="name")?1:-1; }
+    render();
+  });
+});
+["q","fArticle","fData"].forEach(id=>document.getElementById(id).addEventListener("input",render));
+computeStats();
+render();
+</script>
+</body>
+</html>
