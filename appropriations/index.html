@@ -1,120 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bristol Appropriations — Nonprofit Financial Dashboard (2026 Town Meeting)</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Bristol's Money Goes &middot; Bristol, In Progress</title>
+<meta name="description" content="Every organization Bristol voters fund at Town Meeting, what each one does, and how the money splits between Bristol-based groups and regional organizations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root{
-    --green:#2f5d34; --green-dark:#234727; --gold:#b9892f; --ink:#1c1c1a;
-    --muted:#6b6b63; --line:#e3e0d6; --bg:#f6f4ec; --card:#fffdf8;
-    --chip:#eef0e6; --warn:#8a5a00; --warnbg:#fbf3df;
+    color-scheme:light;
+    --ground:#f9f9f7; --surface:#ffffff;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --rule:#e1e0d9; --rule-strong:#c3c2b7;
+    --accent:#eb6834; --signal:#2a78d6; --live:#1baf7a;
+    --local:#2a78d6; --local-2:#8fb6e4;
+    --regional:#1baf7a; --regional-2:#93d6bd;
+    --library:#52514e; --library-2:#c3c2b7;
+    --inert:#c3c2b7; --track:#eeede7;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --ground:#0d0d0d; --surface:#1a1a19;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --rule:#2c2c2a; --rule-strong:#3d3d3a;
+      --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+      --local:#5b9ceb; --local-2:#33587f;
+      --regional:#22b581; --regional-2:#1d5f47;
+      --library:#c3c2b7; --library-2:#4a4a46;
+      --inert:#4a4a46; --track:#262624;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --ground:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --rule:#2c2c2a; --rule-strong:#3d3d3a;
+    --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+    --local:#5b9ceb; --local-2:#33587f;
+    --regional:#22b581; --regional-2:#1d5f47;
+    --library:#c3c2b7; --library-2:#4a4a46;
+    --inert:#4a4a46; --track:#262624;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.45;font-size:15px}
-  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
-  header h1{font-size:25px;margin:0 0 4px;color:var(--green-dark);letter-spacing:-.2px}
-  header .sub{color:var(--muted);font-size:14px;margin:0 0 2px}
-  header .src{color:var(--muted);font-size:12.5px;margin-top:6px}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px 92px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{
+    outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
 
-  .tabs{display:flex;gap:8px;margin:20px 0 4px;border-bottom:2px solid var(--line)}
-  .tab{padding:10px 16px;border:none;background:none;font-size:14px;font-weight:600;color:var(--muted);
-    cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
-  .tab:hover{color:var(--green-dark)}
-  .tab.active{color:var(--green-dark);border-bottom-color:var(--gold)}
-  .tab .c{font-weight:500;color:var(--muted);font-size:12.5px}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 8px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-  .stat .n{font-size:23px;font-weight:700;color:var(--green-dark);letter-spacing:-.3px}
-  .stat .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+  /* masthead */
+  .masthead{padding:44px 0 0;display:flex;flex-direction:column;gap:20px}
+  .kicker{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .kicker .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+  .kicker a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+  .kicker a:hover{color:var(--ink)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,7vw,60px);line-height:1.03;
+    letter-spacing:-.02em;margin:0;text-wrap:balance}
+  h1 em{font-style:italic}
+  .standfirst{font-family:var(--display);font-size:clamp(18px,2.4vw,21px);line-height:1.5;
+    color:var(--ink-2);max-width:38em;margin:0}
+  .notice{display:flex;gap:14px;align-items:flex-start;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--rule);padding:16px 0 18px;margin-top:6px}
+  .notice .flag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);padding-top:3px;white-space:nowrap}
+  .notice p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:56em}
+  .notice a{color:var(--signal);text-underline-offset:2px}
 
-  .note{background:var(--warnbg);border:1px solid #ecd9a8;color:var(--warn);
-    border-radius:10px;padding:11px 14px;font-size:13px;margin:16px 0 4px}
-  .note b{color:#6e4800}
+  /* controls */
+  .tabs{display:flex;gap:26px;margin:34px 0 0;border-bottom:1px solid var(--rule-strong);flex-wrap:wrap}
+  .tab{padding:0 0 10px;border:none;background:none;font-family:var(--body);font-size:13px;
+    font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+    cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--ink);border-bottom-color:var(--accent)}
+  .tab .c{font-family:var(--mono);font-weight:400;letter-spacing:.02em}
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 10px}
+  .controls select,.controls input[type=search]{padding:9px 11px;border:1px solid var(--rule-strong);
+    border-radius:4px;background:var(--surface);font-size:14px;color:var(--ink);font-family:var(--body)}
+  .controls input[type=search]{min-width:240px;flex:1 1 240px;max-width:380px}
+  .controls .count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);margin-left:auto}
 
-  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 12px}
-  .controls input[type=search]{flex:1;min-width:220px;padding:9px 12px;border:1px solid var(--line);
-    border-radius:9px;font-size:14px;background:var(--card)}
-  .controls select{padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:13.5px}
-  .controls .count{color:var(--muted);font-size:13px;margin-left:auto}
+  h2.sec{font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:.11em;
+    text-transform:uppercase;margin:52px 0 0;border-bottom:1px solid var(--rule-strong);
+    padding-bottom:9px;display:flex;align-items:baseline;justify-content:space-between;
+    gap:16px;flex-wrap:wrap}
+  h2.sec span{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.02em;
+    text-transform:none;color:var(--muted)}
 
-  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
-    border-radius:12px;overflow:hidden;font-size:13.5px}
-  thead th{background:var(--green);color:#fff;text-align:left;padding:10px 12px;font-weight:600;
-    font-size:12.5px;cursor:pointer;white-space:nowrap;user-select:none}
+  /* stat tiles */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:0;margin:26px 0 4px;border-top:1px solid var(--rule)}
+  .stat{border-bottom:1px solid var(--rule);padding:16px 20px 16px 0}
+  .stat .n{font-family:var(--display);font-size:34px;font-weight:400;line-height:1.05;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px}
+  .stat .sub2{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+
+  .note{border-left:2px solid var(--accent);padding:12px 0 12px 16px;margin:22px 0 4px;
+    font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:70em}
+  .note b{color:var(--ink)}
+
+  /* library callout */
+  .callout{background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+    padding:20px 22px;margin-top:26px;display:grid;grid-template-columns:1fr auto;
+    gap:6px 26px;align-items:baseline}
+  .callout .cn{font-family:var(--display);font-size:34px;line-height:1.05;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;grid-column:2;grid-row:1/span 2;text-align:right;white-space:nowrap}
+  .callout .ct{font-family:var(--body);font-size:15.5px;font-weight:700}
+  .callout .cd{font-size:14.5px;color:var(--ink-2);line-height:1.55;max-width:60ch;margin:0}
+  .callout .cbar{grid-column:1/-1;height:7px;border-radius:4px;background:var(--track);
+    overflow:hidden;margin-top:12px;display:flex}
+  .callout .cbar i{display:block;height:100%}
+  .callout .cleg{grid-column:1/-1;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);margin-top:8px;display:flex;gap:18px;flex-wrap:wrap}
+
+  /* split + purpose rows */
+  .cmp{margin-top:26px}
+  .cmprow{border-top:1px solid var(--rule);padding:14px 0}
+  .cmprow:first-child{border-top:none;padding-top:4px}
+  .cmphead{display:flex;align-items:baseline;gap:10px;font-size:15px;flex-wrap:wrap}
+  .cmphead .nm{font-weight:700}
+  .cmphead .gap{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.03em}
+  .cmphead .amt{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:600}
+  .cmphead .pc{font-variant-numeric:tabular-nums;font-weight:700;min-width:56px;text-align:right}
+  .bar{height:9px;border-radius:4px;background:var(--track);margin-top:8px;overflow:hidden;display:flex}
+  .bar i{display:block;height:100%}
+  .bar i+i{box-shadow:-2px 0 0 var(--ground)}
+  .dw{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em}
+
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:16px}
+  .legend .k{display:flex;align-items:center;gap:7px}
+  .legend .sw{width:8px;height:8px;border-radius:2px;flex:0 0 auto}
+
+  /* tables */
+  .tbl{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+  thead th{text-align:left;padding:0 14px 9px 0;font-family:var(--mono);font-size:10.5px;
+    font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    cursor:pointer;white-space:nowrap;user-select:none;border-bottom:1px solid var(--rule-strong)}
+  thead th:hover{color:var(--ink)}
   thead th.num{text-align:right}
-  thead th span{opacity:.6;font-size:10px}
-  tbody td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+  tbody td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
   tbody td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-  tbody tr:hover{background:#faf8f0}
-  .org{font-weight:600;color:var(--ink)}
-  .org a{color:var(--green-dark);text-decoration:none}
-  .org a:hover{text-decoration:underline}
-  .meta{color:var(--muted);font-size:11.5px;margin-top:2px}
-  .chip{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:20px;background:var(--chip);
-    color:#4a4a40;margin-right:4px;white-space:nowrap}
-  .chip.art{background:#e7eee0;color:#3a5a32}
-  .badge{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
-  .b-data{background:#e2efe1;color:#2c6b3a}
-  .b-reg{background:#eef0e6;color:#6b6b40}
-  .b-none{background:#f1e6e6;color:#9a5454}
-  .b-pend{background:#e7eaf2;color:#4a5573}
-  .dash{color:#c7c3b6}
-  .appro{font-weight:700;color:var(--gold)}
-
-  .bs-caret{display:inline-block;width:14px;margin-right:5px;color:var(--gold);font-size:11px;
-    cursor:pointer;transition:transform .15s ease;user-select:none;transform:translateY(-1px)}
-  .bs-caret.open{transform:translateY(-1px) rotate(90deg)}
-  tr.bs-row>td{background:#faf8f0;border-top:none;padding:0 12px 14px}
-  .bs-panel{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);max-width:640px}
-  .bs-title{font-size:12px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.4px;margin-bottom:9px}
-  .bs-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin-bottom:10px;border:1px solid var(--line)}
+  tbody tr:hover{background:var(--track)}
+  tbody td .org{display:flex;align-items:baseline;gap:7px}
+  tbody td .org a{font-weight:600;text-underline-offset:2px;text-decoration-color:var(--rule-strong)}
+  tbody td .meta{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5;max-width:46ch}
+  tbody td .meta i{color:var(--ink-2)}
+  .appro{font-weight:700}
+  .dash{color:var(--muted)}
+  .chip{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+    text-transform:uppercase;border:1px solid var(--rule-strong);border-radius:3px;
+    padding:1px 6px;margin-right:7px;color:var(--ink-2);white-space:nowrap}
+  .scope{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+  .scope .sw{width:8px;height:8px;border-radius:2px;flex:0 0 auto}
+  .badge{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+    border-radius:3px;padding:2px 7px;white-space:nowrap;border:1px solid}
+  .b-data{color:var(--regional);border-color:var(--regional-2)}
+  .b-reg{color:var(--ink-2);border-color:var(--rule-strong)}
+  .b-pend{color:var(--accent);border-color:var(--accent)}
+  .b-none{color:var(--muted);border-color:var(--rule)}
+  .bs-caret{cursor:pointer;color:var(--muted);font-size:11px;line-height:1;
+    transition:transform .12s ease;display:inline-block;user-select:none}
+  .bs-caret.open{transform:rotate(90deg);color:var(--accent)}
+  .bs-panel{background:var(--track);border-radius:5px;padding:16px 18px;margin:2px 0 8px}
+  .bs-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px}
+  .bs-bar{display:flex;height:9px;border-radius:4px;overflow:hidden;background:var(--rule)}
   .bs-bar span{display:block;height:100%}
-  .bs-legend{display:flex;flex-wrap:wrap;gap:4px 18px}
-  .bs-legend .row{display:flex;align-items:center;gap:7px;font-size:12.5px;min-width:180px}
-  .bs-legend .row .amt{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
-  .bs-legend .row.total{border-top:1px solid var(--line);margin-top:5px;padding-top:6px;width:100%;font-weight:700;color:var(--green-dark)}
-  .bs-dot{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
-  .bs-note{font-size:11.5px;color:var(--muted);margin-top:8px}
-  footer{margin-top:26px;color:var(--muted);font-size:12px;line-height:1.6}
-  footer a{color:var(--green-dark)}
-  @media(max-width:760px){
-    .stats{grid-template-columns:repeat(2,1fr)}
+  .bs-legend{margin-top:11px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:2px 26px;font-size:13px}
+  .bs-legend .row{display:flex;align-items:center;gap:8px;padding:3px 0}
+  .bs-legend .row .amt{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+  .bs-legend .row.total{border-top:1px solid var(--rule-strong);margin-top:5px;padding-top:7px;font-weight:700}
+  .bs-legend .row.total .amt{color:var(--ink)}
+  .bs-dot{width:9px;height:9px;border-radius:2px;flex:0 0 auto}
+  .bs-note{font-size:12.5px;color:var(--muted);margin-top:9px;font-style:italic}
+
+  footer{margin-top:72px;border-top:2px solid var(--ink);padding-top:22px;
+    display:flex;flex-direction:column;gap:14px}
+  footer p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2);max-width:72ch}
+  footer p b{color:var(--ink)}
+  footer .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted)}
+  footer a{color:var(--signal);text-underline-offset:2px}
+
+  [hidden]{display:none!important}
+  @media (max-width:760px){
+    .wrap{padding:0 16px 60px}
     .hide-sm{display:none}
-    .wrap{padding:18px 14px 50px}
+    .callout{grid-template-columns:1fr}
+    .callout .cn{grid-column:1;grid-row:auto;text-align:left}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>Bristol Appropriations &mdash; Nonprofit Financial Dashboard</h1>
-    <p class="sub">Two views: organizations requesting a Town appropriation at the March 2, 2026 Annual Town Meeting (FY2027), and other local-area nonprofits that do <b>not</b> receive an appropriation. Each shows the latest IRS Form 990 financials from ProPublica's Nonprofit Explorer.</p>
-    <p class="src">Appropriations source: Town of Bristol FY2025 Annual Report, Articles 11&ndash;15. Financial source: ProPublica Nonprofit Explorer (IRS Form 990 extracts). Compiled June 21, 2026.</p>
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="dot"></span>
+      <a href="../">Bristol, In Progress</a>
+      <span>&middot;</span>
+      <span>Public data, made readable</span>
+    </div>
+
+    <h1>Where Bristol's money <em>goes</em></h1>
+
+    <p class="standfirst">
+      Every year Bristol voters approve a set of appropriations at Town Meeting: money that leaves
+      the town budget and goes to a library, a rescue squad, a food shelf, a bus service. This page
+      shows all thirty of them for FY2027, what each one does, and how much of the money stays in
+      Bristol.
+    </p>
+
+    <div class="notice">
+      <span class="flag">Please note</span>
+      <p>
+        This is my own page, not an official Town of Bristol publication, and nothing here speaks
+        for the Selectboard. The warned articles and the certified vote live with the
+        Bristol Town Clerk. Financial figures come from each organization's own IRS filings, not
+        from the Town.
+      </p>
+    </div>
   </header>
 
   <div class="tabs">
     <button class="tab active" data-tab="appro">Appropriation recipients <span class="c" id="tc-appro"></span></button>
-    <button class="tab" data-tab="local">Local organizations &mdash; no appropriation <span class="c" id="tc-local"></span></button>
+    <button class="tab" data-tab="local">Local organizations, no appropriation <span class="c" id="tc-local"></span></button>
   </div>
 
-  <section class="stats" id="stats"></section>
+  <div id="view-appro">
 
-  <div class="note">
-    <b>Reading the data.</b> Financial figures are each org's most recent IRS Form 990 with a data extract (mostly FY2023; a few FY2024). Many file on a June or August fiscal year, so a FY2024 return may exist but not yet be extracted. Regional nonprofits (Middlebury, Colchester, etc.) serve all of Addison County, not Bristol alone, so their totals reflect their full operation. <b>Verify:</b> "Addison County Restorative Justice Services" maps to the registered entity <i>Addison County Court Diversion &amp; Community Justice Projects Inc</i>. Small local groups marked <i>No 990 on file</i> are likely 990-N (e-postcard) filers or operate under a parent/church and file no public financials.
+    <section class="stats" id="stats-appro"></section>
+
+    <h2 class="sec">The town library, first <span>Article 11</span></h2>
+    <div class="callout" id="libcallout"></div>
+    <p class="note">
+      <b>Why it sits on its own.</b> Lawrence Memorial Library is a municipal town library, a
+      department of the Town rather than an independent nonprofit, and it files no IRS Form 990.
+      At <span id="libpct"></span> of every appropriation dollar it would flatten any chart it
+      appeared in. <b>Every figure below this point excludes it</b>, so the comparison is nonprofit
+      to nonprofit.
+    </p>
+
+    <h2 class="sec">Bristol-based, and everyone else <span id="splitsub"></span></h2>
+    <div class="cmp" id="splitrows"></div>
+    <div class="legend">
+      <span class="k"><span class="sw" style="background:var(--local)"></span>Based in Bristol</span>
+      <span class="k"><span class="sw" style="background:var(--regional)"></span>Regional or statewide</span>
+    </div>
+    <p class="note">
+      <b>How this is counted.</b> "Based in Bristol" means the organization's own address is in
+      Bristol. It is not a measure of who benefits: Tri-Valley Transit runs buses through Bristol
+      from a Middlebury office, and Bristol residents use the Counseling Service, HOPE and Age Well
+      the same way their neighbors in Lincoln and Starksboro do. Regional organizations serve all of
+      Addison County, so Bristol's contribution is a share of a much larger operation.
+    </p>
+
+    <h2 class="sec">Where the money lands, by town <span>Office address of each recipient</span></h2>
+    <div class="cmp" id="townrows"></div>
+
+    <h2 class="sec">What the money actually does <span id="purposesub"></span></h2>
+    <div class="cmp" id="purposerows"></div>
+    <div class="legend">
+      <span class="k"><span class="sw" style="background:var(--local)"></span>Based in Bristol</span>
+      <span class="k"><span class="sw" style="background:var(--regional)"></span>Regional or statewide</span>
+    </div>
+    <p class="note">
+      <b>About these groupings.</b> The categories are mine, not the Town's. The warned articles
+      group recipients by Article 11 through 15, which is a budgeting structure rather than a
+      description of the work. Each organization sits in exactly one category and the categories
+      sum to the nonprofit total.
+    </p>
+
   </div>
+
+  <div id="view-local" hidden>
+    <section class="stats" id="stats-local"></section>
+    <p class="note">
+      <b>What this list is.</b> Registered nonprofits in Bristol and the surrounding towns that
+      receive <b>no</b> Town appropriation. It is here for context: the appropriations list is a
+      small slice of the nonprofit activity in this area, and being left off it is the norm rather
+      than the exception.
+    </p>
+  </div>
+
+  <h2 class="sec">Every organization <span>Sort any column. Click a name for its ProPublica record.</span></h2>
 
   <div class="controls">
-    <input type="search" id="q" placeholder="Search organizations…" autocomplete="off">
+    <input type="search" id="q" placeholder="Search organizations, purpose or town&hellip;" autocomplete="off">
+    <select id="fScope">
+      <option value="">Bristol and regional</option>
+      <option value="local">Bristol-based only</option>
+      <option value="regional">Regional or statewide only</option>
+    </select>
     <select id="fArticle">
       <option value="">All articles</option>
-      <option value="11">Art. 11 — Library</option>
-      <option value="12">Art. 12 — Rescue</option>
-      <option value="13">Art. 13 — Bristol-based</option>
-      <option value="14">Art. 14 — Restorative Justice</option>
-      <option value="15">Art. 15 — Regional</option>
+      <option value="11">Art. 11 &mdash; Library</option>
+      <option value="12">Art. 12 &mdash; Rescue</option>
+      <option value="13">Art. 13 &mdash; Bristol-based</option>
+      <option value="14">Art. 14 &mdash; Restorative Justice</option>
+      <option value="15">Art. 15 &mdash; Regional</option>
     </select>
     <select id="fData">
       <option value="">All data status</option>
@@ -125,28 +324,69 @@
     <span class="count" id="count"></span>
   </div>
 
+  <div class="note" style="margin-top:6px">
+    <b>Reading the financial columns.</b> These describe the size of each organization, not the
+    Town's money. Figures are each org's most recent IRS Form 990 with a public data extract, mostly
+    FY2024. Many file on a June or August fiscal year, so a newer return may exist but not yet be
+    extracted. Small groups marked <i>No 990</i> are usually 990-N postcard filers or operate under
+    a parent organization or church and file no public financials.
+  </div>
+
+  <div class="tbl">
   <table id="tbl">
     <thead>
       <tr>
-        <th data-k="name">Organization <span>&#8597;</span></th>
-        <th data-k="loc">Town <span>&#8597;</span></th>
-        <th data-k="kind" class="hide-sm">Kind <span>&#8597;</span></th>
-        <th data-k="article" class="hide-sm">Art. <span>&#8597;</span></th>
-        <th data-k="appro" class="num">Appropriation <span>&#8597;</span></th>
-        <th data-k="year" class="num hide-sm">FY <span>&#8597;</span></th>
-        <th data-k="rev" class="num">Revenue <span>&#8597;</span></th>
-        <th data-k="exp" class="num hide-sm">Expenses <span>&#8597;</span></th>
-        <th data-k="assets" class="num hide-sm">Total Assets (EOY) <span>&#8597;</span></th>
-        <th data-k="comp" class="num hide-sm">Officer Comp <span>&#8597;</span></th>
-        <th data-k="status">990 Status <span>&#8597;</span></th>
+        <th data-k="name">Organization</th>
+        <th data-k="scope">Based</th>
+        <th data-k="bucket" class="hide-sm">Purpose</th>
+        <th data-k="article" class="num hide-sm">Art.</th>
+        <th data-k="appro" class="num">Appropriation</th>
+        <th data-k="year" class="num hide-sm">FY</th>
+        <th data-k="rev" class="num">Revenue</th>
+        <th data-k="exp" class="num hide-sm">Expenses</th>
+        <th data-k="assets" class="num hide-sm">Total assets</th>
+        <th data-k="comp" class="num hide-sm">Officer comp</th>
+        <th data-k="status">990 status</th>
       </tr>
     </thead>
     <tbody id="rows"></tbody>
   </table>
+  </div>
 
   <footer>
-    <p><b>Notes &amp; caveats.</b> EINs verified against ProPublica's organization endpoint. "Net Assets/EOY" shown is total assets at end of year. Officer comp is "compensation of current officers" as reported on the 990; $0 often means an all-volunteer board or comp reported elsewhere. Lawrence Memorial Library is a municipal town library and files no Form 990. Have-a-Heart Food Shelf operates through St. Ambrose Catholic Church. Addison County River Watch Collaborative and RSVP/Foster Grandparent are programs under parent organizations (ACRPC and a regional volunteer center, respectively) and have no standalone 990. Open Door Clinic, Bristol CORE, Bristol Little League, and Addison County Readers are active nonprofits that do not surface a public 990 extract (likely 990-N filers).</p>
-    <p>Click an organization name to open its full record on ProPublica. To refresh, re-run the data pull in Cowork (figures update as the IRS releases new 990 extracts).</p>
+    <p>
+      <b>Sources.</b> Appropriation amounts and article numbers come from the Town of Bristol
+      Annual Report, Articles 11 through 15, as warned for the March 2, 2026 Annual Town Meeting
+      (FY2027). Financial figures come from ProPublica's
+      <a href="https://projects.propublica.org/nonprofits/" target="_blank" rel="noopener">Nonprofit
+      Explorer</a>, which republishes IRS Form 990 data extracts. Asset breakdowns come from Part X
+      of each organization's e-filed return. Population is the 2020 Census count for Bristol, 3,782.
+    </p>
+    <p>
+      <b>How the numbers were checked.</b> Every EIN was verified against ProPublica's organization
+      endpoint. The Bristol and regional subtotals, the fourteen purpose categories and the by-town
+      totals each reconcile to the appropriations total, with and without the library. Asset
+      buckets are taken from the filed return and always sum to reported total assets.
+    </p>
+    <p>
+      <b>Two cautions.</b> "Addison County Restorative Justice Services" is the operating name of
+      the registered entity <i>Addison County Court Diversion &amp; Community Justice Projects
+      Inc</i>. Officer compensation of $0 usually means an all-volunteer board, or that staff pay is
+      reported on the salaries line instead, and it is not evidence that nobody is paid.
+    </p>
+    <p>
+      <b>On the per-resident figure.</b> It is total appropriations divided by population, nothing
+      more. Appropriations are funded through the municipal property tax, so no resident pays that
+      exact amount and what any given household pays depends on assessed value. It is offered as a
+      sense of scale, not as a tax bill.
+    </p>
+    <p>
+      <b>Bristol, In Progress</b> is written and maintained by Ian Albinson, one of five members of
+      the Bristol Selectboard. It is a personal project. It is not an official publication of the
+      Town of Bristol, it is not reviewed or approved by the Selectboard, and it does not speak for
+      the Town.
+    </p>
+    <p class="meta" id="asof"></p>
   </footer>
 </div>
 
@@ -276,9 +516,6 @@ const LOCAL = [
  {name:"18Hz Arts Collective Inc", appro:null, ein:null, year:null, rev:null, exp:null, assets:null, comp:null, loc:"Vermont", cat:"Arts", kind:"—", status:"none", note:"Not found in ProPublica — likely unregistered, 990-N, or fiscally sponsored"}
 ];
 
-// Form 990 Part X balance-sheet asset breakdown for appropriation recipients.
-// Buckets (integers, dollars) always sum to total. Source: IRS e-file XML (Tax Exempt Org Search bulk data),
-// most-recent e-filed return per org. cash = cash + savings/temp investments; other = total - (cash+receivables+landBldg+investments).
 const BS = {
     "23-7083861": {year:2024, form:"990", cash:126042, receivables:0, landBldg:458964, investments:19050, other:0, total:604056},
     "20-3718929": {year:2024, form:"990", cash:-1166, receivables:0, landBldg:0, investments:0, other:0, total:-1166},
@@ -302,22 +539,86 @@ const BS = {
     "03-0276755": {year:2024, form:"990", cash:750555, receivables:1525835, landBldg:0, investments:0, other:879270, total:3155660}
   };
 
-const fmt0 = n => n==null ? null : "$"+Math.round(n).toLocaleString("en-US");
-const fmtA = n => "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
-const pp = ein => "https://projects.propublica.org/nonprofits/organizations/"+ein.replace("-","");
+/* ---------- derived fields ---------- */
+const CENSUS_POP = 3782;
+const LIBRARY_NAME = "Lawrence Memorial Library";
+
+const BUCKET = {
+  "Lawrence Memorial Library":"Town library",
+  "Bristol Rescue Squad":"Emergency & rescue",
+  "Bristol Cemetery Association":"Cemeteries",
+  "Bristol CORE":"Community & downtown",
+  "Bristol Family Center":"Children & families",
+  "Bristol Fourth of July Committee":"Community & downtown",
+  "Bristol Historical Society":"Arts, history & media",
+  "Bristol Little League Baseball & Softball":"Recreation",
+  "Bristol Recreation Club":"Recreation",
+  "Bristol Town Band":"Arts, history & media",
+  "Have-a-Heart Food Shelf":"Food & basic needs",
+  "Northeast Addison Television (NEAT)":"Arts, history & media",
+  "Addison County Restorative Justice Services":"Safety & justice",
+  "Addison County Home Health & Hospice":"Health & recovery",
+  "Addison County Parent/Child Center":"Children & families",
+  "Addison County Readers":"Children & families",
+  "Addison County River Watch Collaborative":"Environment & animals",
+  "Age Well":"Older residents",
+  "Atria Collective":"Safety & justice",
+  "Counseling Service of Addison County":"Health & recovery",
+  "Elderly Services":"Older residents",
+  "Homeward Bound (Addison County Humane Society)":"Environment & animals",
+  "Habitat for Humanity Addison County":"Housing & shelter",
+  "HOPE (Helping Overcome Poverty's Effects)":"Food & basic needs",
+  "John W. Graham Shelter":"Housing & shelter",
+  "Open Door Clinic":"Health & recovery",
+  "RSVP / Green Mountain Foster Grandparent":"Older residents",
+  "Tri-Valley Transit":"Transportation",
+  "Turning Point Center of Addison County":"Health & recovery",
+  "Vermont Adult Learning":"Adult education"
+};
+
+DATA.forEach(d=>{
+  d.scope  = /^Bristol/.test(d.loc||"") ? "local" : "regional";
+  d.bucket = BUCKET[d.name] || "Other";
+  d.isLib  = d.name === LIBRARY_NAME;
+});
+LOCAL.forEach(d=>{
+  d.scope  = /^Bristol/.test(d.loc||"") ? "local" : "regional";
+  d.bucket = d.cat || "Other";
+});
+
+const NP        = DATA.filter(d=>!d.isLib);          // the 29 nonprofits
+const LIB       = DATA.find(d=>d.isLib);
+const TOTAL_ALL = DATA.reduce((s,d)=>s+(d.appro||0),0);
+const TOTAL_NP  = NP.reduce((s,d)=>s+(d.appro||0),0);
+const SUM       = a => a.reduce((s,d)=>s+(d.appro||0),0);
+const NP_LOCAL  = NP.filter(d=>d.scope==="local");
+const NP_REG    = NP.filter(d=>d.scope==="regional");
+
+/* ---------- formatting ---------- */
+const fmt0  = n => n==null ? null : "$"+Math.round(n).toLocaleString("en-US");
+const fmtA  = n => "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct   = (n,d) => (n/d*100);
+const pctS  = (n,d) => pct(n,d).toFixed(1)+"%";
+const pp    = ein => "https://projects.propublica.org/nonprofits/organizations/"+ein.replace("-","");
+const plural = (n,w) => n+" "+w+(n===1?"":"s");
 
 const badgeFor = s => s==="data"
   ? '<span class="badge b-data">990 on file</span>'
-  : s==="reg" ? '<span class="badge b-reg">Registered</span>'
+  : s==="reg"  ? '<span class="badge b-reg">Registered</span>'
   : s==="pending" ? '<span class="badge b-pend">Financials pending</span>'
   : '<span class="badge b-none">No 990</span>';
 
+const scopeCell = s => s==="local"
+  ? '<span class="scope"><span class="sw" style="background:var(--local)"></span>Bristol</span>'
+  : '<span class="scope"><span class="sw" style="background:var(--regional)"></span>Regional</span>';
+
+/* ---------- asset breakdown panel ---------- */
 const BS_BUCKETS = [
-  ["cash","Cash & savings","#3a5a32"],
-  ["receivables","Receivables","#7a9b5e"],
-  ["landBldg","Land, buildings & equipment (net)","#b9892f"],
-  ["investments","Investments","#cdae6a"],
-  ["other","Other assets","#cfc7ac"]
+  ["cash","Cash &amp; savings","#1f5fa8"],
+  ["receivables","Receivables","#2a78d6"],
+  ["landBldg","Land, buildings &amp; equipment (net)","#6fa3e0"],
+  ["investments","Investments","#a3c4e8"],
+  ["other","Other assets","#8a8a84"]
 ];
 function bsPanelHtml(bs){
   const segs = BS_BUCKETS.filter(b=>bs[b[0]]>0);
@@ -327,7 +628,8 @@ function bsPanelHtml(bs){
     : "";
   const legend = BS_BUCKETS.filter(b=>bs[b[0]]!==0).map(b=>
     `<div class="row"><span class="bs-dot" style="background:${b[2]}"></span>${b[1]}<span class="amt">${fmt0(bs[b[0]])}</span></div>`).join("");
-  const note = bs.total<=0 ? `<div class="bs-note">This filing reports net total assets at or below zero; no proportional bar is shown.</div>` : "";
+  const note = bs.total<=0
+    ? `<div class="bs-note">This filing reports net total assets at or below zero, so no proportional bar is shown.</div>` : "";
   return `<div class="bs-panel">
     <div class="bs-title">Assets breakdown &mdash; FY${bs.year} (Form ${bs.form})</div>
     ${bar}
@@ -337,51 +639,128 @@ function bsPanelHtml(bs){
   </div>`;
 }
 
+/* ---------- at a glance ---------- */
+function paintGlance(){
+  const libPct = pct(LIB.appro, TOTAL_ALL);
+  document.getElementById("stats-appro").innerHTML = [
+    [fmt0(TOTAL_ALL), "Total appropriations, FY2027",
+      "Approved by voters at the March 2, 2026 Annual Town Meeting"],
+    [DATA.length, "Organizations funded",
+      "One municipal town library and "+NP.length+" independent nonprofits"],
+    [libPct.toFixed(0)+"%", "Goes to the town library",
+      fmtA(LIB.appro)+" of the total, on its own warned article"],
+    ["$"+(TOTAL_ALL/CENSUS_POP).toFixed(0), "Per Bristol resident",
+      "An arithmetic average across 3,782 residents. Not a tax bill, see the notes."]
+  ].map(c=>`<div class="stat"><div class="n">${c[0]}</div><div class="l">${c[1]}</div><div class="sub2">${c[2]}</div></div>`).join("");
+
+  document.getElementById("libpct").textContent = libPct.toFixed(0)+"%";
+
+  document.getElementById("libcallout").innerHTML = `
+    <div class="ct">Lawrence Memorial Library &mdash; Article 11</div>
+    <div class="cn">${fmtA(LIB.appro)}</div>
+    <p class="cd">The single largest appropriation on the ballot, and larger than all
+      ${NP.length} nonprofit appropriations put together.</p>
+    <div class="cbar">
+      <i style="width:${libPct.toFixed(2)}%;background:var(--library)"></i>
+      <i style="width:${(100-libPct).toFixed(2)}%;background:var(--library-2)"></i>
+    </div>
+    <div class="cleg">
+      <span>Library ${libPct.toFixed(1)}%</span>
+      <span>All other appropriations ${(100-libPct).toFixed(1)}% &middot; ${fmt0(TOTAL_NP)}</span>
+    </div>`;
+
+  /* Bristol vs regional */
+  document.getElementById("splitsub").textContent =
+    NP.length+" nonprofits · "+fmt0(TOTAL_NP)+" · library excluded";
+  document.getElementById("splitrows").innerHTML = [
+    ["Based in Bristol", NP_LOCAL, "var(--local)",
+     "Groups with a Bristol address, funded mostly under Article 13"],
+    ["Regional or statewide", NP_REG, "var(--regional)",
+     "Addison County and Vermont organizations serving Bristol among other towns"]
+  ].map(r=>{
+    const amt = SUM(r[1]), p = pct(amt, TOTAL_NP);
+    return `<div class="cmprow">
+      <div class="cmphead"><span class="nm">${r[0]}</span>
+        <span class="gap">${plural(r[1].length,"organization")}</span>
+        <span class="amt">${fmt0(amt)}</span><span class="pc">${p.toFixed(1)}%</span></div>
+      <div class="bar"><i style="width:${p.toFixed(2)}%;background:${r[2]}"></i></div>
+      <div class="dw">${r[3]}</div></div>`;
+  }).join("");
+
+  /* by town */
+  const towns = {};
+  NP.forEach(d=>{
+    const t = (d.loc||"Unknown").replace(/,\s*VT$/,"");
+    if(!towns[t]) towns[t] = {amt:0,n:0,scope:d.scope};
+    towns[t].amt += d.appro||0; towns[t].n++;
+  });
+  const tmax = Math.max(...Object.values(towns).map(t=>t.amt));
+  document.getElementById("townrows").innerHTML = Object.entries(towns)
+    .sort((a,b)=>b[1].amt-a[1].amt)
+    .map(([name,t])=>`<div class="cmprow">
+      <div class="cmphead"><span class="nm">${name}</span>
+        <span class="gap">${plural(t.n,"organization")}</span>
+        <span class="amt">${fmt0(t.amt)}</span><span class="pc">${pctS(t.amt,TOTAL_NP)}</span></div>
+      <div class="bar"><i style="width:${(t.amt/tmax*100).toFixed(2)}%;background:var(--${t.scope==="local"?"local":"regional"})"></i></div>
+    </div>`).join("");
+
+  /* by purpose */
+  const buckets = {};
+  NP.forEach(d=>{
+    if(!buckets[d.bucket]) buckets[d.bucket] = {local:0, regional:0, amt:0, n:0, orgs:[]};
+    const b = buckets[d.bucket];
+    b[d.scope] += d.appro||0; b.amt += d.appro||0; b.n++; b.orgs.push(d.name);
+  });
+  const entries = Object.entries(buckets).sort((a,b)=>b[1].amt-a[1].amt);
+  const bmax = entries[0][1].amt;
+  document.getElementById("purposesub").textContent =
+    entries.length+" categories · "+fmt0(TOTAL_NP);
+  document.getElementById("purposerows").innerHTML = entries.map(([name,b])=>{
+    const w = b.amt/bmax*100;
+    const lw = b.amt ? b.local/b.amt*w : 0, rw = b.amt ? b.regional/b.amt*w : 0;
+    return `<div class="cmprow">
+      <div class="cmphead"><span class="nm">${name}</span>
+        <span class="gap">${plural(b.n,"organization")}</span>
+        <span class="amt">${fmt0(b.amt)}</span><span class="pc">${pctS(b.amt,TOTAL_NP)}</span></div>
+      <div class="bar">${lw>0?`<i style="width:${lw.toFixed(2)}%;background:var(--local)"></i>`:""}${rw>0?`<i style="width:${rw.toFixed(2)}%;background:var(--regional)"></i>`:""}</div>
+      <div class="dw">${b.orgs.join(" · ")}</div></div>`;
+  }).join("");
+
+  /* local tab tiles */
+  const withData = LOCAL.filter(d=>d.status==="data");
+  const combRev  = withData.reduce((s,d)=>s+(d.rev||0),0);
+  document.getElementById("stats-local").innerHTML = [
+    [LOCAL.length, "Organizations", "Registered nonprofits in Bristol and the surrounding towns"],
+    ["None", "Town appropriation", "None of these receive Town of Bristol money"],
+    [withData.length+" of "+LOCAL.length, "With 990 financials", "The rest file a 990-N postcard or are exempt"],
+    [fmt0(combRev), "Combined revenue", "Reporting organizations only, most recent filed year"]
+  ].map(c=>`<div class="stat"><div class="n">${c[0]}</div><div class="l">${c[1]}</div><div class="sub2">${c[2]}</div></div>`).join("");
+}
+
+/* ---------- table ---------- */
 const datasets = {appro:DATA, local:LOCAL};
 let activeTab="appro", sortK="appro", sortDir=-1;
 
 document.getElementById("tc-appro").textContent = "("+DATA.length+")";
 document.getElementById("tc-local").textContent = "("+LOCAL.length+")";
 
-function computeStats(){
-  const set = datasets[activeTab];
-  const withData = set.filter(d=>d.status==="data");
-  const combRev = withData.reduce((s,d)=>s+(d.rev||0),0);
-  let cards;
-  if(activeTab==="appro"){
-    const total = set.reduce((s,d)=>s+(d.appro||0),0);
-    cards = [
-      [set.length, "Organizations"],
-      [fmtA(total), "Total appropriations"],
-      [withData.length+" of "+set.length, "With 990 financials"],
-      [fmt0(combRev), "Combined revenue (reporting orgs)"]
-    ];
-  } else {
-    cards = [
-      [set.length, "Organizations"],
-      ["None", "Town appropriation"],
-      [withData.length+" of "+set.length, "With 990 financials"],
-      [fmt0(combRev), "Combined revenue (reporting orgs)"]
-    ];
-  }
-  document.getElementById("stats").innerHTML = cards.map(c=>
-    `<div class="stat"><div class="n">${c[0]}</div><div class="l">${c[1]}</div></div>`).join("");
-}
-
 function render(){
   const set = datasets[activeTab];
-  const q = document.getElementById("q").value.toLowerCase().trim();
+  const q  = document.getElementById("q").value.toLowerCase().trim();
+  const fs = document.getElementById("fScope").value;
   const fa = document.getElementById("fArticle").value;
   const fd = document.getElementById("fData").value;
   let rows = set.filter(d=>{
-    if(q && !(d.name.toLowerCase().includes(q) || (d.cat||"").toLowerCase().includes(q) || (d.loc||"").toLowerCase().includes(q))) return false;
+    if(q && !((d.name+" "+(d.cat||"")+" "+(d.loc||"")+" "+(d.bucket||"")).toLowerCase().includes(q))) return false;
+    if(fs && d.scope!==fs) return false;
     if(activeTab==="appro" && fa && String(d.article)!==fa) return false;
     if(fd && d.status!==fd) return false;
     return true;
   });
   rows.sort((a,b)=>{
+    if(sortK==="name" || sortK==="scope" || sortK==="bucket")
+      return String(a[sortK]||"").localeCompare(String(b[sortK]||""))*sortDir;
     let x=a[sortK], y=b[sortK];
-    if(sortK==="name"){ return a.name.localeCompare(b.name)*sortDir; }
     x = x==null?-1:x; y = y==null?-1:y;
     return (x<y?-1:x>y?1:0)*sortDir;
   });
@@ -390,28 +769,25 @@ function render(){
   document.getElementById("rows").innerHTML = rows.map(d=>{
     const ppSearch = "https://projects.propublica.org/nonprofits/search?q="+encodeURIComponent(d.name);
     const nameCell = `<a href="${d.ein?pp(d.ein):ppSearch}" target="_blank" rel="noopener">${d.name}</a>`;
-    const einLine = d.ein ? `EIN ${d.ein}` : "no EIN";
-    const apprCell = d.appro!=null ? `<span class="appro">${fmtA(d.appro)}</span>` : dash;
-    const artCell = d.article!=null ? `<span class="chip art">${d.article}</span>` : dash;
-    const town = d.loc ? d.loc.replace(/,\s*VT$/,"") : dash;
-    const bs = (d.ein && BS[d.ein]) ? BS[d.ein] : null;
-    const rowId = bs ? d.ein.replace("-","") : "";
-    const caret = bs ? `<span class="bs-caret" data-bs="${rowId}" role="button" tabindex="0" aria-label="Toggle asset breakdown" title="Asset breakdown">&#9656;</span>` : "";
-    const detailRow = bs ? `<tr class="bs-row" id="bs-${rowId}" style="display:none"><td colspan="11">${bsPanelHtml(bs)}</td></tr>` : "";
+    const einLine  = d.ein ? `EIN ${d.ein}` : "no EIN";
+    const bs     = (d.ein && BS[d.ein]) ? BS[d.ein] : null;
+    const rowId  = bs ? d.ein.replace("-","") : "";
+    const caret  = bs ? `<span class="bs-caret" data-bs="${rowId}" role="button" tabindex="0" aria-label="Toggle asset breakdown" title="Asset breakdown">&#9656;</span>` : "";
+    const detail = bs ? `<tr class="bs-row" id="bs-${rowId}" hidden><td colspan="11">${bsPanelHtml(bs)}</td></tr>` : "";
     return `<tr>
       <td><div class="org">${caret}${nameCell}</div>
         <div class="meta"><span class="chip">${d.cat}</span>${einLine}${d.web?` &middot; ${d.web}`:""}${d.note?`<br><i>${d.note}</i>`:""}</div></td>
-      <td>${town}</td>
-      <td class="hide-sm">${d.kind||dash}</td>
-      <td class="hide-sm">${artCell}</td>
-      <td class="num">${apprCell}</td>
+      <td>${scopeCell(d.scope)}<div class="meta">${(d.loc||"").replace(/,\s*VT$/,"")}</div></td>
+      <td class="hide-sm">${activeTab==="appro"?d.bucket:(d.cat||dash)}</td>
+      <td class="num hide-sm">${d.article!=null?d.article:dash}</td>
+      <td class="num">${d.appro!=null?`<span class="appro">${fmtA(d.appro)}</span>`:dash}</td>
       <td class="num hide-sm">${d.year||dash}</td>
       <td class="num">${fmt0(d.rev)||dash}</td>
       <td class="num hide-sm">${fmt0(d.exp)||dash}</td>
       <td class="num hide-sm">${fmt0(d.assets)||dash}</td>
       <td class="num hide-sm">${fmt0(d.comp)||dash}</td>
       <td>${badgeFor(d.status)}</td>
-    </tr>${detailRow}`;
+    </tr>${detail}`;
   }).join("");
 }
 
@@ -419,8 +795,8 @@ function toggleBs(id){
   const row = document.getElementById("bs-"+id);
   const caret = document.querySelector('.bs-caret[data-bs="'+id+'"]');
   if(!row) return;
-  const open = row.style.display==="none";
-  row.style.display = open ? "table-row" : "none";
+  const open = row.hidden;
+  row.hidden = !open;
   if(caret) caret.classList.toggle("open", open);
 }
 document.getElementById("rows").addEventListener("click", e=>{
@@ -436,11 +812,13 @@ document.getElementById("rows").addEventListener("keydown", e=>{
 function setTab(tab){
   activeTab = tab;
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===tab));
-  document.getElementById("fArticle").style.display = (tab==="appro") ? "" : "none";
-  if(tab==="appro"){ document.getElementById("fArticle").value=""; }
+  document.getElementById("view-appro").hidden = tab!=="appro";
+  document.getElementById("view-local").hidden = tab!=="local";
+  const fa = document.getElementById("fArticle");
+  fa.hidden = tab!=="appro";
+  if(tab!=="appro") fa.value="";
   sortK = (tab==="appro") ? "appro" : "rev";
   sortDir = -1;
-  computeStats();
   render();
 }
 
@@ -448,13 +826,19 @@ document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setT
 document.querySelectorAll("thead th").forEach(th=>{
   th.addEventListener("click",()=>{
     const k=th.dataset.k;
-    if(sortK===k) sortDir*=-1; else { sortK=k; sortDir = (k==="name")?1:-1; }
+    if(sortK===k) sortDir*=-1;
+    else { sortK=k; sortDir = (k==="name"||k==="scope"||k==="bucket")?1:-1; }
     render();
   });
 });
-["q","fArticle","fData"].forEach(id=>document.getElementById(id).addEventListener("input",render));
-computeStats();
-render();
+["q","fScope","fArticle","fData"].forEach(id=>
+  document.getElementById(id).addEventListener("input",render));
+
+document.getElementById("asof").textContent =
+  "Appropriations as warned for Town Meeting, March 2 2026 · IRS 990 data compiled June 21 2026 · Page rebuilt September 9 2026";
+
+paintGlance();
+setTab("appro");
 </script>
 </body>
 </html>
