@@ -61,8 +61,6 @@
   #mapwrap{flex:1;position:relative}
   #map{position:absolute;inset:0;background:var(--track)}
   .leaflet-container{background:var(--track);font-family:var(--body)}
-  #map[data-base="dark"] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) saturate(.55) brightness(.92) contrast(.92)}
-  #map[data-base="light"] .leaflet-tile-pane{filter:saturate(.45) brightness(1.03)}
 
   .kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.13em;
     text-transform:uppercase;color:var(--muted);display:flex;gap:9px;align-items:center;margin-bottom:12px}
@@ -203,9 +201,7 @@
         <option value="c">Color by the survey's overall rating</option>
       </select>
       <select id="baseMap">
-        <option value="auto">Basemap: match the page theme</option>
-        <option value="light">Basemap: street map, light</option>
-        <option value="dark">Basemap: street map, dark</option>
+        <option value="osm">Basemap: street map</option>
         <option value="sat">Basemap: aerial photo</option>
       </select>
       <label><input type="checkbox" id="showPhotos"> Show the 571 photo locations</label>
@@ -365,27 +361,16 @@ document.getElementById('notesub').textContent=OBS.length+' of '+fmt(N)+' points
 const MAXZ=21;
 const map=L.map('map',{maxZoom:MAXZ});
 map.fitBounds(L.latLngBounds(PTS.map(p=>[p[1],p[0]])).pad(0.06));
-const OSM_CREDIT='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-const ESRI_IMG_CREDIT='Imagery &copy; Esri, Maxar, Earthstar Geographics and the GIS User Community';
 const BASES={
-  light:{url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-         attribution:OSM_CREDIT, maxNative:19, tone:'light'},
-  dark: {url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-         attribution:OSM_CREDIT, maxNative:19, tone:'dark'},
-  sat:  {url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-         attribution:ESRI_IMG_CREDIT, maxNative:19, tone:'sat'}
+  osm:{url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png', maxNative:19,
+       attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'},
+  sat:{url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', maxNative:19,
+       attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics and the GIS User Community'}
 };
-const prefersDark=()=>{
-  const t=document.documentElement.getAttribute('data-theme');
-  if(t) return t==='dark';
-  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-};
-let baseChoice='auto', baseLayer=null;
+let baseChoice='osm', baseLayer=null;
 function applyBase(){
-  const key = baseChoice==='auto' ? (prefersDark()?'dark':'light') : baseChoice;
-  const spec = BASES[key];
+  const spec = BASES[baseChoice] || BASES.osm;
   if(baseLayer) map.removeLayer(baseLayer);
-  document.getElementById('map').setAttribute('data-base',spec.tone);
   baseLayer = L.tileLayer(spec.url,{maxZoom:MAXZ, maxNativeZoom:spec.maxNative, attribution:spec.attribution}).addTo(map);
   baseLayer.bringToBack();
 }
