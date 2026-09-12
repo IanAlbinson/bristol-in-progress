@@ -276,6 +276,12 @@
     background:var(--accent);
   }
   .chip.live::before { background:var(--live); }
+  .chip.ext::before { background:var(--signal); }
+  a.tool[target] h3::after {
+    content:"\2197";
+    font-size:0.62em; vertical-align:0.5em; margin-left:0.32em;
+    color:var(--muted); text-decoration:none;
+  }
 
   /* ---------- work ledger ---------- */
 
@@ -441,7 +447,8 @@
     </div>
     <p class="lede">
       Small standalone pages built from public records. Each one shows its sources and the date the
-      data was pulled. More go up here as they're finished.
+      data was pulled. A few are other people's maps that deserve more readers than they get;
+      those are marked and open on the site that made them.
     </p>
 
     <div class="tools">
@@ -481,6 +488,19 @@
         <div class="foot">
           <span class="chip live">Live</span>
           <span>IRS Form 990 filings</span>
+        </div>
+      </a>
+
+      <a class="tool" href="https://acrpc.maps.arcgis.com/apps/instant/basic/index.html?appid=6d4f32ec56584200bec6638085b2e74d" target="_blank" rel="noopener">
+        <h3>Sidewalk condition</h3>
+        <p>
+          ACRPC's 2022 inventory of Bristol's sidewalks: 1,644 points rated 0 to 5 for overall
+          condition, with written observations and 571 photos. Most of the network rates 0, the best
+          score, and 71 points rate 4 or 5. Not my map, and it opens on ACRPC's site.
+        </p>
+        <div class="foot">
+          <span class="chip ext">ACRPC</span>
+          <span>2022 Bristol Sidewalk Inventory</span>
         </div>
       </a>
     </div>
