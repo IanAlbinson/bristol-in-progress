@@ -160,6 +160,10 @@
   .pop td:last-child{text-align:right;font-weight:600;white-space:nowrap}
   .pop .obs{margin-top:8px;padding-top:8px;border-top:1px solid #ddd;font-style:italic;color:#444}
   .pop a{color:#2a78d6}
+  .pop figure{margin:0 0 8px}
+  .pop figure img{display:block;width:100%;max-width:340px;height:auto;border-radius:3px;
+    background:#e9e8e3;min-height:60px}
+  .pop figure figcaption{margin-top:5px;font-size:11px;color:#7a7873}
   .swk{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
 
   @media(max-width:820px){
@@ -215,8 +219,9 @@
       <label><input type="checkbox" id="showNotes" checked> Ring the 54 written notes</label>
     </div>
     <p class="note">
-      Photo markers open the surveyor's original image on ACRPC's server. They are unresized phone
-      photographs averaging 5.3&nbsp;MB, so nothing loads until you ask for one.
+      Photo markers show the surveyor's field photograph. The 571 images are served from this site,
+      resized from the originals; each popup also links to the full-resolution file on ACRPC's
+      server. Nothing loads until you open a marker.
     </p>
 
     <h2 class="sec">What was measured<em>Every point scored on all four, plus surface weathering</em></h2>
@@ -424,13 +429,19 @@ function draw(){
     + `<span class="k"><i style="background:transparent;border:2px solid var(--note)"></i>written note</span>`
 ;
 }
+const PHOTO_DIR='photos/';
 PHOTOS.forEach(ph=>{
-  const url=D.photoBase+ph[2]+'/attachments/'+ph[3];
+  const local=PHOTO_DIR+ph[2]+'_'+ph[3]+'.jpg';
+  const orig=D.photoBase+ph[2]+'/attachments/'+ph[3];
   const m=L.circleMarker([ph[1],ph[0]],{pane:'photos',radius:5,weight:1.5,color:cssv('--photo'),
     fillColor:cssv('--photo'),fillOpacity:.22});
-  m.bindPopup(`<div class="pop"><h4>Field photograph</h4>
-    <a href="${url}" target="_blank" rel="noopener">Open the original on ACRPC's server</a>
-    <div class="obs" style="font-style:normal">Full resolution, about ${ph[4]} MB.</div></div>`);
+  m.bindPopup(()=>`<div class="pop"><h4>Field photograph</h4>
+    <figure><a href="${local}" target="_blank" rel="noopener"><img src="${local}" loading="lazy"
+      alt="Surveyor's photograph of this sidewalk location"></a>
+    <figcaption>Click to open it full size.</figcaption></figure>
+    <div class="obs" style="font-style:normal">Resized for the web from the surveyor's original.
+      <a href="${orig}" target="_blank" rel="noopener">The full-resolution file</a> (about ${ph[4]}&nbsp;MB)
+      stays on ACRPC's server.</div></div>`, {maxWidth:380, minWidth:300});
   photoLayer.addLayer(m);
 });
 document.getElementById('colorBy').addEventListener('change',e=>{mode=e.target.value;draw();});
