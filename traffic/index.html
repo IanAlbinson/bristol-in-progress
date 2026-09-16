@@ -12,7 +12,7 @@
   :root{
     color-scheme:light;
     --ground:#f9f9f7; --surface:#ffffff; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
-    --rule:#e1e0d9; --rule-strong:#c3c2b7; --accent:#eb6834; --signal:#2a78d6; --live:#1baf7a;
+    --rule:#e1e0d9; --rule-strong:#c3c2b7; --accent:#eb6834; --signal:#2a78d6; --live:#1baf7a; --stn-1:#33505f; --stn-2:#7b909c; --stn-3:#b9c4ca; --stn-0:#8a8f98;
     --track:#eeede7; --tilefx:none;
     --display:"Newsreader",Georgia,"Times New Roman",serif;
     --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -22,7 +22,7 @@
     :root:not([data-theme="light"]){
       color-scheme:dark;
       --ground:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
-      --rule:#2c2c2a; --rule-strong:#3d3d3a; --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+      --rule:#2c2c2a; --rule-strong:#3d3d3a; --accent:#e5713f; --signal:#3987e5; --live:#22b581; --stn-1:#cfe0ea; --stn-2:#8fa7b5; --stn-3:#5d7480; --stn-0:#7e8a90;
       --track:#262624; --tilefx:invert(1) hue-rotate(180deg) brightness(.92) contrast(.92);
     }
   }
@@ -68,6 +68,11 @@
   .cdot{width:11px;height:11px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:4px;border:1px solid rgba(0,0,0,.25)}
   .bignum{font-family:var(--display);font-size:29px;font-weight:400;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:14px}
   .crashkey{display:flex;flex-wrap:wrap;gap:12px;margin-top:9px;font-size:11.5px;color:var(--ink-2)}
+
+  .stkey{display:flex;flex-wrap:wrap;gap:10px 16px;font-size:12px;color:#5a5f66;margin:10px 0 4px}
+  .stkey span{display:inline-flex;align-items:center;gap:6px}
+  .stkey .sq{width:9px;height:9px;display:inline-block;transform:rotate(45deg);border:1px solid rgba(0,0,0,.45)}
+  .stkey .sq-hollow{background:transparent;border:1px solid var(--stn-0)}
   .ctx{font-size:12.5px;line-height:1.55;color:var(--ink-2);margin:11px 0 0}
   .ctx b{color:var(--ink)}
 
@@ -112,6 +117,7 @@
     <label class="toggle"><input type="checkbox" id="tStudy" checked> FY27 four-gateway study area</label>
     <label class="toggle"><input type="checkbox" id="tCrash" checked> Downtown crashes, 2020&ndash;2025 (n=72)</label>
     <label class="toggle"><input type="checkbox" id="tConflict" checked> Named conflict points</label>
+    <label class="toggle"><input type="checkbox" id="tStations"> VTrans count locations (n=50)</label>
 
     <h2 class="sec">Legend</h2>
     <div id="legend"></div>
@@ -131,11 +137,33 @@
     <h2 class="sec">Count data <span>85th %ile / ADT / % trk</span></h2>
     <table id="dataTbl"><thead><tr><th class="l">Location</th><th class="num">mph</th><th class="num">ADT</th><th class="num">% trk</th></tr></thead><tbody></tbody></table>
 
+    <h2 class="sec">VTrans count locations <span>TCDS, all of Bristol</span></h2>
+    <p class="ctx">
+      The State keeps <b>50 count locations</b> in Bristol. Turn the layer on to see them. Do not
+      read them alongside the village counts above: those are field counts of speed and volume,
+      while almost all of these are <b>AADT</b>, the State's estimated annual average daily
+      traffic for a year rather than a measurement taken on a day.
+    </p>
+    <div class="stkey">
+      <span><span class="sq" style="background:var(--stn-1)"></span>Figure from 2020 or later</span>
+      <span><span class="sq" style="background:var(--stn-2)"></span>2000&ndash;2019</span>
+      <span><span class="sq" style="background:var(--stn-3)"></span>Before 2000</span>
+      <span><span class="sq sq-hollow"></span>Nothing on file</span>
+    </div>
+    <p class="hint">
+      The split is clean. All <b>26 intersection locations</b> sit on the Turning Movement Count
+      schedule, and of those only <b>7 carry a count</b>, every one of them taken on July 31 2015.
+      The other <b>19 are empty</b>, including all four legs of North, Pleasant and Spring, the
+      intersection at the center of the study area. The remaining <b>24 locations carry AADT</b>,
+      stamped by year: eighteen for 2025, and one each reaching back to 2013, 1991, 1980, 1978 and
+      1976. Nine locations are on no count schedule at all, so nothing is scheduled to refresh them.
+    </p>
+
     <div class="foot">
       <h3>Sources</h3>
-      <p>Traffic counts: ACRPC 2020 village survey and September 2024 North Street count, summarized in a Mike Winslow email dated November 7, 2024 (Bristol Selectboard packet 2024-12-16, item V.4). Crash points: Bristol crash dashboard, from the VTrans Crash Query Tool, downtown district, August 2020 through July 2025. Road geometry: OpenStreetMap. Study-area gateways: Bristol FY2027 Downtown Access Study request.</p>
+      <p>Traffic counts: ACRPC 2020 village survey and September 2024 North Street count, summarized in a Mike Winslow email dated November 7, 2024 (Bristol Selectboard packet 2024-12-16, item V.4). Crash points: Bristol crash dashboard, from the VTrans Crash Query Tool, downtown district, August 2020 through July 2025. VTrans count locations: Traffic Data Management System (vtrans.ms2soft.com, run for VTrans by Midwestern Software Solutions), TCDS module, county ADDISON and community BRISTOL, exported September 2026. Field definitions from the VTrans Traffic Data Management System Info Sheet, October 2016. Road geometry: OpenStreetMap. Study-area gateways: Bristol FY2027 Downtown Access Study request.</p>
       <h3>How the numbers were checked</h3>
-      <p>Count figures are transcribed from Winslow's summary table. Crash points are plotted from the dashboard's own coordinates. Study corridors are traced along OpenStreetMap street centerlines from the main downtown intersection to each gateway. Four count locations without a crash-dashboard anchor (North St. @ ambulance, North St. @ Lathrop Ln., Plank Rd., Pleasant St.) are placed on the correct street and flagged &ldquo;approx.&rdquo; in their popups.</p>
+      <p>The State's 50 locations are plotted from the coordinates in the export. Its Category field names the count schedule a location is assigned to, not the kind of number it holds, so it is shown that way; the trailing cycle-year digit is not used to date anything, because the cycle numbering in the 2016 info sheet has since rolled over. Count figures are transcribed from Winslow's summary table. Crash points are plotted from the dashboard's own coordinates. Study corridors are traced along OpenStreetMap street centerlines from the main downtown intersection to each gateway. Four count locations without a crash-dashboard anchor (North St. @ ambulance, North St. @ Lathrop Ln., Plank Rd., Pleasant St.) are placed on the correct street and flagged &ldquo;approx.&rdquo; in their popups.</p>
       <p class="fine">Data current to the sources above. Page compiled September 16, 2026.</p>
       <p class="fine">A working reference compiled by Ian Albinson, one of five members of the Bristol Selectboard. Not an official Town of Bristol publication; it has not been reviewed or adopted by the Selectboard and does not speak for the board, Town staff, ACRPC, or VTrans.</p>
     </div>
@@ -242,9 +270,58 @@ crashes.forEach(c=>{
     .bindPopup(`<b>Crash — ${c.typ}</b><br>${c.date}<br>${c.inter?('at '+c.inter+'<br>'):''}${c.addr||''}`).addTo(crashLayer);
 });
 
+// VTrans TCDS count stations (all of Bristol)
+const stations = [{"id":"30103105-E","on":"SPRING ST","at":"","dir":"EB/WB","cat":"TMC","fc":"9","lat":44.136413,"lng":-73.078687,"v":null,"yr":null,"date":null,"est":false},{"id":"30103105-N","on":"NORTH ST","at":"","dir":"NB/SB","cat":"TMC","fc":"Local - 7","lat":44.136508,"lng":-73.078899,"v":null,"yr":null,"date":null,"est":false},{"id":"30103105-S","on":"NORTH ST","at":"","dir":"NB/SB","cat":"TMC","fc":"Local - 7","lat":44.136291,"lng":-73.078863,"v":null,"yr":null,"date":null,"est":false},{"id":"30103105-W","on":"PLEASANT ST","at":"","dir":"EB/WB","cat":"TMC","fc":"9","lat":44.136387,"lng":-73.079046,"v":null,"yr":null,"date":null,"est":false},{"id":"30103110-N","on":"MONKTON RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Local - 7","lat":44.156869,"lng":-73.098721,"v":null,"yr":null,"date":null,"est":false},{"id":"30103110-S","on":"MONKTON RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Local - 7","lat":44.156425,"lng":-73.09832,"v":null,"yr":null,"date":null,"est":false},{"id":"30103110-W","on":"BURPEE RD","at":"","dir":"EB/WB","cat":"TMC","fc":"9","lat":44.156379,"lng":-73.098741,"v":null,"yr":null,"date":null,"est":false},{"id":"30103115-N","on":"MONKTON RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Local - 7","lat":44.158425,"lng":-73.09908,"v":null,"yr":null,"date":null,"est":false},{"id":"30103115-S","on":"MONKTON RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Local - 7","lat":44.15811,"lng":-73.099016,"v":null,"yr":null,"date":null,"est":false},{"id":"30103115-W","on":"HARDSCRABBLE RD","at":"","dir":"EB/WB","cat":"TMC","fc":"9","lat":44.158264,"lng":-73.099282,"v":null,"yr":null,"date":null,"est":false},{"id":"30103805-E","on":"STONEY HILL RD","at":"","dir":"EB/WB","cat":"TMC","fc":"Minor Collector - 6","lat":44.129501,"lng":-73.097127,"v":2227,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103805-N","on":"BURPEE RD","at":"","dir":"NB/SB","cat":"TMC","fc":"9","lat":44.129619,"lng":-73.097422,"v":848,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103805-S","on":"S 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.129247,"lng":-73.097371,"v":1548,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103805-W","on":"STONEY HILL RD","at":"","dir":"EB/WB","cat":"TMC","fc":"Minor Collector - 6","lat":44.129402,"lng":-73.09767,"v":1519,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103810-E","on":"DRAKE WOODS RD","at":"","dir":"EB/WB","cat":"TMC","fc":"Local - 7","lat":44.153219,"lng":-73.045195,"v":583,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103810-N","on":"N 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.153264,"lng":-73.045597,"v":1066,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103810-S","on":"N 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.152852,"lng":-73.045431,"v":1373,"yr":2015,"date":"2015-07-31","est":false},{"id":"30103820-N","on":"S 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.099784,"lng":-73.097159,"v":null,"yr":null,"date":null,"est":false},{"id":"30103820-S","on":"S 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.099464,"lng":-73.096964,"v":null,"yr":null,"date":null,"est":false},{"id":"30103820-W","on":"RIVER RD","at":"","dir":"EB/WB","cat":"TMC","fc":"Local - 7","lat":44.099447,"lng":-73.097274,"v":null,"yr":null,"date":null,"est":false},{"id":"30103825-E","on":"HEWITT RD","at":"","dir":"EB/WB","cat":"TMC","fc":"9","lat":44.121225,"lng":-73.096436,"v":null,"yr":null,"date":null,"est":false},{"id":"30103825-N","on":"S 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.12133,"lng":-73.096733,"v":null,"yr":null,"date":null,"est":false},{"id":"30103825-S","on":"S 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.120919,"lng":-73.096623,"v":null,"yr":null,"date":null,"est":false},{"id":"30103835-E","on":"LINCOLN RD","at":"","dir":"EB/WB","cat":"TMC","fc":"Local - 7","lat":44.129087,"lng":-73.049849,"v":null,"yr":null,"date":null,"est":false},{"id":"30103835-N","on":"N 116 RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.129364,"lng":-73.049771,"v":null,"yr":null,"date":null,"est":false},{"id":"30103835-S","on":"ROCKYDALE RD","at":"","dir":"NB/SB","cat":"TMC","fc":"Minor Collector - 6","lat":44.129196,"lng":-73.05016,"v":null,"yr":null,"date":null,"est":false},{"id":"A015","on":"VT-17","at":"between VT116 AND QUAKER ST","dir":"EB/WB","cat":"Coverage","fc":"Major Collector - 5","lat":44.154236,"lng":-73.043641,"v":1636,"yr":2025,"date":"2025-01-01","est":true},{"id":"A125","on":"VT-116","at":"between LINCOLN RD AND VT 17","dir":"NB/SB","cat":"Coverage","fc":"Minor Arterial - 4","lat":44.141701,"lng":-73.045502,"v":3229,"yr":2025,"date":"2025-01-01","est":true},{"id":"A126","on":"VT-116","at":"between ROCKYDALE TRAILER PARK AND LINCOLN RD","dir":"NB/SB","cat":"Coverage","fc":"Minor Arterial - 4","lat":44.1282,"lng":-73.057098,"v":4872,"yr":2025,"date":"2025-01-01","est":true},{"id":"A127","on":"VT-116","at":"","dir":"NB/SB","cat":"","fc":"Minor Arterial - 4","lat":44.129799,"lng":-73.0952,"v":4860,"yr":2025,"date":"2025-01-01","est":true},{"id":"A128","on":"VT-116","at":"between STETSON RD AND HUNT FARM RD","dir":"NB/SB","cat":"Coverage","fc":"Minor Arterial - 4","lat":44.106701,"lng":-73.096901,"v":4217,"yr":2025,"date":"2025-01-01","est":true},{"id":"A129","on":"VT-116","at":"","dir":"NB/SB","cat":"","fc":"Minor Arterial - 4","lat":44.0784,"lng":-73.086403,"v":1200,"yr":1978,"date":"1978-01-01","est":true},{"id":"A162","on":"VT-116","at":"","dir":"NB/SB","cat":"","fc":"Minor Arterial - 4","lat":44.133499,"lng":-73.080002,"v":4510,"yr":2025,"date":"2025-01-01","est":true},{"id":"A164","on":"VT-116","at":"","dir":"NB/SB","cat":"","fc":"Minor Arterial - 4","lat":44.1343,"lng":-73.084602,"v":4000,"yr":1980,"date":"1980-01-01","est":true},{"id":"A165","on":"NORTH ST","at":"between PRINCE LN AND GARFIELD ST","dir":"NB/SB","cat":"Coverage","fc":"Major Collector - 5","lat":44.1343,"lng":-73.078697,"v":2801,"yr":2025,"date":"2025-01-01","est":true},{"id":"A166","on":"NORTH ST","at":"between FRANCES PL AND CRESCENT ST","dir":"NB/SB","cat":"","fc":"Major Collector - 5","lat":44.1402,"lng":-73.080469,"v":1700,"yr":1991,"date":"1991-01-01","est":true},{"id":"A332","on":"Monkton Rd","at":"","dir":"NB/SB","cat":"Coverage","fc":"Major Collector - 5","lat":44.148998,"lng":-73.087097,"v":1590,"yr":2025,"date":"2025-01-01","est":true},{"id":"A333","on":"HEWITT RD","at":"between VT 116 AND LOVERS LN","dir":"EB/WB","cat":"LOCAL 3","fc":"Local - 7","lat":44.12273,"lng":-73.092939,"v":805,"yr":2025,"date":"2025-01-01","est":true},{"id":"A384","on":"-","at":"","dir":"NB/SB","cat":"","fc":"Local - 7","lat":44.132099,"lng":-73.098,"v":640,"yr":1976,"date":"1976-01-01","est":true},{"id":"A385","on":"Hardscrabble Road","at":"","dir":"NB/SB","cat":"LOCAL 3","fc":"Local - 7","lat":44.157001,"lng":-73.111298,"v":681,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDD","on":"BURPEE RD","at":"","dir":"NB/SB","cat":"LOCAL 3","fc":"Local - 7","lat":44.150101,"lng":-73.099701,"v":2257,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDF","on":"Mountain St","at":"between SPRING ST","dir":"NB/SB","cat":"LOCAL 4","fc":"Local - 7","lat":44.137263,"lng":-73.076417,"v":437,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDG","on":"PINE ST","at":"between TAYLOR AVE","dir":"EB/WB","cat":"LOCAL 4","fc":"Local - 7","lat":44.139073,"lng":-73.081933,"v":549,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDH","on":"","at":"","dir":"","cat":"LOCAL 4","fc":"Local - 7","lat":44.133203,"lng":-73.090237,"v":1539,"yr":2020,"date":"2020-01-01","est":true},{"id":"AXDI","on":"LIBERTY ST","at":"between W PLEASANT ST","dir":"NB/SB","cat":"LOCAL 4","fc":"Local - 7","lat":44.136083,"lng":-73.087577,"v":700,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDJ","on":"","at":"","dir":"","cat":"LOCAL 4","fc":"Local - 7","lat":44.129098,"lng":-73.090372,"v":347,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDK","on":"TAYLOR AVE","at":"between ELM ST","dir":"NB/SB","cat":"","fc":"Local - 7","lat":44.137725,"lng":-73.082303,"v":140,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXDN","on":"","at":"","dir":"","cat":"LOCAL 4","fc":"Local - 7","lat":44.12793,"lng":-73.044653,"v":234,"yr":2025,"date":"2025-01-01","est":true},{"id":"AXEI","on":"BRIS18","at":"","dir":"EB/WB","cat":"","fc":"Local - 7","lat":44.079701,"lng":-73.083504,"v":470,"yr":2013,"date":"2013-01-01","est":true},{"id":"AXEJ","on":"BRIS20","at":"","dir":"NB/SB","cat":"","fc":"Local - 7","lat":44.141701,"lng":-73.100197,"v":2300,"yr":2013,"date":"2013-01-01","est":true}];
+/* Age ramp is deliberately neutral. The speed and crash colors on this map carry
+   meaning; these stations are reference context and must not read as an assessment.
+   The ramp inverts by theme so the newest tier stays the most prominent in both. */
+const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function stColor(st){
+  if(st.v==null) return null;
+  if(st.yr>=2020) return cssv('--stn-1');
+  if(st.yr>=2000) return cssv('--stn-2');
+  return cssv('--stn-3');
+}
+const stationLayer=L.layerGroup();
+function drawStations(){
+stationLayer.clearLayers();
+stations.forEach(st=>{
+  const c = stColor(st);
+  const fill = c || 'transparent';
+  const edge = c ? 'rgba(128,128,128,.75)' : cssv('--stn-0');
+  const size = st.v==null ? 9 : 11;
+  const box  = Math.ceil(size*1.42);
+  const html = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">
+    <div style="width:${size}px;height:${size}px;transform:rotate(45deg);background:${fill};
+      border:1.5px solid ${edge};box-shadow:0 0 0 1px rgba(255,255,255,.55)"></div></div>`;
+  const where = [st.on, st.at].filter(Boolean).join(' ');
+  /* Category names the count SCHEDULE a location sits on, not the kind of number.
+     Per the VTrans TCDS info sheet (Oct 2016), the trailing digit is a cycle year. */
+  const sched = st.cat==='TMC' ? 'Turning Movement Count schedule'
+              : st.cat==='Coverage' ? 'Coverage Count schedule, federal-aid routes'
+              : /^LOCAL/.test(st.cat) ? 'Local Road schedule, cycle year '+st.cat.split(' ')[1]
+              : 'not assigned to a count schedule';
+  const val = st.v==null
+    ? '<i>Nothing on file for this location.</i>'
+    : (st.est
+        ? `AADT <b>${st.v.toLocaleString()}</b> for <b>${st.yr}</b><br>
+           <span style="color:#5a5f66">Annual average daily traffic, the State's estimate for the year. Not a count taken on one day.</span>`
+        : `Turning movement count: <b>${st.v.toLocaleString()}</b><br>
+           <span style="color:#5a5f66">Counted ${st.date}.</span>`);
+  L.marker([st.lat,st.lng],{icon:L.divIcon({className:'',iconSize:[box,box],iconAnchor:[box/2,box/2],html})})
+    .bindPopup(`<b>${where||st.id}</b><br><span style="color:#5a5f66">${st.id} &middot; ${sched}${st.dir?' &middot; '+st.dir:''}</span><br>${val}`)
+    .addTo(stationLayer);
+});
+}
+drawStations();
+if(window.matchMedia) try{
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawStations);
+}catch(e){}
+
 // layer toggles
 document.getElementById('tCounts').onchange=e=>e.target.checked?countLayer.addTo(map):map.removeLayer(countLayer);
 document.getElementById('tStudy').onchange=e=>e.target.checked?studyLayer.addTo(map):map.removeLayer(studyLayer);
+document.getElementById('tStations').onchange=e=>e.target.checked?stationLayer.addTo(map):map.removeLayer(stationLayer);
 document.getElementById('tConflict').onchange=e=>e.target.checked?conflictLayer.addTo(map):map.removeLayer(conflictLayer);
 document.getElementById('tCrash').onchange=e=>e.target.checked?crashLayer.addTo(map):map.removeLayer(crashLayer);
 
