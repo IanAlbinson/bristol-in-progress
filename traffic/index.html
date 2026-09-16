@@ -7,8 +7,8 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
   #wrap{display:flex;height:100%}
-  #map{flex:1;min-width:0}
-  #side{width:340px;max-width:42vw;overflow-y:auto;background:var(--panel);border-left:1px solid var(--line);padding:16px 16px 40px}
+  #map{flex:1;min-width:0;order:2}
+  #side{width:340px;max-width:42vw;overflow-y:auto;background:var(--panel);border-right:1px solid var(--line);padding:16px 16px 40px;order:1}
   h1{font-size:16px;margin:0 0 2px}
   .sub{font-size:12px;color:var(--muted);margin:0 0 14px}
   h2{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:18px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
@@ -79,32 +79,32 @@
 // --- Count data (Winslow 2024-11-07 summary). speed=85th %ile mph, adt=avg daily traffic, trk=% trucks classes 4-13 (null = n/a). yr = count year. loc approximate. ---
 // Coordinates anchored to the crash dashboard dataset (real on-road points) where available; approx=true where no dashboard anchor exists.
 const counts = [
-  {name:"Liberty St.",            lat:44.135755, lng:-73.087527, speed:35, adt:620,  trk:34.6, yr:2020, approx:false},
-  {name:"Maple St.",              lat:44.135263, lng:-73.083361, speed:28, adt:183,  trk:14.2, yr:2020, approx:false},
-  {name:"Mountain St.",           lat:44.138199, lng:-73.077097, speed:28, adt:367,  trk:5.4,  yr:2020, approx:false},
-  {name:"North St. @ ambulance",  lat:44.135410, lng:-73.078760, speed:38, adt:1114, trk:null, yr:2020, approx:true},
-  {name:"North St. @ Lathrop Ln.",lat:44.141000, lng:-73.081000, speed:35, adt:1617, trk:null, yr:2020, approx:true},
-  {name:"North St. (Garfield–Park)",lat:44.134700,lng:-73.079000, speed:31, adt:2616, trk:13.1, yr:2024, approx:false},
-  {name:"Pine St.",               lat:44.139184, lng:-73.082567, speed:28, adt:760,  trk:10.1, yr:2020, approx:false},
-  {name:"Plank Rd.",              lat:44.144500, lng:-73.084000, speed:39, adt:499,  trk:null, yr:2020, approx:true},
-  {name:"Pleasant St.",           lat:44.135800, lng:-73.086000, speed:25, adt:343,  trk:13.5, yr:2020, approx:true},
-  {name:"Taylor Ave.",            lat:44.138150, lng:-73.081990, speed:21, adt:99,   trk:7.6,  yr:2020, approx:false}
+  {name:"Liberty St.", lat:44.135832, lng:-73.087503, speed:35, adt:620, trk:34.6, yr:2020, approx:false},
+  {name:"Maple St.", lat:44.135095, lng:-73.083287, speed:28, adt:183, trk:14.2, yr:2020, approx:false},
+  {name:"Mountain St.", lat:44.138145, lng:-73.076665, speed:28, adt:367, trk:5.4, yr:2020, approx:false},
+  {name:"North St. @ ambulance", lat:44.135356, lng:-73.078747, speed:38, adt:1114, trk:null, yr:2020, approx:true},
+  {name:"North St. @ Lathrop Ln.", lat:44.141009, lng:-73.081098, speed:35, adt:1617, trk:null, yr:2020, approx:true},
+  {name:"North St. (Garfield–Park)", lat:44.135064, lng:-73.078723, speed:31, adt:2616, trk:13.1, yr:2024, approx:false},
+  {name:"Pine St.", lat:44.13902, lng:-73.082551, speed:28, adt:760, trk:10.1, yr:2020, approx:false},
+  {name:"Plank Rd.", lat:44.143228, lng:-73.083424, speed:39, adt:499, trk:null, yr:2020, approx:true},
+  {name:"Pleasant St.", lat:44.136138, lng:-73.083473, speed:25, adt:343, trk:13.5, yr:2020, approx:true},
+  {name:"Taylor Ave.", lat:44.137253, lng:-73.082178, speed:21, adt:99, trk:7.6, yr:2020, approx:false}
 ];
 // Main downtown intersection (West/Main/North/South) — anchored to crash cluster
 const hub = {lat:44.133139, lng:-73.078334};
 // FY27 four gateway endpoints — anchored to real crash coordinates (West end extended past last anchor toward Airport Dr)
 const gateways = {
-  "West St. → before Airport Dr.": {lat:44.133600, lng:-73.089000},
-  "East St. → past Drake Smith Rd.":{lat:44.129783, lng:-73.069402},
-  "North St. → Pine St.":          {lat:44.139581, lng:-73.080044},
-  "South St. → over the bridge":   {lat:44.129388, lng:-73.083041}
+  "West St. → before Airport Dr.": {lat:44.133246, lng:-73.088751},
+  "East St. → past Drake Smith Rd.": {lat:44.12982, lng:-73.069579},
+  "North St. → Pine St.": {lat:44.139671, lng:-73.080109},
+  "South St. → over the bridge": {lat:44.129413, lng:-73.083043}
 };
 // Corridor polylines traced through real on-road crash waypoints (hub → gateway)
 const corridors = {
-  "West St. → before Airport Dr.":[[44.133139,-73.078334],[44.133195,-73.079492],[44.133374,-73.079581],[44.134144,-73.083650],[44.134172,-73.083838],[44.133838,-73.087271],[44.133600,-73.089000]],
-  "East St. → past Drake Smith Rd.":[[44.133139,-73.078334],[44.133076,-73.077975],[44.133013,-73.077578],[44.132919,-73.076956],[44.132879,-73.076658],[44.132441,-73.075423],[44.129783,-73.069402]],
-  "North St. → Pine St.":[[44.133139,-73.078334],[44.133391,-73.078044],[44.134803,-73.078345],[44.135411,-73.078759],[44.139581,-73.080044]],
-  "South St. → over the bridge":[[44.133139,-73.078334],[44.133145,-73.078692],[44.131431,-73.081149],[44.129388,-73.083041]]
+  "West St. → before Airport Dr.":[[44.133211,-73.078683],[44.133242,-73.078842],[44.133464,-73.08],[44.133539,-73.080372],[44.133547,-73.080412],[44.133597,-73.080681],[44.133833,-73.081903],[44.133963,-73.082595],[44.134046,-73.083021],[44.134065,-73.083122],[44.134175,-73.083751],[44.13426,-73.084304],[44.134298,-73.08459],[44.134319,-73.084949],[44.134319,-73.085093],[44.134295,-73.085442],[44.134277,-73.085665],[44.134237,-73.086092],[44.134209,-73.086307],[44.134183,-73.086446],[44.134166,-73.086515],[44.134134,-73.086643],[44.134052,-73.086837],[44.133902,-73.087135],[44.133765,-73.08742],[44.133678,-73.087621],[44.13354,-73.087956],[44.133246,-73.088751]],
+  "East St. → past Drake Smith Rd.":[[44.133211,-73.078683],[44.133173,-73.078489],[44.133134,-73.078252],[44.132963,-73.077205],[44.132935,-73.07704],[44.132891,-73.076745],[44.132795,-73.076129],[44.132746,-73.075949],[44.132674,-73.075746],[44.132641,-73.075671],[44.132641,-73.075671],[44.132616,-73.075619],[44.132505,-73.075397],[44.13094,-73.072573],[44.130897,-73.072495],[44.130456,-73.071599],[44.130336,-73.07136],[44.130269,-73.071216],[44.130167,-73.070951],[44.130067,-73.070659],[44.130004,-73.070363],[44.12982,-73.069579]],
+  "North St. → Pine St.":[[44.133211,-73.078683],[44.133338,-73.078675],[44.133611,-73.07867],[44.133947,-73.078692],[44.135064,-73.078723],[44.135356,-73.078747],[44.135531,-73.078766],[44.135895,-73.078807],[44.136348,-73.078864],[44.136407,-73.07887],[44.136651,-73.078929],[44.137544,-73.079147],[44.137598,-73.079163],[44.137818,-73.079227],[44.138297,-73.079367],[44.138359,-73.079385],[44.138688,-73.079481],[44.138744,-73.079511],[44.139028,-73.07969],[44.139263,-73.079838],[44.139341,-73.079887],[44.139671,-73.080109]],
+  "South St. → over the bridge":[[44.133073,-73.078664],[44.132266,-73.078749],[44.132114,-73.078772],[44.132023,-73.07878],[44.13194,-73.078838],[44.131839,-73.078972],[44.13175,-73.079138],[44.131683,-73.079301],[44.131569,-73.079658],[44.131474,-73.079997],[44.131443,-73.080144],[44.131413,-73.080283],[44.131369,-73.080837],[44.131371,-73.080856],[44.131379,-73.080915],[44.131491,-73.081187],[44.13167,-73.0815],[44.131763,-73.081692],[44.131841,-73.08189],[44.131924,-73.082165],[44.132019,-73.082514],[44.132071,-73.082721],[44.1321,-73.082861],[44.132112,-73.083003],[44.132107,-73.083145],[44.132077,-73.083285],[44.13198,-73.083456],[44.131971,-73.083471],[44.131876,-73.083592],[44.131841,-73.083636],[44.13148,-73.084094],[44.131429,-73.084167],[44.131358,-73.08427],[44.13126,-73.084373],[44.131141,-73.084446],[44.131007,-73.084459],[44.130817,-73.084372],[44.130666,-73.084223],[44.130462,-73.083922],[44.130336,-73.083745],[44.130198,-73.083572],[44.130032,-73.083422],[44.129413,-73.083043]]
 };
 // Documented conflict points (named in the FY27 request; approximate)
 const conflicts = [
