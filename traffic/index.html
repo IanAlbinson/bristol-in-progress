@@ -1,0 +1,210 @@
+<meta charset="utf-8">
+<title>Bristol Village Traffic Map — ACRPC Counts + FY27 Study Area</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root{--bg:#f4f2ec;--panel:#fff;--ink:#1f2733;--muted:#5c6672;--line:#dcd8cf;--accent:#2b6cb0;}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  #wrap{display:flex;height:100%}
+  #map{flex:1;min-width:0}
+  #side{width:340px;max-width:42vw;overflow-y:auto;background:var(--panel);border-left:1px solid var(--line);padding:16px 16px 40px}
+  h1{font-size:16px;margin:0 0 2px}
+  .sub{font-size:12px;color:var(--muted);margin:0 0 14px}
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:18px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  .ctrl{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .ctrl button{flex:1;min-width:120px;padding:7px 8px;font-size:12px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+  .ctrl button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .toggle{display:flex;align-items:center;gap:8px;font-size:13px;margin:6px 0;cursor:pointer}
+  .stat{background:#faf8f3;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0}
+  .stat b{font-size:20px}
+  table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px}
+  th,td{text-align:left;padding:4px 5px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .legrow{display:flex;align-items:center;gap:8px;font-size:12px;margin:3px 0}
+  .dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.3);flex:none}
+  .note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:6px}
+  .badge2024{display:inline-block;font-size:10px;background:#2b6cb0;color:#fff;border-radius:4px;padding:1px 5px;margin-left:4px}
+  .leaflet-popup-content{font-size:12.5px;line-height:1.5}
+  .leaflet-popup-content b{font-size:13px}
+</style>
+<div id="wrap">
+  <div id="map"></div>
+  <div id="side">
+    <h1>Bristol Village Traffic Map</h1>
+    <p class="sub">ACRPC traffic counts (2020 &amp; 2024) with the FY2027 Downtown Access Study area. Prepared 2026-09-15.</p>
+
+    <h2>Color pins by</h2>
+    <div class="ctrl" id="metricCtrl">
+      <button data-m="speed" class="on">85th %ile speed</button>
+      <button data-m="trucks">% trucks</button>
+    </div>
+    <div class="note">Pin size scales with average daily traffic (ADT).</div>
+
+    <h2>Layers</h2>
+    <label class="toggle"><input type="checkbox" id="tCounts" checked> Traffic count locations</label>
+    <label class="toggle"><input type="checkbox" id="tStudy" checked> FY27 four-gateway study area</label>
+    <label class="toggle"><input type="checkbox" id="tCrash" checked> Downtown crashes, 2020&ndash;2025 (n=72)</label>
+    <label class="toggle"><input type="checkbox" id="tConflict" checked> Named conflict points</label>
+
+    <h2>Legend</h2>
+    <div id="legend"></div>
+
+    <h2>Crash / safety context</h2>
+    <div class="stat"><b>72</b> downtown-district crashes, Aug 2020&ndash;July 2025<div class="note">Source: Bristol crash dashboard (District zone), plotted individually on the map. 7 injury, 58 property-damage, 7 untyped. Townwide over the same window: 170.<br><span style="color:#c81d1d">&#9679;</span> injury &nbsp; <span style="color:#6b4fa0">&#9679;</span> property damage &nbsp; <span style="color:#8a8f98">&#9679;</span> untyped</div></div>
+    <div class="note" style="background:#fff5f0;border:1px solid #e6c3b3;border-radius:8px;padding:8px 10px"><b>Discrepancy flag:</b> the FY27 application states &ldquo;12 crashes, Aug 2020&ndash;July 2025.&rdquo; The dashboard shows 72 in the downtown district for the same window. Reconcile before the 9/16 pitch.</div>
+
+    <h2>What the counts said (Winslow, Nov 2024)</h2>
+    <div class="note">
+      &bull; Truck traffic on North St. is <b>not excessive</b> compared to other village streets.<br>
+      &bull; A <b>25 mph</b> limit for most of the village is <b>&ldquo;entirely reasonable&rdquo;</b> (Plank Rd. and the northern end of North St. may be exceptions).<br>
+      &bull; As volume rises north&rarr;south on North St., speeds drop.<br>
+      &bull; Liberty St. stands out on both speed and % trucks (likely town-garage proximity).
+    </div>
+
+    <h2>Count data</h2>
+    <table id="dataTbl"><thead><tr><th>Location</th><th class="num">85th mph</th><th class="num">ADT</th><th class="num">% trk</th></tr></thead><tbody></tbody></table>
+
+    <h2>Sources &amp; caveats</h2>
+    <div class="note">
+      Data: ACRPC counts, 2020 village survey + Sept 2024 North St. count, summarized in M. Winslow email 2024-11-07 (Bristol SB packet 2024-12-16, item V.4). Study-area gateways per Bristol FY2027 Downtown Access Study request.<br><br>
+      <b>Locations:</b> count pins and gateways are anchored to real coordinates from the Bristol crash dashboard dataset; corridors are traced through on-road crash waypoints. Four count spots have no dashboard anchor (North St. @ ambulance, North St. @ Lathrop Ln., Plank Rd., Pleasant St.) and are flagged &ldquo;approx.&rdquo; in their popups. The exact counter position on each street is still approximate. The 2024 North St. count is flagged; all others are 2020.<br><br>
+      <b>Please note:</b> this is a working reference page compiled by Ian Albinson. It is not an official Town of Bristol publication and does not speak for the Selectboard, ACRPC, or VTrans.
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+// --- Count data (Winslow 2024-11-07 summary). speed=85th %ile mph, adt=avg daily traffic, trk=% trucks classes 4-13 (null = n/a). yr = count year. loc approximate. ---
+// Coordinates anchored to the crash dashboard dataset (real on-road points) where available; approx=true where no dashboard anchor exists.
+const counts = [
+  {name:"Liberty St.",            lat:44.135755, lng:-73.087527, speed:35, adt:620,  trk:34.6, yr:2020, approx:false},
+  {name:"Maple St.",              lat:44.135263, lng:-73.083361, speed:28, adt:183,  trk:14.2, yr:2020, approx:false},
+  {name:"Mountain St.",           lat:44.138199, lng:-73.077097, speed:28, adt:367,  trk:5.4,  yr:2020, approx:false},
+  {name:"North St. @ ambulance",  lat:44.135410, lng:-73.078760, speed:38, adt:1114, trk:null, yr:2020, approx:true},
+  {name:"North St. @ Lathrop Ln.",lat:44.141000, lng:-73.081000, speed:35, adt:1617, trk:null, yr:2020, approx:true},
+  {name:"North St. (Garfield–Park)",lat:44.134700,lng:-73.079000, speed:31, adt:2616, trk:13.1, yr:2024, approx:false},
+  {name:"Pine St.",               lat:44.139184, lng:-73.082567, speed:28, adt:760,  trk:10.1, yr:2020, approx:false},
+  {name:"Plank Rd.",              lat:44.144500, lng:-73.084000, speed:39, adt:499,  trk:null, yr:2020, approx:true},
+  {name:"Pleasant St.",           lat:44.135800, lng:-73.086000, speed:25, adt:343,  trk:13.5, yr:2020, approx:true},
+  {name:"Taylor Ave.",            lat:44.138150, lng:-73.081990, speed:21, adt:99,   trk:7.6,  yr:2020, approx:false}
+];
+// Main downtown intersection (West/Main/North/South) — anchored to crash cluster
+const hub = {lat:44.133139, lng:-73.078334};
+// FY27 four gateway endpoints — anchored to real crash coordinates (West end extended past last anchor toward Airport Dr)
+const gateways = {
+  "West St. → before Airport Dr.": {lat:44.133600, lng:-73.089000},
+  "East St. → past Drake Smith Rd.":{lat:44.129783, lng:-73.069402},
+  "North St. → Pine St.":          {lat:44.139581, lng:-73.080044},
+  "South St. → over the bridge":   {lat:44.129388, lng:-73.083041}
+};
+// Corridor polylines traced through real on-road crash waypoints (hub → gateway)
+const corridors = {
+  "West St. → before Airport Dr.":[[44.133139,-73.078334],[44.133195,-73.079492],[44.133374,-73.079581],[44.134144,-73.083650],[44.134172,-73.083838],[44.133838,-73.087271],[44.133600,-73.089000]],
+  "East St. → past Drake Smith Rd.":[[44.133139,-73.078334],[44.133076,-73.077975],[44.133013,-73.077578],[44.132919,-73.076956],[44.132879,-73.076658],[44.132441,-73.075423],[44.129783,-73.069402]],
+  "North St. → Pine St.":[[44.133139,-73.078334],[44.133391,-73.078044],[44.134803,-73.078345],[44.135411,-73.078759],[44.139581,-73.080044]],
+  "South St. → over the bridge":[[44.133139,-73.078334],[44.133145,-73.078692],[44.131431,-73.081149],[44.129388,-73.083041]]
+};
+// Documented conflict points (named in the FY27 request; approximate)
+const conflicts = [
+  {name:"Main intersection", note:"Eastbound queuing; pedestrian crossing conflicts.", lat:44.133139, lng:-73.078334},
+  {name:"Champlain Farms", note:"Open curb cuts, no defined pedestrian path.", lat:44.133177, lng:-73.079504}
+];
+// Downtown-district crashes, Aug 1 2020 – Jul 31 2025, from Bristol crash dashboard (n=72)
+const crashes = [{"date":"2020-09-29","typ":"Unspecified","inter":"","addr":"30 PINE ST","lat":44.139184,"lon":-73.082567},{"date":"2020-09-30","typ":"Property Damage Only","inter":"Church Street","addr":"29 Maple Street","lat":44.135263,"lon":-73.083361},{"date":"2020-11-25","typ":"Property Damage Only","inter":"Rockydale Rd","addr":"91 East St","lat":44.129782,"lon":-73.069397},{"date":"2020-12-21","typ":"Unspecified","inter":"","addr":"42 West St","lat":44.134144,"lon":-73.08365},{"date":"2021-01-22","typ":"Property Damage Only","inter":"Bristol Elementary School - South Parking Lot","addr":"57 Mountain Street","lat":44.138199,"lon":-73.077097},{"date":"2021-03-01","typ":"Property Damage Only","inter":"Mountain Ter","addr":"7 Prince Ln","lat":44.133731,"lon":-73.076623},{"date":"2021-04-09","typ":"Property Damage Only","inter":"South St","addr":"10 Main St","lat":44.133076,"lon":-73.077975},{"date":"2021-04-14","typ":"Property Damage Only","inter":"W Pleasant St","addr":"49 Liberty St","lat":44.135755,"lon":-73.087527},{"date":"2021-05-23","typ":"Property Damage Only","inter":"MAIN STREET","addr":"7 PRINCE LANE","lat":44.133901,"lon":-73.080411},{"date":"2021-06-01","typ":"Property Damage Only","inter":"North St","addr":"Bristol Shaw's","lat":44.133403,"lon":-73.07742},{"date":"2021-06-01","typ":"Property Damage Only","inter":"Basin St","addr":"Bristol Shaw's","lat":44.133505,"lon":-73.076921},{"date":"2021-07-14","typ":"Unspecified","inter":"","addr":"7 PRINCE LN","lat":44.133765,"lon":-73.077038},{"date":"2021-09-11","typ":"Unspecified","inter":"","addr":"7 PRINCE LN","lat":44.133765,"lon":-73.077038},{"date":"2021-09-16","typ":"Unspecified","inter":"","addr":"42 WEST ST","lat":44.134144,"lon":-73.08365},{"date":"2021-10-07","typ":"Unspecified","inter":"NORTH ST","addr":"MAIN ST","lat":44.133225,"lon":-73.078761},{"date":"2021-10-23","typ":"Property Damage Only","inter":"South Street","addr":"Main Street","lat":44.133225,"lon":-73.078761},{"date":"2021-11-05","typ":"Unspecified","inter":"","addr":"1 PRINCE LN","lat":44.133683,"lon":-73.077737},{"date":"2021-11-09","typ":"Property Damage Only","inter":"Main St","addr":"1 South Street","lat":44.133145,"lon":-73.078692},{"date":"2021-12-05","typ":"Property Damage Only","inter":"South St","addr":"22 Main St","lat":44.133013,"lon":-73.077578},{"date":"2022-01-16","typ":"Property Damage Only","inter":"Pump House Drive","addr":"20 South Street","lat":44.131431,"lon":-73.081149},{"date":"2022-02-14","typ":"Property Damage Only","inter":"School St","addr":"Bristol Community Bank","lat":44.133525,"lon":-73.080323},{"date":"2022-03-17","typ":"Property Damage Only","inter":"Drake Smith Rd","addr":"91 East St","lat":44.129783,"lon":-73.069402},{"date":"2022-03-21","typ":"Property Damage Only","inter":"South St","addr":"3 West St","lat":44.1333,"lon":-73.079151},{"date":"2022-04-15","typ":"Property Damage Only","inter":"Garfield St","addr":"32 North St","lat":44.135411,"lon":-73.078759},{"date":"2022-06-28","typ":"Injury","inter":"Prince Ln","addr":"North Street","lat":44.133504,"lon":-73.078685},{"date":"2022-07-06","typ":"Property Damage Only","inter":"Maple St","addr":"West St","lat":44.13404,"lon":-73.083062},{"date":"2022-07-19","typ":"Injury","inter":"Mountain St","addr":"36 Main St","lat":44.132809,"lon":-73.076205},{"date":"2022-07-24","typ":"Property Damage Only","inter":"Maple St","addr":"42 West St, Bristol VT 05443","lat":44.134183,"lon":-73.083846},{"date":"2022-09-28","typ":"Injury","inter":"South St","addr":"45-99 South St","lat":44.129388,"lon":-73.083041},{"date":"2022-10-02","typ":"Property Damage Only","inter":"North Street","addr":"1 Prince Lane","lat":44.133391,"lon":-73.078044},{"date":"2022-10-13","typ":"Property Damage Only","inter":"South Street","addr":"11 West Street","lat":44.133374,"lon":-73.079581},{"date":"2022-11-09","typ":"Property Damage Only","inter":"Taylor Ave","addr":"70 Taylor Ave","lat":44.13815,"lon":-73.08199},{"date":"2022-12-11","typ":"Property Damage Only","inter":"Maplefields","addr":"49 West St","lat":44.134201,"lon":-73.083944},{"date":"2023-01-03","typ":"Injury","inter":"School Street","addr":"2-56 Park Pl","lat":44.134006,"lon":-73.079262},{"date":"2023-03-17","typ":"Property Damage Only","inter":"","addr":"93 Mountain St","lat":44.141042,"lon":-73.077944},{"date":"2023-03-19","typ":"Property Damage Only","inter":"Main Street","addr":"7 Prince Ln","lat":44.133116,"lon":-73.075417},{"date":"2023-04-16","typ":"Property Damage Only","inter":"North Street","addr":"16 Church Street","lat":44.135278,"lon":-73.080425},{"date":"2023-04-24","typ":"Property Damage Only","inter":"West Street","addr":"3 West Street","lat":44.133195,"lon":-73.079492},{"date":"2023-05-08","typ":"Property Damage Only","inter":"Road Connecting Prince Ln To Main Street","addr":"7 Prince Ln","lat":44.133433,"lon":-73.076945},{"date":"2023-05-17","typ":"Property Damage Only","inter":"Middlebury National Bank","addr":"7 Prince Ln","lat":44.133289,"lon":-73.076944},{"date":"2023-05-22","typ":"Property Damage Only","inter":"Champlain Farms","addr":"3 West Street","lat":44.133177,"lon":-73.079504},{"date":"2023-05-29","typ":"Property Damage Only","inter":"North ST","addr":"Main St","lat":44.132953,"lon":-73.077553},{"date":"2023-06-02","typ":"Property Damage Only","inter":"","addr":"7 Prince Ln","lat":44.133527,"lon":-73.077958},{"date":"2023-06-06","typ":"Property Damage Only","inter":"Maple St","addr":"39-59 West St","lat":44.134172,"lon":-73.083838},{"date":"2023-07-03","typ":"Property Damage Only","inter":"North Street","addr":"2 West Street","lat":44.133305,"lon":-73.078993},{"date":"2023-08-25","typ":"Property Damage Only","inter":"Prince Ln","addr":"28 Main Street","lat":44.132919,"lon":-73.076956},{"date":"2023-08-28","typ":"Property Damage Only","inter":"","addr":"57 Mountain St","lat":44.138579,"lon":-73.07737},{"date":"2023-08-28","typ":"Property Damage Only","inter":"Main Street","addr":"South St","lat":44.131956,"lon":-73.078793},{"date":"2023-09-05","typ":"Property Damage Only","inter":"South Street","addr":"Main Street","lat":44.133193,"lon":-73.078605},{"date":"2023-09-25","typ":"Property Damage Only","inter":"","addr":"20 North St","lat":44.134803,"lon":-73.078345},{"date":"2023-09-25","typ":"Property Damage Only","inter":"North Street","addr":"Main Street","lat":44.133019,"lon":-73.077627},{"date":"2023-09-28","typ":"Property Damage Only","inter":"","addr":"1-9 School St N","lat":44.133848,"lon":-73.080323},{"date":"2023-10-08","typ":"Property Damage Only","inter":"South Street","addr":"Main Street","lat":44.133139,"lon":-73.078334},{"date":"2023-10-14","typ":"Injury","inter":"South Street","addr":"North Street","lat":44.133328,"lon":-73.078684},{"date":"2023-10-25","typ":"Property Damage Only","inter":"Prince Lane","addr":"21 Main Street","lat":44.133013,"lon":-73.077587},{"date":"2023-11-30","typ":"Property Damage Only","inter":"park Pl","addr":"1-9 School St N","lat":44.133938,"lon":-73.080311},{"date":"2023-12-22","typ":"Injury","inter":"Maple Street","addr":"42 West Street","lat":44.134126,"lon":-73.083532},{"date":"2024-01-09","typ":"Property Damage Only","inter":"","addr":"2-28 Main St","lat":44.133029,"lon":-73.077686},{"date":"2024-02-04","typ":"Property Damage Only","inter":"Main Street","addr":"7 Prince Lane","lat":44.133312,"lon":-73.075982},{"date":"2024-04-01","typ":"Property Damage Only","inter":"NORTH STREET","addr":"1 PRINCE LN","lat":44.133491,"lon":-73.077983},{"date":"2024-04-16","typ":"Injury","inter":"Pine Street","addr":"79 North St","lat":44.139581,"lon":-73.080044},{"date":"2024-04-23","typ":"Property Damage Only","inter":"North Street","addr":"7 Prince Ln","lat":44.133493,"lon":-73.077533},{"date":"2024-04-29","typ":"Property Damage Only","inter":"Mountain Terrace","addr":"14 High St","lat":44.134006,"lon":-73.073939},{"date":"2024-06-04","typ":"Property Damage Only","inter":"","addr":"34-44 Main St","lat":44.132879,"lon":-73.076658},{"date":"2024-07-14","typ":"Property Damage Only","inter":"Maple Street","addr":"42-58 West St","lat":44.134076,"lon":-73.083262},{"date":"2024-08-19","typ":"Property Damage Only","inter":"","addr":"43 East St","lat":44.132441,"lon":-73.075423},{"date":"2024-09-04","typ":"Property Damage Only","inter":"Liberty St","addr":"72-78 West St","lat":44.133838,"lon":-73.087271},{"date":"2024-11-21","typ":"Property Damage Only","inter":"North St","addr":"6 Park Pl","lat":44.134014,"lon":-73.079375},{"date":"2024-11-25","typ":"Property Damage Only","inter":"Devino Lane","addr":"96-108 North St","lat":44.142301,"lon":-73.082101},{"date":"2024-12-11","typ":"Property Damage Only","inter":"","addr":"1-5 Main St","lat":44.133139,"lon":-73.078334},{"date":"2025-06-09","typ":"Property Damage Only","inter":"West St","addr":"1-5 Main St","lat":44.133128,"lon":-73.078275},{"date":"2025-07-23","typ":"Property Damage Only","inter":"South St","addr":"7-25 Main St","lat":44.13307,"lon":-73.077942}];
+
+const map = L.map('map',{scrollWheelZoom:true}).setView([44.1345,-73.0808],15);
+// OSM Standard default (matches the crash dashboard). Works when served over http(s)/GitHub Pages.
+const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  maxZoom:19, attribution:'&copy; OpenStreetMap contributors'
+}).addTo(map);
+const esriStreet = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+  maxZoom:19, attribution:'Tiles &copy; Esri'
+});
+const esriAerial = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
+  maxZoom:19, attribution:'Tiles &copy; Esri'
+});
+L.control.layers({'OSM Standard':osm,'Esri street':esriStreet,'Esri aerial':esriAerial},null,{position:'topright'}).addTo(map);
+
+// color scales
+function speedColor(v){ if(v==null)return'#9aa4af'; if(v<=25)return'#2e8b57'; if(v<=30)return'#8cbf3f'; if(v<=35)return'#e39a2b'; return'#d1493f'; }
+function truckColor(v){ if(v==null)return'#9aa4af'; if(v<10)return'#2e8b57'; if(v<20)return'#e39a2b'; return'#d1493f'; }
+function radius(adt){ return 6 + Math.sqrt(adt)/3.2; } // ~7.5 (99) to ~22 (2616)
+
+let metric='speed';
+const countLayer=L.layerGroup().addTo(map);
+const markers=[];
+function draw(){
+  countLayer.clearLayers(); markers.length=0;
+  counts.forEach(c=>{
+    const col = metric==='speed'?speedColor(c.speed):truckColor(c.trk);
+    const m=L.circleMarker([c.lat,c.lng],{radius:radius(c.adt),color:'#333',weight:1,fillColor:col,fillOpacity:.85});
+    m.bindPopup(`<b>${c.name}</b>${c.yr===2024?' <span style="color:#2b6cb0">(2024 count)</span>':' (2020)'}<br>
+      85th %ile speed: <b>${c.speed} mph</b><br>
+      Avg daily traffic: <b>${c.adt.toLocaleString()}</b><br>
+      Trucks: <b>${c.trk==null?'n/a':c.trk+'%'}</b>${c.approx?'<br><i style="color:#a33">approx. location (no dashboard anchor)</i>':''}`);
+    m.addTo(countLayer); markers.push(m);
+  });
+}
+draw();
+
+// study area: corridors from hub to each gateway + hub marker
+const studyLayer=L.layerGroup().addTo(map);
+Object.entries(gateways).forEach(([label,g])=>{
+  L.polyline(corridors[label],{color:'#2b6cb0',weight:5,opacity:.55}).bindPopup('<b>Study corridor</b><br>'+label).addTo(studyLayer);
+  L.marker([g.lat,g.lng],{icon:L.divIcon({className:'',html:'<div style="background:#2b6cb0;color:#fff;font-size:10px;padding:2px 5px;border-radius:4px;white-space:nowrap;transform:translate(-50%,-50%)">gateway</div>'})}).bindPopup('<b>Gateway</b><br>'+label).addTo(studyLayer);
+});
+L.circleMarker([hub.lat,hub.lng],{radius:9,color:'#1a3d5c',weight:2,fillColor:'#2b6cb0',fillOpacity:.9}).bindPopup('<b>Main downtown intersection</b><br>VT 17/116 core — West / Main / North / South').addTo(studyLayer);
+
+// conflict points
+const conflictLayer=L.layerGroup().addTo(map);
+conflicts.forEach(c=>{
+  L.marker([c.lat,c.lng],{icon:L.divIcon({className:'',html:'<div style="font-size:18px;transform:translate(-50%,-50%)">⚠️</div>'})})
+    .bindPopup(`<b>${c.name}</b><br>${c.note}`).addTo(conflictLayer);
+});
+
+// crash layer (individual points, colored by severity)
+const crashLayer=L.layerGroup().addTo(map);
+function crashColor(t){ if(/injury/i.test(t))return'#c81d1d'; if(/property/i.test(t))return'#6b4fa0'; return'#8a8f98'; }
+crashes.forEach(c=>{
+  L.circleMarker([c.lat,c.lon],{radius:/injury/i.test(c.typ)?6:4,color:'#fff',weight:1,fillColor:crashColor(c.typ),fillOpacity:.9})
+    .bindPopup(`<b>Crash — ${c.typ}</b><br>${c.date}<br>${c.inter?('at '+c.inter+'<br>'):''}${c.addr||''}`).addTo(crashLayer);
+});
+
+// layer toggles
+document.getElementById('tCounts').onchange=e=>e.target.checked?countLayer.addTo(map):map.removeLayer(countLayer);
+document.getElementById('tStudy').onchange=e=>e.target.checked?studyLayer.addTo(map):map.removeLayer(studyLayer);
+document.getElementById('tConflict').onchange=e=>e.target.checked?conflictLayer.addTo(map):map.removeLayer(conflictLayer);
+document.getElementById('tCrash').onchange=e=>e.target.checked?crashLayer.addTo(map):map.removeLayer(crashLayer);
+
+// metric buttons
+document.querySelectorAll('#metricCtrl button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#metricCtrl button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); metric=b.dataset.m; draw(); legend();
+});
+
+// legend
+function legend(){
+  const el=document.getElementById('legend');
+  if(metric==='speed'){
+    el.innerHTML=[['#2e8b57','≤ 25 mph'],['#8cbf3f','26–30'],['#e39a2b','31–35'],['#d1493f','> 35'],['#9aa4af','n/a']]
+      .map(([c,t])=>`<div class="legrow"><span class="dot" style="background:${c}"></span>${t}</div>`).join('');
+  } else {
+    el.innerHTML=[['#2e8b57','< 10% trucks'],['#e39a2b','10–20%'],['#d1493f','> 20%'],['#9aa4af','n/a']]
+      .map(([c,t])=>`<div class="legrow"><span class="dot" style="background:${c}"></span>${t}</div>`).join('');
+  }
+}
+legend();
+
+// data table
+const tb=document.querySelector('#dataTbl tbody');
+counts.slice().sort((a,b)=>b.speed-a.speed).forEach(c=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${c.name}${c.yr===2024?'<span class="badge2024">2024</span>':''}</td>
+    <td class="num">${c.speed}</td><td class="num">${c.adt.toLocaleString()}</td><td class="num">${c.trk==null?'–':c.trk}</td>`;
+  tr.style.cursor='pointer';
+  tr.onclick=()=>{const m=markers.find(x=>x.getPopup().getContent().includes(c.name));if(m){map.panTo(m.getLatLng());m.openPopup();}};
+  tb.appendChild(tr);
+});
+</script>
