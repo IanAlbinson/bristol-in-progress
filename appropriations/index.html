@@ -145,18 +145,22 @@
 
   /* tables */
   .tbl{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
-  table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
-  thead th{text-align:left;padding:0 14px 9px 0;font-family:var(--mono);font-size:10.5px;
+  @media (min-width:1180px){
+    .tbl{width:min(1340px, calc(100vw - 48px));margin-left:50%;transform:translateX(-50%)}
+  }
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:0}
+  thead th{text-align:left;padding:0 10px 9px 0;font-family:var(--mono);font-size:10.5px;
     font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     cursor:pointer;white-space:nowrap;user-select:none;border-bottom:1px solid var(--rule-strong)}
   thead th:hover{color:var(--ink)}
   thead th.num{text-align:right}
-  tbody td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+  .h-short{display:none}
+  tbody td{padding:11px 10px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
   tbody td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   tbody tr:hover{background:var(--track)}
   tbody td .org{display:flex;align-items:baseline;gap:7px}
-  tbody td .org a{font-weight:600;text-underline-offset:2px;text-decoration-color:var(--rule-strong)}
-  tbody td .meta{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5;max-width:46ch}
+  tbody td .org a{font-weight:600;overflow-wrap:anywhere;text-underline-offset:2px;text-decoration-color:var(--rule-strong)}
+  tbody td .meta{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5;max-width:34ch;overflow-wrap:anywhere}
   tbody td .meta i{color:var(--ink-2)}
   .appro{font-weight:700}
   .dash{color:var(--muted)}
@@ -198,6 +202,40 @@
   footer a{color:var(--signal);text-underline-offset:2px}
 
   [hidden]{display:none!important}
+  @media (max-width:1180px){
+    .hide-md{display:none}
+  }
+  @media (max-width:860px){
+    .hide-sm{display:none}
+  }
+  @media (max-width:700px){
+    .hide-xs{display:none}
+    tbody td .meta{max-width:none}
+    table{font-size:13.5px}
+    thead th, tbody td{padding-right:8px}
+    thead th{white-space:normal}
+    .h-long{display:none}
+    .h-short{display:inline}
+    #tbl{table-layout:fixed}
+    thead th:nth-child(1), tbody td:nth-child(1){width:44%}
+    thead th:nth-child(5), tbody td:nth-child(5){width:28%}
+    thead th:nth-child(7), tbody td:nth-child(7){width:28%}
+    tbody td, thead th{overflow-wrap:anywhere}
+    tbody td .chip{white-space:normal}
+    tbody td .org{flex-wrap:wrap}
+  }
+  @media (max-width:480px){
+    table{font-size:13px}
+    thead th, tbody td{padding-right:6px}
+    tbody td .meta{font-size:12px}
+  }
+  @media (max-width:360px){
+    tbody td.num{font-size:12px}
+    thead th, tbody td{padding-right:4px}
+    thead th:nth-child(1), tbody td:nth-child(1){width:46%}
+    thead th:nth-child(5), tbody td:nth-child(5){width:27%}
+    thead th:nth-child(7), tbody td:nth-child(7){width:27%}
+  }
   @media (max-width:760px){
     .wrap{padding:0 16px 60px}
     .hide-sm{display:none}
@@ -338,16 +376,16 @@
     <thead>
       <tr>
         <th data-k="name">Organization</th>
-        <th data-k="scope">Based</th>
+        <th data-k="scope" class="hide-xs">Based</th>
         <th data-k="bucket" class="hide-sm">Purpose</th>
         <th data-k="article" class="num hide-sm">Art.</th>
-        <th data-k="appro" class="num">Appropriation</th>
-        <th data-k="year" class="num hide-sm">FY</th>
-        <th data-k="rev" class="num">Revenue</th>
-        <th data-k="exp" class="num hide-sm">Expenses</th>
-        <th data-k="assets" class="num hide-sm">Total assets</th>
-        <th data-k="comp" class="num hide-sm">Officer comp</th>
-        <th data-k="status">990 status</th>
+        <th data-k="appro" class="num"><span class="h-long">Appropriation</span><span class="h-short">Appro</span></th>
+        <th data-k="year" class="num hide-sm hide-md">FY</th>
+        <th data-k="rev" class="num"><span class="h-long">Revenue</span><span class="h-short">Rev</span></th>
+        <th data-k="exp" class="num hide-sm hide-md">Expenses</th>
+        <th data-k="assets" class="num hide-sm hide-md">Total assets</th>
+        <th data-k="comp" class="num hide-sm hide-md">Officer comp</th>
+        <th data-k="status" class="hide-xs">990 status</th>
       </tr>
     </thead>
     <tbody id="rows"></tbody>
@@ -780,16 +818,16 @@ function render(){
     return `<tr>
       <td><div class="org">${caret}${nameCell}</div>
         <div class="meta"><span class="chip">${d.cat}</span>${einLine}${d.web?` &middot; ${d.web}`:""}${d.note?`<br><i>${d.note}</i>`:""}</div></td>
-      <td>${scopeCell(d.scope)}<div class="meta">${(d.loc||"").replace(/,\s*VT$/,"")}</div></td>
+      <td class="hide-xs">${scopeCell(d.scope)}<div class="meta">${(d.loc||"").replace(/,\s*VT$/,"")}</div></td>
       <td class="hide-sm">${activeTab==="appro"?d.bucket:(d.cat||dash)}</td>
       <td class="num hide-sm">${d.article!=null?d.article:dash}</td>
       <td class="num">${d.appro!=null?`<span class="appro">${fmtA(d.appro)}</span>`:dash}</td>
-      <td class="num hide-sm">${d.year||dash}</td>
+      <td class="num hide-sm hide-md">${d.year||dash}</td>
       <td class="num">${fmt0(d.rev)||dash}</td>
-      <td class="num hide-sm">${fmt0(d.exp)||dash}</td>
-      <td class="num hide-sm">${fmt0(d.assets)||dash}</td>
-      <td class="num hide-sm">${fmt0(d.comp)||dash}</td>
-      <td>${badgeFor(d.status)}</td>
+      <td class="num hide-sm hide-md">${fmt0(d.exp)||dash}</td>
+      <td class="num hide-sm hide-md">${fmt0(d.assets)||dash}</td>
+      <td class="num hide-sm hide-md">${fmt0(d.comp)||dash}</td>
+      <td class="hide-xs">${badgeFor(d.status)}</td>
     </tr>${detail}`;
   }).join("");
 }

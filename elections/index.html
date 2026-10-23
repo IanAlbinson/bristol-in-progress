@@ -147,7 +147,7 @@
 
   /* tables */
   .tbl{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
-  table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:0}
   thead th{text-align:left;padding:0 14px 9px 0;font-family:var(--mono);font-size:10.5px;
     font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     cursor:pointer;white-space:nowrap;user-select:none;border-bottom:1px solid var(--rule-strong)}
@@ -190,6 +190,38 @@
     text-transform:uppercase;color:var(--muted)}
   footer a{color:var(--signal);text-underline-offset:2px}
 
+  @media (max-width:700px){
+    table{font-size:12.5px}
+    thead th{white-space:normal;padding-right:7px}
+    tbody td{padding-right:7px}
+    .minibar{min-width:34px}
+    /* winners table: hide the supporting columns on phones. Order is
+       Office, District, Primary, Candidate, Address town, Votes, %, Won. */
+    table[data-t="wt"] th:nth-child(5), table[data-t="wt"] td:nth-child(5),
+    table[data-t="wt"] th:nth-child(7), table[data-t="wt"] td:nth-child(7),
+    table[data-t="wt"] th:nth-child(8), table[data-t="wt"] td:nth-child(8){display:none}
+    /* other dense tables: hide only derived or decorative columns on phones */
+    table[data-t="vtc"] th:nth-child(7), table[data-t="vtc"] td:nth-child(7),  /* Ballot mix */
+    table[data-t="brt"] th:nth-child(7), table[data-t="brt"] td:nth-child(7),  /* Gap */
+    table[data-t="loc"] th:nth-child(6), table[data-t="loc"] td:nth-child(6)   /* % */
+      {display:none}
+  }
+  @media (max-width:480px){
+    table{font-size:12px}
+    thead th, tbody td{padding-right:5px}
+    table[data-t="adt"] th:nth-child(2), table[data-t="adt"] td:nth-child(2),  /* Ballots */
+    table[data-t="loc"] th:nth-child(3), table[data-t="loc"] td:nth-child(3)   /* Office */
+      {display:none}
+  }
+  @media (max-width:400px){
+    thead th{font-size:9.5px;letter-spacing:.06em}
+    thead th, tbody td{padding-right:3px}
+    table{font-size:11.5px}
+  }
+  @media (max-width:375px){
+    thead th, tbody td{padding-right:2px}
+    table{font-size:11px}
+  }
   @media (max-width:760px){
     .wrap{padding:0 16px 60px}
     .cmpbars{grid-template-columns:70px 1fr 52px}
