@@ -570,8 +570,8 @@
   <section class="panel" id="p-photos" role="tabpanel" aria-labelledby="t-photos" tabindex="0" hidden>
   <h2 class="sec">Photos <span id="gcount"></span></h2>
   <p class="note" style="margin-top:18px">
-    <b>About these photos.</b> They were taken during site visits and are arranged by the date
-    each was taken. Tap any photo to see it larger.
+    <b>About these photos.</b> Most were taken during site visits. Two older photos show the
+    building before the project. All are arranged by the date each was taken. Tap any photo to see it larger.
   </p>
   <div id="gallery"></div>
 
@@ -596,7 +596,7 @@
       check warrant through September 28, 2026 and the State's grant payments (dated September
       30, 2026). Incentive figures come from Green Mountain Power's letter of support (corrected
       July 15, 2026) and Efficiency Vermont's weatherization offer (July 22, 2026). Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Milestones come from the weekly owner, architect and contractor meeting
-      notes and project correspondence. Architect's drawings are sheets from Vermont Integrated Architecture's drawing sets in the Town's project files, shown as issued; each sheet carries its own date. Photos come from the Town's project photo folder; dates
+      notes and project correspondence. Architect's drawings are sheets from Vermont Integrated Architecture's drawing sets in the Town's project files, shown as issued; each sheet carries its own date. Photos come from the Town's project photo folder, plus two older photos from the Town's Holley Hall photo folder (the February 2019 photo is by Meridith McFarland); dates
       are read from each photo's own camera data. They were resized for the web and all location
       and camera data was removed.
     </p>
@@ -650,16 +650,16 @@ var DATA={
  ],
  timeline:[
   {d:"2010",e:"Earlier renovation insulates the lower level and attic. The upper-floor walls are left as they were."},
-  {d:"June 18, 2024",e:"<b>Level II energy assessment.</b> It reports a baseline blower door test of 16,155 cfm of air leakage."},
+  {d:"June 18, 2024",ph:["1888"],e:"<b>Level II energy assessment.</b> It reports a baseline blower door test of 16,155 cfm of air leakage."},
   {d:"September 27, 2024",e:"The Bristol Energy Committee submits the MERP implementation grant application."},
-  {d:"December 16, 2024",e:"<b>Grant awarded</b>, $325,853.52, with a completion deadline of December 31, 2026."},
+  {d:"December 16, 2024",ph:["front-v2"],e:"<b>Grant awarded</b>, $325,853.52, with a completion deadline of December 31, 2026."},
   {d:"February 10, 2025",e:"The Town asks design firms for letters of interest."},
   {d:"June 11, 2025",e:"Design contract signed with Vermont Integrated Architecture (VIA)."},
   {d:"June 19, 2025",e:"Project sent to the Vermont Division for Historic Preservation for review."},
   {d:"January 22, 2026",e:"<b>Contractor pricing.</b> Silver Maple Construction presents a base price of $399,781.65."},
   {d:"February 11, 2026",e:"First grant payment from the State, for design bills."},
   {d:"February 20, 2026",e:"State building permit applications sent to the Division of Fire Safety."},
-  {d:"Early March 2026",e:"The Recreation office moves out to temporary space."},
+  {d:"Early March 2026",ph:["2350","2340"],e:"The Recreation office moves out to temporary space."},
   {d:"March 9, 2026",ph:["2345","1415","1420"],e:"<b>Construction starts</b> with demolition."},
   {d:"May 22, 2026",ph:["1885","1662","1960"],e:"Insulation, sheathing and taping complete."},
   {d:"May 28, 2026",ph:["0277"],e:"Mid-project blower door test: about 10,800 cfm, roughly a third less leakage than baseline."},
@@ -696,6 +696,8 @@ var DATA={
   {h:"Final cost",p:"The State grant is fully paid, so remaining costs fall to the Town. A few items are still unpriced, and architect time is billed hourly through closeout."}
  ],
  photos:[
+  {id:"1888",dt:"2017-11-26",c:"Water stains on the meeting hall ceiling, November 2017"},
+  {id:"front-v2",dt:"2019-02-28",c:"Holley Hall in winter, February 2019. Photo: Meridith McFarland"},
   {id:"2331",dt:"2026-02-24",c:"Stairs to the stage, before work began"},
   {id:"2340",dt:"2026-02-24",c:"The original baseboard radiators along the hall wall"},
   {id:"2345",dt:"2026-02-24",c:"The meeting hall before work began, looking toward the stage"},
@@ -807,7 +809,7 @@ var DATA={
   if(at!==DATA.timeline.length)console.warn("Chapters cover",at,"of",DATA.timeline.length);
   $("tlcount").textContent=DATA.timeline.length+" entries in "+CHAPTERS.length+" parts";
   var months={};ORDER.forEach(function(p){var k=p.dt.slice(0,7);(months[k]=months[k]||[]).push(p)});
-  $("gcount").textContent=ORDER.length+" photos, "+shortD(ORDER[0].dt)+" to "+fmtDate(ORDER[ORDER.length-1].dt);
+  $("gcount").textContent=ORDER.length+" photos, "+fmtDate(ORDER[0].dt)+" to "+fmtDate(ORDER[ORDER.length-1].dt);
   $("gallery").innerHTML=Object.keys(months).sort().map(function(k){
     var d=k.split("-"),nm=new Date(+d[0],+d[1]-1,1).toLocaleDateString("en-US",{month:"long",year:"numeric"});
     return '<h3 class="gmonth">'+nm+'<span>'+months[k].length+(months[k].length==1?' photo':' photos')+'</span></h3><div class="grid">'+
