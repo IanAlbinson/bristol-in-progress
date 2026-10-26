@@ -83,7 +83,7 @@
   .who.hh{color:var(--hh)} .who.lml{color:var(--lml)}
 
   /* stats */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
     gap:0;margin:34px 0 4px;border-top:1px solid var(--rule)}
   .stat{border-bottom:1px solid var(--rule);padding:16px 20px 16px 0}
   .stat .n{font-family:var(--display);font-size:34px;font-weight:400;line-height:1.05;
@@ -311,6 +311,7 @@
   .pnext button{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);border-radius:4px;
     padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .pnext button:hover{border-color:var(--ink)}
+  @media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -378,7 +379,7 @@
         <tr><td>Goal</td><td>Make the leaky, uninsulated upper floor comfortable and cheaper to heat and cool.</td><td>Update the building for modern use, including internet access for work, education and health monitoring: better air, heat, insulation, a quiet room and repairs.</td></tr>
         <tr><td>Paid by</td><td>State Municipal Energy Resilience Program grant. <span class="fig" data-v="hhGrant"></span>, no local match.</td><td>Federal Capital Projects Fund grant through the Vermont Department of Libraries. <span class="fig" data-v="lmlGrant"></span> as awarded in 2024, raised to <span class="fig" data-v="lmlAlloc"></span> in 2026. No local match.</td></tr>
         <tr><td>The surprise</td><td>No hidden conditions on record. The contractor's price came in above the grant.</td><td>PCBs in the first-floor carpet glue had soaked into the wood below. The floor in the main rooms came out down to the joists.</td></tr>
-        <tr><td>Where it stands</td><td>Construction essentially complete. Passed the fire marshal's inspection September 9, with one condition. Staff moved back in September 23.</td><td>New subfloor going down. Propane hooked up September 28. Flooring and finishes to come. The library's goal is to reopen the first week of December.</td></tr>
+        <tr><td>Where it stands</td><td>Construction essentially complete. Passed the fire marshal's inspection September 9, with one condition. Staff moved back in September 23.</td><td>New subfloor down and propane hooked up September 28. Finish flooring going in as of October 26. The library's goal is to reopen the first week of December.</td></tr>
       </tbody>
     </table>
   </div>
@@ -405,7 +406,7 @@
         <li>Front steps, porch and center handrail rebuilt, attic insulated, heat pump units installed</li>
         <li>Propane hookup, September 28</li>
         <li class="o">Closure report on the PCB cleanup</li>
-        <li class="o">Finish flooring, now an engineered oak, waiting on sample approval as of September 18</li>
+        <li class="o">Finish flooring, going in as of October 26</li>
         <li class="o">Final cost and the amended grant agreement</li>
         <li class="o">Last day at the pop-up, October 27</li>
         <li class="o">Reopening at 40 North Street, with a goal of the first week of December</li>
@@ -715,7 +716,7 @@
       minutes of June 9, 2025 and June 22 through August 10, 2026 (approved) and September 14, 2026
       (draft); building history from the 2022 Historic Assessment and the Northern Architects drawing
       set; temporary service dates from the library's construction updates on its website and the Addison Independent (July 2, 2026). Both: weekly owner, architect and contractor meeting notes and project correspondence
-      through September 2026. Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Library air-leakage figures come from Green Mountain Enclosure Consulting's progress test report (test September 25, report September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Final air-leakage figures come from Green Mountain Enclosure Consulting's final airtightness test report (August 11, 2026). Photos come from the Town's project photo folders;  Dates are read from
+      through September 2026. Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Heating oil: the Holley Hall figure is Green Mountain Power's estimate in its letter of support; the library figure is its 2022 oil use from the 2024 energy assessment. Library air-leakage figures come from Green Mountain Enclosure Consulting's progress test report (test September 25, report September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Final air-leakage figures come from Green Mountain Enclosure Consulting's final airtightness test report (August 11, 2026). Photos come from the Town's project photo folders;  Dates are read from
       each photo's camera data, except the four joist photos, which had none and are dated by the day
       they were emailed, and the 2021 to 2024 library condition photos, which are dated from their
       file names in the Town's building records. The before-and-after pairs were lined up by scaling, shifting and slightly
@@ -851,6 +852,7 @@ var DATA={
   {d:"2026-09-23",b:"lml",t:"Photos show the library's finished front steps, with the center handrail back in place."},
   {d:"2026-09-28",b:"lml",t:"Propane hookup at the library."},
   {d:"2026-09-30",b:"hh",t:"Holley Hall grant: any unfinished work must be under contract.",f:1},
+  {d:"2026-10-26",b:"lml",t:"Finish flooring going in on the library's first floor."},
   {d:"2026-10-27",b:"lml",t:"Last day of service at the library's pop-up.",f:1},
   {d:"2026-12-31",b:"both",t:"<b>Both grants end.</b> Work must be finished and paid for.",f:1}
  ]
@@ -879,11 +881,24 @@ var DATA={
   var V={combinedR:usd(Math.round(combined/100)*100,0),days:String(days),hhCut:"about "+cut+" percent",hhGrantR:usd(Math.round(H.grant),0),lmlGrantR:usd(Math.round(lmlGrant),0),hhIncR:usd(Math.round(inc),0),hhGrant:usd(H.grant,1),lmlGrant:usd(lmlGrant,1),hhEst:usd(H.est,0),hhShare:"about "+share+" percent",hhInc:usd(inc,1),lmlAdd:usd(L.stateAdd,0),lmlNewBase:usd(L.newBase,0),lmlLedgerAdd:usd(r2(L.newBase-L.base),0),lmlAlloc:usd(L.alloc,1)};
   document.querySelectorAll("[data-v]").forEach(function(e){e.textContent=V[e.getAttribute("data-v")]});
 
+  // Known cost and who pays, paid plus signed through the September 28, 2026 warrant.
+  // Holley Hall: Town spend-against-funding tally. Library: Town Administrator's September 30 summary.
+  var KC={hhKnown:519393.29,hhGrant:325853.52,hhInc:20652.05,
+          lmlKnown:914807.55,lmlAward:857246.15,lmlBoard:54925.08,lmlTown:2636.32,lmlInc:14085.95};
+  var kTotal=r2(KC.hhKnown+KC.lmlKnown), kGrants=r2(KC.hhGrant+KC.lmlAward);
+  var kTown=r2((KC.hhKnown-KC.hhGrant)+KC.lmlTown), kInc=r2(KC.hhInc+KC.lmlInc);
+  if(Math.abs(r2(kGrants+kTown+KC.lmlBoard)-kTotal)>0.01) warn("grants, Town money and Library Board funds do not add up to the known cost.");
+  if(Math.abs(r2(KC.lmlKnown-KC.lmlAward-KC.lmlBoard)-KC.lmlTown)>0.01) warn("library Town share does not reconcile.");
+  var perDollar=kGrants/kTown;
   $("stats").innerHTML=[
-    [usd(r2(H.grant+L.alloc),0),"State and federal grants","Both buildings, with the library increase"],
-    [String(days),"Days to the deadline","Both grants end December 31, 2026"],
+    [usd(kTotal,0),"Combined cost so far","Both buildings, paid and signed through September 28, 2026. Includes "+usd(KC.lmlBoard,0)+" from the Library Board."],
+    [usd(kGrants,0),"State and federal grants",Math.round(kGrants/kTotal*100)+"% of the cost so far"],
+    [usd(kTown,0),"Town's cost",Math.round(kTown/kTotal*100)+"% of the cost so far, before up to "+usd(kInc,0)+" in expected utility incentives"],
+    ["$"+perDollar.toFixed(2),"In grants per Town dollar","For every dollar of Town money, both buildings"],
     [cut+"% less","Air leaking at Holley Hall","Final test, August 10, 2026"],
-    [Math.round((1-3231/5172)*100)+"% less","Air leaking at the library","Progress test, September 25, 2026"]
+    [Math.round((1-3231/5172)*100)+"% less","Air leaking at the library","Progress test, September 25, 2026"],
+    [(1267+930).toLocaleString("en-US"),"Fewer gallons of heating oil a year","About 1,267 at Holley Hall, where heat pumps take over much of the heating and the oil boiler stays for the baseboards (Green Mountain Power's estimate), and 930 at the library, which is moving from oil to propane"],
+    ["11,300","Square feet of public building","Holley Hall (about 7,800) and the library (3,515), both renovated in 2026"]
   ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
 
   // costs
