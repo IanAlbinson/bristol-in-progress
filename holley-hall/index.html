@@ -865,7 +865,7 @@ var DATA={
     tabs.forEach(t=>{const on=t.dataset.tab===k; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
       document.getElementById('p-'+t.dataset.tab).hidden=!on; if(on) t.scrollIntoView({block:'nearest',inline:'nearest'});});
     try{ history.replaceState(null,'',k===keys[0]?location.pathname+location.search:'#'+k); }catch(e){}
-    if(scroll){ const y=bar.getBoundingClientRect().top+scrollY; if(scrollY>y) window.scrollTo({top:y}); }
+    if(scroll){ const pn=document.getElementById('p-'+k); const y=Math.max(0,pn.getBoundingClientRect().top+scrollY-bar.offsetHeight-12); if(scrollY>y) window.scrollTo({top:y}); }
     if(focus) document.getElementById('t-'+k).focus();
   }
   tabs.forEach((t,i)=>{
