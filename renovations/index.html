@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Draft &middot; Renovating Holley Hall and the Lawrence Memorial Library &middot; Bristol, In Progress</title>
+<meta name="description" content="How Bristol renovated Holley Hall and the Lawrence Memorial Library in 2026: what was done, what went wrong, what it cost and what is still open.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --ground:#f9f9f7; --surface:#ffffff;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --rule:#e1e0d9; --rule-strong:#c3c2b7;
+    --accent:#eb6834; --signal:#2a78d6; --live:#1baf7a;
+    --hh:#2a78d6; --lml:#1baf7a;
+    --bar:#2a78d6; --bar-2:#8fb6e4; --inert:#c3c2b7; --track:#eeede7;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --ground:#0d0d0d; --surface:#1a1a19;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --rule:#2c2c2a; --rule-strong:#3d3d3a;
+      --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+      --hh:#5b9ceb; --lml:#22b581;
+      --bar:#5b9ceb; --bar-2:#33587f; --inert:#4a4a46; --track:#262624;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --ground:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --rule:#2c2c2a; --rule-strong:#3d3d3a;
+    --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+    --hh:#5b9ceb; --lml:#22b581;
+    --bar:#5b9ceb; --bar-2:#33587f; --inert:#4a4a46; --track:#262624;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px 92px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+  img{max-width:100%}
+
+  /* masthead */
+  .masthead{padding:44px 0 0;display:flex;flex-direction:column;gap:20px}
+  .kicker{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .kicker .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+  .kicker a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+  .kicker a:hover{color:var(--ink)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,7vw,64px);line-height:1.03;
+    letter-spacing:-.02em;margin:0;text-wrap:balance}
+  h1 em{font-style:italic}
+  .standfirst{font-family:var(--display);font-size:clamp(18px,2.4vw,21px);line-height:1.5;
+    color:var(--ink-2);max-width:38em;margin:0}
+  .notice{display:flex;gap:14px;align-items:flex-start;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--rule);padding:16px 0 18px;margin-top:6px}
+  .notice .flag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);padding-top:3px;white-space:nowrap}
+  .notice p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:56em}
+
+  /* hero pair */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
+  .hero figure{margin:0;position:relative}
+  .hero button{padding:0;border:0;background:var(--track);cursor:zoom-in;display:block;width:100%;
+    aspect-ratio:4/3;border-radius:4px;overflow:hidden}
+  .hero img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero figcaption{display:flex;gap:8px;align-items:baseline;margin-top:8px;font-size:14px;color:var(--ink-2)}
+  .hero figcaption b{font-weight:600;color:var(--ink)}
+
+  .who{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;
+    font-weight:500;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+  .who::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor}
+  .who.hh{color:var(--hh)} .who.lml{color:var(--lml)}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:0;margin:34px 0 4px;border-top:1px solid var(--rule)}
+  .stat{border-bottom:1px solid var(--rule);padding:16px 20px 16px 0}
+  .stat .n{font-family:var(--display);font-size:34px;font-weight:400;line-height:1.05;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px}
+  .stat .sub2{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+
+  h2.sec{font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:.11em;
+    text-transform:uppercase;margin:60px 0 0;border-bottom:1px solid var(--rule-strong);
+    padding-bottom:9px;display:flex;align-items:baseline;justify-content:space-between;
+    gap:16px;flex-wrap:wrap}
+  h2.sec span{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.02em;
+    text-transform:none;color:var(--muted)}
+  .svc{list-style:none;margin:18px 0 0;padding:0;border-top:2px solid var(--ink)}
+  .svc li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.5}
+  .svc .dd{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:3px;letter-spacing:.03em}
+  .svc .st{font-family:var(--mono);font-size:10px;color:var(--signal);letter-spacing:.08em;text-transform:uppercase;margin-left:6px}
+  h3.sub{font-family:var(--display);font-weight:400;font-size:23px;margin:38px 0 0;letter-spacing:-.01em}
+
+  .ctbl td:first-child{font-family:var(--body);font-size:14.5px;letter-spacing:0;text-transform:none;color:var(--ink);width:auto;padding-top:11px}
+  .ctbl .num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px;white-space:nowrap}
+  .ctbl tr.tot td{font-weight:700;border-top:1px solid var(--ink)}
+  .pend{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .prose{max-width:40em}
+  .prose p{margin:18px 0 0;font-size:16.5px;line-height:1.65}
+  .note{border-left:2px solid var(--accent);padding:12px 0 12px 16px;margin:22px 0 4px;
+    font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:70em}
+  .note b{color:var(--ink)}
+
+  /* chapter openers */
+  .chapter{margin-top:84px;border-top:2px solid var(--ink);padding-top:22px;display:grid;
+    grid-template-columns:auto 1fr;gap:6px 22px;align-items:baseline}
+  .chapter .num{font-family:var(--display);font-size:64px;line-height:.9;color:var(--muted);grid-row:span 2}
+  .chapter h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,44px);line-height:1.08;
+    letter-spacing:-.015em;margin:0}
+  .chapter h2 em{font-style:italic}
+  .chapter .who{margin-top:4px}
+
+  /* glance table */
+  .tbl{overflow-x:auto;margin-top:18px}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:620px}
+  th{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:8px 18px 8px 0;border-bottom:1px solid var(--rule-strong);vertical-align:bottom}
+  td{padding:11px 18px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5}
+  td:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);width:130px;padding-top:13px}
+  td .fig{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+  /* before / after */
+  .cmp{position:relative;margin-top:22px;aspect-ratio:4/3;max-height:640px;width:100%;border-radius:4px;
+    overflow:hidden;background:var(--track);user-select:none;-webkit-user-select:none;touch-action:pan-y}
+  .cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .cmp .bf{clip-path:inset(0 calc(100% - var(--p,50%)) 0 0)}
+  .cmp .line{position:absolute;top:0;bottom:0;left:var(--p,50%);width:2px;margin-left:-1px;background:#fff;
+    box-shadow:0 0 0 1px rgba(0,0,0,.25);pointer-events:none}
+  .cmp .knob{position:absolute;top:50%;left:var(--p,50%);width:42px;height:42px;margin:-21px 0 0 -21px;
+    border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;
+    font-size:18px;box-shadow:0 1px 6px rgba(0,0,0,.35);pointer-events:none;font-family:var(--body)}
+  .cmp .lab{position:absolute;top:12px;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:3px;pointer-events:none}
+  .cmp .lab.l{left:12px} .cmp .lab.r{right:12px}
+  .cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+  .cmp:has(input:focus-visible){outline:2px solid var(--signal);outline-offset:3px}
+  .cmpcap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:8px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+
+  /* photo strip */
+  .strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,30%);gap:12px;overflow-x:auto;
+    scroll-snap-type:x mandatory;padding:4px 0 12px;margin-top:20px;overscroll-behavior-x:contain}
+  .strip figure{margin:0;scroll-snap-align:start}
+  .strip button{padding:0;border:0;background:var(--track);cursor:zoom-in;display:block;width:100%;
+    aspect-ratio:4/3;border-radius:4px;overflow:hidden}
+  .strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+  .strip button:hover img{transform:scale(1.03)}
+  .strip figcaption{margin-top:7px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+  .strip figcaption .d{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:1px}
+  .striphint{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin-top:2px}
+
+  /* bars */
+  .bars{margin-top:18px;max-width:760px}
+  .brow{display:grid;grid-template-columns:minmax(120px,190px) 1fr auto;gap:6px 16px;align-items:center;
+    padding:9px 0;border-top:1px solid var(--rule)}
+  .brow:first-child{border-top:none}
+  .brow .nm{font-size:14.5px;font-weight:600;line-height:1.3}
+  .brow .nm small{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.03em}
+  .brow .tr{height:12px;background:var(--track);border-radius:3px;overflow:hidden}
+  .brow .tr i{display:block;height:100%;background:var(--bar);border-radius:3px}
+  .brow .tr i.soft{background:var(--bar-2)}
+  .brow .tr i.empty{background:repeating-linear-gradient(45deg,var(--inert) 0 3px,transparent 3px 7px)}
+  .brow .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+  /* PCB rounds */
+  .pcbwrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;margin-top:22px;align-items:start}
+  .rounds{list-style:none;margin:0;padding:0;counter-reset:r}
+  .rounds li{border-top:1px solid var(--rule);padding:14px 0 14px}
+  .rounds .rh{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .rounds .rh b{font-family:var(--display);font-weight:400;font-size:21px}
+  .rounds .rh span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .rounds .meter{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:8px 0 6px}
+  .rounds .mt{position:relative;height:10px;background:var(--track);border-radius:3px}
+  .rounds .mt i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+  .rounds .mt s{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);text-decoration:none}
+  .rounds .mv{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+  .rounds p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+  .pcbfig{margin:0}
+  .pcbfig button{padding:0;border:0;background:var(--track);cursor:zoom-in;display:block;width:100%;aspect-ratio:4/3;border-radius:4px;overflow:hidden}
+  .pcbfig img{width:100%;height:100%;object-fit:cover;display:block}
+  .pcbfig figcaption{margin-top:8px;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+  .scalekey{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);margin-top:10px}
+
+  /* status */
+  .status{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 36px;margin-top:6px}
+  .status ul{list-style:none;margin:0;padding:0}
+  .status li{position:relative;padding:8px 0 8px 22px;border-top:1px solid var(--rule);font-size:15px;line-height:1.5}
+  .status li::before{content:"";position:absolute;left:2px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--live)}
+  .status li.o::before{background:transparent;border:1.5px solid var(--muted);width:7px;height:7px}
+  .status h4{margin:18px 0 4px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  /* shared team */
+  .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:20px}
+  .card{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px}
+  .card h4{margin:0 0 6px;font-size:15px}
+  .card p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-2)}
+  .card .who{margin-bottom:8px}
+
+  /* timeline */
+  .tlkey{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
+  .tl{margin:18px 0 0;padding:0;list-style:none;border-left:1px solid var(--rule-strong)}
+  .tl li{position:relative;padding:0 0 18px 26px}
+  .tl li::before{content:"";position:absolute;left:-6px;top:7px;width:11px;height:11px;border-radius:50%;
+    background:var(--ground);border:2px solid var(--muted)}
+  .tl li.hh::before{background:var(--hh);border-color:var(--hh)}
+  .tl li.lml::before{background:var(--lml);border-color:var(--lml)}
+  .tl li.both::before{background:linear-gradient(90deg,var(--hh) 50%,var(--lml) 50%);border-color:var(--ground);box-shadow:0 0 0 1px var(--rule-strong)}
+  .tl li.fut::before{background:var(--ground);border-style:dashed}
+  .tl li.fut.hh::before{border-color:var(--hh)} .tl li.fut.lml::before{border-color:var(--lml)}
+  .tl li.fut.both::before{background:var(--ground);border-color:var(--muted)}
+  .tl .dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .tl .ev{font-size:15.5px;line-height:1.5;margin-top:2px;max-width:48em}
+  .tl .ev b{font-weight:600}
+
+  .more{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:20px}
+  .more a{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
+  .more a:hover{border-color:var(--rule-strong)}
+  .more h4{margin:6px 0 4px;font-family:var(--display);font-weight:400;font-size:22px}
+  .more p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.5}
+
+  footer{margin-top:72px;border-top:2px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:14px}
+  footer p{margin:0;font-size:12.5px;line-height:1.6;color:var(--ink-2);max-width:none}
+  footer p b{color:var(--ink)}
+  footer .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  /* lightbox */
+  #lb{position:fixed;inset:0;background:rgba(8,8,8,.94);display:none;z-index:50;
+    flex-direction:column;align-items:center;justify-content:center;padding:48px 16px 20px}
+  #lb.on{display:flex}
+  #lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;border-radius:3px}
+  #lb .cap{color:#e8e7e2;font-size:14.5px;line-height:1.5;margin-top:12px;max-width:60em;text-align:center}
+  #lb .cap b{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:#b5b4ad;display:block;margin-bottom:2px}
+  #lb button{position:absolute;background:rgba(255,255,255,.1);color:#fff;border:0;border-radius:50%;
+    width:44px;height:44px;font-size:22px;line-height:44px;cursor:pointer;font-family:var(--body)}
+  #lb button:hover{background:rgba(255,255,255,.22)}
+  #lb .x{top:12px;right:12px} #lb .pv{left:12px;top:50%} #lb .nx{right:12px;top:50%}
+
+  @media (max-width:760px){
+    .pcbwrap{grid-template-columns:1fr}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 16px 72px}
+    .hero{grid-template-columns:1fr}
+    .strip{grid-auto-columns:78%}
+    .brow{grid-template-columns:1fr auto}
+    .brow .tr{grid-column:1/-1;grid-row:2}
+    .stat .n{font-size:30px}
+    .chapter .num{font-size:48px}
+  }
+  @media (prefers-reduced-motion: reduce){ .strip img{transition:none} }
+  /* project partners: credits grid */
+  .credits{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:28px}
+  .credits li{border-top:1px solid var(--rule);margin-top:-1px;padding:14px 0 18px;display:flex;flex-direction:column;gap:12px}
+  .credits .role{font-family:var(--mono);font-size:10.5px;font-weight:500;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);min-height:2.8em}
+  .credits .slot{height:72px;display:flex;align-items:center}
+  .credits .nm{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+  .lgo{position:relative;display:inline-block;flex:0 0 auto;max-width:100%}
+  .lgo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:left center}
+  .lgo .w{display:none}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lgo .c{display:none}:root:not([data-theme="light"]) .lgo .w{display:block;opacity:.88}}
+  :root[data-theme="dark"] .lgo .c{display:none} :root[data-theme="dark"] .lgo .w{display:block;opacity:.88}
+  :root[data-theme="light"] .lgo .c{display:block} :root[data-theme="light"] .lgo .w{display:none}
+  @media (max-width:640px){.credits{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}}
+  .firms{columns:2 280px;column-gap:36px;margin-top:16px;padding:0;list-style:none}
+  .firms li{break-inside:avoid;padding:8px 0;border-top:1px solid var(--rule);font-size:15px}
+  .firms li .who{margin-right:10px}
+  .firms li > span:not(.who){display:block;font-size:13.5px;color:var(--ink-2)}
+  /* thank you */
+  .thanks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px;margin-top:20px}
+  .thanks .grp2{border-top:1px solid var(--rule);padding:14px 0 16px}
+  .thanks h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .thanks ul{list-style:none;margin:0;padding:0}
+  .thanks li{font-size:14.5px;line-height:1.45;padding:3px 0}
+  .thanks li span{color:var(--ink-2);font-size:13px}
+  .draftflag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:1px 6px;margin-left:8px}
+  @media (max-width:820px){.thanks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.thanks{grid-template-columns:1fr}}
+  .tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ground);
+    margin:30px 0 0;padding:10px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule-strong)}
+  .tablist{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tablist::-webkit-scrollbar{display:none}
+  @media (max-width:760px){.tablist{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:28px}}
+  .tablist button{flex:0 0 auto;border:1px solid transparent;background:none;cursor:pointer;font-family:var(--body);
+    font-size:15.5px;font-weight:600;color:var(--ink-2);padding:9px 16px;border-radius:999px;white-space:nowrap;
+    transition:background .15s,color .15s,border-color .15s}
+  .tablist button:hover{color:var(--ink);border-color:var(--rule-strong)}
+  .tablist button[aria-selected="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+  .tablist button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  .tablist .tc{margin-left:7px;font-family:var(--mono);font-size:11.5px;font-weight:400;opacity:.7}
+  @media (prefers-reduced-motion:reduce){.tablist button{transition:none}}
+  .panel{outline:none;padding-top:8px}
+  .panel > h2.sec:first-child{margin-top:34px}
+  .panel > .hero:first-child{margin-top:28px}
+  .panel > .chapter:first-child,.panel > h2.sec:first-child{margin-top:34px}
+  .pnext{margin-top:48px;border-top:1px solid var(--rule);padding-top:16px;display:flex;justify-content:flex-end}
+  .pnext button{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);border-radius:4px;
+    padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .pnext button:hover{border-color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="dot"></span>
+      <a href="../">Bristol, In Progress</a>
+      <span>&middot;</span>
+      <span>Capital projects</span>
+      <span>&middot;</span>
+      <span class="draftflag">Draft</span>
+    </div>
+
+    <h1>Renovating <em>Holley&nbsp;Hall</em> and the <em>Lawrence Memorial Library</em></h1>
+
+    <p class="standfirst">
+      In 2026 Bristol renovated Holley Hall and the Lawrence Memorial Library at the same time,
+      with the same architect, the same builder and grant money that has to be spent by the end of
+      the year. Holley Hall is essentially finished. At the library, testing turned up a chemical
+      cleanup that was not in the plan. This page tells the story of both.
+    </p>
+
+    <div class="notice">
+      <span class="flag">Draft</span>
+      <p>
+        This page is a draft. Figures, names, dates and photos are still being checked and may
+        change before it is final.
+      </p>
+    </div>
+  </header>
+
+  <nav class="tabbar" aria-label="Sections">
+    <div class="tablist" role="tablist">
+      <button role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button>
+      <button role="tab" id="t-holley" aria-controls="p-holley" aria-selected="false" tabindex="-1" data-tab="holley">Holley Hall</button>
+      <button role="tab" id="t-library" aria-controls="p-library" aria-selected="false" tabindex="-1" data-tab="library">Library</button>
+      <button role="tab" id="t-money" aria-controls="p-money" aria-selected="false" tabindex="-1" data-tab="money">Money</button>
+      <button role="tab" id="t-people" aria-controls="p-people" aria-selected="false" tabindex="-1" data-tab="people">People</button>
+      <button role="tab" id="t-timeline" aria-controls="p-timeline" aria-selected="false" tabindex="-1" data-tab="timeline">Timeline</button>
+    </div>
+  </nav>
+
+  <section class="panel" id="p-overview" role="tabpanel" aria-labelledby="t-overview" tabindex="0">
+  <div class="hero">
+    <figure>
+      <button data-ph="hh-1945" aria-label="Enlarge: the finished meeting hall in Holley Hall"><img src="img/hh-1945-hero.jpg" alt="The finished meeting hall in Holley Hall, looking across the wood floor toward the balcony and its arched stained glass window"></button>
+      <figcaption><span class="who hh">Holley Hall</span> The finished meeting hall, October 2, 2026</figcaption>
+    </figure>
+    <figure>
+      <button data-ph="lml-1770" aria-label="Enlarge: the front of the Lawrence Memorial Library"><img src="img/lml-1770-hero.jpg" alt="The front of the Lawrence Memorial Library from the walk, with the rebuilt steps and the contractor's sign on the lawn"></button>
+      <figcaption><span class="who lml">Library</span> The front of the library from the walk, September 23</figcaption>
+    </figure>
+  </div>
+
+  <section class="stats" id="stats"></section>
+
+  <h2 class="sec">The two projects at a glance <span>As of <span class="asof"></span></span></h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th><span class="who hh">Holley Hall</span></th><th><span class="who lml">Lawrence Memorial Library</span></th></tr></thead>
+      <tbody>
+        <tr><td>The building</td><td>Brick town hall completed in 1884 to a design by C.W. Damon, about 7,800 square feet. Town offices and community space, with a meeting hall and stage upstairs. Listed on the National Register of Historic Places.</td><td>Wood-frame classical revival library at 40 North Street, built around 1911. Lower level rebuilt for children in 1995 to 1997.</td></tr>
+        <tr><td>Goal</td><td>Make the leaky, uninsulated upper floor comfortable and cheaper to heat and cool.</td><td>Update the building for modern use, including internet access for work, education and health monitoring: better air, heat, insulation, a quiet room and repairs.</td></tr>
+        <tr><td>Paid by</td><td>State Municipal Energy Resilience Program grant. <span class="fig" data-v="hhGrant"></span>, no local match.</td><td>Federal Capital Projects Fund grant through the Vermont Department of Libraries. <span class="fig" data-v="lmlGrant"></span> as awarded in 2024, raised to <span class="fig" data-v="lmlAlloc"></span> in 2026. No local match.</td></tr>
+        <tr><td>The surprise</td><td>No hidden conditions on record. The contractor's price came in above the grant.</td><td>PCBs in the first-floor carpet glue had soaked into the wood below. The floor in the main rooms came out down to the joists.</td></tr>
+        <tr><td>Where it stands</td><td>Construction essentially complete. Passed the fire marshal's inspection September 9, with one condition. Staff moved back in September 23.</td><td>New subfloor going down. Propane hooked up September 28. Flooring and finishes to come. The library's goal is to reopen the first week of December.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">Still open <span>As of <span class="asof"></span></span></h2>
+  <div class="status">
+    <div>
+      <h4><span class="who hh">Holley Hall</span></h4>
+      <ul>
+        <li>Final air-leakage test report, August 11</li>
+        <li>Inspection passed September 9, with a conditional certificate of occupancy</li>
+        <li>Recreation Department back in its office September 17</li>
+        <li>Main move back, September 23</li>
+        <li class="o">Guardrail at the balcony window, a condition of the certificate</li>
+        <li class="o">Hall ceiling finish, a lower-cost replacement for the dropped acoustic ceiling, not yet priced</li>
+        <li class="o">Utility incentives, not yet paid</li>
+      </ul>
+    </div>
+    <div>
+      <h4><span class="who lml">Library</span></h4>
+      <ul>
+        <li>Pop-up branch at 74 Munsill Avenue open since June 20</li>
+        <li>PCB removal finished, including three joist sections</li>
+        <li>Front steps, porch and center handrail rebuilt, attic insulated, heat pump units installed</li>
+        <li>Propane hookup, September 28</li>
+        <li class="o">Closure report on the PCB cleanup</li>
+        <li class="o">Finish flooring, now an engineered oak, waiting on sample approval as of September 18</li>
+        <li class="o">Final cost and the amended grant agreement</li>
+        <li class="o">Last day at the pop-up, October 27</li>
+        <li class="o">Reopening at 40 North Street, with a goal of the first week of December</li>
+      </ul>
+    </div>
+  </div>
+  <div class="legend" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:14px">Filled dot: done &middot; Open dot: still to come</div>
+
+    <div class="pnext"><button type="button" data-goto="holley">Next: Holley Hall <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-holley" role="tabpanel" aria-labelledby="t-holley" tabindex="0" hidden>
+  <!-- ================= HOLLEY HALL ================= -->
+  <div class="chapter">
+    <span class="num">1</span>
+    <h2>Inside the <em>Holley Hall</em> retrofit</h2>
+    <span class="who hh">March to September 2026</span>
+  </div>
+
+  <div class="prose">
+    <p>
+      A 2010 renovation insulated Holley Hall's lower level and attic but left the upstairs walls
+      alone: a single layer of brick over wood framing with little or no insulation, single-pane
+      windows and uninsulated doors. One oil boiler heats the whole building, and it still does. The
+      lower level also has heat pumps in each office area and the conference room, with heat recovery
+      ventilation. The upper floor had no mechanical ventilation beyond bathroom fans and no cooling. The 2024 energy assessment
+      summary noted that the hall "becomes very uncomfortable in hot weather."
+    </p>
+    <p>
+      In March crews stripped the hall walls to the framing. They sheathed and taped them for air
+      sealing, blew in cellulose, added a layer of wood-fiber insulation board and refinished the
+      walls. Two ducted heat pumps now serve the hall, with a third in the tower office, and two
+      ventilators under the stage bring in fresh air while keeping most of the heat. Fifteen windows
+      were repaired and fitted with interior storm windows, exterior doors were weatherstripped,
+      programmable thermostats went in, and LED lights went in under the balcony.
+    </p>
+  </div>
+
+  <div class="cmp" id="cmpHH" style="--p:50%">
+    <img src="img/cmp-hh-after.jpg" alt="The meeting hall in September 2026, after the work">
+    <img class="bf" src="img/cmp-hh-before.jpg" alt="The meeting hall in February 2026, before the work">
+    <span class="line"></span><span class="knob" aria-hidden="true">&#8596;</span>
+    <span class="lab l">Before &middot; Feb 24</span><span class="lab r">After &middot; Sep 11</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Drag to compare the hall before and after">
+  </div>
+  <div class="cmpcap"><span>Drag the handle to compare. The meeting hall, looking toward the stage.</span><span>Same view, lined up on the stage</span></div>
+
+  <h3 class="sub">How it came together</h3>
+  <div class="strip" id="stripHH"></div>
+  <div class="striphint">Scroll sideways for more. Tap a photo to enlarge it.</div>
+
+  <h3 class="sub">Is the building tighter?</h3>
+  <div class="bars" id="leak"></div>
+  <p class="note">
+    <b>How to read this.</b> A blower door test uses a fan to pull air out of the building and
+    measures how much leaks back in. Lower is better. The mid-project test came before every air
+    barrier was finished. <b>The final test on August 10, after the work was complete, measured
+    58% less leakage than before the project.</b> Per square foot of building shell, the hall went
+    from 1.00 cfm, which the 2024 assessment rated "extremely leaky," to 0.42 cfm.
+  </p>
+
+  <h3 class="sub">What it cost</h3>
+  <div class="prose">
+    <p>
+      The Town's May 2026 estimate put the whole project at <span class="fig" data-v="hhEst"></span>,
+      including design and engineering. The state grant covers <span data-v="hhShare"></span> of that.
+      Green Mountain Power and Efficiency Vermont incentives could return up to
+      <span data-v="hhInc"></span> once inspections and paperwork are done. The final cost will not be
+      known until change orders are settled at closeout.
+    </p>
+  </div>
+
+    <div class="pnext"><button type="button" data-goto="library">Next: Library <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-library" role="tabpanel" aria-labelledby="t-library" tabindex="0" hidden>
+  <!-- ================= LIBRARY ================= -->
+  <div class="chapter">
+    <span class="num">2</span>
+    <h2>Inside the <em>Lawrence Memorial Library</em> renovation</h2>
+    <span class="who lml">Spring to December 2026</span>
+  </div>
+
+  <div class="prose">
+    <p>
+      The library project was always the bigger one. The plan swaps the oil boiler for propane, adds
+      heat pumps and fresh-air ventilation with better filters, insulates the upper walls and brings
+      the attic to R-60. It turns a storage room into a soundproofed quiet room, updates the
+      electrical, deals with lead paint, repairs rotted trim and siding and rebuilds the front porch
+      and steps.
+    </p>
+    <p>
+      Most of that went the way renovations go. The attic was insulated in April, the outdoor heat
+      pump units went on their stands the same month, and the worn front steps were rebuilt by late
+      July.
+    </p>
+  </div>
+
+  <h3 class="sub">What the building needed</h3>
+  <div class="strip" id="stripPRE"></div>
+  <div class="striphint">Photos from the Town's files, 2021 to 2024, of conditions in the project's scope. Scroll sideways for more.</div>
+
+  <div class="cmp" id="cmpLML" style="--p:50%">
+    <img src="img/cmp-lml-after.jpg" alt="The rebuilt front steps, railings and center handrail in September 2026">
+    <img class="bf" src="img/cmp-lml-before.jpg" alt="The front steps in April 2025 with peeling paint and rust">
+    <span class="line"></span><span class="knob" aria-hidden="true">&#8596;</span>
+    <span class="lab l">Before &middot; Apr 21, 2025</span><span class="lab r">After &middot; Sep 23, 2026</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Drag to compare the front steps before and after">
+  </div>
+  <div class="cmpcap"><span>Drag the handle to compare. The front steps on North Street.</span><span>Same view, lined up on the front door</span></div>
+
+  <h3 class="sub">How it came together</h3>
+  <div class="strip" id="stripLML"></div>
+  <div class="striphint">Scroll sideways for more. Tap a photo to enlarge it.</div>
+
+  <h3 class="sub">Then came the PCBs</h3>
+  <div class="prose">
+    <p>
+      Before the inside work went further, the building was tested in April for asbestos, lead and
+      PCBs, industrial chemicals banned in 1979 that still turn up in older materials. Asbestos
+      was found only in the first-floor plaster, and the work there was cleaning up dust and debris,
+      finished by mid-July. The brown glue under the first-floor carpet held PCBs at 140 mg/kg.
+      Federal rules require anything over 50 to be removed as PCB waste, so the carpet, the glue and
+      the wood floor under it came out of the main first-floor rooms.
+    </p>
+    <p>
+      After removal, a second firm takes samples to confirm the building is clean. The standard is
+      1 mg/kg. It took three rounds to get there.
+    </p>
+    <p>
+      The first round showed the PCBs had soaked into the wood subfloor itself, so that came out
+      too. By August 21 those rooms were down to their joists, with the radiant heating tubes still
+      in place and the space sealed in plastic sheeting. In places you could see straight through to
+      the ceiling of the rooms below.
+    </p>
+  </div>
+
+  <div class="strip" id="stripPCB"></div>
+  <div class="striphint">Photos taken right after the subfloor came out, before the joist sections were cut. Tap a photo to enlarge it.</div>
+
+  <div class="pcbwrap">
+    <ol class="rounds" id="rounds"></ol>
+    <figure class="pcbfig">
+      <button data-ph="lml-1749" aria-label="Enlarge: new subfloor between the stacks"><img src="img/lml-1749.jpg" alt="New subfloor partly laid between the library stacks, with floor framing showing"></button>
+      <figcaption>September 21: new subfloor going down between the stacks, a month after the photos above.</figcaption>
+    </figure>
+  </div>
+  <p class="scalekey">Bars use a log scale so small and large readings both show. The black tick marks the 1 mg/kg standard.</p>
+
+  <p class="note">
+    <b>What it changed.</b> A new first floor was added to the job and the finish floor is still
+    being chosen. In August a backup generator and exterior painting were taken out of scope; the
+    generator was dropped because of the cleanup's cost overruns. The August 10 Selectboard minutes
+    record that the State had added <span data-v="lmlAdd"></span> to
+    the grant to cover the mitigation work and "a little bit more." The State's own grant ledger,
+    updated September 9, shows the base award raised to <span data-v="lmlNewBase"></span>, an
+    increase of <span data-v="lmlLedgerAdd"></span>. The environmental firm's closure report was
+    still pending as of this page's date.
+  </p>
+
+  <h3 class="sub">Keeping the library open</h3>
+  <div class="prose">
+    <p>
+      The library closed its North Street building to the public on March 10, 2026, expecting to
+      reopen at the beginning of May while exterior work continued. Then asbestos turned up in the
+      wall plaster and PCBs in the carpet adhesive. An eight-week closure is now heading toward nine
+      months. Library staff kept the library running the whole time, first by email and with
+      programs held off-site, then from a pop-up branch in the BristolWorks building, while also
+      packing up the first floor so the cleanup could go ahead.
+    </p>
+  </div>
+  <ul class="svc">
+    <li><span class="dd">Mar 10, 2026</span><span>Last day of in-person service at 40 North Street. Returns go through the back-entrance book drop, and staff answer questions by email.</span></li>
+    <li><span class="dd">Early May</span><span>The library announces the project has run into delays. Loans are renewed automatically, and the monthly book club and weekly storytime move to off-site locations.</span></li>
+    <li><span class="dd">Late May</span><span>Asbestos in the wall plaster and PCBs in the carpet adhesive are confirmed on the first floor. The library announces a pop-up location at BristolWorks.</span></li>
+    <li><span class="dd">Jun 8</span><span>A book drop opens at 74 Munsill Avenue, Suite 100.</span></li>
+    <li><span class="dd">Jun 20</span><span>The pop-up has its soft opening, together with the summer reading kickoff.</span></li>
+    <li><span class="dd">Jun 22</span><span>Regular pop-up hours begin, six days a week: 10 to 5 on Monday, Wednesday and Friday, 10 to 6 on Tuesday and Thursday, and 10 to 2 on Saturday. Patrons can borrow from a curated collection, read, play and attend programs, including storytime.</span></li>
+    <li><span class="dd">Jun 29</span><span>Asbestos cleanup begins on the first floor at North Street.</span></li>
+    <li><span class="dd">Jul</span><span>The library announces staff will pack up the first floor and store its contents in Howden Hall, so the PCB removal can begin.</span></li>
+    <li><span class="dd">Oct 7</span><span>Interlibrary loan requests are paused ahead of the move back.</span></li>
+    <li><span class="dd">Oct 27</span><span>Last day of service at the pop-up.<span class="st">Scheduled</span></span></li>
+    <li><span class="dd">Early Dec</span><span>The library's goal is to reopen at 40 North Street the first week of December.<span class="st">Goal</span></span></li>
+  </ul>
+
+    <div class="pnext"><button type="button" data-goto="money">Next: Money <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-money" role="tabpanel" aria-labelledby="t-money" tabindex="0" hidden>
+  <!-- ================= COSTS ================= -->
+  <h2 class="sec">What it all costs <span>As of <span class="asof"></span></span></h2>
+  <div class="prose">
+    <p>
+      Both grants pay by reimbursement: the Town pays the bills and the State pays it back. What the
+      grants do not cover falls to the Town. For the FY2027 budget, the Town raised its yearly
+      contribution to the Capital Building and Maintenance Fund to $120,000, from a typical $30,000,
+      in part to cover these two projects.
+    </p>
+  </div>
+
+  <h3 class="sub">Who pays</h3>
+  <div class="tbl"><table class="ctbl" id="payTbl"></table></div>
+
+  <h3 class="sub">Holley Hall, by the Town's May 2026 estimate</h3>
+  <div class="tbl"><table class="ctbl" id="hhCostTbl"></table></div>
+
+  <h3 class="sub">Library, contracts and change orders on record</h3>
+  <div class="tbl"><table class="ctbl" id="lmlCostTbl"></table></div>
+
+  <p class="note">
+    <b>What these tables are not.</b> They are not a final accounting. The Holley Hall figures are an
+    estimate made before the change orders. The library list holds only amounts that appear in a
+    signed contract, change order, bid award or check warrant, so it leaves out the Clay Point
+    consulting fees, most of Stone Environmental's sampling fees, the September joist removal and the
+    finish floor, none of which had a total on record. The two shortfalls come from the Town
+    Administrator's August 20 closeout memo, before the hardwood floor and the Holley Hall ceiling were
+    priced. The final cost of both projects will not be known until closeout.
+  </p>
+
+    <div class="pnext"><button type="button" data-goto="people">Next: People <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-people" role="tabpanel" aria-labelledby="t-people" tabindex="0" hidden>
+  <!-- ================= SHARED ================= -->
+  <h2 class="sec">One team, two buildings <span>Project partners</span></h2>
+  <div class="prose">
+    <p>
+      Vermont Integrated Architecture designed both projects under one contract approved in June
+      2025 and oversees construction. Silver Maple Construction built both, and a weekly owner,
+      architect and contractor meeting covers both jobs.
+    </p>
+  </div>
+  <ul class="credits">
+    <li><div class="role">General contractor and mechanical</div><div class="slot"><span class="lgo" style="height:51px;width:85px"><img class="c" src="img/partners/silver-maple.png" alt="Silver Maple Construction logo" loading="lazy"><img class="w" src="img/partners/silver-maple-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Silver Maple Construction</div></li>
+    <li><div class="role">Architect</div><div class="slot"><span class="lgo" style="height:52px;width:83px"><img class="c" src="img/partners/via.png" alt="Vermont Integrated Architecture logo" loading="lazy"><img class="w" src="img/partners/via-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Vermont Integrated Architecture</div></li>
+    <li><div class="role">MEP engineering</div><div class="slot"><span class="lgo" style="height:50px;width:87px"><img class="c" src="img/partners/dubois-king.png" alt="DuBois &amp; King logo" loading="lazy"><img class="w" src="img/partners/dubois-king-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">DuBois &amp; King</div></li>
+    <li><div class="role">Structural engineering</div><div class="slot"><span class="lgo" style="height:33px;width:131px"><img class="c" src="img/partners/engineering-ventures.png" alt="Engineering Ventures logo" loading="lazy"><img class="w" src="img/partners/engineering-ventures-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Engineering Ventures</div></li>
+    <li><div class="role">Electrical</div><div class="slot"><span class="lgo" style="height:66px;width:66px"><img class="c" src="img/partners/smith-mcclain.png" alt="Smith &amp; McClain logo" loading="lazy"><img class="w" src="img/partners/smith-mcclain-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Smith &amp; McClain</div></li>
+    <li><div class="role">Envelope commissioning</div><div class="slot"><span class="lgo" style="height:43px;width:102px"><img class="c" src="img/partners/gmec.png" alt="Green Mountain Enclosure Consulting logo" loading="lazy"><img class="w" src="img/partners/gmec-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Green Mountain Enclosure Consulting</div></li>
+    <li><div class="role">Roofing and slate at Holley Hall, chimney work at the library</div><div class="slot"><span class="lgo" style="height:32px;width:135px"><img class="c" src="img/partners/g-helms.png" alt="G. Helms Construction logo" loading="lazy"><img class="w" src="img/partners/g-helms-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">G. Helms Construction</div></li>
+  </ul>
+
+  <h2 class="sec">Also on the project</h2>
+  <ul class="firms">
+    <li><span class="who hh">Holley Hall</span>Middlebury VT Insulators<span>Dense-pack cellulose insulation</span></li>
+    <li><span class="who" style="color:var(--muted)">Both</span>Acme Glass<span>Storm windows</span></li>
+    <li><span class="who hh">Holley Hall</span>Magic Brush<span>Painting</span></li>
+    <li><span class="who lml">Library</span>Painting with Purpose<span>Painting, as a Silver Maple subcontractor</span></li>
+    <li><span class="who hh">Holley Hall</span>The Royal Group<span>Alarm work during construction</span></li>
+    <li><span class="who lml">Library</span>Clay Point Associates<span>Asbestos, lead and PCB testing, bid documents and abatement oversight</span></li>
+    <li><span class="who lml">Library</span>Stone Environmental<span>PCB confirmation sampling and closure report</span></li>
+    <li><span class="who lml">Library</span>Alloy<span>PCB abatement and asbestos cleanup</span></li>
+  </ul>
+
+  <h2 class="sec">Thank you <span>Draft list<span class="draftflag">Under review</span></span></h2>
+  <p class="note" style="margin-top:18px"><b>Projects like these take a lot of people.</b> Thank you to everyone who planned, built, tested, funded, inspected and put up with the work.</p>
+  <div class="thanks">
+    <div class="grp2"><h3>Town staff</h3><ul><li>Greg Faust, <span>Town Administrator</span></li><li>Freeda Powers, <span>Grant Administrator</span></li><li>Sharon Lucia, <span>Town Clerk and Treasurer</span></li><li>Kris Perlee, <span>Assistant Clerk and Treasurer</span></li><li>AZ Larsen, <span>Planning and Zoning Administrator</span></li></ul></div>
+    <div class="grp2"><h3>Selectboard</h3><ul><li>Ian Albinson</li><li>Joel Bouvier</li><li>Peeker Heffernan</li><li>Michelle Perlee</li><li>Jessica Teets</li></ul></div>
+    <div class="grp2"><h3>Bristol Energy Committee</h3><ul><li>David Flaschenriem</li><li>Allison Pouliot</li><li>Ben Skolozdra</li></ul></div>
+    <div class="grp2"><h3>Recreation Department <span class="who hh">Holley Hall</span></h3><ul><li>Meridith McFarland, <span>Recreation Director</span></li><li>Aidan Lenihan, <span>Parks Manager</span></li></ul></div>
+    <div class="grp2"><h3>Library staff <span class="who lml">Library</span></h3><ul><li>Katie Male-Riordan, <span>Library Director</span></li><li>Jen Lazar</li><li>Rebekah Cameron</li><li>Jill Quackenbush</li><li>Gail Creeksong</li><li>Jane Ploughman</li><li>Lily Weaver</li><li>Marita Schine</li><li>Moth Nasta</li></ul></div>
+    <div class="grp2"><h3>Library Board of Trustees <span class="who lml">Library</span></h3><ul><li>Vicki Coyle</li><li>Sophie Pickens</li><li>Peter Hewitt</li><li>Kenneth Johnson</li><li>Elizabeth Guilbeault</li><li>Darren Klinefelter</li><li>Scott Kluever</li></ul></div>
+    <div class="grp2"><h3>State of Vermont</h3><ul><li>Marty Gillies, <span>Buildings and General Services</span></li><li>Brian Sewell, <span>Buildings and General Services</span></li><li>Greg Socinski, <span>Division for Historic Preservation</span></li><li>Joshua Maxham, <span>Assistant State Fire Marshal</span></li><li>Catherine Delneo, <span>State Librarian</span></li><li>Tom McMurdo, <span>Assistant State Librarian</span></li><li>Jessica Leal, <span>Department of Libraries</span></li><li>Abe Koffman, <span>Department of Libraries</span></li></ul></div>
+    <div class="grp2"><h3>Efficiency programs</h3><ul><li>Emily Eckert, <span>Efficiency Vermont</span></li><li>Matt Sharpe, <span>Efficiency Vermont</span></li><li>Eli Pereira, <span>Green Mountain Power</span></li></ul></div>
+    <div class="grp2"><h3>Regional planning <span class="who hh">Holley Hall</span></h3><ul><li>Jolyon Larson, <span>Addison County Regional Planning Commission</span></li></ul></div>
+    <div class="grp2"><h3>Flooring and grounds <span class="who lml">Library</span></h3><ul><li>David Babcock, <span>Babcock's Vermont Carpet Gallery</span></li><li>Dawn Crane, <span>Rice Lumber</span></li><li>Ed Burke, <span>Rocky Dale Gardens</span></li></ul></div>
+  </div>
+
+    <div class="pnext"><button type="button" data-goto="timeline">Next: Timeline <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-timeline" role="tabpanel" aria-labelledby="t-timeline" tabindex="0" hidden>
+  <h2 class="sec">Timeline <span id="tlcount"></span></h2>
+  <div class="tlkey"><span class="who hh">Holley Hall</span><span class="who lml">Library</span><span class="who" style="color:var(--muted)">Both</span></div>
+  <ul class="tl" id="tl"></ul>
+
+  </section>
+
+  <h2 class="sec">The full detail <span>Companion pages</span></h2>
+  <div class="more">
+    <a href="../holley-hall/"><span class="who hh">Holley Hall</span><h4>Inside the <em>Holley Hall</em> retrofit &rarr;</h4><p>Scope item by item, the contract by trade, incentives and all 40 project photos.</p></a>
+    <a href="../library/"><span class="who lml">Library</span><h4>Inside the <em>Lawrence Memorial Library</em> renovation &rarr;</h4><p>Where the money comes from, every contract on record, the PCB results and the full photo set.</p></a>
+  </div>
+
+  <div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="x" aria-label="Close">&times;</button>
+    <button class="pv" aria-label="Previous photo">&#8249;</button>
+    <button class="nx" aria-label="Next photo">&#8250;</button>
+    <img alt="">
+    <div class="cap"></div>
+  </div>
+
+  <footer>
+    <p>
+      <b>Sources.</b> Costs: the Town Administrator's August 20, 2026 closeout memo and his reply
+      of the same day; the Vermont Department of Libraries grant ledger updated September 9, 2026;
+      Alloy change order 1 (August 11, 2026); the September 14, 2026 check warrant; and the FY2027
+      budget presentation at the February 2, 2026 Town Meeting information session. Holley Hall: building history from the Town's 2024 State Historic Preservation grant application and the Division for Historic Preservation's 2010 review; MERP implementation grant agreement #01155-A172-5443; Level II
+      Energy Assessment (June 18, 2024); project scope of work (December 2024); blower door results
+      from the 2024 baseline test and Green Mountain Enclosure Consulting's progress report (June 1,
+      2026); the project estimate the Town reported to Efficiency Vermont (May 6, 2026); Green
+      Mountain Power's letter of support (corrected July 15, 2026) and Efficiency Vermont's
+      weatherization offer (July 22, 2026). Library: Vermont Department of Libraries grant agreement
+      01130-2024-CPF-003; Clay Point Associates project 16505 reports and bid documents; Stone
+      Environmental confirmation results of August 10, August 31 and September 9, 2026; Selectboard
+      minutes of June 9, 2025 and June 22 through August 10, 2026 (approved) and September 14, 2026
+      (draft); building history from the 2022 Historic Assessment and the Northern Architects drawing
+      set; temporary service dates from the library's construction updates on its website and the Addison Independent (July 2, 2026). Both: weekly owner, architect and contractor meeting notes and project correspondence
+      through September 2026. Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Library air-leakage figures come from Green Mountain Enclosure Consulting's progress test report (test September 25, report September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Final air-leakage figures come from Green Mountain Enclosure Consulting's final airtightness test report (August 11, 2026). Photos come from the Town's project photo folders;  Dates are read from
+      each photo's camera data, except the four joist photos, which had none and are dated by the day
+      they were emailed, and the 2021 to 2024 library condition photos, which are dated from their
+      file names in the Town's building records. The before-and-after pairs were lined up by scaling, shifting and slightly
+      straightening the later photo to match the earlier one; nothing in either picture was added or
+      removed. The photos were resized for the web with all location and camera
+      data removed.
+    </p>
+    <p>
+      <b>How the numbers were checked.</b> Combined grant, the grant's share of the Holley Hall
+      estimate, the incentive total, the leakage reduction and the days to the deadline are all
+      computed on this page from the figures in its data block, not typed into the text. The library
+      grant is checked as base plus contingency against the agreement's not-to-exceed amount, and the
+      timeline is checked for date order when the page loads. The cost tables are summed on the page;
+      the Holley Hall lines must match the Town's reported estimate and the library ledger's award plus
+      contingency must match its total allocation. The page shows a warning if any check
+      fails.
+    </p>
+    <p>
+      <b>Please note.</b> This is my own page, not an official Town of Bristol publication, and
+      nothing here speaks for the Selectboard or any other Town board. Every figure is taken from a
+      Town record named in the Sources above. Where the record does not yet say something, this page
+      says so rather than guessing. Contracts, invoices and grant records for the project are public
+      records held by the Town.
+    </p>
+    <p>
+      <b>Bristol, In Progress</b> is maintained by Ian Albinson, one of five members of
+      the Bristol Selectboard. It is a personal project. It is not an official publication of the
+      Town of Bristol, it is not reviewed or approved by the Selectboard, and it does not speak for
+      the Town.
+    </p>
+    <p class="meta" id="asof"></p>
+  </footer>
+</div>
+
+<script>
+var DATA={
+ asof:"2026-10-26",
+ deadline:"2026-12-31",
+ hh:{grant:325853.52, est:477279.55, incentives:[10652.05,10000], leak:[
+   {label:"Before work",sub:"December 2023 baseline",v:16155},
+   {label:"Mid-project",sub:"May 28, 2026",v:10800},
+   {label:"Final",sub:"August 10, 2026",v:6723}]},
+ lml:{base:483000.00, contingency:58246.15, nte:541246.15, stateAdd:310000, newBase:799000.00, alloc:857246.15, disbursed:467117.19, pending:60632.93, ledgerDate:"2026-09-09"},
+ hhCosts:[
+  {k:"Design and engineering",v:62497.55,st:"Estimate"},
+  {k:"Construction, Silver Maple base contract",v:399782,st:"Estimate, from the $399,781.65 contract"},
+  {k:"Other project costs",v:15000,st:"Estimate"}],
+ hhShort:11930.08,
+ lmlCosts:[
+  {k:"Silver Maple Construction, contract budget",v:534955.90,st:"Feb. 19, 2026. Includes a $25,200 contingency"},
+  {k:"Silver Maple change order 7, new first floor and radiant plating",v:76743.30,st:"Excludes the finish floor. Includes $30,696.84 of added radiant scope"},
+  {k:"Alloy, PCB removal base contract",v:69013.00,st:"Per the Town Administrator's Aug. 20 memo. Bid awarded June 22 at $57,013 before disposal costs"},
+  {k:"Alloy, change order 1, subfloor removal",v:59400.00,st:"Signed Aug. 11, 2026"},
+  {k:"Alloy, asbestos cleanup through Silver Maple",v:38613.00,st:"Bid amount, June 2026"},
+  {k:"Stone Environmental, PCB sampling",v:9591.23,st:"One invoice, Sept. 14 check warrant. Other invoices not on record"}],
+ lmlShort:16490.52,
+ vianote:"Vermont Integrated Architecture's $118,150 design contract covers both buildings.",
+ pcb:[
+  {r:"Round 1",d:"August 10",hi:42,res:"14 of 19 samples over the standard",next:"The PCBs had soaked into the wood subfloor. The first-floor deck in the affected rooms came out."},
+  {r:"Round 2",d:"August 31",hi:1.4,res:"One floor joist over the standard",next:"The subfloor above it had read 28 mg/kg. The neighboring joists were sampled again."},
+  {r:"Round 3",d:"September 9",hi:null,res:"Three joist sections over, everything else clean",next:"The three sections were cut out on September 10, with the structural engineer on site that day."}
+ ],
+ photos:{
+  "hh-1945":{dt:"2026-10-02",c:"The finished meeting hall, looking toward the balcony and its arched stained glass window"},
+  "hh-1607":{dt:"2026-09-11",c:"The finished meeting hall, looking toward the balcony"},
+  "lml-1875":{dt:"2026-05-06",c:"The front of the library in May"},
+  "lml-1769":{dt:"2026-09-23",c:"The front of the library with the rebuilt steps and railings"},
+  "lml-1770":{dt:"2026-09-23",c:"The front of the library from the walk, with the contractor's sign on the lawn"},
+  "hh-2345":{dt:"2026-02-24",c:"The meeting hall before work began, looking toward the stage"},
+  "hh-1611":{dt:"2026-09-11",c:"The finished hall, looking toward the stage"},
+  "hh-1420":{dt:"2026-03-12",c:"Walls opened to the framing under the balcony"},
+  "hh-1662":{dt:"2026-04-18",c:"New plywood sheathing along the hall wall, around the stained glass"},
+  "hh-0277":{dt:"2026-06-09",c:"Wood-fiber insulation board going on over the taped sheathing"},
+  "hh-1960":{dt:"2026-05-22",c:"A ducted heat pump air handler going in above a side room"},
+  "hh-0527":{dt:"2026-07-11",c:"Fresh paint in the hall, looking toward the stage"},
+  "hh-1612":{dt:"2026-09-11",c:"New thermostats and heat pump controls"},
+  "hh-1617":{dt:"2026-09-11",c:"The Recreation office with new carpet and a wall-mounted heat pump"},
+  "lml-8660":{dt:"2025-04-21",c:"The front steps in April 2025, paint peeling and rust showing"},
+  "lml-1176":{dt:"2026-08-27",c:"The rebuilt front steps and railings"},
+  "lml-1651":{dt:"2026-04-18",c:"The attic after new insulation was blown in"},
+  "lml-1637":{dt:"2026-04-18",c:"Outdoor heat pump units on their stands"},
+  "lml-1653":{dt:"2026-04-18",c:"Ventilation equipment and ductwork on the lower level"},
+  "lml-0249":{dt:"2026-06-09",c:"The front porch taken apart for rebuilding"},
+  "lml-1742":{dt:"2026-09-21",c:"The new enclosure over the basement stairs"},
+  "lml-1173":{dt:"2026-08-27",c:"The side door canopy after repair"},
+  "lml-1749":{dt:"2026-09-21",c:"New subfloor partly down between the stacks, framing still showing"},
+  "pre-2870":{dt:"2024-03-07",c:"The basement oil tank room. The plan replaces the oil boiler with propane and removes the tank"},
+  "pre-2859":{dt:"2024-03-07",c:"A first-floor storage nook. The plan turns a storage area into a soundproofed quiet room"},
+  "pre-2855":{dt:"2024-03-07",c:"Inside the storage nook, packed floor to ceiling"},
+  "pre-2865":{dt:"2024-03-07",c:"A fire door propped open. The plan adds an automatic closer tied to the fire alarm on the Children's Room door"},
+  "pre-5847":{dt:"2021-09-10",c:"The side door and its canopy, which the plan repairs and gives new storm glazing"},
+  "pre-rot1":{dt:"2022-08-22",c:"Rotted wood at the base of a porch column"},
+  "pre-rot8":{dt:"2022-08-22",c:"Rotted trim below a first-floor window"},
+  "pre-rot12":{dt:"2022-08-22",c:"Rot at the corner of a porch roof"},
+  "pre-roof":{dt:"2021-12-02",c:"A failed section of crown molding at the front roof edge, fallen by the steps"},
+  "pre-steps":{dt:"2022-08-15",c:"The front steps in 2022, rotted at the edges"},
+  "lml-j1":{dt:"2026-08-21",by:1,c:"The first floor with its subfloor removed, inside plastic containment"},
+  "lml-j2":{dt:"2026-08-21",by:1,c:"Joists open to the ceiling of the room below"},
+  "lml-j3":{dt:"2026-08-21",by:1,c:"Old joists lapped over the center beam, heating tubes still in place"},
+  "lml-j4":{dt:"2026-08-21",by:1,c:"The open floor framing, looking across the room"},
+  "cmp-hh-before":{dt:"2026-02-24",c:"The meeting hall before work began, looking toward the stage"},
+  "cmp-hh-after":{dt:"2026-09-11",c:"The same view after the work"},
+  "cmp-lml-before":{dt:"2025-04-21",c:"The front steps in April 2025, paint peeling and rust showing"},
+  "cmp-lml-after":{dt:"2026-09-23",c:"The same view with the rebuilt steps, railings and center handrail"}
+ },
+ stripHH:["hh-1420","hh-1662","hh-1960","hh-0277","hh-0527","hh-1612","hh-1617"],
+ stripLML:["lml-1651","lml-1637","lml-1653","lml-0249","lml-1173","lml-1742","lml-1770"],
+ stripPCB:["lml-j1","lml-j2","lml-j3","lml-j4"],
+ stripPRE:["pre-2870","pre-2859","pre-2855","pre-2865","pre-5847","pre-rot1","pre-rot8","pre-rot12","pre-roof","pre-steps"],
+ tl:[
+  {d:"2024-06-18",b:"both",t:"<b>Energy assessments</b> for both buildings. Holley Hall's baseline test records 16,155 cfm of air leakage."},
+  {d:"2024-09-01",b:"lml",t:"<b>Library grant begins</b>: $541,246.15 from the Vermont Department of Libraries."},
+  {d:"2024-12-16",b:"hh",t:"<b>Holley Hall grant awarded</b>: $325,853.52 from the State's energy resilience program."},
+  {d:"2025-06-09",b:"both",t:"Selectboard hires Vermont Integrated Architecture to design both projects."},
+  {d:"2026-01-22",b:"hh",t:"Silver Maple Construction prices the Holley Hall work at $399,781.65."},
+  {d:"2026-02-19",b:"lml",t:"Silver Maple's library contract budget: $534,955.90."},
+  {d:"2026-03-09",b:"hh",t:"<b>Construction starts</b> at Holley Hall."},
+  {d:"2026-03-10",b:"lml",t:"The library closes its North Street building to the public."},
+  {d:"2026-04-09",b:"lml",t:"The library is tested for asbestos, lead and PCBs."},
+  {d:"2026-04-18",b:"lml",t:"Library attic insulated; outdoor heat pump units set."},
+  {d:"2026-05-28",b:"hh",t:"Mid-project test at Holley Hall: about a third less air leakage."},
+  {d:"2026-06-20",b:"lml",t:"The library's pop-up branch opens at BristolWorks, 74 Munsill Avenue."},
+  {d:"2026-06-22",b:"lml",t:"Selectboard awards the PCB removal to Alloy, $57,013."},
+  {d:"2026-07-20",b:"lml",t:"The library's rebuilt front steps are in place."},
+  {d:"2026-08-10",b:"both",t:"Final air-leakage test at Holley Hall. At the library, the first PCB round fails and the State's increase to the grant is reported."},
+  {d:"2026-08-11",b:"lml",t:"Change order signed to remove the contaminated first-floor subfloor. By August 21 the main rooms are down to their joists."},
+  {d:"2026-08-20",b:"lml",t:"Library generator and exterior painting taken out of scope."},
+  {d:"2026-08-31",b:"lml",t:"Second PCB round: one joist over the standard."},
+  {d:"2026-09-09",b:"both",t:"<b>Holley Hall passes the fire marshal's inspection.</b> At the library, the third PCB round finds three joist sections to remove."},
+  {d:"2026-09-17",b:"hh",t:"The Recreation Department moves back into Holley Hall."},
+  {d:"2026-09-21",b:"lml",t:"New subfloor going down at the library; State library officials visit."},
+  {d:"2026-09-23",b:"hh",t:"Main move back into Holley Hall."},
+  {d:"2026-09-23",b:"lml",t:"Photos show the library's finished front steps, with the center handrail back in place."},
+  {d:"2026-09-28",b:"lml",t:"Propane hookup at the library."},
+  {d:"2026-09-30",b:"hh",t:"Holley Hall grant: any unfinished work must be under contract.",f:1},
+  {d:"2026-10-27",b:"lml",t:"Last day of service at the library's pop-up.",f:1},
+  {d:"2026-12-31",b:"both",t:"<b>Both grants end.</b> Work must be finished and paid for.",f:1}
+ ]
+};
+
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var warn=function(msg){console.warn(msg);document.querySelector("footer").insertAdjacentHTML("afterbegin",'<p class="note"><b>Check failed:</b> '+msg+'</p>')};
+  var usd=function(v,c){return "$"+v.toLocaleString("en-US",{minimumFractionDigits:c?2:0,maximumFractionDigits:c?2:0})};
+  var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var pd=function(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])};
+  var fmtL=function(s){var p=s.split("-");return MON[+p[1]-1]+" "+(+p[2])+", "+p[0]};
+  var fmtS=function(s){var p=s.split("-");return MON[+p[1]-1].slice(0,3)+" "+(+p[2])+", "+p[0]};
+  var r2=function(v){return Math.round(v*100)/100};
+
+  var L=DATA.lml, H=DATA.hh;
+  var lmlGrant=r2(L.base+L.contingency);
+  if(lmlGrant!==L.nte) warn("library grant base plus contingency does not equal the agreement total.");
+  var combined=r2(H.grant+lmlGrant);
+  var days=Math.round((pd(DATA.deadline)-pd(DATA.asof))/864e5);
+  var cut=Math.round((1-H.leak[2].v/H.leak[0].v)*100);
+  var inc=r2(H.incentives.reduce(function(a,b){return a+b},0));
+  var share=Math.round(H.grant/H.est*100);
+
+  document.querySelectorAll(".asof").forEach(function(e){e.textContent=fmtL(DATA.asof)});
+  var V={combinedR:usd(Math.round(combined/100)*100,0),days:String(days),hhCut:"about "+cut+" percent",hhGrantR:usd(Math.round(H.grant),0),lmlGrantR:usd(Math.round(lmlGrant),0),hhIncR:usd(Math.round(inc),0),hhGrant:usd(H.grant,1),lmlGrant:usd(lmlGrant,1),hhEst:usd(H.est,0),hhShare:"about "+share+" percent",hhInc:usd(inc,1),lmlAdd:usd(L.stateAdd,0),lmlNewBase:usd(L.newBase,0),lmlLedgerAdd:usd(r2(L.newBase-L.base),0),lmlAlloc:usd(L.alloc,1)};
+  document.querySelectorAll("[data-v]").forEach(function(e){e.textContent=V[e.getAttribute("data-v")]});
+
+  $("stats").innerHTML=[
+    [usd(r2(H.grant+L.alloc),0),"State and federal grants","Both buildings, with the library increase"],
+    [String(days),"Days to the deadline","Both grants end December 31, 2026"],
+    [cut+"% less","Air leaking at Holley Hall","Final test, August 10, 2026"],
+    [Math.round((1-3231/5172)*100)+"% less","Air leaking at the library","Progress test, September 25, 2026"]
+  ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
+
+  // costs
+  var hhSum=r2(DATA.hhCosts.reduce(function(a,c){return a+c.v},0));
+  if(Math.abs(hhSum-H.est)>1) warn("Holley Hall estimate lines do not sum to the reported total.");
+  var hhTown=r2(H.est-H.grant);
+  var lmlSum=r2(DATA.lmlCosts.reduce(function(a,c){return a+c.v},0));
+  if(r2(L.newBase+L.contingency)!==L.alloc) warn("library ledger award plus contingency does not equal the allocation.");
+  var th='<tr><th>Item</th><th class="num">Amount</th><th>Status</th></tr>';
+  var row=function(k,v,st,cls){return '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+k+'</td><td class="num">'+v+'</td><td>'+(st||'')+'</td></tr>'};
+  $("hhCostTbl").innerHTML=th+DATA.hhCosts.map(function(c){return row(c.k,usd(c.v,1),c.st)}).join("")+
+    row("Estimated project cost",usd(hhSum,1),"",'tot')+
+    row("State MERP grant","&minus;"+usd(H.grant,1),"Awarded Dec. 16, 2024")+
+    row("Town share, planned",usd(hhTown,1),"From the Town's capital funds",'tot')+
+    row("Shortfall beyond that, reported",usd(DATA.hhShort,1),"Aug. 20, 2026, before the ceiling work is priced")+
+    row("Utility incentives, possible offset","&minus;"+usd(inc,1),"Maximum; not yet paid");
+  $("lmlCostTbl").innerHTML=th+DATA.lmlCosts.map(function(c){return row(c.k,usd(c.v,1),c.st)}).join("")+
+    row("Total of amounts on record",usd(lmlSum,1),"Incomplete; see note below",'tot')+
+    row("Grant available, State ledger",usd(L.alloc,1),"Updated "+fmtL(L.ledgerDate))+
+    row("Reimbursed so far",usd(L.disbursed,1),usd(L.pending,1)+" more submitted, not yet paid")+
+    row("Shortfall, reported",usd(DATA.lmlShort,1),"Aug. 20, 2026, before the finish floor");
+  $("lmlCostTbl").insertAdjacentHTML("afterend",'<p class="note" style="margin-top:10px"><b>Design.</b> '+DATA.vianote+' The Holley Hall estimate carries '+usd(DATA.hhCosts[0].v,1)+' for design and engineering. How the contract splits between the two buildings is not broken out on record.</p>');
+  var ph='<tr><th>Source</th><th class="num">Holley Hall</th><th class="num">Library</th><th>Notes</th></tr>';
+  $("payTbl").innerHTML=ph+
+    '<tr><td>State and federal grants</td><td class="num">'+usd(H.grant,1)+'</td><td class="num">'+usd(L.alloc,1)+'</td><td>Holley Hall: state MERP. Library: federal Capital Projects Fund, as raised in 2026</td></tr>'+
+    '<tr><td>Town, planned</td><td class="num">'+usd(hhTown,1)+'</td><td class="num">$0.00</td><td>Holley Hall estimate less its grant. The library grant carried no local share</td></tr>'+
+    '<tr><td>Town, shortfall reported Aug. 20</td><td class="num">'+usd(DATA.hhShort,1)+'</td><td class="num">'+usd(DATA.lmlShort,1)+'</td><td>'+usd(r2(DATA.hhShort+DATA.lmlShort),1)+' combined, before the hardwood floor and the Holley Hall ceiling</td></tr>'+
+    '<tr><td>Library funds</td><td class="num">none</td><td class="num"><span class="pend">not set</span></td><td>The library is paying for the finish floor</td></tr>'+
+    '<tr><td>Town operating budget</td><td class="num">none</td><td class="num">$55 a month</td><td>Battery backup lease from Green Mountain Power in place of the dropped generator, being pursued</td></tr>'+
+    '<tr><td>Utility incentives</td><td class="num">up to '+usd(inc,1)+'</td><td class="num"><span class="pend">not set</span></td><td>Paid after inspection; none received yet</td></tr>';
+
+  // photo order for the lightbox = order of appearance on the page
+  var ORDER=[];
+  function reg(id){var i=ORDER.indexOf(id);if(i<0){ORDER.push(id);i=ORDER.length-1}return i}
+  function strip(el,ids){
+    $(el).innerHTML=ids.map(function(id){var p=DATA.photos[id];
+      return '<figure><button data-ph="'+id+'" aria-label="Enlarge: '+p.c+'"><img loading="lazy" src="img/'+id+'-t.jpg" alt="'+p.c+'"></button><figcaption><span class="d">'+(p.by?'By ':'')+fmtS(p.dt)+'</span>'+p.c+'</figcaption></figure>'}).join("");
+  }
+  strip("stripHH",DATA.stripHH); strip("stripLML",DATA.stripLML); strip("stripPCB",DATA.stripPCB); strip("stripPRE",DATA.stripPRE);
+  document.querySelectorAll("[data-ph]").forEach(function(b){reg(b.getAttribute("data-ph"))});
+  ["cmp-hh-before","cmp-hh-after","cmp-lml-before","cmp-lml-after"].forEach(reg);
+
+  // leakage bars
+  var lmax=H.leak[0].v;
+  $("leak").innerHTML=H.leak.map(function(r,i){
+    var bar=r.v==null?'<i class="empty" style="width:100%"></i>':'<i'+(i===0?' class="soft"':'')+' style="width:'+(r.v/lmax*100).toFixed(1)+'%"></i>';
+    return '<div class="brow"><div class="nm">'+r.label+'<small>'+r.sub+'</small></div><div class="tr">'+bar+'</div><div class="v">'+(r.v==null?'Report pending':r.v.toLocaleString()+' cfm')+'</div></div>'}).join("");
+
+  // PCB rounds, log scale with a tick at the 1 mg/kg standard
+  var hiMax=Math.max.apply(null,DATA.pcb.filter(function(r){return r.hi!=null}).map(function(r){return r.hi}));
+  var lg=function(v){return Math.log10(v+1)/Math.log10(hiMax+1)*100};
+  $("rounds").innerHTML=DATA.pcb.map(function(r){
+    var m=r.hi==null?'<div class="meter"><span class="mt"><s style="left:'+lg(1).toFixed(1)+'%"></s></span><span class="mv">not stated</span></div>'
+      :'<div class="meter"><span class="mt"><i style="width:'+Math.max(3,lg(r.hi)).toFixed(1)+'%"></i><s style="left:'+lg(1).toFixed(1)+'%"></s></span><span class="mv">highest '+r.hi+' mg/kg</span></div>';
+    return '<li><div class="rh"><b>'+r.r+'</b><span>'+r.d+'</span></div>'+m+'<p><b style="color:var(--ink);font-weight:600">'+r.res+'.</b> '+r.next+'</p></li>'}).join("");
+
+  // timeline, checked for date order
+  for(var i=1;i<DATA.tl.length;i++){if(DATA.tl[i].d<DATA.tl[i-1].d) warn("timeline out of order at "+DATA.tl[i].d+".")}
+  $("tlcount").textContent=DATA.tl.length+" milestones, "+fmtS(DATA.tl[0].d)+" to "+fmtS(DATA.tl[DATA.tl.length-1].d);
+  $("tl").innerHTML=DATA.tl.map(function(t){
+    return '<li class="'+t.b+(t.f?' fut':'')+'"><div class="dt">'+fmtL(t.d)+(t.f?' &middot; upcoming':'')+'</div><div class="ev">'+t.t+'</div></li>'}).join("");
+
+  // before/after sliders
+  document.querySelectorAll(".cmp").forEach(function(c){
+    var inp=c.querySelector("input");
+    var set=function(v){c.style.setProperty("--p",v+"%")};
+    inp.addEventListener("input",function(){set(inp.value)});
+    c.addEventListener("pointerdown",function(e){
+      var move=function(ev){var r=c.getBoundingClientRect();var v=Math.max(0,Math.min(100,(ev.clientX-r.left)/r.width*100));inp.value=v;set(v)};
+      move(e);
+    });
+  });
+
+  // lightbox
+  var lb=$("lb"),li=lb.querySelector("img"),lc=lb.querySelector(".cap"),cur=0,last=null;
+  function show(i){cur=(i+ORDER.length)%ORDER.length;var id=ORDER[cur],p=DATA.photos[id];
+    li.src="img/"+id+".jpg";li.alt=p.c;
+    lc.innerHTML='<b>'+(/hh-/.test(id)?"Holley Hall":"Library")+' &middot; '+(p.by?'By ':'')+fmtL(p.dt)+' &middot; '+(cur+1)+' of '+ORDER.length+'</b>'+p.c}
+  function open(i){last=document.activeElement;show(i);lb.classList.add("on");document.body.style.overflow="hidden";lb.querySelector(".x").focus()}
+  function close(){lb.classList.remove("on");document.body.style.overflow="";if(last)last.focus()}
+  document.addEventListener("click",function(e){var b=e.target.closest("button[data-ph]");if(b)open(ORDER.indexOf(b.getAttribute("data-ph")))});
+  lb.querySelector(".x").onclick=close;lb.querySelector(".pv").onclick=function(){show(cur-1)};lb.querySelector(".nx").onclick=function(){show(cur+1)};
+  lb.addEventListener("click",function(e){if(e.target===lb)close()});
+  document.addEventListener("keydown",function(e){if(!lb.classList.contains("on"))return;
+    if(e.key==="Escape")close();else if(e.key==="ArrowLeft")show(cur-1);else if(e.key==="ArrowRight")show(cur+1)});
+  var tx=null;lb.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener("touchend",function(e){if(tx==null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)show(cur+(dx<0?1:-1));tx=null});
+
+  $("asof").textContent="Data as of "+fmtL(DATA.asof)+" · Page updated October 26, 2026";
+})();
+</script>
+<script>
+(function(){
+  const tabs=[...document.querySelectorAll('.tablist [role="tab"]')];
+  const keys=tabs.map(t=>t.dataset.tab);
+  const bar=document.querySelector('.tabbar');
+  function show(k, focus, scroll){
+    if(!keys.includes(k)) k=keys[0];
+    tabs.forEach(t=>{const on=t.dataset.tab===k; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
+      document.getElementById('p-'+t.dataset.tab).hidden=!on; if(on) t.scrollIntoView({block:'nearest',inline:'nearest'});});
+    try{ history.replaceState(null,'',k===keys[0]?location.pathname+location.search:'#'+k); }catch(e){}
+    if(scroll){ const pn=document.getElementById('p-'+k); const y=Math.max(0,pn.getBoundingClientRect().top+scrollY-bar.offsetHeight-12); if(scrollY>y) window.scrollTo({top:y}); }
+    if(focus) document.getElementById('t-'+k).focus();
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>show(t.dataset.tab,false,true));
+    t.addEventListener('keydown',e=>{
+      let j=null;
+      if(e.key==='ArrowRight') j=(i+1)%tabs.length; else if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') j=0; else if(e.key==='End') j=tabs.length-1;
+      if(j!==null){ e.preventDefault(); show(keys[j],true,false); }
+    });
+  });
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto,false,true)));
+  show((location.hash||'').slice(1),false,false);
+  window.addEventListener('hashchange',()=>show(location.hash.slice(1),false,false));
+})();
+</script>
+</body>
+</html>
