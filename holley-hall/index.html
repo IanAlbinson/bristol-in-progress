@@ -297,6 +297,54 @@
   .hstrip img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
   .hstrip figcaption{font-size:11.5px;line-height:1.4;color:var(--muted);margin-top:6px}
   .hstrip a:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+
+  /* money tab, matched to the library page */
+  #p-money .lede{max-width:44em;color:var(--ink-2);margin:18px 0 0;font-size:15.5px}
+  #p-money .srcbar{display:flex;height:38px;border-radius:6px;overflow:hidden;margin-top:26px;background:var(--track)}
+  #p-money .srcbar i{display:block;height:100%}
+  #p-money .srcbar i+i{box-shadow:-2px 0 0 var(--ground)}
+  #p-money .srclab{display:flex;gap:26px;flex-wrap:wrap;margin-top:12px;font-size:14px}
+  #p-money .srclab .k{display:flex;align-items:baseline;gap:8px}
+  #p-money .srclab .sw{width:9px;height:9px;border-radius:2px;flex:0 0 auto;position:relative;top:-1px}
+  #p-money .srclab b{font-variant-numeric:tabular-nums}
+  #p-money .tbl{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
+  #p-money table{width:100%;border-collapse:collapse;font-size:14px;min-width:0}
+  #p-money thead th{text-align:left;padding:0 14px 9px 0;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;border-bottom:1px solid var(--rule-strong)}
+  #p-money thead th.num{text-align:right}
+  #p-money tbody td{padding:10px 14px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5}
+  #p-money tbody td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--body);font-size:14px}
+  #p-money tbody td .sub2{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+  #p-money tbody td.nm{font-weight:600;min-width:170px}
+  #p-money tbody tr.tot td{font-weight:700;border-top:none;border-bottom:2px solid var(--rule-strong)}
+  #p-money tr.grp td{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:16px}
+  #p-money .pend{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+  #money{min-width:640px} #who{min-width:720px} #spend{min-width:640px}
+  #p-money .spbar{position:relative;height:38px;border-radius:6px;background:var(--track);margin-top:30px;display:flex;overflow:visible}
+  #p-money .spbar i{display:block;height:100%}
+  #p-money .spbar i:first-child{border-radius:6px 0 0 6px}
+  #p-money .spbar i+i{box-shadow:-2px 0 0 var(--ground)}
+  #p-money .spbar .mk{position:absolute;top:-8px;bottom:-8px;width:0;border-left:2px solid var(--ink)}
+  #p-money .spbar .mk span{position:absolute;top:-20px;left:6px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+  #p-money .unpriced{margin:14px 0 0;padding:0;list-style:none;max-width:60em}
+  #p-money .unpriced li{border-top:1px solid var(--rule);padding:10px 0;font-size:14.5px;color:var(--ink-2)}
+  #p-money .unpriced li b{color:var(--ink)}
+  #p-money .cost4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+  #p-money .cost4 .c{border-top:3px solid var(--ink);padding-top:10px}
+  #p-money .cost4 .c.hl{border-top-color:var(--signal)}
+  #p-money .cost4 .n{font-family:var(--display);font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+  #p-money .cost4 .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  #p-money .cost4 .s{font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.4}
+  @media (max-width:640px){#p-money .cost4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  #p-money .ladder{list-style:none;counter-reset:st;margin:14px 0 0;padding:0;max-width:60em}
+  #p-money .ladder li{counter-increment:st;display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:baseline;border-top:1px solid var(--rule);padding:14px 0}
+  #p-money .ladder li::before{content:counter(st);font-family:var(--mono);font-size:12px;color:var(--muted)}
+  #p-money .ladder .t{font-size:14.5px;color:var(--ink-2)}
+  #p-money .ladder .r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;font-size:17px}
+  #p-money .ladder .r small{display:block;font-weight:400;font-size:10.5px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:560px){#p-money .ladder li{grid-template-columns:22px 1fr}#p-money .ladder .r{grid-column:2;text-align:left}}
+  #p-money details.more{margin-top:28px;border-top:1px solid var(--rule);padding-top:12px}
+  #p-money details.more summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+  #p-money details.more summary span{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -522,30 +570,70 @@
   </section>
 
   <section class="panel" id="p-money" role="tabpanel" aria-labelledby="t-money" tabindex="0" hidden>
-  <h2 class="sec">What it cost <span id="costsub"></span></h2>
-  <div class="prose">
-    <p>
-      The State's Municipal Energy Resilience Program grant paid for most of the work. It required
-      no local match, and the State paid the full award in five payments between February and
-      August 2026. The Town covers the rest: it set aside a $150,000 reserve for the project, and
-      costs have now passed that reserve too.
-    </p>
+  <!-- ============ MONEY ============ -->
+  <h2 class="sec">Where the money comes from <span>as of <span id="m-asof"></span></span></h2>
+  <div class="srcbar" id="srcbar"></div>
+  <div class="srclab" id="srclab"></div>
+  <div class="tbl">
+    <table id="money">
+      <thead><tr><th>Source</th><th class="num">Amount</th><th>What the record says</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
-  <div class="tbl"><table id="costtbl"></table></div>
-
-  <h2 class="sec">Where the money went</h2>
-  <div class="bars" id="vend"></div>
-
-  <h2 class="sec">Utility incentives <span>not yet paid</span></h2>
-  <div class="tbl"><table id="inctbl"></table></div>
   <p class="note">
-    <b>What these figures are not.</b> They count bills the Town has paid through the
-    September 28, 2026 check warrant, plus signed work not yet billed. A few items are not priced
-    yet and will add to the total: a replacement for the dropped acoustic ceiling finish, three
-    heat pump wall controllers, exterior fascia painting, and architect time through closeout,
-    which is billed hourly. A separate roof repair paid through the Town's insurance is not part
-    of this project and is not counted. Incentives are shown at their maximum; none had been paid
-    as of this page's date.
+    <b>The grant was a fixed amount.</b> The State's Municipal Energy Resilience Program grant
+    required no local match and is now paid in full. It does not grow when costs do, so everything
+    past it falls to the Town. The Town set aside a $150,000 reserve for the project, and costs have
+    now passed that reserve too.
+  </p>
+
+  <h2 class="sec">Contracts on record <span>approved or signed</span></h2>
+  <div class="tbl">
+    <table id="who">
+      <thead><tr><th>Firm</th><th>Role</th><th class="num">Amount</th><th>Approved or signed</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">
+    <b>These are contract figures, not a project total.</b> The design contract covers the library
+    as well as Holley Hall. What has actually been paid and signed is below.
+  </p>
+
+  <!-- ============ SPEND ============ -->
+  <h2 class="sec">What it has cost so far <span>through the September 28 warrant</span></h2>
+  <p class="lede">
+    The Town's check warrants record every payment the Selectboard approves. Here is where the
+    Holley Hall project stands through September 28: the totals first, then how they work out to the
+    Town's share.
+  </p>
+  <div class="cost4" id="cost4"></div>
+  <div class="spbar" id="spbar"></div>
+  <div class="srclab" id="splab"></div>
+
+  <h2 class="sec">How the Town's share works out</h2>
+  <ol class="ladder" id="ladder"></ol>
+  <p class="note" id="netnote"></p>
+
+  <details class="more">
+    <summary>Every vendor line <span id="sp-count"></span></summary>
+    <div class="tbl">
+      <table id="spend">
+        <thead><tr><th>Vendor</th><th class="num">Paid</th><th class="num">Signed, not paid</th><th class="num">Total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
+  <h2 class="sec">Not yet priced <span>each adds to the cost above</span></h2>
+  <ul class="unpriced">
+    <li><b>A replacement for the hall ceiling finish.</b> The sprayed acoustic ceiling was dropped from the project on August 19; the architect is working up a lower-cost alternative.</li>
+    <li><b>Three heat pump wall controllers.</b> Not yet priced.</li>
+    <li><b>Exterior fascia painting.</b> Not yet priced.</li>
+    <li><b>Architect time through closeout.</b> Vermont Integrated Architecture bills by the hour.</li>
+  </ul>
+  <p class="note">
+    <b>Not counted here.</b> A separate roof repair paid through the Town's insurance is not part of
+    this project. Incentives are shown at their maximum; none had been paid as of this page's date.
   </p>
 
 
@@ -873,28 +961,60 @@ var DATA={
   var tx=null;lb.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
   lb.addEventListener("touchend",function(e){if(tx==null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)show(cur+(dx<0?1:-1));tx=null});
 
-  var inc=sum(DATA.incentives), overGR=Math.round((known-DATA.grant-DATA.reserve)*100)/100, net=Math.round((overGR-inc)*100)/100;
-  $("costsub").textContent="The grant covers "+Math.round(DATA.grant/known*100)+"% of known cost";
-  var row=function(k,v,tag,cls,neg){return '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+k+'</td><td class="num">'+(neg?'&minus;':'')+usd(v,1)+'</td><td>'+(tag||'')+'</td></tr>'};
-  var tg=function(t,ok){return '<span class="tag'+(ok?' ok':'')+'">'+t+'</span>'};
-  $("costtbl").innerHTML='<tr><th>Item</th><th class="num">Amount</th><th>Status</th></tr>'+
-    row("Paid to vendors, through September 28, 2026",DATA.paid,tg("Paid",1))+
-    row("Signed, not yet billed (balcony repairs)",DATA.signed,tg("Signed"))+
-    row("Known cost",known,"","tot")+
-    row("State MERP grant",DATA.grant,tg("Paid in full",1),"",1)+
-    row("Town reserve set aside for the project",DATA.reserve,tg("Budgeted"),"",1)+
-    row("Beyond the grant and the reserve",overGR,"","tot")+
-    row("Expected utility incentives",inc,tg("Pending"),"",1)+
-    row("Beyond the reserve, if incentives arrive",net,"","tot");
-  var vsum=sum(DATA.vendors), vmax=Math.max.apply(null,DATA.vendors.map(function(d){return d.v}));
-  $("vend").innerHTML=DATA.vendors.map(function(d){
-    return '<div class="brow"><div class="nm">'+d.k+(d.sub?'<small>'+d.sub+'</small>':'')+'</div><div class="tr"><i style="width:'+Math.max(d.v/vmax*100,0.4).toFixed(1)+'%"></i></div><div class="v">'+usd(d.v,1)+'</div></div>'}).join("")+
-    '<div class="brow"><div class="nm">Known cost</div><div></div><div class="v"><b>'+usd(vsum,1)+'</b></div></div>';
-  if(Math.abs(vsum-known)>0.01){$("vend").insertAdjacentHTML("afterend",'<p class="note"><b>Check failed:</b> vendor lines do not sum to the known cost.</p>')}
-
-  $("inctbl").innerHTML='<tr><th>From</th><th>For</th><th class="num">Up to</th><th>Status</th></tr>'+
-    DATA.incentives.map(function(r){return '<tr><td>'+r.k+'</td><td>'+r.what+'</td><td class="num">'+usd(r.v,1)+'</td><td>'+r.st+'</td></tr>'}).join("")+
-    '<tr class="tot"><td colspan="2">Combined</td><td class="num">'+usd(sum(DATA.incentives),1)+'</td><td></td></tr>';
+  // ---- money tab (same layout as the library page)
+  var M={
+    grantNote:"Municipal Energy Resilience Program implementation grant #01155-A172-5443, awarded December 16, 2024. No local match required.",
+    contracts:[
+      {f:"Vermont Integrated Architecture",r:"Architect and engineering design, construction oversight. Covers the library too.",note:"Subconsultants DuBois &amp; King (mechanical and electrical) and Engineering Ventures (structural).",amt:118150,when:"Approved June 9, 2025"},
+      {f:"Silver Maple Construction",r:"General contractor and mechanical",note:"Budget for contract presented January 22, 2026.",amt:399781.65,when:"Priced January 22, 2026"},
+      {f:"Silver Maple, balcony change order",r:"Balcony repairs",note:"Signed, not yet billed as of the September 28 warrant.",amt:12942.06,when:"Signed September 25, 2026"}
+    ],
+    signedBy:{"Silver Maple Construction":12942.06}
+  };
+  var u2=function(v){return usd(v,v%1!==0)}, u0=function(v){return usd(Math.round(v),0)};
+  var inc=sum(DATA.incentives), past=Math.round((known-DATA.grant)*100)/100,
+      overGR=Math.round((past-DATA.reserve)*100)/100, net=Math.round((overGR-inc)*100)/100;
+  $("m-asof").textContent=fmtDate(DATA.asof);
+  var cols={a:"var(--signal)",b:"color-mix(in oklab, var(--signal) 55%, var(--ground))",c:"var(--accent)"};
+  var src=[["State MERP grant",DATA.grant,"a"],["Town reserve",DATA.reserve,"b"],["Town money beyond the reserve",overGR,"c"]];
+  $("srcbar").innerHTML=src.map(function(m){return '<i style="width:'+(m[1]/known*100).toFixed(2)+'%;background:'+cols[m[2]]+'" title="'+m[0]+'"></i>'}).join("");
+  $("srclab").innerHTML=src.map(function(m){return '<span class="k"><span class="sw" style="background:'+cols[m[2]]+'"></span>'+m[0]+' <b>'+u2(m[1])+'</b></span>'}).join("");
+  var gmp=DATA.incentives[0], ev=DATA.incentives[1];
+  document.querySelector("#money tbody").innerHTML=
+    '<tr><td class="nm">State MERP grant</td><td class="num">'+u2(DATA.grant)+'</td><td>'+M.grantNote+'</td></tr>'+
+    '<tr><td class="nm">Town reserve</td><td class="num">'+u2(DATA.reserve)+'</td><td>Set aside by the Town for the project.</td></tr>'+
+    '<tr><td class="nm">Town money beyond the reserve</td><td class="num">'+u2(overGR)+'</td><td>What the known cost runs past the grant and the reserve, through the September 28 warrant.</td></tr>'+
+    '<tr><td class="nm">Efficiency Vermont and GMP incentives</td><td class="num"><span class="pend">up to</span> '+u2(inc)+'</td><td>Not yet received: Green Mountain Power heat pump incentive ('+u2(gmp.v)+', '+gmp.st.toLowerCase()+') and Efficiency Vermont weatherization ('+u2(ev.v)+', '+ev.st.charAt(0).toLowerCase()+ev.st.slice(1)+'). Green Mountain Power pays after installation and inspection; Efficiency Vermont is waiting on the ventilation equipment invoices.</td></tr>'+
+    '<tr class="tot"><td>Known cost</td><td class="num">'+u2(known)+'</td><td></td></tr>'+
+    '<tr><td class="nm">Grant paid so far</td><td class="num">'+u2(DATA.grant)+'</td><td>Paid in full in five payments, February to August 2026. The fifth and final payment came August 24.</td></tr>';
+  document.querySelector("#who tbody").innerHTML=M.contracts.map(function(w){
+    return '<tr><td class="nm">'+w.f+'</td><td>'+w.r+(w.note?'<div class="sub2">'+w.note+'</div>':'')+'</td><td class="num">'+u2(w.amt)+'</td><td>'+w.when+'</td></tr>'}).join("");
+  $("cost4").innerHTML=[
+    [u0(known),"Known cost so far",u0(DATA.paid)+" paid, "+u0(DATA.signed)+" signed and not yet paid"],
+    [u0(DATA.grant),"State grant","Paid in full"],
+    [u0(past),"Past the grant","Work beyond what the grant covers",1],
+    [u0(overGR),"Beyond the reserve","After the Town's "+u0(DATA.reserve)+" reserve",1]
+  ].map(function(c){return '<div class="c'+(c[3]?' hl':'')+'"><div class="n">'+c[0]+'</div><div class="l">'+c[1]+'</div><div class="s">'+c[2]+'</div></div>'}).join("");
+  var pct=function(v){return (v/known*100).toFixed(2)+"%"};
+  $("spbar").innerHTML='<i style="width:'+pct(DATA.paid)+';background:var(--signal)" title="Paid"></i>'+
+    '<i style="width:'+pct(DATA.signed)+';background:color-mix(in oklab, var(--signal) 45%, var(--ground))" title="Signed, not paid"></i>'+
+    '<span class="mk" style="left:'+pct(DATA.grant)+'"><span>Grant '+u0(DATA.grant)+'</span></span>';
+  $("splab").innerHTML='<span class="k"><span class="sw" style="background:var(--signal)"></span>Paid <b>'+u2(DATA.paid)+'</b></span>'+
+    '<span class="k"><span class="sw" style="background:color-mix(in oklab, var(--signal) 45%, var(--ground))"></span>Signed, not yet paid <b>'+u2(DATA.signed)+'</b></span>'+
+    '<span class="k">Past the grant <b>'+u2(past)+'</b></span>';
+  $("ladder").innerHTML=[
+    ["Known cost, paid and signed, comes to "+u0(known)+". The State grant is "+u0(DATA.grant)+".",u0(past),"past the grant"],
+    ["Take out the "+u0(DATA.reserve)+" reserve the Town set aside for the project.",u0(overGR),"beyond the reserve"],
+    ["Expected incentives of up to "+u0(inc)+" come off the Town's share.",u0(net),"beyond the reserve, if incentives arrive"]
+  ].map(function(r){return '<li><div class="t">'+r[0]+'</div><div class="r">'+r[1]+'<small>'+r[2]+'</small></div></li>'}).join("");
+  $("netnote").innerHTML='<b>What this means.</b> The grant is paid in full, so every remaining cost is the Town\'s. On the costs known today, the project has run '+u0(overGR)+' past the reserve, or about '+u0(net)+' if the incentives arrive. The work not yet priced, listed below, will add to that.';
+  var vsum=sum(DATA.vendors);
+  $("sp-count").textContent="("+DATA.vendors.length+")";
+  document.querySelector("#spend tbody").innerHTML=DATA.vendors.map(function(d){
+      var sg=M.signedBy[d.k]||0, pd=Math.round((d.v-sg)*100)/100;
+      return '<tr><td>'+d.k+(d.sub?'<div class="sub2">'+d.sub+'</div>':'')+'</td><td class="num">'+(pd?u2(pd):'')+'</td><td class="num">'+(sg?u2(sg):'')+'</td><td class="num">'+u2(d.v)+'</td></tr>'}).join("")+
+    '<tr class="tot"><td>Total known cost</td><td class="num">'+u2(DATA.paid)+'</td><td class="num">'+u2(DATA.signed)+'</td><td class="num">'+u2(vsum)+'</td></tr>';
+  if(Math.abs(vsum-known)>0.01){$("spend").insertAdjacentHTML("afterend",'<p class="note"><b>Check failed:</b> vendor lines do not sum to the known cost.</p>')}
 
   $("open").innerHTML=DATA.open.map(function(o){return '<div class="card"><h4>'+o.h+'</h4><p>'+o.p+'</p></div>'}).join("");
   $("firms").innerHTML=DATA.firms.map(function(f){return '<li>'+f[0]+'<span>'+f[1]+'</span></li>'}).join("");

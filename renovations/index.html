@@ -314,6 +314,58 @@
     padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .pnext button:hover{border-color:var(--ink)}
   @media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  /* money tab, matched to the library page */
+  #p-money .lede{max-width:44em;color:var(--ink-2);margin:18px 0 0;font-size:15.5px}
+  #p-money .srcbar{display:flex;height:38px;border-radius:6px;overflow:hidden;margin-top:26px;background:var(--track)}
+  #p-money .srcbar i{display:block;height:100%}
+  #p-money .srcbar i+i{box-shadow:-2px 0 0 var(--ground)}
+  #p-money .srclab{display:flex;gap:26px;flex-wrap:wrap;margin-top:12px;font-size:14px}
+  #p-money .srclab .k{display:flex;align-items:baseline;gap:8px}
+  #p-money .srclab .sw{width:9px;height:9px;border-radius:2px;flex:0 0 auto;position:relative;top:-1px}
+  #p-money .srclab b{font-variant-numeric:tabular-nums}
+  #p-money .tbl{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
+  #p-money table{width:100%;border-collapse:collapse;font-size:14px;min-width:0}
+  #p-money thead th{text-align:left;padding:0 14px 9px 0;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;border-bottom:1px solid var(--rule-strong)}
+  #p-money thead th.num{text-align:right}
+  #p-money tbody td{padding:10px 14px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5}
+  #p-money tbody td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--body);font-size:14px}
+  #p-money tbody td .sub2{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+  #p-money tbody td.nm{font-weight:600;min-width:170px}
+  #p-money tbody tr.tot td{font-weight:700;border-top:none;border-bottom:2px solid var(--rule-strong)}
+  #p-money tr.grp td{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:16px}
+  #p-money .pend{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+  #msrc{min-width:640px} #mwho{min-width:720px} #mspend{min-width:640px}
+  #p-money .spbar{position:relative;height:38px;border-radius:6px;background:var(--track);margin-top:30px;display:flex;overflow:visible}
+  #p-money .spbar i{display:block;height:100%}
+  #p-money .spbar i:first-child{border-radius:6px 0 0 6px}
+  #p-money .spbar i+i{box-shadow:-2px 0 0 var(--ground)}
+  #p-money .spbar .mk{position:absolute;top:-8px;bottom:-8px;width:0;border-left:2px solid var(--ink)}
+  #p-money .spbar .mk span{position:absolute;top:-20px;left:6px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+  #p-money .unpriced{margin:14px 0 0;padding:0;list-style:none;max-width:60em}
+  #p-money .unpriced li{border-top:1px solid var(--rule);padding:10px 0;font-size:14.5px;color:var(--ink-2)}
+  #p-money .unpriced li b{color:var(--ink)}
+  #p-money .cost4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+  #p-money .cost4 .c{border-top:3px solid var(--ink);padding-top:10px}
+  #p-money .cost4 .c.hl{border-top-color:var(--signal)}
+  #p-money .cost4 .n{font-family:var(--display);font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+  #p-money .cost4 .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  #p-money .cost4 .s{font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.4}
+  @media (max-width:640px){#p-money .cost4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  #p-money .ladder{list-style:none;counter-reset:st;margin:14px 0 0;padding:0;max-width:60em}
+  #p-money .ladder li{counter-increment:st;display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:baseline;border-top:1px solid var(--rule);padding:14px 0}
+  #p-money .ladder li::before{content:counter(st);font-family:var(--mono);font-size:12px;color:var(--muted)}
+  #p-money .ladder .t{font-size:14.5px;color:var(--ink-2)}
+  #p-money .ladder .r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;font-size:17px}
+  #p-money .ladder .r small{display:block;font-weight:400;font-size:10.5px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:560px){#p-money .ladder li{grid-template-columns:22px 1fr}#p-money .ladder .r{grid-column:2;text-align:left}}
+  #p-money details.vmore{margin-top:28px;border-top:1px solid var(--rule);padding-top:12px}
+  #p-money details.vmore summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+  #p-money details.vmore summary span{color:var(--muted)}
+  #p-money tbody td.who-c{white-space:nowrap}
+  #p-money .tbl tbody td:first-child{font-family:var(--body);font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink);width:auto}
+  #p-money .tbl tbody td.nm:first-child{font-weight:600}
+  #p-money .tbl tbody tr.grp td:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -599,41 +651,59 @@
 
   <section class="panel" id="p-money" role="tabpanel" aria-labelledby="t-money" tabindex="0" hidden>
   <!-- ================= COSTS ================= -->
-  <h2 class="sec">What it all costs <span>As of <span class="asof"></span></span></h2>
-  <div class="prose">
-    <p>
-      Both grants pay by reimbursement: the Town pays the bills and the State pays it back. What the
-      grants do not cover falls to the Town. For the FY2027 budget, the Town raised its yearly
-      contribution to the Capital Building and Maintenance Fund to $120,000, from a typical $30,000,
-      in part to cover these two projects.
-    </p>
+  <h2 class="sec">Where the money comes from <span>as of <span class="asof"></span></span></h2>
+  <div class="srcbar" id="srcbar"></div>
+  <div class="srclab" id="srclab"></div>
+  <div class="tbl">
+    <table id="msrc">
+      <thead><tr><th>Source</th><th class="num">Amount</th><th>What the record says</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
-
-  <h3 class="sub">Who pays</h3>
-  <p class="ctx">Paid and signed through the September 28, 2026 check warrant.</p>
-  <div class="tbl"><table class="ctbl" id="payTbl"></table></div>
-
-  <h3 class="sub">The Library Board's share</h3>
-  <p class="ctx">Money from the Library Board, separate from Town money and from the grant.</p>
-  <div class="tbl"><table class="ctbl" id="boardTbl"></table></div>
-
-  <h3 class="sub">Holley Hall, where the money went</h3>
-  <div class="tbl"><table class="ctbl" id="hhCostTbl"></table></div>
-
-  <h3 class="sub">Library, where the money went</h3>
-  <div class="tbl"><table class="ctbl" id="lmlCostTbl"></table></div>
-
-  <h3 class="sub">Not yet priced</h3>
-  <p class="ctx">Each of these will add to the costs above.</p>
-  <ul class="firms" id="unpriced"></ul>
-
   <p class="note">
-    <b>What these tables are not.</b> They are not a final accounting. They count bills the Town has
-    paid through the September 28, 2026 check warrant plus signed work not yet billed, from the Town
-    Administrator's spend-against-funding summary of September 30. Incentives are shown at their
-    expected or maximum amounts; none had been paid. The final cost of both projects will not be known
-    until closeout.
+    <b>Two different kinds of grant.</b> Holley Hall's state grant was a fixed amount, now paid in full,
+    so everything past it falls to the Town. The library's federal grant was raised in 2026 after the
+    PCB cleanup and covers nearly all of that project. Both pay by reimbursement: the Town pays the
+    bills first and is paid back.
   </p>
+
+  <h2 class="sec">Contracts on record <span>approved or signed</span></h2>
+  <div class="tbl">
+    <table id="mwho">
+      <thead><tr><th>Firm</th><th>Role</th><th class="num">Amount</th><th>Approved or signed</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">
+    <b>These are contract figures, not a project total.</b> The design contract covers both buildings.
+    What has actually been paid and signed is below.
+  </p>
+
+  <h2 class="sec">What it has cost so far <span>through the September 28 warrant</span></h2>
+  <p class="lede">
+    The Town's check warrants record every payment the Selectboard approves. Here is where the two
+    projects stand through September 28: the totals first, then how they work out to the Town's share.
+  </p>
+  <div class="cost4" id="cost4"></div>
+  <div class="spbar" id="spbar"></div>
+  <div class="srclab" id="splab"></div>
+
+  <h2 class="sec">How the Town's share works out</h2>
+  <ol class="ladder" id="ladder"></ol>
+  <p class="note" id="netnote"></p>
+
+  <details class="vmore">
+    <summary>Every vendor line <span id="sp-count"></span></summary>
+    <div class="tbl">
+      <table id="mspend">
+        <thead><tr><th>Vendor</th><th class="num">Paid</th><th class="num">Signed, not paid</th><th class="num">Total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
+  <h2 class="sec">Not yet priced <span>each adds to the cost above</span></h2>
+  <ul class="unpriced" id="unpriced"></ul>
 
     <div class="pnext"><button type="button" data-goto="people">Next: People <span aria-hidden="true">&rarr;</span></button></div>
   </section>
@@ -951,39 +1021,72 @@ var DATA={
   if(Math.abs(boardT-KC.lmlBoard)>0.01) warn("Library Board lines do not match.");
   var past=r2(gw-KC.lmlAward), lmlTown=r2(past+lc-boardT);
   if(Math.abs(lmlTown-KC.lmlTown)>0.01) warn("library Town share does not reconcile.");
-  var hhTown=r2(hhKnown-KC.hhGrant);
-  var u=function(v){return usd(v,1)}, neg=function(v){return "&minus;"+usd(v,1)};
-  var tr=function(cells,cls){return '<tr'+(cls?' class="'+cls+'"':'')+'>'+cells.map(function(c,k){return '<td'+(k>0?' class="num"':'')+'>'+c+'</td>'}).join("")+'</tr>'};
-  // who pays
-  var net=function(t,i){return t-i<0?'<span class="pend">covered, '+u(i-t)+' left over</span>':u(r2(t-i))};
-  $("payTbl").innerHTML='<tr><th></th><th class="num">Holley Hall</th><th class="num">Library</th><th class="num">Both</th></tr>'+
-    tr(["Known cost so far",u(hhKnown),u(lmlKnown),u(r2(hhKnown+lmlKnown))],"tot")+
-    tr(["State and federal grants",neg(KC.hhGrant),neg(KC.lmlAward),neg(r2(KC.hhGrant+KC.lmlAward))])+
-    tr(["Library Board funds","none",neg(boardT),neg(boardT)])+
-    tr(["Town money",u(hhTown),u(lmlTown),u(r2(hhTown+lmlTown))],"tot")+
-    tr(["Expected utility incentives",neg(KC.hhInc),neg(lmlIncT),neg(r2(KC.hhInc+lmlIncT))])+
-    tr(["Town money, if incentives arrive",u(r2(hhTown-KC.hhInc)),net(lmlTown,lmlIncT),u(r2(hhTown+lmlTown-KC.hhInc-lmlIncT))],"tot");
-  $("payTbl").insertAdjacentHTML("afterend",'<p class="note" style="margin-top:12px"><b>How to read this.</b> Holley Hall\'s grant was a fixed '+u(KC.hhGrant)+' and the work cost more, so the Town carries the difference; it set aside a '+usd(M.hhReserve,0)+' reserve toward it. The library grant, raised in 2026 after the PCB cleanup, covers nearly all of that project, and the Library Board paid for the front porch and part of the new floor. Holley Hall incentives are maximums: Green Mountain Power '+u(10652.05)+' and Efficiency Vermont '+u(10000)+'. Library incentives: '+M.lmlInc.map(function(x){return x[0]+' '+u(x[1])}).join(" and ")+'.</p>');
-  // board
-  $("boardTbl").innerHTML='<tr><th>For</th><th>What the record says</th><th class="num">Amount</th></tr>'+
-    M.board.map(function(b){return '<tr><td>'+b[0]+'</td><td>'+b[1]+'</td><td class="num">'+u(b[2])+'</td></tr>'}).join("")+
-    '<tr class="tot"><td>Library Board total</td><td></td><td class="num">'+u(boardT)+'</td></tr>';
-  // HH
-  $("hhCostTbl").innerHTML='<tr><th>Vendor</th><th>For</th><th class="num">Amount</th></tr>'+
-    M.hh.map(function(v){return '<tr><td>'+v[0]+'</td><td>'+v[1]+'</td><td class="num">'+u(v[2])+'</td></tr>'}).join("")+
-    '<tr class="tot"><td>Known cost</td><td>'+u(M.hhPaid)+' paid, '+u(M.hhSigned)+' signed for balcony repairs</td><td class="num">'+u(hhKnown)+'</td></tr>'+
-    '<tr><td>State MERP grant</td><td>Paid in full in five payments, February to August 2026</td><td class="num">'+neg(KC.hhGrant)+'</td></tr>'+
-    '<tr class="tot"><td>Town money</td><td>Of this, '+usd(M.hhReserve,0)+' was set aside as a reserve; '+u(r2(hhTown-M.hhReserve))+' is beyond it</td><td class="num">'+u(hhTown)+'</td></tr>';
-  // LML
-  var l3=function(k,p,sg){return '<tr><td>'+k+'</td><td class="num">'+(p?u(p):'')+'</td><td class="num">'+(sg?u(sg):'')+'</td><td class="num">'+u(r2(p+sg))+'</td></tr>'};
-  $("lmlCostTbl").innerHTML='<tr><th>Item</th><th class="num">Paid</th><th class="num">Signed, not paid</th><th class="num">Total</th></tr>'+
-    '<tr class="grp"><td colspan="4">Work of the kind the grant pays for</td></tr>'+M.lmlGrantWork.map(function(x){return l3(x[0],x[1],x[2])}).join("")+
-    '<tr class="tot"><td>Subtotal</td><td class="num">'+u(gwP)+'</td><td class="num">'+u(gwS)+'</td><td class="num">'+u(gw)+'</td></tr>'+
-    '<tr class="grp"><td colspan="4">Local costs outside the grant</td></tr>'+M.lmlLocal.map(function(x){return l3(x[0],x[1],x[2])}).join("")+
-    '<tr class="tot"><td>Subtotal</td><td class="num">'+u(lcP)+'</td><td class="num">'+u(lcS)+'</td><td class="num">'+u(lc)+'</td></tr>'+
-    '<tr class="tot"><td>Known cost</td><td class="num">'+u(r2(gwP+lcP))+'</td><td class="num">'+u(r2(gwS+lcS))+'</td><td class="num">'+u(lmlKnown)+'</td></tr>';
-  $("lmlCostTbl").insertAdjacentHTML("afterend",'<p class="note" style="margin-top:12px"><b>How the Town\'s share works out.</b> Grant-type work comes to '+u(gw)+' against the '+u(KC.lmlAward)+' award, '+u(past)+' past it. Add '+u(lc)+' in local costs outside the grant and take out the Library Board\'s '+u(boardT)+'. That leaves '+u(lmlTown)+' in Town money, before '+u(lmlIncT)+' in expected incentives. The finish flooring is carried at the '+u(25600)+' solid white oak quote; the engineered oak estimate of September 16 was '+u(27000)+'.</p>');
-  $("unpriced").innerHTML=M.unpriced.map(function(x){var c=x[0]==="Library"?"lml":x[0]==="Holley Hall"?"hh":"";return '<li><span class="who '+c+'"'+(c?'':' style="color:var(--muted)"')+'>'+x[0]+'</span>'+x[1]+'</li>'}).join("");
+  var hhTown=r2(hhKnown-KC.hhGrant), town=r2(hhTown+lmlTown), tot=r2(hhKnown+lmlKnown), grants=r2(KC.hhGrant+KC.lmlAward), incT=r2(KC.hhInc+lmlIncT);
+  var paidT=r2(M.hhPaid+gwP+lcP), signedT=r2(M.hhSigned+gwS+lcS);
+  if(Math.abs(r2(paidT+signedT)-tot)>0.01) warn("paid and signed do not add up to the combined known cost.");
+  var u2=function(v){return usd(v,v%1!==0?1:0)}, u0=function(v){return usd(Math.round(v),0)};
+  var tag=function(b){return '<span class="who '+(b==="Holley Hall"?"hh":b==="Library"?"lml":"")+'"'+(b==="Both"?' style="color:var(--muted)"':'')+'>'+b+'</span> '};
+  // sources
+  var cols={a:"var(--signal)",b:"color-mix(in oklab, var(--signal) 55%, var(--ground))",c:"var(--live)",d:"var(--accent)"};
+  var src=[["State grant, Holley Hall",KC.hhGrant,"a"],["Federal grant, library",KC.lmlAward,"b"],["Library Board",boardT,"c"],["Town money",town,"d"]];
+  $("srcbar").innerHTML=src.map(function(m){return '<i style="width:'+(m[1]/tot*100).toFixed(2)+'%;background:'+cols[m[2]]+'" title="'+m[0]+'"></i>'}).join("");
+  $("srclab").innerHTML=src.map(function(m){return '<span class="k"><span class="sw" style="background:'+cols[m[2]]+'"></span>'+m[0]+' <b>'+u2(m[1])+'</b></span>'}).join("");
+  var srow=function(k,v,t){return '<tr><td class="nm">'+k+'</td><td class="num">'+v+'</td><td>'+t+'</td></tr>'};
+  document.querySelector("#msrc tbody").innerHTML=
+    srow(tag("Holley Hall")+'<br>State MERP grant',u2(KC.hhGrant),'Municipal Energy Resilience Program grant #01155-A172-5443, awarded December 16, 2024. No local match. Paid in full in five payments, February to August 2026.')+
+    srow(tag("Library")+'<br>Federal Capital Projects Fund grant',u2(KC.lmlAward),'Through the Vermont Department of Libraries: $483,000 base award and $58,246.15 contingency (agreement 01130-2024-CPF-003), plus a $316,000 State increase in August 2026 shown in the State\'s grant ledger. No local match. $467,117.19 reimbursed as of the September 9 ledger.')+
+    srow(tag("Library")+'<br>Library Board funds',u2(boardT),M.board.map(function(b){return '<b>'+u2(b[2])+'</b> '+b[0].toLowerCase()+'. '+b[1]+'.'}).join(" ")+' Not Town money and not grant money.')+
+    srow(tag("Holley Hall")+'<br>Town money',u2(hhTown),'What Holley Hall costs past its grant. The Town set aside a '+usd(M.hhReserve,0)+' reserve toward it; '+u2(r2(hhTown-M.hhReserve))+' is beyond the reserve.')+
+    srow(tag("Library")+'<br>Town money',u2(lmlTown),'What is left after the grant and the Library Board funds.')+
+    srow('Efficiency Vermont and GMP incentives','<span class="pend">up to</span> '+u2(incT),'Not yet received. Holley Hall: Green Mountain Power heat pump incentive ($10,652.05, estimate) and Efficiency Vermont weatherization ($10,000 maximum). Library: '+M.lmlInc.map(function(x){return x[0]+' ('+u2(x[1])+')'}).join(" and ")+'.')+
+    '<tr class="tot"><td>Known cost, both buildings</td><td class="num">'+u2(tot)+'</td><td></td></tr>';
+  // contracts
+  var C=[["Both","Vermont Integrated Architecture","Architect and engineering design, construction oversight for both buildings","Subconsultants DuBois &amp; King and Engineering Ventures.",118150,"Approved June 9, 2025"],
+    ["Holley Hall","Silver Maple Construction","General contractor and mechanical","Budget for contract.",399781.65,"Priced January 22, 2026"],
+    ["Holley Hall","Silver Maple, balcony change order","Balcony repairs","Signed, not yet billed as of the September 28 warrant.",12942.06,"Signed September 25, 2026"],
+    ["Library","Silver Maple Construction","General contractor","Includes executed change orders, among them the front porch ($30,725.08).",598295.48,"Contract sum at pay application 6"],
+    ["Library","Silver Maple, change order 7","New subfloor, radiant heat and plating on the first floor","Finish flooring is separate.",76743.30,"Signed August 20, 2026"],
+    ["Library","Alloy (Prism Response LLC)","PCB abatement, first floor","Low of two bids.",57013,"Awarded June 22, 2026"],
+    ["Library","Alloy, change order 1","Remove the first-floor wood deck after the first PCB round failed","",59400,"Signed August 11, 2026"],
+    ["Library","Alloy (via Silver Maple)","Asbestos dust and debris cleanup, first floor","Contracted through the general contractor.",38613,"Bid opened June 2026"],
+    ["Library","Stone Environmental","PCB confirmation sampling and closure report","",20600,"Contract with two amendments"],
+    ["Library","Clay Point Associates","Testing, bid documents and oversight of the hazardous-materials work","Billed so far.",6214,"Billed so far"]];
+  document.querySelector("#mwho tbody").innerHTML=C.map(function(w){return '<tr><td class="nm">'+tag(w[0])+'<br>'+w[1]+'</td><td>'+w[2]+(w[3]?'<div class="sub2">'+w[3]+'</div>':'')+'</td><td class="num">'+u2(w[4])+'</td><td>'+w[5]+'</td></tr>'}).join("");
+  // cost tiles + bar
+  $("cost4").innerHTML=[
+    [u0(tot),"Known cost so far",u0(paidT)+" paid, "+u0(signedT)+" signed and not yet paid"],
+    [u0(grants),"State and federal grants",Math.round(grants/tot*100)+"% of the cost so far"],
+    [u0(boardT),"Library Board","Front porch and new floor"],
+    [u0(town),"Town money","Before up to "+u0(incT)+" in expected incentives",1]
+  ].map(function(c){return '<div class="c'+(c[3]?' hl':'')+'"><div class="n">'+c[0]+'</div><div class="l">'+c[1]+'</div><div class="s">'+c[2]+'</div></div>'}).join("");
+  var pct=function(v){return (v/tot*100).toFixed(2)+"%"};
+  $("spbar").innerHTML='<i style="width:'+pct(paidT)+';background:var(--signal)" title="Paid"></i>'+
+    '<i style="width:'+pct(signedT)+';background:color-mix(in oklab, var(--signal) 45%, var(--ground))" title="Signed, not paid"></i>'+
+    '<span class="mk" style="left:'+pct(grants)+'"><span>Grants '+u0(grants)+'</span></span>';
+  $("splab").innerHTML='<span class="k"><span class="sw" style="background:var(--signal)"></span>Paid <b>'+u2(paidT)+'</b></span>'+
+    '<span class="k"><span class="sw" style="background:color-mix(in oklab, var(--signal) 45%, var(--ground))"></span>Signed, not yet paid <b>'+u2(signedT)+'</b></span>'+
+    '<span class="k">Past the grants <b>'+u2(r2(tot-grants))+'</b></span>';
+  // ladder
+  $("ladder").innerHTML=[
+    [tag("Holley Hall")+"Known cost comes to "+u0(hhKnown)+". The fixed State grant is "+u0(KC.hhGrant)+".",u0(hhTown),"Town money, Holley Hall"],
+    [tag("Library")+"Grant-type work comes to "+u0(gw)+" against the "+u0(KC.lmlAward)+" award, "+u0(past)+" past it. Add "+u0(lc)+" in local costs outside the grant and take out "+u0(boardT)+" from the Library Board.",u0(lmlTown),"Town money, library"],
+    [tag("Both")+"Add the two together.",u0(town),"Town money, both"],
+    ["Expected incentives of up to "+u0(incT)+" come off the Town's share.",u0(r2(town-incT)),"Town money, if incentives arrive"]
+  ].map(function(r){return '<li><div class="t">'+r[0]+'</div><div class="r">'+r[1]+'<small>'+r[2]+'</small></div></li>'}).join("");
+  $("netnote").innerHTML='<b>What this means.</b> Almost all of the Town\'s share is Holley Hall, where the grant was fixed and the work cost more. At the library, the grant and the Library Board cover nearly everything known so far. For every dollar of Town money, the two projects brought in $'+(grants/town).toFixed(2)+' in grants. The work not yet priced, listed below, will add to the Town\'s share.';
+  // vendor lines
+  var vr=function(k,p,sg){return '<tr><td>'+k+'</td><td class="num">'+(p?u2(p):'')+'</td><td class="num">'+(sg?u2(sg):'')+'</td><td class="num">'+u2(r2(p+sg))+'</td></tr>'};
+  var hhRows=M.hh.map(function(x){var sg=x[0]==="Silver Maple Construction"?M.hhSigned:0;return vr(x[0]+(x[1]?'<div class="sub2">'+x[1]+'</div>':''),r2(x[2]-sg),sg)});
+  $("sp-count").textContent="("+(M.hh.length+M.lmlGrantWork.length+M.lmlLocal.length)+")";
+  document.querySelector("#mspend tbody").innerHTML=
+    '<tr class="grp"><td colspan="4">Holley Hall</td></tr>'+hhRows.join("")+
+    '<tr class="tot"><td>Subtotal</td><td class="num">'+u2(M.hhPaid)+'</td><td class="num">'+u2(M.hhSigned)+'</td><td class="num">'+u2(hhKnown)+'</td></tr>'+
+    '<tr class="grp"><td colspan="4">Library, work of the kind the grant pays for</td></tr>'+M.lmlGrantWork.map(function(x){return vr(x[0],x[1],x[2])}).join("")+
+    '<tr class="tot"><td>Subtotal</td><td class="num">'+u2(gwP)+'</td><td class="num">'+u2(gwS)+'</td><td class="num">'+u2(gw)+'</td></tr>'+
+    '<tr class="grp"><td colspan="4">Library, local costs outside the grant</td></tr>'+M.lmlLocal.map(function(x){return vr(x[0],x[1],x[2])}).join("")+
+    '<tr class="tot"><td>Subtotal</td><td class="num">'+u2(lcP)+'</td><td class="num">'+u2(lcS)+'</td><td class="num">'+u2(lc)+'</td></tr>'+
+    '<tr class="tot"><td>Total known cost, both buildings</td><td class="num">'+u2(paidT)+'</td><td class="num">'+u2(signedT)+'</td><td class="num">'+u2(tot)+'</td></tr>';
+  $("unpriced").innerHTML=M.unpriced.map(function(x){return '<li>'+tag(x[0])+'<b>'+x[1]+'.</b></li>'}).join("");
 
   // photo order for the lightbox = order of appearance on the page
   var ORDER=[];
