@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Draft &middot; Inside the Lawrence Memorial Library Renovation &middot; Bristol, In Progress</title>
+<meta name="description" content="The Lawrence Memorial Library renovation in Bristol, Vermont: what is being done, who is doing it, what it costs, the PCB cleanup, and where it stands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --ground:#f9f9f7; --surface:#ffffff;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --rule:#e1e0d9; --rule-strong:#c3c2b7;
+    --accent:#eb6834; --signal:#2a78d6;
+    --up:#b4342b; --down:#12854c;
+    --inert:#c3c2b7; --track:#eeede7;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --ground:#0d0d0d; --surface:#1a1a19;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --rule:#2c2c2a; --rule-strong:#3d3d3a;
+      --accent:#e5713f; --signal:#3987e5;
+      --up:#e2685c; --down:#22b581;
+      --inert:#4a4a46; --track:#262624;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --ground:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --rule:#2c2c2a; --rule-strong:#3d3d3a;
+    --accent:#e5713f; --signal:#3987e5;
+    --up:#e2685c; --down:#22b581;
+    --inert:#4a4a46; --track:#262624;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px 92px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+
+  .masthead{padding:44px 0 0;display:flex;flex-direction:column;gap:20px}
+  .kicker{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .kicker .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+  .kicker a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+  .kicker a:hover{color:var(--ink)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,7vw,60px);line-height:1.03;
+    letter-spacing:-.02em;margin:0;text-wrap:balance}
+  h1 em{font-style:italic}
+  .standfirst{font-family:var(--display);font-size:clamp(18px,2.4vw,21px);line-height:1.5;
+    color:var(--ink-2);max-width:38em;margin:0}
+  .notice{display:flex;gap:14px;align-items:flex-start;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--rule);padding:16px 0 18px;margin-top:6px}
+  .notice .flag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);padding-top:3px;white-space:nowrap}
+  .notice p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:56em}
+
+  h2.sec{font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:.11em;
+    text-transform:uppercase;margin:56px 0 0;border-bottom:1px solid var(--rule-strong);
+    padding-bottom:9px;display:flex;align-items:baseline;justify-content:space-between;
+    gap:16px;flex-wrap:wrap}
+  h2.sec span{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.02em;
+    text-transform:none;color:var(--muted)}
+  .lede{max-width:44em;color:var(--ink-2);margin:18px 0 0;font-size:15.5px}
+  .lede b{color:var(--ink)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:0;margin:26px 0 4px;border-top:1px solid var(--rule)}
+  .stat{border-bottom:1px solid var(--rule);padding:16px 20px 16px 0}
+  .stat .n{font-family:var(--display);font-size:34px;font-weight:400;line-height:1.05;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px}
+  .stat .sub2{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+
+  .note{border-left:2px solid var(--accent);padding:12px 0 12px 16px;margin:22px 0 4px;
+    font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:70em}
+  .note b{color:var(--ink)}
+
+  /* scope */
+  .scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 40px;margin-top:20px}
+  .grp{border-top:1px solid var(--rule);padding:14px 0 6px}
+  .grp h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .grp ul{margin:0;padding:0;list-style:none}
+  .grp li{font-size:14.5px;padding:5px 0 5px 16px;position:relative;line-height:1.5}
+  .grp li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:1px;background:var(--inert)}
+  .grp li.add::before{background:var(--signal)}
+  .grp li.cut{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--rule-strong)}
+  .grp li.cut::before{background:transparent;border:1px solid var(--rule-strong)}
+  .grp li .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--signal);margin-left:6px;white-space:nowrap}
+  .grp li.cut .tag{color:var(--muted);display:inline-block;text-decoration:none}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+  .legend .k{display:flex;align-items:center;gap:7px}
+  .legend .sw{width:8px;height:8px;border-radius:1px;flex:0 0 auto}
+
+  /* money bar */
+  .srcbar{display:flex;height:38px;border-radius:6px;overflow:hidden;margin-top:26px;background:var(--track)}
+  .srcbar i{display:block;height:100%}
+  .srcbar i+i{box-shadow:-2px 0 0 var(--ground)}
+  .srclab{display:flex;gap:26px;flex-wrap:wrap;margin-top:12px;font-size:14px}
+  .srclab .k{display:flex;align-items:baseline;gap:8px}
+  .srclab .sw{width:9px;height:9px;border-radius:2px;flex:0 0 auto;position:relative;top:-1px}
+  .srclab b{font-variant-numeric:tabular-nums}
+
+  /* tables */
+  .tbl{overflow-x:auto;margin-top:22px;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  thead th{text-align:left;padding:0 14px 9px 0;font-family:var(--mono);font-size:10.5px;
+    font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    white-space:nowrap;border-bottom:1px solid var(--rule-strong)}
+  thead th.num{text-align:right}
+  tbody td{padding:10px 14px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+  tbody td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tbody td .sub2{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+  tbody td.nm{font-weight:600;min-width:170px}
+  tbody tr.tot td{font-weight:700;border-bottom:2px solid var(--rule-strong)}
+  .pend{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+  #money{min-width:640px} #who{min-width:720px} #pcb{min-width:640px}
+
+  /* air leakage */
+  .leak{margin-top:26px;display:grid;gap:14px;max-width:760px}
+  .lk{display:grid;grid-template-columns:150px 1fr 120px;gap:14px;align-items:center;font-size:14px}
+  .lk .nm{font-weight:600;line-height:1.3}
+  .lk .nm small{display:block;font-weight:400;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
+  .lk .tr{position:relative;height:22px;background:var(--track);border-radius:4px}
+  .lk .tr i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--inert)}
+  .lk .tr i.now{background:var(--signal)}
+  .lk .tr .ref{position:absolute;top:-5px;bottom:-5px;border-left:1.5px dashed var(--ink-2)}
+  .lk .v{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+  .lk .v small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+  .lkkey{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px;max-width:760px}
+  @media (max-width:560px){.lk{grid-template-columns:1fr 92px}.lk .nm{grid-column:1 / -1}}
+
+  /* spend vs award */
+  .spbar{position:relative;height:38px;border-radius:6px;background:var(--track);margin-top:30px;display:flex;overflow:visible}
+  .spbar i{display:block;height:100%}
+  .spbar i:first-child{border-radius:6px 0 0 6px}
+  .spbar i+i{box-shadow:-2px 0 0 var(--ground)}
+  .spbar .mk{position:absolute;top:-8px;bottom:-8px;width:0;border-left:2px solid var(--ink)}
+  .spbar .mk span{position:absolute;top:-20px;right:6px;white-space:nowrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+  tbody tr.grp td{background:var(--track);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:7px 10px}
+  .unpriced{margin:14px 0 0;padding:0;list-style:none;max-width:60em}
+  .unpriced li{border-top:1px solid var(--rule);padding:10px 0;font-size:14.5px;color:var(--ink-2)}
+  .unpriced li b{color:var(--ink)}
+  #spend{min-width:640px}
+  .cost4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+  .cost4 .c{border-top:3px solid var(--ink);padding-top:10px}
+  .cost4 .c.hl{border-top-color:var(--signal)}
+  .cost4 .n{font-family:var(--display);font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+  .cost4 .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .cost4 .s{font-size:13px;color:var(--ink-2);margin-top:4px;line-height:1.4}
+  @media (max-width:640px){.cost4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .ladder{list-style:none;counter-reset:st;margin:14px 0 0;padding:0;max-width:60em}
+  .ladder li{counter-increment:st;display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:baseline;border-top:1px solid var(--rule);padding:14px 0}
+  .ladder li::before{content:counter(st);font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .ladder .t{font-size:14.5px;color:var(--ink-2)}
+  .ladder .r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;font-size:17px}
+  .ladder .r small{display:block;font-weight:400;font-size:10.5px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:560px){.ladder li{grid-template-columns:22px 1fr}.ladder .r{grid-column:2;text-align:left}}
+  details.more{margin-top:28px;border-top:1px solid var(--rule);padding-top:12px}
+  details.more summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+  details.more summary span{color:var(--muted)}
+
+  /* PCB meter */
+  .res{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+  .res .bx{width:110px;height:8px;border-radius:3px;background:var(--track);overflow:hidden;position:relative}
+  .res .bx i{position:absolute;left:0;top:0;bottom:0;background:var(--up)}
+  .res .bx i.ok{background:var(--down)}
+
+  /* timeline */
+  .tl{margin-top:22px;border-left:2px solid var(--rule-strong);margin-left:6px}
+  .ev{position:relative;padding:0 0 20px 22px}
+  .ev::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;
+    background:var(--ground);border:2px solid var(--ink)}
+  .ev.fut::before{border-color:var(--rule-strong);border-style:dashed}
+  .ev.now::before{background:var(--accent);border-color:var(--accent)}
+  .ev .d{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .ev .d .st{margin-left:8px;color:var(--signal)}
+  .ev .t{font-size:15px;margin-top:2px;max-width:48em}
+  .ev .t b{font-weight:600}
+  .ev.fut .t{color:var(--ink-2)}
+  .tlyr{font-family:var(--display);font-size:22px;margin:6px 0 12px -2px;padding-left:22px;position:relative}
+
+  .gaps{margin:18px 0 0;padding:0;list-style:none;max-width:52em}
+  .gaps li{border-top:1px solid var(--rule);padding:11px 0;font-size:14.5px;color:var(--ink-2)}
+  .gaps li b{color:var(--ink)}
+
+  footer{margin-top:76px;border-top:2px solid var(--ink);padding-top:22px;
+    display:flex;flex-direction:column;gap:14px}
+  footer p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2);max-width:72ch}
+  footer p b{color:var(--ink)}
+  footer .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted)}
+
+  /* photos */
+  .ev .ph{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .ev .ph button{padding:0;border:0;background:none;cursor:zoom-in;display:flex;flex-direction:column;
+    gap:4px;text-align:left;width:220px;max-width:calc(50% - 5px)}
+  .ev .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;display:block;background:var(--track)}
+  .ev .ph span{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted);line-height:1.35}
+  .gmonth{font-family:var(--display);font-weight:400;font-size:23px;margin:30px 0 10px;display:flex;
+    align-items:baseline;gap:12px}
+  .gmonth span{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+  .grid button{padding:0;border:0;background:var(--track);cursor:zoom-in;border-radius:4px;overflow:hidden;aspect-ratio:1}
+  .grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+  .grid button:hover img{transform:scale(1.03)}
+  .ev .ph button:focus-visible,.grid button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  #lb{position:fixed;inset:0;background:rgba(8,8,8,.94);display:none;z-index:50;
+    flex-direction:column;align-items:center;justify-content:center;padding:48px 16px 20px}
+  #lb.on{display:flex}
+  #lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;border-radius:3px}
+  #lb .cap{color:#e8e7e2;font-size:14.5px;line-height:1.5;margin-top:12px;max-width:60em;text-align:center}
+  #lb .cap b{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:#b5b4ad;display:block;margin-bottom:2px}
+  #lb button{position:absolute;background:rgba(255,255,255,.1);color:#fff;border:0;border-radius:50%;
+    width:44px;height:44px;font-size:22px;line-height:44px;cursor:pointer;font-family:var(--body)}
+  #lb button:hover{background:rgba(255,255,255,.22)}
+  #lb .x{top:12px;right:12px} #lb .pv{left:12px;top:50%} #lb .nx{right:12px;top:50%}
+  @media (prefers-reduced-motion:reduce){.grid img{transition:none}.grid button:hover img{transform:none}}
+
+  [hidden]{display:none!important}
+  @media (max-width:760px){
+    .wrap{padding:0 16px 60px}
+    .res .bx{width:70px}
+  }
+  /* project partners: credits grid */
+  .credits{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:28px}
+  .credits li{border-top:1px solid var(--rule);padding:14px 0 18px;display:flex;flex-direction:column;gap:12px}
+  .credits li:nth-child(-n+4){border-top:0}
+  .credits .role{font-family:var(--mono);font-size:10.5px;font-weight:500;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);min-height:2.8em}
+  .credits .slot{height:72px;display:flex;align-items:center}
+  .credits .nm{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+  .lgo{position:relative;display:inline-block;flex:0 0 auto;max-width:100%}
+  .lgo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:left center}
+  .lgo .w{display:none}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lgo .c{display:none}:root:not([data-theme="light"]) .lgo .w{display:block;opacity:.88}}
+  :root[data-theme="dark"] .lgo .c{display:none} :root[data-theme="dark"] .lgo .w{display:block;opacity:.88}
+  :root[data-theme="light"] .lgo .c{display:block} :root[data-theme="light"] .lgo .w{display:none}
+  .subhd{font-family:var(--display);font-weight:400;font-size:23px;margin:36px 0 0}
+  @media (max-width:640px){.credits{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}.credits li:nth-child(3),.credits li:nth-child(4){border-top:1px solid var(--rule)}}
+  /* thank you */
+  .thanks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px;margin-top:20px}
+  .thanks .grp2{border-top:1px solid var(--rule);padding:14px 0 16px;break-inside:avoid}
+  .thanks h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .thanks ul{list-style:none;margin:0;padding:0}
+  .thanks li{font-size:14.5px;line-height:1.45;padding:3px 0}
+  .thanks li span{color:var(--ink-2);font-size:13px}
+  .thanks .cf{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-left:6px;white-space:nowrap}
+  .draftflag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:1px 6px;margin-left:8px}
+  @media (max-width:820px){.thanks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.thanks{grid-template-columns:1fr}}
+  .firms{columns:2 280px;column-gap:36px;margin-top:16px;padding:0;list-style:none}
+  .firms li{break-inside:avoid;padding:8px 0;border-top:1px solid var(--rule);font-size:15px}
+  .firms li span{display:block;font-size:13.5px;color:var(--ink-2)}
+  .firms .cf{display:inline;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .hero{margin:30px 0 0}
+  .hero img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 40%;border-radius:6px;display:block;background:var(--track)}
+  .hero figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);margin-top:8px}
+
+  /* timeline chapters */
+  :root{ --c-hist:#b58a2b; --c-money:#2a78d6; --c-work:#1baf7a; --c-clean:#b4342b; --c-test:#8659c5; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --c-hist:#a8791c; --c-money:#4f93e6; --c-work:#2aa15f; --c-clean:#d15448; --c-test:#9b6ad4; } }
+  :root[data-theme="dark"]{ --c-hist:#a8791c; --c-money:#4f93e6; --c-work:#2aa15f; --c-clean:#d15448; --c-test:#9b6ad4; }
+  .catkey{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:16px 0 18px}
+  .catkey span{display:inline-flex;align-items:center;gap:7px}
+  .cdot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;display:inline-block}
+  .ch{display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 32px;border-top:1px solid var(--rule-strong);padding:24px 0 26px}
+  .ch:first-child{border-top:2px solid var(--ink)}
+  .ch .no{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .ch h3{font-family:var(--display);font-weight:400;font-size:27px;line-height:1.15;margin:6px 0 4px;text-wrap:balance}
+  .ch .rng{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+  .ch .cbar{height:6px;border-radius:3px;background:var(--track);margin-top:12px;overflow:hidden;display:flex}
+  .ch .cbar i{display:block;height:100%}
+  .ch .sum{font-size:14px;color:var(--ink-2);margin:12px 0 0;line-height:1.5}
+  .ch ul{list-style:none;margin:0;padding:0}
+  .ch li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.5}
+  .ch li:last-child{border-bottom:0}
+  .ch li .dd{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:3px;letter-spacing:.03em;display:flex;gap:7px;align-items:flex-start}
+  .ch li .dd .cdot{margin-top:3px}
+  .ch li.fut{color:var(--ink-2)}
+  .ch li .st{font-family:var(--mono);font-size:10px;color:var(--signal);letter-spacing:.08em;text-transform:uppercase;margin-left:6px}
+  .ch .strip{display:flex;gap:8px;margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .ch .strip button{padding:0;border:0;background:none;cursor:zoom-in;flex:0 0 auto}
+  .ch .strip img{width:150px;aspect-ratio:4/3;object-fit:cover;border-radius:4px;background:var(--track);display:block}
+  .ch .strip button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  @media (max-width:700px){.ch{grid-template-columns:minmax(0,1fr)}.ch aside{margin-bottom:12px}}
+
+  /* tabs */
+  .tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ground);
+    margin:30px 0 0;padding:10px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule-strong)}
+  .tablist{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tablist::-webkit-scrollbar{display:none}
+  @media (max-width:760px){.tablist{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:28px}}
+  .tablist button{flex:0 0 auto;border:1px solid transparent;background:none;cursor:pointer;font-family:var(--body);
+    font-size:15.5px;font-weight:600;color:var(--ink-2);padding:9px 16px;border-radius:999px;white-space:nowrap;
+    transition:background .15s,color .15s,border-color .15s}
+  .tablist button:hover{color:var(--ink);border-color:var(--rule-strong)}
+  .tablist button[aria-selected="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+  .tablist button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  .tablist .tc{margin-left:7px;font-family:var(--mono);font-size:11.5px;font-weight:400;opacity:.7}
+  @media (prefers-reduced-motion:reduce){.tablist button{transition:none}}
+  .panel{outline:none;padding-top:8px}
+  .panel > h2.sec:first-child{margin-top:34px}
+  .panel > .hero:first-child{margin-top:28px}
+  .pnext{margin-top:48px;border-top:1px solid var(--rule);padding-top:16px;display:flex;justify-content:flex-end}
+  .pnext button{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);border-radius:4px;
+    padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .pnext button:hover{border-color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="dot"></span>
+      <a href="../">Bristol, In Progress</a>
+      <span>&middot;</span>
+      <span>Capital projects</span>
+      <span>&middot;</span>
+      <span class="draftflag">Draft</span>
+    </div>
+
+    <h1><em>Inside the</em> Lawrence<br>Memorial Library <em>renovation</em></h1>
+
+    <p class="standfirst">
+      The Town is renovating its library at 40 North Street, a building that dates to 1911. The work
+      is paid for mostly by a federal grant passed through the Vermont Department of Libraries, and
+      it has to be finished by the end of 2026. This page covers what is being done, who is doing it,
+      what it costs so far, the PCB cleanup that slowed it down, and where it stands.
+    </p>
+
+    <div class="notice">
+      <span class="flag">Draft</span>
+      <p>
+        This page is a draft. Figures, names, dates and photos are still being checked and may
+        change before it is final.
+      </p>
+    </div>
+
+    <div class="notice">
+      <span class="flag">Please note</span>
+      <p>
+        This is my own page, not an official Town of Bristol publication, and nothing here speaks
+        for the Selectboard or the Library Board of Trustees. Every figure is taken from a Town record
+        named in the Sources below. Where the record does not yet say something, this page says so
+        rather than guessing.
+      </p>
+    </div>
+  </header>
+
+  <nav class="tabbar" aria-label="Sections">
+    <div class="tablist" role="tablist">
+      <button role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button>
+      <button role="tab" id="t-work" aria-controls="p-work" aria-selected="false" tabindex="-1" data-tab="work">The work</button>
+      <button role="tab" id="t-money" aria-controls="p-money" aria-selected="false" tabindex="-1" data-tab="money">Money</button>
+      <button role="tab" id="t-people" aria-controls="p-people" aria-selected="false" tabindex="-1" data-tab="people">People</button>
+      <button role="tab" id="t-pcb" aria-controls="p-pcb" aria-selected="false" tabindex="-1" data-tab="pcb">PCB cleanup</button>
+      <button role="tab" id="t-timeline" aria-controls="p-timeline" aria-selected="false" tabindex="-1" data-tab="timeline">Timeline</button>
+      <button role="tab" id="t-photos" aria-controls="p-photos" aria-selected="false" tabindex="-1" data-tab="photos">Photos<span class="tc" id="tc-photos"></span></button>
+    </div>
+  </nav>
+
+  <section class="panel" id="p-overview" role="tabpanel" aria-labelledby="t-overview" tabindex="0">
+  <figure class="hero">
+    <img src="img/lml-1770.jpg" alt="The front of the Lawrence Memorial Library from the walk, with the rebuilt steps and the contractor's sign on the lawn">
+    <figcaption>The front of the library from the walk, September 23, 2026</figcaption>
+  </figure>
+
+  <section class="stats" id="stats"></section>
+
+  <!-- ============ BUILDING ============ -->
+  <h2 class="sec">The building <span>1911 to today</span></h2>
+  <p class="lede">
+    The library was designed by architect Chas. E. Paige and built in 1911 in the classical revival
+    style: wood frame, clapboard, a slate hipped roof and a stone foundation. The children's room was
+    originally on the first floor, and the basement held a coal room and the furnace. A 1995 to 1997
+    accessibility renovation by Northern Architects of Burlington added the lift and entry addition
+    and built out the lower level as the children's collection, multipurpose room, kitchenette and
+    accessible bathroom that are there today.
+  </p>
+  <p class="lede">
+    The Town had the building's energy use assessed in 2022 and again in 2024, before and during
+    the grant application.
+  </p>
+
+  <h2 class="sec">Why the work was done <span>From the grant agreement and the 2024 energy assessment</span></h2>
+  <p class="lede">The grant behind this project comes with a specific purpose. The Vermont Department of Libraries agreement says the money is for renovating the library "to enable internet access for the purposes of work, education and health monitoring." In return, the Town must keep the building open as a public library with high-speed internet available to everyone for at least five years after the project is finished.</p>
+  <p class="lede">The 2024 energy assessment found a leaky building heated by oil. The whole library ran on a single oil-fired boiler installed in 1999, which burned 930 gallons of heating oil in 2022. There was no mechanical cooling or ventilation besides bathroom exhaust fans. A blower door test measured 0.62 cfm of air leakage per square foot of building shell, which the assessment rated "leaky." It also found missing and settled insulation in the exterior walls and no insulation at the band joists.</p>
+  <p class="lede">The assessment noted wear on the building too: water damage at the back entry roof from an incorrect drip edge, water damage at a column and a damaged basement window sill. The Town's photos from 2021 to 2025 show peeling paint, rotted trim and worn front steps (see the Photos tab).</p>
+
+  <!-- ============ GAPS ============ -->
+  <h2 class="sec">What this page does not know yet</h2>
+  <ul class="gaps">
+    <li><b>The amended grant agreement.</b> The increase appears in the State's grant ledger and the
+      minutes; the amended agreement itself is not yet in the Town's project files.</li>
+    <li><b>The final cost.</b> The known cost is a floor, not a ceiling: several items are not yet priced, including the subfloor rebuild and the September joist work.</li>
+    <li><b>A reopening date.</b> None has been announced. The only fixed date is the grant deadline.</li>
+    <li><b>The PCB closure report.</b> Promised September 9; not yet on file.</li>
+  </ul>
+
+
+    <div class="pnext"><button type="button" data-goto="work">Next: The work <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-work" role="tabpanel" aria-labelledby="t-work" tabindex="0" hidden>
+  <!-- ============ SCOPE ============ -->
+  <h2 class="sec">What the work includes <span>as designed, and as changed</span></h2>
+  <div class="scope">
+    <div class="grp">
+      <h3>Heating and air</h3>
+      <ul>
+        <li>Replace the oil boiler with a propane boiler; remove the fuel oil tank</li>
+        <li>Ceiling cassette heat pumps upstairs, ductless heat pumps on the lower level</li>
+        <li>Energy recovery ventilation (ERV) serving both floors, with MERV 13 filters and ductwork</li>
+        <li class="add">Heat plates under the new first floor, for the radiant system<span class="tag">Added Jul 2026</span></li>
+      </ul>
+    </div>
+    <div class="grp">
+      <h3>Building envelope</h3>
+      <ul>
+        <li>Dense-pack cellulose in the upper walls; insulate the sill beams</li>
+        <li>Air-seal the attic and bring it to R-60</li>
+        <li>Repair, air-seal and weatherstrip the main windows; add storm windows</li>
+        <li>Rot repair to trim and siding</li>
+        <li>Side door on Lawrence Lane: new canopy and storm glazing</li>
+        <li>Replace an unneeded exterior door with a window</li>
+        <li>Roof repair as needed</li>
+        <li>Rebuild the front porch and steps<span class="tag">Bid alternate</span></li>
+        <li class="add">Remove the chimney<span class="tag">Added Apr 2026</span></li>
+      </ul>
+    </div>
+    <div class="grp">
+      <h3>Inside the library</h3>
+      <ul>
+        <li>A soundproofed quiet room, with a transom window, in what was storage</li>
+        <li>Walls around open areas extended to the ceiling</li>
+        <li>An automatic closer on the Children's Room door, tied to the fire alarm</li>
+        <li>Electrical updates</li>
+        <li>Lead paint remediation and repainting</li>
+        <li class="add">New first-floor subfloor and finish flooring, after the PCB removal<span class="tag">Added Jul 2026</span></li>
+        <li class="add">Basement egress stair<span class="tag">Added Jul 2026</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="k"><span class="sw" style="background:var(--inert)"></span>Original scope</span>
+    <span class="k"><span class="sw" style="background:var(--signal)"></span>Added</span>
+  </div>
+  <p class="note">
+    <b>Why the floor is new.</b> The first floor's hardwood was not part of the original plan. It
+    had to come out when PCB testing found contamination in the carpet adhesive and the wood beneath
+    it (see the cleanup section below). The finish floor is being chosen by the library. The first
+    choice was solid white oak; in September the flooring distributor warned that the manufacturer's
+    warranty does not cover solid wood nailed over radiant heat, and the selection moved to an
+    engineered oak. As of September 17 the order was waiting on a physical sample.
+  </p>
+
+  <!-- ============ AIR LEAKAGE ============ -->
+  <h2 class="sec">How much air leaks out <span>blower door, cfm at 75 pascals</span></h2>
+  <p class="lede">
+    A blower door test pulls air out of the building and measures how much leaks back in. Lower is
+    tighter. The State's energy assessment tested the library before any work began; Green Mountain
+    Enclosure Consulting ran a progress test on September 25, 2026, with the envelope work underway.
+  </p>
+  <div class="leak" id="leak"></div>
+  <div class="lkkey"><span>Dashed lines: 0.50 per sq ft ("leaky" above it) and 0.30 per sq ft (code reference)</span></div>
+  <p class="note" id="leaknote"></p>
+
+
+    <div class="pnext"><button type="button" data-goto="money">Next: Money <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-money" role="tabpanel" aria-labelledby="t-money" tabindex="0" hidden>
+  <!-- ============ MONEY ============ -->
+  <h2 class="sec">Where the money comes from <span>as of <span class="asof"></span></span></h2>
+  <div class="srcbar" id="srcbar"></div>
+  <div class="srclab" id="srclab"></div>
+  <div class="tbl">
+    <table id="money">
+      <thead><tr><th>Source</th><th class="num">Amount</th><th>What the record says</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">
+    <b>It is all one grant.</b> The Capital Projects Fund was created by the American Rescue Plan
+    Act, which is why Town minutes sometimes call this "the ARPA library project." The PCB cleanup is
+    paid from the same grant: the first change order was submitted against the contingency, and the
+    State's August increase was described as covering the mitigation work and "a little bit more." The
+    grant is a reimbursement, so the Town pays bills first and is paid back.
+  </p>
+
+  <h2 class="sec">Contracts on record <span>approved or signed</span></h2>
+  <div class="tbl">
+    <table id="who">
+      <thead><tr><th>Firm</th><th>Role</th><th class="num">Amount</th><th>Approved or signed</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">
+    <b>These are contract figures, not a project total.</b> The design contract covers Holley Hall
+    as well as the library. What has actually been paid and signed is below.
+  </p>
+
+  <!-- ============ SPEND ============ -->
+  <h2 class="sec">What it has cost so far <span>through the September 28 warrant</span></h2>
+  <p class="lede">
+    The Town's check warrants record every payment the Selectboard approves. Here is where the
+    library project stands through September 28: the totals first, then how they work out to the
+    Town's share.
+  </p>
+  <div class="cost4" id="cost4"></div>
+  <div class="spbar" id="spbar"></div>
+  <div class="srclab" id="splab"></div>
+
+  <h2 class="sec">How the Town's share works out</h2>
+  <ol class="ladder" id="ladder"></ol>
+  <p class="note" id="netnote"></p>
+
+  <details class="more">
+    <summary>Every vendor line <span id="sp-count"></span></summary>
+    <div class="tbl">
+      <table id="spend">
+        <thead><tr><th>Vendor</th><th class="num">Paid</th><th class="num">Signed, not paid</th><th class="num">Total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </details>
+
+  <h2 class="sec">Not yet priced <span>each adds to the cost above</span></h2>
+  <ul class="unpriced">
+    <li><b>Subfloor rebuild over the replaced joists.</b> Silver Maple is doing this work on time and materials.</li>
+    <li><b>Removing the three joist sections.</b> Whether this is included in Alloy's September invoice has not yet been confirmed in writing.</li>
+    <li><b>Blower door and envelope testing.</b> Approved August 26; the price is not yet on file.</li>
+    <li><b>Architect time through closeout.</b> Vermont Integrated Architecture bills by the hour.</li>
+    <li><b>Environmental oversight</b> beyond what Clay Point has billed so far.</li>
+    <li><b>Any work done December 16 to 31.</b> It is eligible through December 31, but the last reimbursement request is due December 15.</li>
+  </ul>
+
+
+    <div class="pnext"><button type="button" data-goto="people">Next: People <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-people" role="tabpanel" aria-labelledby="t-people" tabindex="0" hidden>
+  <!-- ============ WHO ============ -->
+  <h2 class="sec">Who is doing the work <span>project partners</span></h2>
+  <ul class="credits">
+    <li><div class="role">General contractor and mechanical</div><div class="slot"><span class="lgo" style="height:51px;width:85px"><img class="c" src="img/partners/silver-maple.png" alt="Silver Maple Construction logo" loading="lazy"><img class="w" src="img/partners/silver-maple-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Silver Maple Construction</div></li>
+    <li><div class="role">Architect</div><div class="slot"><span class="lgo" style="height:52px;width:83px"><img class="c" src="img/partners/via.png" alt="Vermont Integrated Architecture logo" loading="lazy"><img class="w" src="img/partners/via-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Vermont Integrated Architecture</div></li>
+    <li><div class="role">MEP engineering</div><div class="slot"><span class="lgo" style="height:50px;width:87px"><img class="c" src="img/partners/dubois-king.png" alt="DuBois &amp; King logo" loading="lazy"><img class="w" src="img/partners/dubois-king-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">DuBois &amp; King</div></li>
+    <li><div class="role">Structural engineering</div><div class="slot"><span class="lgo" style="height:33px;width:131px"><img class="c" src="img/partners/engineering-ventures.png" alt="Engineering Ventures logo" loading="lazy"><img class="w" src="img/partners/engineering-ventures-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Engineering Ventures</div></li>
+    <li><div class="role">Electrical</div><div class="slot"><span class="lgo" style="height:66px;width:66px"><img class="c" src="img/partners/smith-mcclain.png" alt="Smith &amp; McClain logo" loading="lazy"><img class="w" src="img/partners/smith-mcclain-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Smith &amp; McClain</div></li>
+    <li><div class="role">Envelope commissioning</div><div class="slot"><span class="lgo" style="height:43px;width:102px"><img class="c" src="img/partners/gmec.png" alt="Green Mountain Enclosure Consulting logo" loading="lazy"><img class="w" src="img/partners/gmec-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Green Mountain Enclosure Consulting</div></li>
+    <li><div class="role">Chimney work</div><div class="slot"><span class="lgo" style="height:32px;width:135px"><img class="c" src="img/partners/g-helms.png" alt="G. Helms Construction logo" loading="lazy"><img class="w" src="img/partners/g-helms-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">G. Helms Construction</div></li>
+  </ul>
+
+  <h2 class="sec">Also on the project</h2>
+  <ul class="firms">
+    <li>Clay Point Associates<span>Asbestos, lead and PCB testing, bid documents and abatement oversight (Kyle Austin)</span></li>
+    <li>Stone Environmental<span>PCB confirmation sampling and closure report (Jennifer Cypher, Daniel Voisin, Katrina Mattice)</span></li>
+    <li>Alloy<span>PCB abatement and asbestos cleanup (Brent Morgenstern, Paula Mullaney, Frank Aiello, David Morneault)</span></li>
+    <li>Painting with Purpose<span>Painting, as a Silver Maple subcontractor</span></li>
+  </ul>
+
+  <h2 class="sec">Thank you <span>Draft list<span class="draftflag">Under review</span></span></h2>
+  <p class="note" style="margin-top:18px"><b>A project like this takes a lot of people.</b> Thank you to everyone who planned, built, tested, funded, inspected and put up with the work.</p>
+  <div class="thanks">
+    <div class="grp2"><h3>Library staff</h3><ul><li>Katie Male-Riordan, <span>Library Director</span></li><li>Jen Lazar</li><li>Rebekah Cameron</li><li>Jill Quackenbush</li><li>Gail Creeksong</li><li>Jane Ploughman</li><li>Lily Weaver</li><li>Marita Schine</li><li>Moth Nasta</li></ul></div>
+    <div class="grp2"><h3>Library Board of Trustees</h3><ul><li>Vicki Coyle</li><li>Sophie Pickens</li><li>Peter Hewitt</li><li>Kenneth Johnson</li><li>Elizabeth Guilbeault</li><li>Darren Klinefelter</li><li>Scott Kluever</li></ul></div>
+    <div class="grp2"><h3>Town staff</h3><ul><li>Greg Faust, <span>Town Administrator</span></li><li>Freeda Powers, <span>Grant Administrator</span></li><li>Sharon Lucia, <span>Town Clerk and Treasurer</span></li><li>Kris Perlee, <span>Assistant Clerk and Treasurer</span></li><li>AZ Larsen, <span>Planning and Zoning Administrator</span></li></ul></div>
+    <div class="grp2"><h3>Selectboard</h3><ul><li>Ian Albinson</li><li>Joel Bouvier</li><li>Peeker Heffernan</li><li>Michelle Perlee</li><li>Jessica Teets</li></ul></div>
+    <div class="grp2"><h3>Bristol Energy Committee</h3><ul><li>David Flaschenriem</li><li>Allison Pouliot</li><li>Ben Skolozdra</li></ul></div>
+    <div class="grp2"><h3>Vermont Department of Libraries</h3><ul><li>Catherine Delneo, <span>State Librarian</span></li><li>Tom McMurdo, <span>Assistant State Librarian</span></li><li>Jessica Leal</li><li>Abe Koffman</li></ul></div>
+    <div class="grp2"><h3>Flooring and grounds</h3><ul><li>David Babcock, <span>Babcock's Vermont Carpet Gallery</span></li><li>Dawn Crane, <span>Rice Lumber</span></li><li>Ed Burke, <span>Rocky Dale Gardens</span></li></ul></div>
+    <div class="grp2"><h3>Efficiency programs</h3><ul><li>Emily Eckert, <span>Efficiency Vermont</span></li><li>Matt Sharpe, <span>Efficiency Vermont</span></li><li>Eli Pereira, <span>Green Mountain Power</span></li></ul></div>
+  </div>
+
+
+    <div class="pnext"><button type="button" data-goto="pcb">Next: PCB cleanup <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-pcb" role="tabpanel" aria-labelledby="t-pcb" tabindex="0" hidden>
+  <!-- ============ PCB ============ -->
+  <h2 class="sec">The PCB cleanup <span>spring to September 2026</span></h2>
+  <p class="lede">
+    Before construction went further, environmental consultant Clay Point Associates tested the
+    building on April 9, 2026 for asbestos, lead paint and PCBs (polychlorinated biphenyls, industrial
+    chemicals banned in 1979 that turn up in older building materials).
+  </p>
+  <p class="lede">
+    <b>Asbestos</b> was found in only one material: first-floor wall and ceiling plaster, at 2 percent.
+    The job there was cleaning up dust and debris, not removing plaster, and it was finished by
+    July 13. <b>Lead paint</b> was found and is handled within the renovation. <b>PCBs</b> were found
+    in the brown carpet adhesive on the first floor at 140 mg/kg. Federal rules require material over
+    50 mg/kg to be removed and disposed of as PCB waste, so the carpet, the adhesive and the wood
+    floor beneath it came out.
+  </p>
+  <p class="lede">
+    After removal, a second firm, Stone Environmental, takes confirmation samples. The cleanup
+    standard is 1 mg/kg. There have been three rounds so far.
+  </p>
+  <div class="tbl">
+    <table id="pcb">
+      <thead><tr><th>Round</th><th>Result</th><th class="num">Highest reading vs 1 mg/kg</th><th>What happened next</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note">
+    <b>Where it stands.</b> The joist sections were removed under a structural engineer's review
+    (site visit September 10, written guidance September 11), and new framing and subfloor followed.
+    Stone Environmental said on September 9 it would prepare a closure report on the final results.
+    I have not yet seen that report, and this page will say when it is filed.
+  </p>
+
+
+    <div class="pnext"><button type="button" data-goto="timeline">Next: Timeline <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-timeline" role="tabpanel" aria-labelledby="t-timeline" tabindex="0" hidden>
+  <!-- ============ TIMELINE ============ -->
+  <h2 class="sec">Timeline <span id="tlcount"></span></h2>
+  <div class="catkey" id="catkey"></div>
+  <div id="chapters"></div>
+
+
+    <div class="pnext"><button type="button" data-goto="photos">Next: Photos <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-photos" role="tabpanel" aria-labelledby="t-photos" tabindex="0" hidden>
+  <!-- ============ PHOTOS ============ -->
+  <h2 class="sec">Photos <span id="gcount"></span></h2>
+  <p class="note" style="margin-top:18px">
+    <b>About these photos.</b> They come from the Town's project photo folder and are arranged by the
+    date each was taken. Those from 2018 through 2025 show the building's condition before construction. Tap any photo to see it larger.
+  </p>
+  <div id="gallery"></div>
+
+  </section>
+
+  <div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="x" aria-label="Close">&times;</button>
+    <button class="pv" aria-label="Previous photo">&#8249;</button>
+    <button class="nx" aria-label="Next photo">&#8250;</button>
+    <img alt="">
+    <div class="cap"></div>
+  </div>
+
+  <footer>
+    <p>
+      <b>Sources.</b> Vermont Department of Libraries grant agreement 01130-2024-CPF-003, executed
+      September 26, 2024. Vermont Department of Libraries grant ledger for the Town, updated September 9, 2026. Selectboard minutes of June 9, 2025; June 22, July 13, July 27 and August 10,
+      2026 (approved); September 14, 2026 (draft, not yet approved). Vermont Integrated Architecture
+      scope narrative (March 19, 2026) and design proposal (May 15, 2025). Silver Maple Construction
+      quote 1105, revised budget for contract (February 19, 2026). Chimney removal scope change,
+      April 2, 2026. Clay Point Associates project 16505 asbestos, lead-based paint and PCB reports
+      (samples April 9, 2026) and bid documents with Addendum 1 (June 2026). Stone Environmental
+      confirmation results of August 10, August 31 and September 9, 2026. Town Administrator and
+      project correspondence, July through September 2026, for scope changes, structural review,
+      flooring and scheduling. Building history from the 2022 Historic Assessment by Tom Bursey
+      Designs and the Northern Architects drawing set, project 1404. Spending comes from the Town
+      Administrator's "Library and Holley Hall: Spend Against Funding," September 30, 2026, and its
+      workbook, which tally the Town's check warrants through September 28, 2026. Air leakage comes
+      from Green Mountain Enclosure Consulting's progress test report (test September 25, report
+      September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Project partner logos and roles follow Vermont Integrated Architecture's Project Partners sheet for Holley Hall (draft, October 20, 2026), adapted for the library. Photos come from the Town's
+      project photo folder; dates are read from each photo's own camera data. They were resized for
+      the web and all location and camera data was removed.
+    </p>
+    <p>
+      <b>How the numbers were checked.</b> The grant total is computed on this page from the base
+      award and contingency in the agreement and matches its "not to exceed" figure. The Alloy award
+      matches the motion in the June 22 minutes. The Silver Maple figure is the total printed on the
+      quote. PCB results are quoted from the lab's own reporting emails. The State's increase and the
+      reimbursements to date come from the State's grant ledger, updated September 9, 2026. The ledger
+      shows a $316,000 increase; the August 10 minutes record $310,000 (the
+      July 27 minutes gave it as "$300K+"). The page checks that the base award, contingency and
+      increase add up to the ledger's total allocation of $857,246.15.
+      The spending section rebuilds every subtotal from its vendor lines on the page and warns if the
+      paid, signed, total or Town-share figures stop matching the Town Administrator's summary; all of
+      them tie to the cent. That summary is itself built line by line from the check warrants, which
+      the Selectboard approves in open meeting. The September 9 State ledger showed $60,632.93
+      submitted and unpaid; the September 30 summary shows the fifth request at $129,645.93, and the
+      later figure is used. The September 28 warrant is the pre-meeting print, so those payments rest
+      on the Board's approval that night.
+    </p>
+    <p>
+      <b>One small disagreement in the record.</b> The 2022 historic assessment gives the construction
+      date as 1911; the architect's 2026 scope narrative says "c. 1912." This page uses 1911.
+    </p>
+    <p>
+      <b>Bristol, In Progress</b> is written and maintained by Ian Albinson, one of five members of
+      the Bristol Selectboard. It is a personal project. It is not an official publication of the
+      Town of Bristol, it is not reviewed or approved by the Selectboard, and it does not speak for
+      the Town or the library.
+    </p>
+    <p class="meta" id="asof"></p>
+  </footer>
+</div>
+
+<script>
+const P = {
+  asof: "2026-10-01",
+  deadline: "2026-12-31",
+  grant: { base: 483000.00, contingency: 58246.15, nte: 541246.15 },
+  money: [
+    { k:"Grant, base award", amt:483000.00, col:"--signal",
+      src:"Vermont Department of Libraries, federal Capital Projects Fund. Awarded September 1, 2024. No local match required." },
+    { k:"Grant, contingency", amt:58246.15, col:"--sig2",
+      src:"Part of the same agreement. The first PCB change order was submitted against it." },
+    { k:"State increase, August 2026", amt:316000.00, col:"--sig3",
+      src:"The State's grant ledger, updated September 9, shows the base award raised from $483,000 to $799,000. The August 10 minutes record the increase as $310,000, to cover the mitigation work and \"a little bit more.\" The amended agreement itself is not yet in the Town's project files." },
+    { k:"Library Board funds", amt:54925.08,
+      src:"$30,725.08 for the front porch and $24,200 toward the new first floor, per the Town Administrator's September 30 summary. The Library Board approved the porch money on June 2, 2026. Not grant money, so not in the grant total below." },
+    { k:"Efficiency Vermont and GMP incentives", amt:null,
+      amtx:14085.95, src:"Expected, not yet received: Green Mountain Power Tier 3 ($4,085.95) and Efficiency Vermont insulation ($10,000). Efficiency Vermont needs a final blower door test first; a progress test was run September 25." }
+  ],
+  received: { amt:467117.19, date:"2026-09-09", pending:129645.93, note:"Reimbursed to date, per the State's grant ledger" },
+  ledgerAlloc: 857246.15,
+  spend: {
+    unclaimed: 123809.14,
+    award: 857246.15,
+    board: { porch:30725.08, floor:24200.00 },
+    incentives: 14085.95,
+    check: { paid:724640.11, signed:190167.44, total:914807.55, cpf:882089.70, town:2636.32 },
+    rows: [
+      { g:"grant", v:"Silver Maple Construction, contract and executed change orders", p:528443.48, s:74583.82 },
+      { g:"grant", v:"Silver Maple Construction, change order 7 (signed August 20)", p:0, s:76743.30 },
+      { g:"grant", v:"Alloy (Prism Response), PCB abatement and change order 1", p:128413.00, s:0 },
+      { g:"grant", v:"Vermont Integrated Architecture, design and administration", p:45829.12, s:0 },
+      { g:"grant", v:"Stone Environmental, testing", p:12824.68, s:7775.32 },
+      { g:"grant", v:"Clay Point Associates, abatement oversight", p:3799.00, s:2415.00 },
+      { g:"grant", v:"Claimed in the third reimbursement request, not yet matched to a check", p:1262.98, s:0 },
+      { g:"local", v:"Moving costs paid to the library, and a $196 payment", p:1899.10, s:0 },
+      { g:"local", v:"Carpet (Vermont Carpet Gallery)", p:1620.00, s:0 },
+      { g:"local", v:"2022 building assessment and bid notice", p:548.75, s:0 },
+      { g:"local", v:"One-day move to Howden Hall (Booska Movers)", p:0, s:1950.00 },
+      { g:"local", v:"Library network cabling", p:0, s:1100.00 },
+      { g:"local", v:"Finish flooring, material", p:0, s:25600.00 }
+    ]
+  },
+  who: [
+    { f:"Vermont Integrated Architecture", r:"Architect and engineering design, construction oversight. Covers Holley Hall too.", amt:118150.00, when:"Approved June 9, 2025", note:"Proposal of May 15, 2025. Subconsultants DuBois & King (mechanical and electrical) and Engineering Ventures (structural)." },
+    { f:"Silver Maple Construction", r:"General contractor", amt:598295.48, when:"Contract sum at pay application 6", note:"Includes executed change orders, among them the front porch ($30,725.08). The February 19 contract budget was $534,955.90, including a $25,200 contingency." },
+    { f:"Silver Maple, change order 7", r:"New subfloor, radiant heat and plating on the first floor", amt:76743.30, when:"Signed August 20, 2026", note:"Not yet in the contract sum. Finish flooring is separate." },
+    { f:"Clay Point Associates", r:"Environmental consultant: testing, bid documents and oversight of the hazardous-materials work", amt:6214.00, when:"Billed so far", note:"$3,799 paid, $2,415 billed and not yet paid." },
+    { f:"Alloy (Prism Response LLC)", r:"PCB abatement, first floor", amt:57013.00, when:"Awarded June 22, 2026, unanimous", note:"Low of two bids; One Source Environmental bid $78,500. Disposal container was not included, estimated at $29,000 to $31,000." },
+    { f:"Alloy, change order 1", r:"Remove the first-floor wood deck after the first confirmation round failed", amt:59400.00, when:"Signed August 11, 2026", note:"Paid on the September 28 warrant. With its first invoice of $69,013, Alloy has billed $128,413 on its Town contract." },
+    { f:"Alloy, joist removal", r:"Remove three joist sections after the third round", amt:null, when:"September 2026", note:"Invoice requested September 17; not yet priced." },
+    { f:"Alloy (via Silver Maple)", r:"Asbestos dust and debris cleanup, first floor", amt:38613.00, when:"Bid opened June 2026", note:"Contracted through the general contractor, not directly by the Town." },
+    { f:"Stone Environmental", r:"PCB confirmation sampling and closure report", amt:20600.00, when:"Contract with two amendments", note:"$12,824.68 paid so far." }
+  ],
+  leak: { area:8385, rows:[
+    { k:"Before the work", sub:"MERP assessment, Dec 2023", cfm:5172, rep:0.62 },
+    { k:"Progress test", sub:"GMEC, Sept 25, 2026", cfm:3231, rep:0.39, now:1 }
+  ] },
+  pcb: [
+    { r:"Round 1", d:"2026-08-10", res:"14 of 19 samples above the standard", hi:42, next:"Contamination had soaked into the wood subfloor. The first-floor deck was removed under Alloy change order 1, signed August 11." },
+    { r:"Round 2", d:"2026-08-31", res:"One joist above the standard", hi:1.4, next:"The subfloor above that joist had read 28 mg/kg. Neighboring joists were resampled September 2." },
+    { r:"Round 3", d:"2026-09-09", res:"Three joist sections above; everything else below", hi:null, next:"The three sections were removed after structural review. A closure report is to follow." }
+  ],
+  photos: [
+    {id:"n27",dt:"2018-05-18",c:"The front steps and porch in 2018"},
+    {id:"n52",dt:"2021-09-10",c:"Peeling paint on the north side, 2021"},
+    {id:"n82",dt:"2021-12-02",c:"Fallen roof trim in front of the steps, December 2021"},
+    {id:"n62",dt:"2022-07-27",c:"The building from the south lawn, with the chimney, 2022"},
+    {id:"n07",dt:"2022-08-15",c:"Worn paint and rust on the front steps, 2022"},
+    {id:"n11",dt:"2022-08-22",c:"Rotted trim at the corner of a porch roof, 2022"},
+    {id:"n13",dt:"2022-08-22",c:"Peeling paint on the siding above a basement window, 2022"},
+    {id:"n16",dt:"2022-08-22",c:"The roof eave and the brick chimney, 2022"},
+    {id:"n18",dt:"2022-08-22",c:"Rot in the trim at the base of a pilaster, 2022"},
+    {id:"n21",dt:"2022-08-22",c:"Rot along the edge of the side door canopy, 2022"},
+    {id:"n22",dt:"2022-08-22",c:"A worn sill on a basement window, 2022"},
+    {id:"n37",dt:"2024-03-07",c:"The door to the first-floor storage nook, March 2024"},
+    {id:"n43",dt:"2024-03-07",c:"One of the building's fire doors, March 2024"},
+    {id:"n48",dt:"2024-03-07",c:"The oil tank room, March 2024"},
+    {id:"n49",dt:"2024-03-07",c:"The exterior door of the storage nook, March 2024"},
+    {id:"n83",dt:"2024-10-07",c:"Damage at a back corner of the building, October 2024"},
+    {id:"n85",dt:"2024-10-07",c:"Close-up of the back corner damage, October 2024"},
+    {id:"n00",dt:"2026-08-21",c:"The first floor inside the PCB containment, subfloor removed down to the joists"},
+    {id:"n01",dt:"2026-08-21",c:"Joists open to the ceiling below after the subfloor came out"},
+    {id:"n03",dt:"2026-08-21",c:"The open floor framing inside the containment, wide view"},
+    {id:"1716",dt:"2018-07-31",c:"A first-floor reading corner in 2018"},
+    {id:"8660",dt:"2025-04-21",c:"The front steps in April 2025, paint peeling and rust showing"},
+    {id:"8665",dt:"2025-04-21",c:"Damaged siding and trim at the base of a building corner"},
+    {id:"8721",dt:"2025-04-29",c:"The front of the library, April 2025"},
+    {id:"0302",dt:"2025-09-23",c:"Rust bleeding through the paint on the front steps"},
+    {id:"1345",dt:"2026-02-20",c:"A side wall in February"},
+    {id:"1444",dt:"2026-03-18",c:"The basement tank room, with the old fuel oil tank"},
+    {id:"1446",dt:"2026-03-18",c:"The lower level, shelves wrapped in plastic for construction"},
+    {id:"1524",dt:"2026-03-27",c:"A first-floor room opened up to the framing"},
+    {id:"1568",dt:"2026-04-04",c:"Siding removed at the base of a wall, exposing the sill above the stone foundation"},
+    {id:"1571",dt:"2026-04-04",c:"New membrane and house wrap at the base of the walls"},
+    {id:"1573",dt:"2026-04-04",c:"The side door canopy before repair"},
+    {id:"1574",dt:"2026-04-04",c:"A basement window with its surround opened up"},
+    {id:"1590",dt:"2026-04-04",c:"The attic floor before new insulation"},
+    {id:"1591",dt:"2026-04-04",c:"The basement mechanical room and the brick chimney"},
+    {id:"1629",dt:"2026-04-18",c:"House wrap going on along the sidewalk side"},
+    {id:"1637",dt:"2026-04-18",c:"Outdoor heat pump units on their stands"},
+    {id:"1642",dt:"2026-04-18",c:"A ceiling opened above a window, showing the old insulation"},
+    {id:"1645",dt:"2026-04-18",c:"New wallboard high in a reading room, with a ventilation opening"},
+    {id:"1650",dt:"2026-04-18",c:"New ductwork in a framed chase"},
+    {id:"1651",dt:"2026-04-18",c:"The attic after new insulation was blown in"},
+    {id:"1653",dt:"2026-04-18",c:"Ventilation equipment and ductwork on the lower level"},
+    {id:"1862",dt:"2026-05-06",c:"Framing over the basement stairwell"},
+    {id:"1875",dt:"2026-05-06",c:"The front of the library in May"},
+    {id:"1882",dt:"2026-05-08",c:"Damaged trim at a window corner"},
+    {id:"0249",dt:"2026-06-09",c:"The front porch being taken apart"},
+    {id:"0250",dt:"2026-06-09",c:"The brick foundation under the old porch"},
+    {id:"0506",dt:"2026-07-06",c:"New stair framing at the front porch"},
+    {id:"0508",dt:"2026-07-06",c:"New porch decking going down"},
+    {id:"0585",dt:"2026-07-20",c:"The rebuilt front steps"},
+    {id:"0589",dt:"2026-07-20",c:"The new porch deck"},
+    {id:"0595",dt:"2026-07-20",c:"The heating zone controller, labeled by area"},
+    {id:"0969",dt:"2026-08-07",c:"The front steps with the railings back on"},
+    {id:"0972",dt:"2026-08-07",c:"New stair framing in the basement stairwell"},
+    {id:"1167",dt:"2026-08-27",c:"The finished basement stairs"},
+    {id:"1170",dt:"2026-08-27",c:"Heat pump units with their covers"},
+    {id:"1172",dt:"2026-08-27",c:"A corner of the building with its base trim finished"},
+    {id:"1173",dt:"2026-08-27",c:"The side door canopy after repair"},
+    {id:"1176",dt:"2026-08-27",c:"The finished front steps and railings"},
+    {id:"1743",dt:"2026-09-21",c:"A site walkthrough in a reading room, with the floor framing open"},
+    {id:"1744",dt:"2026-09-21",c:"The main room during the September 21 walkthrough"},
+    {id:"1745",dt:"2026-09-21",c:"The main room from beside the window shelving, during the walkthrough"},
+    {id:"1746",dt:"2026-09-21",c:"The first floor under construction, looking through to the back rooms"},
+    {id:"1747",dt:"2026-09-21",c:"A first-floor room with new subfloor going down"},
+    {id:"1751",dt:"2026-09-21",c:"The lower level during the walkthrough, ceiling opened up"},
+    {id:"1752",dt:"2026-09-21",c:"The children's area on the lower level, with the ceiling opened up"},
+    {id:"1753",dt:"2026-09-21",c:"The lower level during the walkthrough, looking toward the back"},
+    {id:"1742",dt:"2026-09-21",c:"The finished enclosure over the basement stairs"},
+    {id:"1748",dt:"2026-09-21",c:"New subfloor going down in a first-floor room"},
+    {id:"1749",dt:"2026-09-21",c:"Subfloor partly down between the stacks, with the floor framing showing"},
+    {id:"1750",dt:"2026-09-21",c:"The lower level with the ceiling opened up"},
+    {id:"1770",dt:"2026-09-23",c:"The front of the library from the walk, with the contractor's sign on the lawn"},
+    {id:"1771",dt:"2026-09-23",c:"The finished front steps, with the center handrail back in place"},
+    {id:"1911",dt:"2026-09-30",c:"A first-floor reading room with new subfloor down"},
+    {id:"1957",dt:"2026-10-07",c:"A reading room with new subfloor, October 7"},
+    {id:"1958",dt:"2026-10-07",c:"Empty shelving along the first floor, looking through to the back rooms"},
+    {id:"1959",dt:"2026-10-07",c:"The main room with the subfloor complete and the shelving emptied"},
+    {id:"1968",dt:"2026-10-08",c:"Radiant heat tubing and aluminum plates under the first floor, seen from the lower level"},
+    {id:"2112",dt:"2026-10-24",c:"Cartons of new flooring stacked in a reading room"},
+    {id:"2114",dt:"2026-10-24",c:"A reading room ready for the new floor"},
+    {id:"2115",dt:"2026-10-24",c:"The main room with the subfloor complete"},
+    {id:"2116",dt:"2026-10-24",c:"A finished room on the lower level"},
+    {id:"2119",dt:"2026-10-24",c:"A small room off the first floor with its door and new lighting"}
+  ],
+  tl: [
+    { d:"1911", t:"Library built to a design by Chas. E. Paige." },
+    { d:"1995", t:"Northern Architects' accessibility plan for the lower level; construction documents and permits follow in 1997.", y:"1995" },
+    { d:"2022-02-22", t:"Energy assessment walkthrough." },
+    { d:"2022-08-22", t:"Photos document rot in exterior trim, including the side door canopy and the base of a pilaster.", ph:["n21","n18"] },
+    { d:"2022-11-11", t:"Historic assessment of the building by Tom Bursey Designs." },
+    { d:"2024-03-07", t:"Photos document the first-floor storage nook, the oil tank room and the fire doors.", ph:["n37","n48"] },
+    { d:"2024-03-12", t:"Town applies for the Capital Projects Fund grant." },
+    { d:"2024-06-18", t:"Level II energy assessment report for the library." },
+    { d:"2024-09-01", t:"<b>Grant period begins.</b> $541,246.15 from the Vermont Department of Libraries; agreement signed September 26." },
+    { d:"2025-04-21", t:"Photos of the exterior show paint failing on the front steps and damaged trim at the base of the walls.", ph:["8660","8665"] },
+    { d:"2025-06-09", t:"Selectboard approves Vermont Integrated Architecture to design the library and Holley Hall projects, after an earlier call for design-build firms drew little response." },
+    { d:"2026-02-19", t:"Silver Maple Construction's contract budget: $534,955.90." },
+    { d:"2026-04-02", t:"Chimney removal added, paid by moving $10,493 out of the roofing allowance.", ph:["1591"] },
+    { d:"2026-04-09", t:"Clay Point Associates samples the building for asbestos, lead and PCBs." },
+    { d:"2026-04-18", t:"Photos from this day show new insulation blown into the attic and the outdoor heat pump units on their stands.", ph:["1651","1637"] },
+    { d:"2026-06-02", t:"Library Board approves $30,725.07 toward the front porch and steps." },
+    { d:"2026-06-09", t:"The front porch and steps are taken apart for rebuilding.", ph:["0249"] },
+    { d:"2026-06-22", t:"<b>Selectboard awards PCB abatement to Alloy</b>, $57,013." },
+    { d:"2026-07-13", t:"Asbestos cleanup reported complete." },
+    { d:"2026-07-20", t:"The rebuilt front steps are in place.", ph:["0585"] },
+    { d:"2026-08-10", t:"First PCB confirmation round: 14 of 19 samples over. The same day, the Town Administrator reports a State increase to the grant; the State's ledger later shows $316,000." },
+    { d:"2026-08-11", t:"Alloy change order 1 signed to remove the first-floor deck." },
+    { d:"2026-08-19", t:"Fifth reimbursement request, $129,645.93, filed with the State." },
+    { d:"2026-08-20", t:"Generator and exterior painting taken out of scope. Silver Maple change order 7, $76,743.30 for the new subfloor, radiant heat and plating, is signed." },
+    { d:"2026-08-21", t:"Photos show the first floor inside the PCB containment, with the subfloor removed down to the joists.", ph:["n00","n01"] },
+    { d:"2026-08-27", t:"The new basement stairs are finished.", ph:["1167"] },
+    { d:"2026-08-31", t:"Second confirmation round: one joist over, at 1.4 mg/kg." },
+    { d:"2026-09-09", t:"Third round: three joist sections to remove. The State's grant ledger, updated the same day, shows $467,117.19 reimbursed so far." },
+    { d:"2026-09-10", t:"Structural engineer on site; written framing guidance follows September 11." },
+    { d:"2026-09-14", t:"Storm window installation scheduled to begin." },
+    { d:"2026-09-16", t:"Flooring moves from solid to engineered oak over the radiant heat warranty issue." },
+    { d:"2026-09-21", t:"Vermont Department of Libraries site visit scheduled. Photos from the day show new subfloor going down on the first floor.", ph:["1748","1749"] },
+    { d:"2026-09-23", t:"Photos show the finished front steps, with the center handrail back in place.", ph:["1771"] },
+    { d:"2026-09-25", t:"Progress blower door test: air leakage down about 38% from the 2023 baseline, 3,231 cfm75 against 5,172." },
+    { d:"2026-09-28", t:"Propane hookup scheduled. The Selectboard's warrant that night includes Alloy's $59,400 change order payment." },
+    { d:"2026-09-30", t:"The Town Administrator's spend summary puts the known cost at $914,807.55 against the $857,246.15 award, with some work not yet priced." },
+    { d:"2026-12-31", t:"<b>Grant deadline.</b> All project work must be complete." }
+  ]
+};
+
+(function(){
+  const $ = s => document.querySelector(s);
+  const usd = (n, c) => n.toLocaleString("en-US",{style:"currency",currency:"USD",
+    minimumFractionDigits:c?2:0, maximumFractionDigits:c?2:0});
+  const usdx = n => (n % 1 ? usd(n,true) : usd(n,false));
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const MONL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const pd = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, (m||1)-1, d||1); };
+  const fmt = s => { const p = s.split("-"); if (p.length===1) return p[0];
+    return MON[+p[1]-1] + " " + (+p[2]) + ", " + p[0]; };
+  const fmtL = s => { const p = s.split("-"); return MONL[+p[1]-1] + " " + (+p[2]) + ", " + p[0]; };
+
+  const asof = pd(P.asof), dl = pd(P.deadline);
+  document.querySelectorAll(".asof").forEach(e => e.textContent = fmtL(P.asof));
+
+  // grant total, computed and checked against the agreement's not-to-exceed
+  const gTotal = Math.round((P.grant.base + P.grant.contingency)*100)/100;
+  if (gTotal !== P.grant.nte) console.warn("Grant total does not reconcile", gTotal, P.grant.nte);
+  const known = P.money.filter(m => m.amt != null && m.col).reduce((a,m) => a + m.amt, 0);
+  const days = Math.round((dl - asof) / 864e5);
+  const fails = P.pcb.length;
+
+  // spending: every total computed from the rows, then checked against the source summary
+  const SPR = P.spend.rows, sum = (a,f) => Math.round(a.reduce((t,r)=>t+f(r),0)*100)/100;
+  const SP = { paid: sum(SPR,r=>r.p), signed: sum(SPR,r=>r.s) };
+  SP.total = Math.round((SP.paid+SP.signed)*100)/100;
+  const G = SPR.filter(r=>r.g==="grant"), Lc = SPR.filter(r=>r.g==="local");
+  SP.gPaid = sum(G,r=>r.p); SP.gSigned = sum(G,r=>r.s); SP.cpf = Math.round((SP.gPaid+SP.gSigned)*100)/100;
+  SP.local = sum(Lc,r=>r.p+r.s);
+  SP.over = Math.round((SP.cpf - P.spend.award)*100)/100;
+  SP.board = Math.round((P.spend.board.porch+P.spend.board.floor)*100)/100;
+  SP.town = Math.round((SP.over + SP.local - SP.board)*100)/100;
+  SP.net = Math.round((SP.town - P.spend.incentives)*100)/100;
+  const CK = P.spend.check;
+  [["paid",SP.paid,CK.paid],["signed",SP.signed,CK.signed],["total",SP.total,CK.total],["grant-type",SP.cpf,CK.cpf],["town",SP.town,CK.town]]
+    .forEach(([k,a,b]) => { if (Math.abs(a-b) > 0.005) console.warn("Spend check failed:", k, a, b); });
+
+  $("#stats").innerHTML = [
+    [usd(gTotal,true), "Grant as awarded", "Base plus contingency, 2024 agreement"],
+    [usd(known,true), "Grant as increased", "Per the State's grant ledger, September 9"],
+    [String(days), "Days to the deadline", "From " + fmt(P.asof) + " to December 31, 2026"],
+    [usd(SP.total,true), "Known cost so far", "Paid and signed, through the September 28 warrant"],
+    [String(fails), "PCB test rounds", "Confirmation sampling, August to September"]
+  ].map(s => `<div class="stat"><div class="n">${s[0]}</div><div class="l">${s[1]}</div><div class="sub2">${s[2]}</div></div>`).join("");
+
+  // money bar (known amounts only)
+  const cols = { "--signal":"var(--signal)", "--sig2":"color-mix(in oklab, var(--signal) 55%, var(--ground))", "--sig3":"var(--accent)" };
+  const bars = P.money.filter(m => m.amt != null && m.col);
+  $("#srcbar").innerHTML = bars.map(m => `<i style="width:${(m.amt/known*100).toFixed(2)}%;background:${cols[m.col]}" title="${m.k}"></i>`).join("");
+  $("#srclab").innerHTML = bars.map(m => `<span class="k"><span class="sw" style="background:${cols[m.col]}"></span>${m.k} <b>${usdx(m.amt)}</b></span>`).join("");
+
+  $("#money tbody").innerHTML = P.money.map(m =>
+    `<tr><td class="nm">${m.k}</td><td class="num">${m.amt!=null?usdx(m.amt):(m.amtx?`<span class="pend">expected</span> ${usdx(m.amtx)}`:'<span class="pend">not set</span>')}</td><td>${m.src}</td></tr>`).join("")
+    + `<tr class="tot"><td>State grant total</td><td class="num">${usdx(known)}</td><td></td></tr>`
+    + `<tr><td class="nm">Paid back so far</td><td class="num">${usdx(P.received.amt)}</td><td>${P.received.note}, updated ${fmtL(P.received.date)}. The fifth request, ${usdx(P.received.pending)}, was filed August 19 and is not yet paid. Another ${usdx(P.spend.unclaimed)} is paid and ready to claim.</td></tr>`;
+  if (Math.abs(known - P.ledgerAlloc) > 0.01) console.warn("Known grant total does not match the State ledger allocation", known, P.ledgerAlloc);
+
+  $("#who tbody").innerHTML = P.who.map(w =>
+    `<tr><td class="nm">${w.f}</td><td>${w.r}${w.note?`<div class="sub2">${w.note}</div>`:""}</td>`
+    + `<td class="num">${w.amt!=null?usdx(w.amt):'<span class="pend">not on record</span>'}</td><td>${w.when||'<span class="pend">not on record</span>'}</td></tr>`).join("");
+
+  const usd0 = v => "$" + Math.round(v).toLocaleString("en-US");
+  $("#cost4").innerHTML = [
+    [usd0(SP.total), "Known cost so far", `${usd0(SP.paid)} paid, ${usd0(SP.signed)} signed and not yet paid`],
+    [usd0(P.spend.award), "State award", "Per the State's grant ledger"],
+    [usd0(SP.over), "Past the award", "Grant-type work beyond what the award covers", 1],
+    [usd0(SP.town), "Town money", `Before ${usd0(P.spend.incentives)} in expected incentives`, 1]
+  ].map(c => `<div class="c${c[3]?' hl':''}"><div class="n">${c[0]}</div><div class="l">${c[1]}</div><div class="s">${c[2]}</div></div>`).join("");
+  $("#sp-count").textContent = "(" + SPR.length + ")";
+  const span = Math.max(SP.cpf, P.spend.award);
+  const pct = v => (v/span*100).toFixed(2)+"%";
+  $("#spbar").innerHTML = `<i style="width:${pct(SP.gPaid)};background:var(--signal)" title="Paid"></i>`
+    + `<i style="width:${pct(SP.gSigned)};background:color-mix(in oklab, var(--signal) 45%, var(--ground))" title="Signed, not paid"></i>`
+    + `<span class="mk" style="left:${pct(P.spend.award)}"><span>Award ${usd(P.spend.award,false)}</span></span>`;
+  $("#splab").innerHTML = `<span class="k"><span class="sw" style="background:var(--signal)"></span>Grant-type work paid <b>${usdx(SP.gPaid)}</b></span>`
+    + `<span class="k"><span class="sw" style="background:color-mix(in oklab, var(--signal) 45%, var(--ground))"></span>Signed, not yet paid <b>${usdx(SP.gSigned)}</b></span>`
+    + `<span class="k">Past the award <b>${usdx(SP.over)}</b></span>`;
+  const row = r => `<tr><td>${r.v}</td><td class="num">${r.p?usdx(r.p):""}</td><td class="num">${r.s?usdx(r.s):""}</td><td class="num">${usdx(Math.round((r.p+r.s)*100)/100)}</td></tr>`;
+  $("#spend tbody").innerHTML =
+      `<tr class="grp"><td colspan="4">Work of the kind the grant pays for</td></tr>` + G.map(row).join("")
+    + `<tr class="tot"><td>Subtotal</td><td class="num">${usdx(SP.gPaid)}</td><td class="num">${usdx(SP.gSigned)}</td><td class="num">${usdx(SP.cpf)}</td></tr>`
+    + `<tr class="grp"><td colspan="4">Local costs outside the grant</td></tr>` + Lc.map(row).join("")
+    + `<tr class="tot"><td>Subtotal</td><td class="num">${usdx(sum(Lc,r=>r.p))}</td><td class="num">${usdx(sum(Lc,r=>r.s))}</td><td class="num">${usdx(SP.local)}</td></tr>`
+    + `<tr class="tot"><td>Total known cost</td><td class="num">${usdx(SP.paid)}</td><td class="num">${usdx(SP.signed)}</td><td class="num">${usdx(SP.total)}</td></tr>`;
+  const BD = SP.board;
+  $("#ladder").innerHTML = [
+    [`Grant-type work, paid and signed, comes to ${usd0(SP.cpf)}. The State award is ${usd0(P.spend.award)}.`, usd0(SP.over), "past the award"],
+    [`Add ${usd0(SP.local)} in local costs outside the grant. Take out ${usd0(BD)} from the Library Board (${usd0(P.spend.board.porch)} for the front porch, ${usd0(P.spend.board.floor)} for the new floor).`, usd0(SP.town), "Town money"],
+    [`Expected incentives of ${usd0(P.spend.incentives)} come off the Town's share.`, SP.net<0 ? usd0(-SP.net) : usd0(SP.net), SP.net<0 ? "covered, with this left over" : "Town money, net"]
+  ].map(r => `<li><div class="t">${r[0]}</div><div class="r">${r[1]}<small>${r[2]}</small></div></li>`).join("");
+  $("#netnote").innerHTML = `<b>What this means.</b> On the costs known today, the expected incentives cover the Town's share. `
+    + `The Town's real exposure is the work not yet priced, listed below. The finish flooring is carried at the $25,600 solid white oak quote; the engineered oak estimate of September 16 was $27,000.`;
+
+  // air leakage: per-square-foot rates computed from cfm and enclosure area, checked against the report
+  const LK = P.leak, lmax = LK.rows[0].cfm, perFt = c => c / LK.area;
+  LK.rows.forEach(r => { if (Math.abs(perFt(r.cfm) - r.rep) > 0.005) console.warn("Leakage rate check failed", r.k); });
+  const refAt = v => (v * LK.area / lmax * 100).toFixed(1) + "%";
+  $("#leak").innerHTML = LK.rows.map(r => `<div class="lk"><div class="nm">${r.k}<small>${r.sub}</small></div>`
+    + `<div class="tr"><i class="${r.now?"now":""}" style="width:${(r.cfm/lmax*100).toFixed(1)}%"></i>`
+    + `<span class="ref" style="left:${refAt(0.50)}"></span><span class="ref" style="left:${refAt(0.30)}"></span></div>`
+    + `<div class="v">${r.cfm.toLocaleString()} cfm75<small>${perFt(r.cfm).toFixed(2)} per sq ft</small></div></div>`).join("");
+  const cut = Math.round((1 - LK.rows[1].cfm / LK.rows[0].cfm) * 100);
+  $("#leaknote").innerHTML = `<b>About ${cut}% less leakage so far.</b> That moves the library from "leaky" to "average" in the assessment's own scale and beats the 25% reduction goal in the Town's 2022 energy summary. `
+    + `It is still above the 0.30 code reference. The tester found the biggest remaining leaks at wiring through the wall top above the electrical panel, at window trim and sash tracks, in the new attic room that houses the ventilation unit, at the boiler vent and sump lid, and where the original building meets the rear addition. A final test follows once those are sealed. The baseline comparison is approximate, because the 2023 test conditions were not documented.`;
+
+  const maxHi = Math.max(...P.pcb.filter(r => r.hi!=null).map(r => r.hi));
+  $("#pcb tbody").innerHTML = P.pcb.map(r => {
+    let meter = '<span class="pend">not stated</span>';
+    if (r.hi != null) {
+      const w = Math.max(3, Math.log10(r.hi+1)/Math.log10(maxHi+1)*100);
+      meter = `<span class="res">${r.hi} mg/kg <span class="bx"><i style="width:${w.toFixed(1)}%"></i></span></span>`;
+    }
+    return `<tr><td class="nm">${r.r}<div class="sub2">${fmt(r.d)}</div></td><td>${r.res}</td><td class="num">${meter}</td><td>${r.next}</td></tr>`;
+  }).join("");
+
+  // photos
+  const ORDER = P.photos.slice().sort((a,b) => a.dt<b.dt?-1:a.dt>b.dt?1:0);
+  const PH = {}; ORDER.forEach((p,i) => { p.i = i; PH[p.id] = p; });
+
+  // timeline as chapters: verify order, assign every entry to a chapter and a category, render
+  const key = s => { const p = s.split("-"); return p[0] + (p[1]||"00") + (p[2]||"00"); };
+  for (let i=1;i<P.tl.length;i++) if (key(P.tl[i].d) < key(P.tl[i-1].d)) console.warn("Timeline out of order at", P.tl[i].d);
+  const CAT = { hist:["Building and conditions","--c-hist"], money:["Money and approvals","--c-money"], work:["Construction","--c-work"], clean:["Hazardous materials","--c-clean"], test:["Energy testing","--c-test"] };
+  const CATOF = {"1911":"hist","1995":"hist","2022-02-22":"test","2022-08-22":"hist","2022-11-11":"hist","2024-03-07":"hist","2024-03-12":"money","2024-06-18":"test","2024-09-01":"money","2025-04-21":"hist","2025-06-09":"money","2026-02-19":"money","2026-04-02":"work","2026-04-09":"clean","2026-04-18":"work","2026-06-02":"money","2026-06-09":"work","2026-06-22":"clean","2026-07-13":"clean","2026-07-20":"work","2026-08-10":"clean","2026-08-11":"clean","2026-08-19":"money","2026-08-20":"money","2026-08-21":"clean","2026-08-27":"work","2026-08-31":"clean","2026-09-09":"clean","2026-09-10":"work","2026-09-14":"work","2026-09-16":"work","2026-09-21":"work","2026-09-23":"work","2026-09-25":"test","2026-09-28":"work","2026-09-30":"money","2026-12-31":"money"};
+  const CHAPTERS = [
+    {t:"The building before the project", from:"1911", to:"2023-12-31", s:"Built in 1911, an accessibility renovation in the 1990s, and energy and historic assessments in 2022."},
+    {t:"Funding and design", from:"2024-01-01", to:"2025-12-31", s:"The grant application, the award and the choice of an architect."},
+    {t:"Construction begins", from:"2026-01-01", to:"2026-05-31", s:"The contract budget, testing for hazardous materials, insulation and heat pumps."},
+    {t:"Abatement and the front porch", from:"2026-06-01", to:"2026-07-31", s:"The PCB contract award, the asbestos cleanup and the rebuilt front steps."},
+    {t:"PCB cleanup and the new floor", from:"2026-08-01", to:"2026-09-16", s:"Three rounds of PCB testing, the first floor taken down to the joists and the floor rebuilt."},
+    {t:"Finishing and closeout", from:"2026-09-17", to:"2026-12-31", s:"Site visits, the progress air leakage test, the spend summary and the grant deadline."}
+  ];
+  const cdot = c => `<span class="cdot" style="background:var(${CAT[c][1]})" aria-hidden="true"></span>`;
+  $("#catkey").innerHTML = Object.keys(CAT).map(k => `<span>${cdot(k)}${CAT[k][0]}</span>`).join("");
+  const dkey = d => d.length === 4 ? d + "-01-01" : d;
+  let covered = 0;
+  $("#chapters").innerHTML = CHAPTERS.map((c, n) => {
+    const es = P.tl.filter(e => dkey(e.d) >= c.from && dkey(e.d) <= c.to); covered += es.length;
+    es.forEach(e => { if (!CATOF[e.d]) console.warn("No category for", e.d); });
+    const counts = Object.keys(CAT).map(k => [k, es.filter(e => CATOF[e.d] === k).length]).filter(x => x[1]);
+    const first = es[0].d, lastd = es[es.length-1].d;
+    const lbl = d => d.length === 10 ? fmt(d) : d;
+    const multi = new Set(es.filter(e => e.d.length === 10).map(e => e.d.slice(0,4))).size > 1;
+    const md = d => { if (d.length !== 10) return d; const p = d.split("-"); return MON[+p[1]-1] + " " + (+p[2]) + (multi ? ", " + p[0] : ""); };
+    const pics = es.flatMap(e => e.ph || []).filter(id => PH[id]);
+    return `<div class="ch"><aside><div class="no">Part ${n+1} of ${CHAPTERS.length}</div><h3>${c.t}</h3>`
+      + `<div class="rng">${lbl(first)} to ${lbl(lastd)} &middot; ${es.length} ${es.length===1?"entry":"entries"}</div>`
+      + `<div class="cbar">${counts.map(([k,v]) => `<i style="width:${(v/es.length*100).toFixed(1)}%;background:var(${CAT[k][1]})" title="${CAT[k][0]}: ${v}"></i>`).join("")}</div>`
+      + `<p class="sum">${c.s}</p></aside><div><ul>`
+      + es.map(e => { const fut = e.d.length === 10 && pd(e.d) > asof;
+          return `<li class="${fut?"fut":""}"><span class="dd">${cdot(CATOF[e.d])}${md(e.d)}</span><span>${e.t}${fut?'<span class="st">Scheduled</span>':""}</span></li>`; }).join("")
+      + `</ul>${pics.length ? `<div class="strip">${pics.map(id => `<button data-i="${PH[id].i}" aria-label="${PH[id].c}"><img loading="lazy" src="img/lml-${id}-t.jpg" alt="${PH[id].c}"></button>`).join("")}</div>` : ""}</div></div>`;
+  }).join("");
+  if (covered !== P.tl.length) console.warn("Chapters cover", covered, "of", P.tl.length, "timeline entries");
+  $("#tlcount").textContent = P.tl.length + " entries in " + CHAPTERS.length + " parts";
+
+  const months = {}; ORDER.forEach(p => { const k = p.dt.slice(0,7); (months[k] = months[k] || []).push(p); });
+  $("#gcount").textContent = ORDER.length + " photos, " + fmt(ORDER[0].dt) + " to " + fmt(ORDER[ORDER.length-1].dt);
+  $("#gallery").innerHTML = Object.keys(months).sort().map(k => {
+    const [y,m] = k.split("-");
+    return `<h3 class="gmonth">${MONL[+m-1]} ${y}<span>${months[k].length} photo${months[k].length==1?"":"s"}</span></h3><div class="grid">`
+      + months[k].map(p => `<button data-i="${p.i}" aria-label="${p.c}"><img loading="lazy" src="img/lml-${p.id}-t.jpg" alt="${p.c}"></button>`).join("") + `</div>`;
+  }).join("");
+  const lb = $("#lb"), li = lb.querySelector("img"), lc = lb.querySelector(".cap");
+  let cur = 0, last = null;
+  const show = i => { cur = (i + ORDER.length) % ORDER.length; const p = ORDER[cur];
+    li.src = "img/lml-" + p.id + ".jpg"; li.alt = p.c;
+    lc.innerHTML = `<b>${fmtL(p.dt)} &middot; ${cur+1} of ${ORDER.length}</b>${p.c}`; };
+  const openLb = i => { last = document.activeElement; show(i); lb.classList.add("on"); document.body.style.overflow = "hidden"; lb.querySelector(".x").focus(); };
+  const closeLb = () => { lb.classList.remove("on"); document.body.style.overflow = ""; if (last) last.focus(); };
+  document.addEventListener("click", e => { const b = e.target.closest("button[data-i]"); if (b) openLb(+b.dataset.i); });
+  lb.querySelector(".x").onclick = closeLb;
+  lb.querySelector(".pv").onclick = () => show(cur-1);
+  lb.querySelector(".nx").onclick = () => show(cur+1);
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+  document.addEventListener("keydown", e => { if (!lb.classList.contains("on")) return;
+    if (e.key === "Escape") closeLb(); else if (e.key === "ArrowLeft") show(cur-1); else if (e.key === "ArrowRight") show(cur+1); });
+  let tx = null;
+  lb.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener("touchend", e => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1)); tx = null; });
+
+  $("#asof").textContent = "Record checked through " + fmtL(P.asof) + " · page updated October 26, 2026";
+})();
+</script>
+
+<script>
+(function(){
+  const tabs=[...document.querySelectorAll('.tablist [role="tab"]')];
+  const keys=tabs.map(t=>t.dataset.tab);
+  const bar=document.querySelector('.tabbar');
+  function show(k, focus, scroll){
+    if(!keys.includes(k)) k=keys[0];
+    tabs.forEach(t=>{const on=t.dataset.tab===k; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
+      document.getElementById('p-'+t.dataset.tab).hidden=!on; if(on) t.scrollIntoView({block:'nearest',inline:'nearest'});});
+    try{ history.replaceState(null,'',k===keys[0]?location.pathname+location.search:'#'+k); }catch(e){}
+    if(scroll){ const y=bar.getBoundingClientRect().top+scrollY; if(scrollY>y) window.scrollTo({top:y}); }
+    if(focus) document.getElementById('t-'+k).focus();
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>show(t.dataset.tab,false,true));
+    t.addEventListener('keydown',e=>{
+      let j=null;
+      if(e.key==='ArrowRight') j=(i+1)%tabs.length; else if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') j=0; else if(e.key==='End') j=tabs.length-1;
+      if(j!==null){ e.preventDefault(); show(keys[j],true,false); }
+    });
+  });
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto,false,true)));
+  const gc=document.getElementById('gcount'), tc=document.getElementById('tc-photos');
+  if(gc&&tc){ const m=gc.textContent.match(/^(\d+)/); if(m) tc.textContent=m[1]; }
+  show((location.hash||'').slice(1),false,false);
+  window.addEventListener('hashchange',()=>show(location.hash.slice(1),false,false));
+})();
+</script>
+</body>
+</html>

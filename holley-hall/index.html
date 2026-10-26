@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Draft &middot; Inside the Holley Hall Retrofit &middot; Bristol, In Progress</title>
+<meta name="description" content="What was done to Holley Hall in 2026, why, who did it, what it cost and what is still open.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --ground:#f9f9f7; --surface:#ffffff;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --rule:#e1e0d9; --rule-strong:#c3c2b7;
+    --accent:#eb6834; --signal:#2a78d6; --live:#1baf7a;
+    --bar:#2a78d6; --bar-2:#8fb6e4; --inert:#c3c2b7; --track:#eeede7;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --ground:#0d0d0d; --surface:#1a1a19;
+      --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --rule:#2c2c2a; --rule-strong:#3d3d3a;
+      --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+      --bar:#5b9ceb; --bar-2:#33587f; --inert:#4a4a46; --track:#262624;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --ground:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --rule:#2c2c2a; --rule-strong:#3d3d3a;
+    --accent:#e5713f; --signal:#3987e5; --live:#22b581;
+    --bar:#5b9ceb; --bar-2:#33587f; --inert:#4a4a46; --track:#262624;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px 92px}
+  a{color:inherit}
+  a:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+
+  .masthead{padding:44px 0 0;display:flex;flex-direction:column;gap:20px}
+  .kicker{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .kicker .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+  .kicker a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+  .kicker a:hover{color:var(--ink)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,7vw,60px);line-height:1.03;
+    letter-spacing:-.02em;margin:0;text-wrap:balance}
+  h1 em{font-style:italic}
+  .standfirst{font-family:var(--display);font-size:clamp(18px,2.4vw,21px);line-height:1.5;
+    color:var(--ink-2);max-width:38em;margin:0}
+  .notice{display:flex;gap:14px;align-items:flex-start;border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--rule);padding:16px 0 18px;margin-top:6px}
+  .notice .flag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent);padding-top:3px;white-space:nowrap}
+  .notice p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:56em}
+
+  h2.sec{font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:.11em;
+    text-transform:uppercase;margin:56px 0 0;border-bottom:1px solid var(--rule-strong);
+    padding-bottom:9px;display:flex;align-items:baseline;justify-content:space-between;
+    gap:16px;flex-wrap:wrap}
+  h2.sec span{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.02em;
+    text-transform:none;color:var(--muted)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:0;margin:26px 0 4px;border-top:1px solid var(--rule)}
+  .stat{border-bottom:1px solid var(--rule);padding:16px 20px 16px 0}
+  .stat .n{font-family:var(--display);font-size:34px;font-weight:400;line-height:1.05;
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .stat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);margin-top:6px}
+  .stat .sub2{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+
+  .prose{max-width:40em}
+  .prose p{margin:18px 0 0;font-size:16.5px;line-height:1.65}
+  .note{border-left:2px solid var(--accent);padding:12px 0 12px 16px;margin:22px 0 4px;
+    font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:70em}
+  .note b{color:var(--ink)}
+
+  /* scope groups */
+  .scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 36px;margin-top:10px}
+  .grp{border-top:1px solid var(--rule);padding:18px 0 6px}
+  .grp h3{font-family:var(--display);font-weight:400;font-size:23px;margin:0 0 8px;letter-spacing:-.01em}
+  .grp ul{margin:0;padding:0;list-style:none}
+  .grp li{position:relative;padding:5px 0 5px 22px;font-size:15px;line-height:1.5}
+  .grp li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:50%;background:var(--live)}
+  .grp li.unc::before{background:transparent;border:1.5px solid var(--muted);width:7px;height:7px}
+  .grp li.unc{color:var(--ink-2)}
+  .legend{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .legend .k{display:inline-flex;gap:7px;align-items:center}
+  .legend .d{width:8px;height:8px;border-radius:50%;background:var(--live);display:inline-block}
+  .legend .d.o{background:transparent;border:1.5px solid var(--muted)}
+
+  /* bars */
+  .bars{margin-top:22px}
+  .brow{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;gap:6px 16px;align-items:center;
+    padding:9px 0;border-top:1px solid var(--rule)}
+  .brow:first-child{border-top:none}
+  .brow .nm{font-size:14.5px;font-weight:600;line-height:1.3}
+  .brow .nm small{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.03em}
+  .brow .tr{height:12px;background:var(--track);border-radius:3px;overflow:hidden}
+  .brow .tr i{display:block;height:100%;background:var(--bar);border-radius:3px}
+  .brow .tr i.soft{background:var(--bar-2)}
+  .brow .tr i.empty{background:repeating-linear-gradient(45deg,var(--inert) 0 3px,transparent 3px 7px)}
+  .brow .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+  /* timeline */
+  .tl{margin:22px 0 0;padding:0;list-style:none;border-left:1px solid var(--rule-strong)}
+  .tl li{position:relative;padding:0 0 20px 26px}
+  .tl li::before{content:"";position:absolute;left:-5px;top:8px;width:9px;height:9px;border-radius:50%;
+    background:var(--ground);border:2px solid var(--accent)}
+  .tl li.fut::before{border-color:var(--muted);border-style:dashed}
+  .tl .dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .tl .ev{font-size:15.5px;line-height:1.5;margin-top:2px;max-width:48em}
+  .tl .ev b{font-weight:600}
+
+  /* table */
+  .tbl{overflow-x:auto;margin-top:18px}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+  th{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);text-align:left;padding:8px 14px 8px 0;border-bottom:1px solid var(--rule-strong)}
+  td{padding:10px 14px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px;white-space:nowrap}
+  tr.tot td{font-weight:700;border-top:1px solid var(--ink);border-bottom:none}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 6px;border-radius:3px;border:1px solid var(--rule-strong);color:var(--ink-2);white-space:nowrap}
+  .tag.ok{border-color:var(--live);color:var(--live)}
+
+  .open{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .card{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px}
+  .card h4{margin:0 0 6px;font-size:15px}
+  .card p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-2)}
+
+  .firms{columns:2 280px;column-gap:36px;margin-top:16px;padding:0;list-style:none}
+  .firms li{break-inside:avoid;padding:8px 0;border-top:1px solid var(--rule);font-size:15px}
+  .firms li span{display:block;font-size:13.5px;color:var(--ink-2)}
+
+  footer{margin-top:72px;border-top:2px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:14px}
+  footer p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-2);max-width:72ch}
+  footer p b{color:var(--ink)}
+  footer .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  /* photos */
+  .tl .ph{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .tl .ph button{padding:0;border:0;background:none;cursor:zoom-in;display:flex;flex-direction:column;
+    gap:4px;text-align:left;width:220px;max-width:calc(50% - 5px)}
+  .tl .ph img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;display:block;background:var(--track)}
+  .tl .ph span{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--muted);line-height:1.35}
+  .gmonth{font-family:var(--display);font-weight:400;font-size:23px;margin:30px 0 10px;display:flex;
+    align-items:baseline;gap:12px}
+  .gmonth span{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+  .grid button{padding:0;border:0;background:var(--track);cursor:zoom-in;border-radius:4px;overflow:hidden;aspect-ratio:1}
+  .grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+  .grid button:hover img{transform:scale(1.03)}
+  .tl .ph button:focus-visible,.grid button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  #lb{position:fixed;inset:0;background:rgba(8,8,8,.94);display:none;z-index:50;
+    flex-direction:column;align-items:center;justify-content:center;padding:48px 16px 20px}
+  #lb.on{display:flex}
+  #lb img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain;border-radius:3px}
+  #lb .cap{color:#e8e7e2;font-size:14.5px;line-height:1.5;margin-top:12px;max-width:60em;text-align:center}
+  #lb .cap b{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:#b5b4ad;display:block;margin-bottom:2px}
+  #lb button{position:absolute;background:rgba(255,255,255,.1);color:#fff;border:0;border-radius:50%;
+    width:44px;height:44px;font-size:22px;line-height:44px;cursor:pointer;font-family:var(--body)}
+  #lb button:hover{background:rgba(255,255,255,.22)}
+  #lb .x{top:12px;right:12px} #lb .pv{left:12px;top:50%} #lb .nx{right:12px;top:50%}
+
+  @media (max-width:600px){
+    .grid{grid-template-columns:repeat(3,1fr);gap:5px}
+    .wrap{padding:0 16px 72px}
+    .brow{grid-template-columns:1fr auto}
+    .brow .tr{grid-column:1/-1;grid-row:2}
+    .stat .n{font-size:30px}
+  }
+  /* project partners: credits grid */
+  .credits{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:28px}
+  .credits li{border-top:1px solid var(--rule);padding:14px 0 18px;display:flex;flex-direction:column;gap:12px}
+  .credits li:nth-child(-n+4){border-top:0}
+  .credits .role{font-family:var(--mono);font-size:10.5px;font-weight:500;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);min-height:2.8em}
+  .credits .slot{height:72px;display:flex;align-items:center}
+  .credits .nm{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+  .lgo{position:relative;display:inline-block;flex:0 0 auto;max-width:100%}
+  .lgo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:left center}
+  .lgo .w{display:none}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lgo .c{display:none}:root:not([data-theme="light"]) .lgo .w{display:block;opacity:.88}}
+  :root[data-theme="dark"] .lgo .c{display:none} :root[data-theme="dark"] .lgo .w{display:block;opacity:.88}
+  :root[data-theme="light"] .lgo .c{display:block} :root[data-theme="light"] .lgo .w{display:none}
+  .subhd{font-family:var(--display);font-weight:400;font-size:23px;margin:36px 0 0}
+  @media (max-width:640px){.credits{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:18px}.credits li:nth-child(3),.credits li:nth-child(4){border-top:1px solid var(--rule)}}
+  /* thank you */
+  .thanks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px;margin-top:20px}
+  .thanks .grp2{border-top:1px solid var(--rule);padding:14px 0 16px;break-inside:avoid}
+  .thanks h3{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .thanks ul{list-style:none;margin:0;padding:0}
+  .thanks li{font-size:14.5px;line-height:1.45;padding:3px 0}
+  .thanks li span{color:var(--ink-2);font-size:13px}
+  .thanks .cf{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-left:6px;white-space:nowrap}
+  .draftflag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:1px 6px;margin-left:8px}
+  @media (max-width:820px){.thanks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.thanks{grid-template-columns:1fr}}
+  .hero{margin:30px 0 0}
+  .hero img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 55%;border-radius:6px;display:block;background:var(--track)}
+  .hero figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);margin-top:8px}
+
+  /* timeline chapters */
+  :root{ --c-hist:#b58a2b; --c-money:#2a78d6; --c-work:#1baf7a; --c-clean:#b4342b; --c-test:#8659c5; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --c-hist:#a8791c; --c-money:#4f93e6; --c-work:#2aa15f; --c-clean:#d15448; --c-test:#9b6ad4; } }
+  :root[data-theme="dark"]{ --c-hist:#a8791c; --c-money:#4f93e6; --c-work:#2aa15f; --c-clean:#d15448; --c-test:#9b6ad4; }
+  .catkey{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:16px 0 18px}
+  .catkey span{display:inline-flex;align-items:center;gap:7px}
+  .cdot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;display:inline-block}
+  .ch{display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 32px;border-top:1px solid var(--rule-strong);padding:24px 0 26px}
+  .ch:first-child{border-top:2px solid var(--ink)}
+  .ch .no{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .ch h3{font-family:var(--display);font-weight:400;font-size:27px;line-height:1.15;margin:6px 0 4px;text-wrap:balance}
+  .ch .rng{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+  .ch .cbar{height:6px;border-radius:3px;background:var(--track);margin-top:12px;overflow:hidden;display:flex}
+  .ch .cbar i{display:block;height:100%}
+  .ch .sum{font-size:14px;color:var(--ink-2);margin:12px 0 0;line-height:1.5}
+  .ch ul{list-style:none;margin:0;padding:0}
+  .ch li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.5}
+  .ch li:last-child{border-bottom:0}
+  .ch li .dd{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:3px;letter-spacing:.03em;display:flex;gap:7px;align-items:flex-start}
+  .ch li .dd .cdot{margin-top:3px}
+  .ch li.fut{color:var(--ink-2)}
+  .ch li .st{font-family:var(--mono);font-size:10px;color:var(--signal);letter-spacing:.08em;text-transform:uppercase;margin-left:6px}
+  .ch .strip{display:flex;gap:8px;margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .ch .strip button{padding:0;border:0;background:none;cursor:zoom-in;flex:0 0 auto}
+  .ch .strip img{width:150px;aspect-ratio:4/3;object-fit:cover;border-radius:4px;background:var(--track);display:block}
+  .ch .strip button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  @media (max-width:700px){.ch{grid-template-columns:minmax(0,1fr)}.ch aside{margin-bottom:12px}}
+
+  /* tabs */
+  .tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ground);
+    margin:30px 0 0;padding:10px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule-strong)}
+  .tablist{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tablist::-webkit-scrollbar{display:none}
+  @media (max-width:760px){.tablist{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:28px}}
+  .tablist button{flex:0 0 auto;border:1px solid transparent;background:none;cursor:pointer;font-family:var(--body);
+    font-size:15.5px;font-weight:600;color:var(--ink-2);padding:9px 16px;border-radius:999px;white-space:nowrap;
+    transition:background .15s,color .15s,border-color .15s}
+  .tablist button:hover{color:var(--ink);border-color:var(--rule-strong)}
+  .tablist button[aria-selected="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+  .tablist button:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  .tablist .tc{margin-left:7px;font-family:var(--mono);font-size:11.5px;font-weight:400;opacity:.7}
+  @media (prefers-reduced-motion:reduce){.tablist button{transition:none}}
+  .panel{outline:none;padding-top:8px}
+  .panel > h2.sec:first-child{margin-top:34px}
+  .panel > .hero:first-child{margin-top:28px}
+  .pnext{margin-top:48px;border-top:1px solid var(--rule);padding-top:16px;display:flex;justify-content:flex-end}
+  .pnext button{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);border-radius:4px;
+    padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .pnext button:hover{border-color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="dot"></span>
+      <a href="../">Bristol, In Progress</a>
+      <span>&middot;</span>
+      <span>Holley Hall</span>
+      <span>&middot;</span>
+      <span class="draftflag">Draft</span>
+    </div>
+
+    <h1><em>Inside the</em> Holley Hall <em>retrofit</em></h1>
+
+    <p class="standfirst">
+      From March to September 2026 the upper floor of Holley Hall was a construction site while
+      crews insulated its walls, sealed its windows and added heat pumps and fresh-air ventilation. A state energy
+      grant paid for most of it. This page covers what was done, why, who did it, what it cost and
+      what is still open.
+    </p>
+
+    <div class="notice">
+      <span class="flag">Draft</span>
+      <p>
+        This page is a draft. Figures, names, dates and photos are still being checked and may
+        change before it is final.
+      </p>
+    </div>
+
+    <div class="notice">
+      <span class="flag">Please note</span>
+      <p>
+        This is my own page, not an official Town of Bristol publication, and nothing here speaks
+        for the Selectboard. Contracts, invoices and grant records for the project are public
+        records held by the Town.
+      </p>
+    </div>
+  </header>
+
+  <nav class="tabbar" aria-label="Sections">
+    <div class="tablist" role="tablist">
+      <button role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button>
+      <button role="tab" id="t-work" aria-controls="p-work" aria-selected="false" tabindex="-1" data-tab="work">The work</button>
+      <button role="tab" id="t-money" aria-controls="p-money" aria-selected="false" tabindex="-1" data-tab="money">Money</button>
+      <button role="tab" id="t-people" aria-controls="p-people" aria-selected="false" tabindex="-1" data-tab="people">People</button>
+      <button role="tab" id="t-timeline" aria-controls="p-timeline" aria-selected="false" tabindex="-1" data-tab="timeline">Timeline</button>
+      <button role="tab" id="t-photos" aria-controls="p-photos" aria-selected="false" tabindex="-1" data-tab="photos">Photos<span class="tc" id="tc-photos"></span></button>
+    </div>
+  </nav>
+
+  <section class="panel" id="p-overview" role="tabpanel" aria-labelledby="t-overview" tabindex="0">
+  <figure class="hero">
+    <img src="img/hh-1945.jpg" alt="The finished meeting hall in Holley Hall, looking across the wood floor toward the balcony and its arched stained glass window">
+    <figcaption>The finished meeting hall, October 2, 2026</figcaption>
+  </figure>
+
+  <section class="stats" id="stats"></section>
+
+  <h2 class="sec">The building <span>1884 to today</span></h2>
+  <div class="prose">
+    <p>
+      Holley Hall was designed by architect C.W. Damon of Haverhill, Massachusetts, and completed in
+      November 1884. It has served as Bristol's town hall ever since. The Bristol Cornet Band was the
+      first group to perform in the hall, in January 1885, and it has hosted plays, dances, concerts
+      and craft shows in the years since. The building is listed on the National Register of
+      Historic Places.
+    </p>
+    <p>
+      Today it holds the Town offices, Town Meeting, Selectboard meetings, a polling place and
+      Recreation Department programs, and it is a designated emergency shelter. Volunteers built an
+      accessible ramp on the west side in 1991. A 2010 renovation corrected high radon levels,
+      renovated the first-floor offices, repaired the roof and the hall's balcony, and added a stair
+      and lift tower on the west side. A Cultural Facilities grant paid for new stage lighting and a
+      movie screen at the same time.
+    </p>
+  </div>
+
+  <h2 class="sec">Why the work was done <span>From the 2024 energy assessment and scope of work</span></h2>
+  <div class="prose">
+    <p>
+      Holley Hall is a historic two-story brick building of about 7,800 square feet that serves as
+      Town office and community space, with a large meeting hall and stage on the second floor.
+      A 2010 renovation insulated the lower level and the attic well, but the upper-floor walls
+      were left alone: a single layer of brick over wood framing with little or no insulation,
+      single-pane windows and uninsulated doors.
+    </p>
+    <p>
+      The whole building is heated by one oil-fired boiler, and that is still the case. The lower
+      level also has heat pumps in each office area and the conference room, along with heat
+      recovery ventilation (HRV). The upper floor had no mechanical
+      ventilation and no cooling, so the hall was cold and drafty in winter and, in the energy
+      assessor's words, "very uncomfortable in hot weather." The assessment also pointed out that
+      heat pumps would let the hall serve as an emergency heating and cooling center.
+    </p>
+  </div>
+
+  <h2 class="sec">Still open <span>As of <span id="asofshort"></span></span></h2>
+  <div class="open" id="open"></div>
+
+
+    <div class="pnext"><button type="button" data-goto="work">Next: The work <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-work" role="tabpanel" aria-labelledby="t-work" tabindex="0" hidden>
+  <h2 class="sec">What was done <span>Upper floor, tower office and lobby</span></h2>
+  <div class="scope" id="scope"></div>
+
+  <h2 class="sec">Is the building tighter? <span>Blower door tests, air leakage at 75 pascals</span></h2>
+  <div class="bars" id="leak"></div>
+  <p class="note">
+    <b>How to read this.</b> A blower door test depressurizes the building with a fan and measures
+    how much air leaks in. Lower is better. The mid-project test was taken before every air barrier
+    was finished. The final test on August 10, 2026, after the work was complete, measured
+    <b><span id="finalcut"></span> less leakage than before the project</b>. Per square foot of
+    building shell, the hall went from 1.00 cfm, which the 2024 assessment rated "extremely
+    leaky," to 0.42 cfm. The consultant places that in the range of average construction, close
+    to the 0.30 cfm reference Vermont's commercial energy code uses for new buildings.
+  </p>
+
+
+    <div class="pnext"><button type="button" data-goto="money">Next: Money <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-money" role="tabpanel" aria-labelledby="t-money" tabindex="0" hidden>
+  <h2 class="sec">What it cost <span id="costsub"></span></h2>
+  <div class="prose">
+    <p>
+      The State's Municipal Energy Resilience Program grant paid for most of the work. It required
+      no local match, and the State paid the full award in five payments between February and
+      August 2026. The Town covers the rest: it set aside a $150,000 reserve for the project, and
+      costs have now passed that reserve too.
+    </p>
+  </div>
+  <div class="tbl"><table id="costtbl"></table></div>
+
+  <h2 class="sec">Where the money went</h2>
+  <div class="bars" id="vend"></div>
+
+  <h2 class="sec">Utility incentives <span>not yet paid</span></h2>
+  <div class="tbl"><table id="inctbl"></table></div>
+  <p class="note">
+    <b>What these figures are not.</b> They count bills the Town has paid through the
+    September 28, 2026 check warrant, plus signed work not yet billed. A few items are not priced
+    yet and will add to the total: a replacement for the dropped acoustic ceiling finish, three
+    heat pump wall controllers, exterior fascia painting, and architect time through closeout,
+    which is billed hourly. A separate roof repair paid through the Town's insurance is not part
+    of this project and is not counted. Incentives are shown at their maximum; none had been paid
+    as of this page's date.
+  </p>
+
+
+    <div class="pnext"><button type="button" data-goto="people">Next: People <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-people" role="tabpanel" aria-labelledby="t-people" tabindex="0" hidden>
+  <h2 class="sec">Who did the work <span>Project partners</span></h2>
+  <ul class="credits">
+    <li><div class="role">General contractor and mechanical</div><div class="slot"><span class="lgo" style="height:51px;width:85px"><img class="c" src="img/partners/silver-maple.png" alt="Silver Maple Construction logo" loading="lazy"><img class="w" src="img/partners/silver-maple-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Silver Maple Construction</div></li>
+    <li><div class="role">Architect</div><div class="slot"><span class="lgo" style="height:52px;width:83px"><img class="c" src="img/partners/via.png" alt="Vermont Integrated Architecture logo" loading="lazy"><img class="w" src="img/partners/via-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Vermont Integrated Architecture</div></li>
+    <li><div class="role">MEP engineering</div><div class="slot"><span class="lgo" style="height:50px;width:87px"><img class="c" src="img/partners/dubois-king.png" alt="DuBois &amp; King logo" loading="lazy"><img class="w" src="img/partners/dubois-king-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">DuBois &amp; King</div></li>
+    <li><div class="role">Structural engineering</div><div class="slot"><span class="lgo" style="height:33px;width:131px"><img class="c" src="img/partners/engineering-ventures.png" alt="Engineering Ventures logo" loading="lazy"><img class="w" src="img/partners/engineering-ventures-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Engineering Ventures</div></li>
+    <li><div class="role">Electrical</div><div class="slot"><span class="lgo" style="height:66px;width:66px"><img class="c" src="img/partners/smith-mcclain.png" alt="Smith &amp; McClain logo" loading="lazy"><img class="w" src="img/partners/smith-mcclain-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Smith &amp; McClain</div></li>
+    <li><div class="role">Envelope commissioning</div><div class="slot"><span class="lgo" style="height:43px;width:102px"><img class="c" src="img/partners/gmec.png" alt="Green Mountain Enclosure Consulting logo" loading="lazy"><img class="w" src="img/partners/gmec-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">Green Mountain Enclosure Consulting</div></li>
+    <li><div class="role">Roofing and slate</div><div class="slot"><span class="lgo" style="height:32px;width:135px"><img class="c" src="img/partners/g-helms.png" alt="G. Helms Construction logo" loading="lazy"><img class="w" src="img/partners/g-helms-w.png" alt="" aria-hidden="true" loading="lazy"></span></div><div class="nm">G. Helms Construction</div></li>
+  </ul>
+
+  <h2 class="sec">Also on the project</h2>
+  <ul class="firms" id="firms"></ul>
+
+  <h2 class="sec">Thank you <span>Draft list<span class="draftflag">Under review</span></span></h2>
+  <p class="note" style="margin-top:18px"><b>A project like this takes a lot of people.</b> Thank you to everyone who planned, built, tested, funded, inspected and put up with the work.</p>
+  <div class="thanks">
+    <div class="grp2"><h3>Town staff</h3><ul><li>Greg Faust, <span>Town Administrator</span></li><li>Freeda Powers, <span>Grant Administrator</span></li><li>Sharon Lucia, <span>Town Clerk and Treasurer</span></li><li>Kris Perlee, <span>Assistant Clerk and Treasurer</span></li><li>AZ Larsen, <span>Planning and Zoning Administrator</span></li></ul></div>
+    <div class="grp2"><h3>Recreation Department</h3><ul><li>Meridith McFarland, <span>Recreation Director</span></li><li>Aidan Lenihan, <span>Parks Manager</span></li></ul></div>
+    <div class="grp2"><h3>Selectboard</h3><ul><li>Ian Albinson</li><li>Joel Bouvier</li><li>Peeker Heffernan</li><li>Michelle Perlee</li><li>Jessica Teets</li></ul></div>
+    <div class="grp2"><h3>Bristol Energy Committee</h3><ul><li>David Flaschenriem</li><li>Allison Pouliot</li><li>Ben Skolozdra</li></ul></div>
+    <div class="grp2"><h3>Efficiency programs</h3><ul><li>Emily Eckert, <span>Efficiency Vermont</span></li><li>Matt Sharpe, <span>Efficiency Vermont</span></li><li>Eli Pereira, <span>Green Mountain Power</span></li></ul></div>
+    <div class="grp2"><h3>State of Vermont</h3><ul><li>Marty Gillies, <span>Buildings and General Services</span></li><li>Brian Sewell, <span>Buildings and General Services</span></li><li>Greg Socinski, <span>Division for Historic Preservation</span></li><li>Joshua Maxham, <span>Assistant State Fire Marshal</span></li></ul></div>
+    <div class="grp2"><h3>Regional planning</h3><ul><li>Jolyon Larson, <span>Addison County Regional Planning Commission</span></li></ul></div>
+  </div>
+
+
+    <div class="pnext"><button type="button" data-goto="timeline">Next: Timeline <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-timeline" role="tabpanel" aria-labelledby="t-timeline" tabindex="0" hidden>
+  <h2 class="sec">Timeline <span id="tlcount"></span></h2>
+  <div class="catkey" id="catkey"></div>
+  <div id="chapters"></div>
+
+
+    <div class="pnext"><button type="button" data-goto="photos">Next: Photos <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-photos" role="tabpanel" aria-labelledby="t-photos" tabindex="0" hidden>
+  <h2 class="sec">Photos <span id="gcount"></span></h2>
+  <p class="note" style="margin-top:18px">
+    <b>About these photos.</b> They were taken during site visits and are arranged by the date
+    each was taken. Tap any photo to see it larger.
+  </p>
+  <div id="gallery"></div>
+
+  </section>
+
+  <div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="x" aria-label="Close">&times;</button>
+    <button class="pv" aria-label="Previous photo">&#8249;</button>
+    <button class="nx" aria-label="Next photo">&#8250;</button>
+    <img alt="">
+    <div class="cap"></div>
+  </div>
+
+  <footer>
+    <p>
+      <b>Sources.</b> Grant amount, dates and scope come from the executed MERP implementation grant
+      agreement (grant #01155-A172-5443). Building history comes from the Town's 2024 State Historic Preservation grant application, the Division for Historic Preservation's 2010 review of the renovation, and the Town's 2000 and 2001 historic preservation grant files. Building conditions come from the Level II Energy
+      Assessment (June 18, 2024) and the project scope of work (December 2024). Blower door figures
+      come from Green Mountain Enclosure Consulting's progress test report (June 1, 2026) and final
+      airtightness test report (August 11, 2026), which restates the assessment's baseline test. Contract pricing comes from Silver Maple Construction's budget for contract (January 22,
+      2026). Cost and payment figures come from the Town's spend-against-funding tally of every
+      check warrant through September 28, 2026 and the State's grant payments (dated September
+      30, 2026). Incentive figures come from Green Mountain Power's letter of support (corrected
+      July 15, 2026) and Efficiency Vermont's weatherization offer (July 22, 2026). Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Milestones come from the weekly owner, architect and contractor meeting
+      notes and project correspondence. Photos come from the Town's project photo folder; dates
+      are read from each photo's own camera data. They were resized for the web and all location
+      and camera data was removed.
+    </p>
+    <p>
+      <b>How the numbers were checked.</b> I re-added the project's warrant lines one by one and
+      they match the Town's tally to the penny: $506,451.23 paid. The vendor lines on this page
+      are summed as the page loads and must equal the known cost, and the funding rows must
+      reconcile to it; the page shows a warning if either check fails. The five grant payments
+      add up to the full award. The leakage reduction is computed from the two test results
+      rather than typed in, and both figures match the consultant's reports: 33% at mid-project and 58% at the final test.
+    </p>
+    <p>
+      <b>Bristol, In Progress</b> is written and maintained by Ian Albinson, one of five members of
+      the Bristol Selectboard. It is a personal project. It is not an official publication of the
+      Town of Bristol, it is not reviewed or approved by the Selectboard, and it does not speak for
+      the Town.
+    </p>
+    <p class="meta" id="asof"></p>
+  </footer>
+</div>
+
+<script>
+var DATA={
+ asof:"2026-09-30",
+ grant:325853.52,
+ sqft:7800,
+ leak:[
+  {label:"Before work",sub:"December 2023 baseline",v:16155},
+  {label:"Mid-project",sub:"May 28, 2026",v:10800},
+  {label:"Final",sub:"August 10, 2026",v:6723}
+ ],
+ scope:[
+  {h:"Walls",items:[
+   ["Air-sealed the exterior sheathing and taped the seams",1],
+   ["Dense-packed cellulose insulation in the hall, stage, side rooms, office and tower",1],
+   ["Added a vapor control membrane and 1½ inches of continuous wood-fiber insulation inside the walls",1],
+   ["Re-finished the walls and reinstalled the wainscoting and trim",1]]},
+  {h:"Windows and doors",items:[
+   ["Repaired 15 windows",1],
+   ["Installed new interior storm windows",1],
+   ["Weatherstripped exterior doors",1]]},
+  {h:"Heating, cooling and fresh air",items:[
+   ["Two ducted air-source heat pumps serving the meeting hall",1],
+   ["A wall-mounted heat pump in the tower office",1],
+   ["Two energy recovery ventilators under the stage, bringing fresh air to the upper floor, which had no mechanical ventilation before",1],
+   ["Programmable thermostats",1]]},
+  {h:"Lighting and finishes",items:[
+   ["LED lights under the balcony",1],
+   ["Smooth-finish drywall on the east wall of the hall",1],
+   ["Painting throughout, and new carpet in the Recreation office",1]]}
+ ],
+ timeline:[
+  {d:"2010",e:"Earlier renovation insulates the lower level and attic. The upper-floor walls are left as they were."},
+  {d:"June 18, 2024",e:"<b>Level II energy assessment.</b> It reports a baseline blower door test of 16,155 cfm of air leakage."},
+  {d:"September 27, 2024",e:"The Bristol Energy Committee submits the MERP implementation grant application."},
+  {d:"December 16, 2024",e:"<b>Grant awarded</b>, $325,853.52, with a completion deadline of December 31, 2026."},
+  {d:"February 10, 2025",e:"The Town asks design firms for letters of interest."},
+  {d:"June 11, 2025",e:"Design contract signed with Vermont Integrated Architecture (VIA)."},
+  {d:"June 19, 2025",e:"Project sent to the Vermont Division for Historic Preservation for review."},
+  {d:"January 22, 2026",e:"<b>Contractor pricing.</b> Silver Maple Construction presents a base price of $399,781.65."},
+  {d:"February 11, 2026",e:"First grant payment from the State, for design bills."},
+  {d:"February 20, 2026",e:"State building permit applications sent to the Division of Fire Safety."},
+  {d:"Early March 2026",e:"The Recreation office moves out to temporary space."},
+  {d:"March 9, 2026",ph:["2345","1420"],e:"<b>Construction starts</b> with demolition."},
+  {d:"May 22, 2026",ph:["1662","1960"],e:"Insulation, sheathing and taping complete."},
+  {d:"May 28, 2026",ph:["0277"],e:"Mid-project blower door test: about 10,800 cfm, roughly a third less leakage than baseline."},
+  {d:"July 24, 2026",ph:["0413","0527"],e:"Drywall and painting complete."},
+  {d:"August 5, 2026",e:"Storm windows installed."},
+  {d:"August 10, 2026",e:"<b>Final blower door test:</b> 6,723 cfm, 58% less leakage than before the project."},
+  {d:"August 14, 2026",ph:["0963"],e:"Punch list walkthrough with the contractor and architect."},
+  {d:"August 24, 2026",e:"<b>Grant paid in full.</b> The State makes its fifth and final payment, completing the $325,853.52 award."},
+  {d:"September 9, 2026",ph:["1611","1607"],e:"<b>Fire marshal's final inspection.</b> The building passes and receives a conditional certificate of occupancy."},
+  {d:"September 17, 2026",ph:["1617"],e:"Recreation staff move back into their office. Staff training on the new mechanical systems is scheduled the same day."},
+  {d:"September 25, 2026",e:"Change order for balcony repairs signed, $12,942.06."}
+ ],
+ paid:506451.23,
+ signed:12942.06,
+ reserve:150000,
+ vendors:[
+  {k:"Silver Maple Construction",sub:"General contractor, including the balcony change order",v:450888.76},
+  {k:"Vermont Integrated Architecture",sub:"Design and site visits, Holley Hall share",v:46724.63},
+  {k:"G. Helms Construction",sub:"Dormer flashing and slate",v:13444.10},
+  {k:"The Royal Group",sub:"Alarm work",v:5059.80},
+  {k:"Green Mountain Enclosure Consulting",sub:"Airtightness testing",v:2550.00},
+  {k:"Dark Star Lighting",v:520.00},
+  {k:"Paquette",sub:"Storage container during the work",v:206.00}
+ ],
+ incentives:[
+  {k:"Green Mountain Power",what:"Heat pump incentive, based on replacing about 1,267 gallons of heating oil a year",v:10652.05,st:"Estimate, conditional on inspection"},
+  {k:"Efficiency Vermont",what:"Weatherization: 75% of insulation and air-sealing costs",v:10000,st:"Maximum; agreement signed September 2026"}
+ ],
+ open:[
+  {h:"Balcony window guardrail",p:"The fire marshal's certificate is conditional on a guardrail at the balcony window. It has been designed and is not yet installed."},
+  {h:"Hall ceiling finish",p:"The sprayed acoustic ceiling was dropped from the project on August 19. The architect is working up a lower-cost alternative, which has not been priced."},
+  {h:"Electrical punch list",p:"A handful of small items, such as a lobby fixture and an office light switch."},
+  {h:"Incentive payments",p:"Green Mountain Power pays after installation and inspection. Efficiency Vermont is waiting on the ventilation equipment invoices. Neither has paid yet."},
+  {h:"Final cost",p:"The State grant is fully paid, so remaining costs fall to the Town. A few items are still unpriced, and architect time is billed hourly through closeout."}
+ ],
+ photos:[
+  {id:"2331",dt:"2026-02-24",c:"Stairs to the stage, before work began"},
+  {id:"2340",dt:"2026-02-24",c:"The original baseboard radiators along the hall wall"},
+  {id:"2345",dt:"2026-02-24",c:"The meeting hall before work began, looking toward the stage"},
+  {id:"2348",dt:"2026-02-24",c:"One of the hall's stained glass windows"},
+  {id:"2350",dt:"2026-02-24",c:"The hall from the balcony, before work began"},
+  {id:"1415",dt:"2026-03-10",c:"First openings cut into the plaster wall"},
+  {id:"1420",dt:"2026-03-12",c:"Walls opened to the framing under the balcony"},
+  {id:"1533",dt:"2026-03-27",c:"The tower office stripped to the studs"},
+  {id:"1535",dt:"2026-03-27",c:"A tower office window with the framing exposed"},
+  {id:"1661",dt:"2026-04-18",c:"The hall with new plywood sheathing going up"},
+  {id:"1662",dt:"2026-04-18",c:"New plywood sheathing along the hall wall"},
+  {id:"1665",dt:"2026-04-18",c:"A stained glass window framed by new sheathing"},
+  {id:"1671",dt:"2026-04-18",c:"The hall from the balcony during sheathing"},
+  {id:"1675",dt:"2026-04-18",c:"The tower office, old framing still exposed"},
+  {id:"1885",dt:"2026-05-08",c:"The stage wall, sheathed and taped for air sealing"},
+  {id:"1960",dt:"2026-05-22",c:"A ducted heat pump air handler going in above a side room"},
+  {id:"1961",dt:"2026-05-22",c:"New ductwork in a side room"},
+  {id:"0269",dt:"2026-06-09",c:"Insulation board going on below the windows"},
+  {id:"0272",dt:"2026-06-09",c:"The hall from the balcony, insulation board on the lower walls"},
+  {id:"0274",dt:"2026-06-09",c:"The tower office, sheathed and taped"},
+  {id:"0277",dt:"2026-06-09",c:"Rigid wood-fiber insulation board over the sheathing"},
+  {id:"0281",dt:"2026-06-09",c:"Insulated ductwork in a side room"},
+  {id:"0413",dt:"2026-06-30",c:"Drywall up in the hall"},
+  {id:"0521",dt:"2026-07-11",c:"The stage end of the hall, painted"},
+  {id:"0527",dt:"2026-07-11",c:"The hall with fresh paint, looking toward the stage"},
+  {id:"0528",dt:"2026-07-11",c:"A side room ready for finishes"},
+  {id:"0955",dt:"2026-08-07",c:"New paint and wainscoting along the hall wall"},
+  {id:"0959",dt:"2026-08-07",c:"The stage, repainted"},
+  {id:"0960",dt:"2026-08-07",c:"Finished ductwork and air handler above a side room"},
+  {id:"0963",dt:"2026-08-07",c:"The hall from the balcony in August"},
+  {id:"0994",dt:"2026-08-14",c:"New lighting controls"},
+  {id:"1086",dt:"2026-08-22",c:"The stage-side corner of the hall, finished"},
+  {id:"1601",dt:"2026-09-11",c:"The finished hall, looking toward the balcony"},
+  {id:"1602",dt:"2026-09-11",c:"A stairwell with new ductwork overhead"},
+  {id:"1607",dt:"2026-09-11",c:"The finished hall and balcony"},
+  {id:"1611",dt:"2026-09-11",c:"The finished hall, looking toward the stage"},
+  {id:"1612",dt:"2026-09-11",c:"New thermostats and heat pump controls"},
+  {id:"1614",dt:"2026-09-11",c:"The hall from the balcony in September"},
+  {id:"1617",dt:"2026-09-11",c:"The Recreation office with new carpet and a wall-mounted heat pump"},
+  {id:"1619",dt:"2026-09-11",c:"The hall from under the balcony"},
+  {id:"1668b",dt:"2026-09-17",c:"The stage end of the hall, with the refinished floor"},
+  {id:"1669b",dt:"2026-09-17",c:"The hall from beside the stage, looking toward the balcony"},
+  {id:"1670b",dt:"2026-09-17",c:"A walkthrough in the finished hall, looking toward the side rooms"},
+  {id:"1671b",dt:"2026-09-17",c:"The walkthrough group in the hall, with the balcony above"},
+  {id:"1945",dt:"2026-10-02",c:"The finished hall in October, looking toward the balcony"}
+ ],
+ firms:[
+  ["Middlebury VT Insulators","Dense-pack cellulose insulation"],
+  ["Acme Glass","Storm window installation (Allied Window units)"],
+  ["Magic Brush","Painting"],
+  ["The Royal Group","Alarm work during construction"],
+  ["Bristol Energy Committee","Prepared and submitted the grant application"],
+  ["Vermont Buildings and General Services","Grant administrator (Municipal Energy Resilience Program)"]
+ ]
+};
+
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var usd=function(v,c){return "$"+v.toLocaleString("en-US",{minimumFractionDigits:c?2:0,maximumFractionDigits:c?2:0})};
+  var sum=function(a){return Math.round(a.reduce(function(s,x){return s+x.v},0)*100)/100};
+  var fmtDate=function(iso){var p=iso.split("-");return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})};
+
+  var base=DATA.leak[0].v, fin=DATA.leak[2].v, cut=Math.round((1-fin/base)*100);
+  document.getElementById("finalcut").textContent=cut+"%";
+  var known=Math.round((DATA.paid+DATA.signed)*100)/100;
+
+  $("stats").innerHTML=[
+    [usd(DATA.grant,1),"State grant","Paid in full, August 2026"],
+    [usd(known),"Known cost","Paid plus signed, September 28, 2026"],
+    [cut+"% less","Air leakage","Final test, August 10, 2026"],
+    [DATA.sqft.toLocaleString(),"Square feet","Two stories, meeting hall upstairs"]
+  ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
+
+  $("scope").innerHTML=DATA.scope.map(function(g){
+    return '<div class="grp"><h3>'+g.h+'</h3><ul>'+g.items.map(function(i){return '<li'+(i[1]?'':' class="unc"')+'>'+i[0]+'</li>'}).join("")+'</ul></div>'}).join("");
+
+  var lmax=base;
+  $("leak").innerHTML=DATA.leak.map(function(r){
+    var bar=r.v==null?'<i class="empty" style="width:100%"></i>':'<i'+(r===DATA.leak[0]?' class="soft"':'')+' style="width:'+(r.v/lmax*100).toFixed(1)+'%"></i>';
+    return '<div class="brow"><div class="nm">'+r.label+'<small>'+r.sub+'</small></div><div class="tr">'+bar+'</div><div class="v">'+(r.v==null?'Report pending':r.v.toLocaleString()+' cfm')+'</div></div>'}).join("");
+
+  var P={},ORDER=DATA.photos.slice().sort(function(a,b){return a.dt<b.dt?-1:a.dt>b.dt?1:0});
+  ORDER.forEach(function(p,i){p.i=i;P[p.id]=p});
+  var shortD=function(iso){var p=iso.split("-");return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString("en-US",{month:"short",day:"numeric"})};
+  var CAT={hist:["Building and conditions","--c-hist"],money:["Money and approvals","--c-money"],work:["Construction","--c-work"],test:["Energy testing","--c-test"]};
+  var CATS=["hist","test","money","money","money","money","money","money","money","money","work","work","work","test","work","work","test","work","money","money","work","money"];
+  var CHAPTERS=[
+    {t:"The building and the assessment",n:2,s:"The 2010 renovation left the upper-floor walls as they were. The 2024 energy assessment measured where things stood."},
+    {t:"Funding and design",n:5,s:"The grant application and award, the call for design firms, the design contract and historic review."},
+    {t:"Pricing and permits",n:4,s:"Contractor pricing, the first grant payment, permit applications and the Recreation office's move out."},
+    {t:"Construction",n:5,s:"Demolition through insulation, the mid-project air test, drywall and storm windows."},
+    {t:"Testing, inspection and move-back",n:6,s:"The final air test, the punch list, the last grant payment, the fire marshal's inspection and the move back in."}
+  ];
+  if(CATS.length!==DATA.timeline.length)console.warn("Timeline categories",CATS.length,"entries",DATA.timeline.length);
+  var ab=function(d){return d.replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/g,function(m){return m.slice(0,3)})};
+  var cdot=function(k){return '<span class="cdot" style="background:var('+CAT[k][1]+')" aria-hidden="true"></span>'};
+  $("catkey").innerHTML=Object.keys(CAT).map(function(k){return '<span>'+cdot(k)+CAT[k][0]+'</span>'}).join("");
+  var at=0;
+  $("chapters").innerHTML=CHAPTERS.map(function(c,n){
+    var es=DATA.timeline.slice(at,at+c.n).map(function(e,j){return {e:e,k:CATS[at+j]}}); at+=c.n;
+    var counts=Object.keys(CAT).map(function(k){return [k,es.filter(function(x){return x.k===k}).length]}).filter(function(x){return x[1]});
+    var pics=[];es.forEach(function(x){(x.e.ph||[]).forEach(function(id){if(P[id])pics.push(id)})});
+    return '<div class="ch"><aside><div class="no">Part '+(n+1)+' of '+CHAPTERS.length+'</div><h3>'+c.t+'</h3>'+
+      '<div class="rng">'+ab(es[0].e.d)+' to '+ab(es[es.length-1].e.d)+' &middot; '+es.length+(es.length===1?' entry':' entries')+'</div>'+
+      '<div class="cbar">'+counts.map(function(x){return '<i style="width:'+(x[1]/es.length*100).toFixed(1)+'%;background:var('+CAT[x[0]][1]+')" title="'+CAT[x[0]][0]+': '+x[1]+'"></i>'}).join("")+'</div>'+
+      '<p class="sum">'+c.s+'</p></aside><div><ul>'+
+      es.map(function(x){return '<li'+(x.e.f?' class="fut"':'')+'><span class="dd">'+cdot(x.k)+ab(x.e.d)+'</span><span>'+x.e.e+(x.e.f?'<span class="st">Upcoming</span>':'')+'</span></li>'}).join("")+
+      '</ul>'+(pics.length?'<div class="strip">'+pics.map(function(id){var p=P[id];return '<button data-i="'+p.i+'" aria-label="'+p.c+'"><img loading="lazy" src="img/hh-'+id+'-t.jpg" alt="'+p.c+'"></button>'}).join("")+'</div>':'')+'</div></div>'}).join("");
+  if(at!==DATA.timeline.length)console.warn("Chapters cover",at,"of",DATA.timeline.length);
+  $("tlcount").textContent=DATA.timeline.length+" entries in "+CHAPTERS.length+" parts";
+  var months={};ORDER.forEach(function(p){var k=p.dt.slice(0,7);(months[k]=months[k]||[]).push(p)});
+  $("gcount").textContent=ORDER.length+" photos, "+shortD(ORDER[0].dt)+" to "+fmtDate(ORDER[ORDER.length-1].dt);
+  $("gallery").innerHTML=Object.keys(months).sort().map(function(k){
+    var d=k.split("-"),nm=new Date(+d[0],+d[1]-1,1).toLocaleDateString("en-US",{month:"long",year:"numeric"});
+    return '<h3 class="gmonth">'+nm+'<span>'+months[k].length+(months[k].length==1?' photo':' photos')+'</span></h3><div class="grid">'+
+      months[k].map(function(p){return '<button data-i="'+p.i+'" aria-label="'+p.c+'"><img loading="lazy" src="img/hh-'+p.id+'-t.jpg" alt="'+p.c+'"></button>'}).join("")+'</div>'}).join("");
+  var lb=$("lb"),li=lb.querySelector("img"),lc=lb.querySelector(".cap"),cur=0,last=null;
+  function show(i){cur=(i+ORDER.length)%ORDER.length;var p=ORDER[cur];li.src="img/hh-"+p.id+".jpg";li.alt=p.c;
+    lc.innerHTML='<b>'+fmtDate(p.dt)+' &middot; '+(cur+1)+' of '+ORDER.length+'</b>'+p.c}
+  function open(i){last=document.activeElement;show(i);lb.classList.add("on");document.body.style.overflow="hidden";lb.querySelector(".x").focus()}
+  function close(){lb.classList.remove("on");document.body.style.overflow="";if(last)last.focus()}
+  document.addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(b)open(+b.getAttribute("data-i"))});
+  lb.querySelector(".x").onclick=close;lb.querySelector(".pv").onclick=function(){show(cur-1)};lb.querySelector(".nx").onclick=function(){show(cur+1)};
+  lb.addEventListener("click",function(e){if(e.target===lb)close()});
+  document.addEventListener("keydown",function(e){if(!lb.classList.contains("on"))return;
+    if(e.key==="Escape")close();else if(e.key==="ArrowLeft")show(cur-1);else if(e.key==="ArrowRight")show(cur+1)});
+  var tx=null;lb.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener("touchend",function(e){if(tx==null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)show(cur+(dx<0?1:-1));tx=null});
+
+  var inc=sum(DATA.incentives), overGR=Math.round((known-DATA.grant-DATA.reserve)*100)/100, net=Math.round((overGR-inc)*100)/100;
+  $("costsub").textContent="The grant covers "+Math.round(DATA.grant/known*100)+"% of known cost";
+  var row=function(k,v,tag,cls,neg){return '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+k+'</td><td class="num">'+(neg?'&minus;':'')+usd(v,1)+'</td><td>'+(tag||'')+'</td></tr>'};
+  var tg=function(t,ok){return '<span class="tag'+(ok?' ok':'')+'">'+t+'</span>'};
+  $("costtbl").innerHTML='<tr><th>Item</th><th class="num">Amount</th><th>Status</th></tr>'+
+    row("Paid to vendors, through September 28, 2026",DATA.paid,tg("Paid",1))+
+    row("Signed, not yet billed (balcony repairs)",DATA.signed,tg("Signed"))+
+    row("Known cost",known,"","tot")+
+    row("State MERP grant",DATA.grant,tg("Paid in full",1),"",1)+
+    row("Town reserve set aside for the project",DATA.reserve,tg("Budgeted"),"",1)+
+    row("Beyond the grant and the reserve",overGR,"","tot")+
+    row("Expected utility incentives",inc,tg("Pending"),"",1)+
+    row("Beyond the reserve, if incentives arrive",net,"","tot");
+  var vsum=sum(DATA.vendors), vmax=Math.max.apply(null,DATA.vendors.map(function(d){return d.v}));
+  $("vend").innerHTML=DATA.vendors.map(function(d){
+    return '<div class="brow"><div class="nm">'+d.k+(d.sub?'<small>'+d.sub+'</small>':'')+'</div><div class="tr"><i style="width:'+Math.max(d.v/vmax*100,0.4).toFixed(1)+'%"></i></div><div class="v">'+usd(d.v,1)+'</div></div>'}).join("")+
+    '<div class="brow"><div class="nm">Known cost</div><div></div><div class="v"><b>'+usd(vsum,1)+'</b></div></div>';
+  if(Math.abs(vsum-known)>0.01){$("vend").insertAdjacentHTML("afterend",'<p class="note"><b>Check failed:</b> vendor lines do not sum to the known cost.</p>')}
+
+  $("inctbl").innerHTML='<tr><th>From</th><th>For</th><th class="num">Up to</th><th>Status</th></tr>'+
+    DATA.incentives.map(function(r){return '<tr><td>'+r.k+'</td><td>'+r.what+'</td><td class="num">'+usd(r.v,1)+'</td><td>'+r.st+'</td></tr>'}).join("")+
+    '<tr class="tot"><td colspan="2">Combined</td><td class="num">'+usd(sum(DATA.incentives),1)+'</td><td></td></tr>';
+
+  $("open").innerHTML=DATA.open.map(function(o){return '<div class="card"><h4>'+o.h+'</h4><p>'+o.p+'</p></div>'}).join("");
+  $("firms").innerHTML=DATA.firms.map(function(f){return '<li>'+f[0]+'<span>'+f[1]+'</span></li>'}).join("");
+
+  $("asofshort").textContent=fmtDate(DATA.asof);
+  $("asof").textContent="Data as of "+fmtDate(DATA.asof)+" · Page updated October 26, 2026";
+})();
+</script>
+<script>
+(function(){
+  const tabs=[...document.querySelectorAll('.tablist [role="tab"]')];
+  const keys=tabs.map(t=>t.dataset.tab);
+  const bar=document.querySelector('.tabbar');
+  function show(k, focus, scroll){
+    if(!keys.includes(k)) k=keys[0];
+    tabs.forEach(t=>{const on=t.dataset.tab===k; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
+      document.getElementById('p-'+t.dataset.tab).hidden=!on; if(on) t.scrollIntoView({block:'nearest',inline:'nearest'});});
+    try{ history.replaceState(null,'',k===keys[0]?location.pathname+location.search:'#'+k); }catch(e){}
+    if(scroll){ const y=bar.getBoundingClientRect().top+scrollY; if(scrollY>y) window.scrollTo({top:y}); }
+    if(focus) document.getElementById('t-'+k).focus();
+  }
+  tabs.forEach((t,i)=>{
+    t.addEventListener('click',()=>show(t.dataset.tab,false,true));
+    t.addEventListener('keydown',e=>{
+      let j=null;
+      if(e.key==='ArrowRight') j=(i+1)%tabs.length; else if(e.key==='ArrowLeft') j=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') j=0; else if(e.key==='End') j=tabs.length-1;
+      if(j!==null){ e.preventDefault(); show(keys[j],true,false); }
+    });
+  });
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto,false,true)));
+  const gc=document.getElementById('gcount'), tc=document.getElementById('tc-photos');
+  if(gc&&tc){ const m=gc.textContent.match(/^(\d+)/); if(m) tc.textContent=m[1]; }
+  show((location.hash||'').slice(1),false,false);
+  window.addEventListener('hashchange',()=>show(location.hash.slice(1),false,false));
+})();
+</script>
+</body>
+</html>
