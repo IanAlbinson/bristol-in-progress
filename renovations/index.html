@@ -107,6 +107,8 @@
   .ctbl td:first-child{font-family:var(--body);font-size:14.5px;letter-spacing:0;text-transform:none;color:var(--ink);width:auto;padding-top:11px}
   .ctbl .num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px;white-space:nowrap}
   .ctbl tr.tot td{font-weight:700;border-top:1px solid var(--ink)}
+  .ctx{margin:8px 0 0;font-size:14px;color:var(--ink-2)}
+  .ctbl tr.grp td{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:16px}
   .pend{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
   .prose{max-width:40em}
   .prose p{margin:18px 0 0;font-size:16.5px;line-height:1.65}
@@ -471,8 +473,8 @@
   <h3 class="sub">What it cost</h3>
   <div class="prose">
     <p>
-      The Town's May 2026 estimate put the whole project at <span class="fig" data-v="hhEst"></span>,
-      including design and engineering. The state grant covers <span data-v="hhShare"></span> of that.
+      Through the September 28, 2026 check warrant, the Town has paid or signed $519,393 for the
+      project, including design. The state grant, paid in full, covers $325,854 of that, about 63%.
       Green Mountain Power and Efficiency Vermont incentives could return up to
       <span data-v="hhInc"></span> once inspections and paperwork are done. The final cost will not be
       known until change orders are settled at closeout.
@@ -608,22 +610,29 @@
   </div>
 
   <h3 class="sub">Who pays</h3>
+  <p class="ctx">Paid and signed through the September 28, 2026 check warrant.</p>
   <div class="tbl"><table class="ctbl" id="payTbl"></table></div>
 
-  <h3 class="sub">Holley Hall, by the Town's May 2026 estimate</h3>
+  <h3 class="sub">The Library Board's share</h3>
+  <p class="ctx">Money from the Library Board, separate from Town money and from the grant.</p>
+  <div class="tbl"><table class="ctbl" id="boardTbl"></table></div>
+
+  <h3 class="sub">Holley Hall, where the money went</h3>
   <div class="tbl"><table class="ctbl" id="hhCostTbl"></table></div>
 
-  <h3 class="sub">Library, contracts and change orders on record</h3>
+  <h3 class="sub">Library, where the money went</h3>
   <div class="tbl"><table class="ctbl" id="lmlCostTbl"></table></div>
 
+  <h3 class="sub">Not yet priced</h3>
+  <p class="ctx">Each of these will add to the costs above.</p>
+  <ul class="firms" id="unpriced"></ul>
+
   <p class="note">
-    <b>What these tables are not.</b> They are not a final accounting. The Holley Hall figures are an
-    estimate made before the change orders. The library list holds only amounts that appear in a
-    signed contract, change order, bid award or check warrant, so it leaves out the Clay Point
-    consulting fees, most of Stone Environmental's sampling fees, the September joist removal and the
-    finish floor, none of which had a total on record. The two shortfalls come from the Town
-    Administrator's August 20 closeout memo, before the hardwood floor and the Holley Hall ceiling were
-    priced. The final cost of both projects will not be known until closeout.
+    <b>What these tables are not.</b> They are not a final accounting. They count bills the Town has
+    paid through the September 28, 2026 check warrant plus signed work not yet billed, from the Town
+    Administrator's spend-against-funding summary of September 30. Incentives are shown at their
+    expected or maximum amounts; none had been paid. The final cost of both projects will not be known
+    until closeout.
   </p>
 
     <div class="pnext"><button type="button" data-goto="people">Next: People <span aria-hidden="true">&rarr;</span></button></div>
@@ -702,10 +711,7 @@
 
   <footer>
     <p>
-      <b>Sources.</b> Costs: the Town Administrator's August 20, 2026 closeout memo and his reply
-      of the same day; the Vermont Department of Libraries grant ledger updated September 9, 2026;
-      Alloy change order 1 (August 11, 2026); the September 14, 2026 check warrant; and the FY2027
-      budget presentation at the February 2, 2026 Town Meeting information session. Holley Hall: building history from the Town's 2024 State Historic Preservation grant application and the Division for Historic Preservation's 2010 review; MERP implementation grant agreement #01155-A172-5443; Level II
+      <b>Sources.</b> Costs: the Town Administrator's "Library and Holley Hall: Spend Against Funding" summary of September 30, 2026 and its workbook, which tally the Town's check warrants through September 28, 2026; the Vermont Department of Libraries grant ledger updated September 9, 2026; and the FY2027 budget presentation at the February 2, 2026 Town Meeting information session. Library Board funds: the September 30 summary and the Library Board's June 2, 2026 approval of the porch money. Holley Hall: building history from the Town's 2024 State Historic Preservation grant application and the Division for Historic Preservation's 2010 review; MERP implementation grant agreement #01155-A172-5443; Level II
       Energy Assessment (June 18, 2024); project scope of work (December 2024); blower door results
       from the 2024 baseline test and Green Mountain Enclosure Consulting's progress report (June 1,
       2026); the project estimate the Town reported to Efficiency Vermont (May 6, 2026); Green
@@ -901,34 +907,83 @@ var DATA={
     ["11,300","Square feet of public building","Holley Hall (about 7,800) and the library (3,515), both renovated in 2026"]
   ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
 
-  // costs
-  var hhSum=r2(DATA.hhCosts.reduce(function(a,c){return a+c.v},0));
-  if(Math.abs(hhSum-H.est)>1) warn("Holley Hall estimate lines do not sum to the reported total.");
-  var hhTown=r2(H.est-H.grant);
-  var lmlSum=r2(DATA.lmlCosts.reduce(function(a,c){return a+c.v},0));
-  if(r2(L.newBase+L.contingency)!==L.alloc) warn("library ledger award plus contingency does not equal the allocation.");
-  var th='<tr><th>Item</th><th class="num">Amount</th><th>Status</th></tr>';
-  var row=function(k,v,st,cls){return '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+k+'</td><td class="num">'+v+'</td><td>'+(st||'')+'</td></tr>'};
-  $("hhCostTbl").innerHTML=th+DATA.hhCosts.map(function(c){return row(c.k,usd(c.v,1),c.st)}).join("")+
-    row("Estimated project cost",usd(hhSum,1),"",'tot')+
-    row("State MERP grant","&minus;"+usd(H.grant,1),"Awarded Dec. 16, 2024")+
-    row("Town share, planned",usd(hhTown,1),"From the Town's capital funds",'tot')+
-    row("Shortfall beyond that, reported",usd(DATA.hhShort,1),"Aug. 20, 2026, before the ceiling work is priced")+
-    row("Utility incentives, possible offset","&minus;"+usd(inc,1),"Maximum; not yet paid");
-  $("lmlCostTbl").innerHTML=th+DATA.lmlCosts.map(function(c){return row(c.k,usd(c.v,1),c.st)}).join("")+
-    row("Total of amounts on record",usd(lmlSum,1),"Incomplete; see note below",'tot')+
-    row("Grant available, State ledger",usd(L.alloc,1),"Updated "+fmtL(L.ledgerDate))+
-    row("Reimbursed so far",usd(L.disbursed,1),usd(L.pending,1)+" more submitted, not yet paid")+
-    row("Shortfall, reported",usd(DATA.lmlShort,1),"Aug. 20, 2026, before the finish floor");
-  $("lmlCostTbl").insertAdjacentHTML("afterend",'<p class="note" style="margin-top:10px"><b>Design.</b> '+DATA.vianote+' The Holley Hall estimate carries '+usd(DATA.hhCosts[0].v,1)+' for design and engineering. How the contract splits between the two buildings is not broken out on record.</p>');
-  var ph='<tr><th>Source</th><th class="num">Holley Hall</th><th class="num">Library</th><th>Notes</th></tr>';
-  $("payTbl").innerHTML=ph+
-    '<tr><td>State and federal grants</td><td class="num">'+usd(H.grant,1)+'</td><td class="num">'+usd(L.alloc,1)+'</td><td>Holley Hall: state MERP. Library: federal Capital Projects Fund, as raised in 2026</td></tr>'+
-    '<tr><td>Town, planned</td><td class="num">'+usd(hhTown,1)+'</td><td class="num">$0.00</td><td>Holley Hall estimate less its grant. The library grant carried no local share</td></tr>'+
-    '<tr><td>Town, shortfall reported Aug. 20</td><td class="num">'+usd(DATA.hhShort,1)+'</td><td class="num">'+usd(DATA.lmlShort,1)+'</td><td>'+usd(r2(DATA.hhShort+DATA.lmlShort),1)+' combined, before the hardwood floor and the Holley Hall ceiling</td></tr>'+
-    '<tr><td>Library funds</td><td class="num">none</td><td class="num"><span class="pend">not set</span></td><td>The library is paying for the finish floor</td></tr>'+
-    '<tr><td>Town operating budget</td><td class="num">none</td><td class="num">$55 a month</td><td>Battery backup lease from Green Mountain Power in place of the dropped generator, being pursued</td></tr>'+
-    '<tr><td>Utility incentives</td><td class="num">up to '+usd(inc,1)+'</td><td class="num"><span class="pend">not set</span></td><td>Paid after inspection; none received yet</td></tr>';
+  // costs, from the Town Administrator's spend-against-funding summary (Sept. 30, 2026)
+  var M={
+    hh:[["Silver Maple Construction","General contractor, including the balcony change order",450888.76],
+        ["Vermont Integrated Architecture","Design and site visits, Holley Hall share",46724.63],
+        ["G. Helms Construction","Dormer flashing and slate",13444.10],
+        ["The Royal Group","Alarm work",5059.80],
+        ["Green Mountain Enclosure Consulting","Airtightness testing",2550.00],
+        ["Dark Star Lighting","",520.00],
+        ["Paquette","Storage container during the work",206.00]],
+    hhPaid:506451.23, hhSigned:12942.06, hhReserve:150000,
+    lmlGrantWork:[["Silver Maple Construction, contract and executed change orders",528443.48,74583.82],
+        ["Silver Maple Construction, change order 7 (new subfloor, radiant heat and plating)",0,76743.30],
+        ["Alloy (Prism Response), PCB abatement and change order 1",128413.00,0],
+        ["Vermont Integrated Architecture, design and administration",45829.12,0],
+        ["Stone Environmental, PCB testing",12824.68,7775.32],
+        ["Clay Point Associates, abatement oversight",3799.00,2415.00],
+        ["Claimed in a reimbursement request, not yet matched to a check",1262.98,0]],
+    lmlLocal:[["Moving costs paid to the library, and a $196 payment",1899.10,0],
+        ["Carpet (Vermont Carpet Gallery)",1620.00,0],
+        ["2022 building assessment and bid notice",548.75,0],
+        ["One-day move to Howden Hall (Booska Movers)",0,1950.00],
+        ["Library network cabling",0,1100.00],
+        ["Finish flooring, material",0,25600.00]],
+    board:[["Front porch and steps","Approved by the Library Board June 2, 2026. Built by Silver Maple as an executed change order",30725.08],
+        ["New first floor","Toward the new finish floor after the PCB removal, per the Town Administrator's September 30 summary",24200.00]],
+    lmlInc:[["Green Mountain Power, Tier 3",4085.95],["Efficiency Vermont, insulation",10000]],
+    unpriced:[["Library","Subfloor rebuild over the replaced joists, on time and materials"],
+        ["Library","Removing the three joist sections"],
+        ["Library","Blower door and envelope testing, approved August 26"],
+        ["Library","Environmental oversight beyond what has been billed"],
+        ["Holley Hall","A replacement for the dropped acoustic ceiling finish"],
+        ["Holley Hall","Three heat pump wall controllers and exterior fascia painting"],
+        ["Both","Architect time through closeout, billed hourly"]]
+  };
+  var sum=function(a,f){return r2(a.reduce(function(t,x){return t+f(x)},0))};
+  var hhKnown=sum(M.hh,function(x){return x[2]});
+  if(Math.abs(hhKnown-KC.hhKnown)>0.01||Math.abs(r2(M.hhPaid+M.hhSigned)-hhKnown)>0.01) warn("Holley Hall vendor lines do not match the known cost.");
+  var gwP=sum(M.lmlGrantWork,function(x){return x[1]}),gwS=sum(M.lmlGrantWork,function(x){return x[2]}),gw=r2(gwP+gwS);
+  var lcP=sum(M.lmlLocal,function(x){return x[1]}),lcS=sum(M.lmlLocal,function(x){return x[2]}),lc=r2(lcP+lcS);
+  var lmlKnown=r2(gw+lc), boardT=sum(M.board,function(x){return x[2]}), lmlIncT=sum(M.lmlInc,function(x){return x[1]});
+  if(Math.abs(lmlKnown-KC.lmlKnown)>0.01) warn("library vendor lines do not match the known cost.");
+  if(Math.abs(boardT-KC.lmlBoard)>0.01) warn("Library Board lines do not match.");
+  var past=r2(gw-KC.lmlAward), lmlTown=r2(past+lc-boardT);
+  if(Math.abs(lmlTown-KC.lmlTown)>0.01) warn("library Town share does not reconcile.");
+  var hhTown=r2(hhKnown-KC.hhGrant);
+  var u=function(v){return usd(v,1)}, neg=function(v){return "&minus;"+usd(v,1)};
+  var tr=function(cells,cls){return '<tr'+(cls?' class="'+cls+'"':'')+'>'+cells.map(function(c,k){return '<td'+(k>0?' class="num"':'')+'>'+c+'</td>'}).join("")+'</tr>'};
+  // who pays
+  var net=function(t,i){return t-i<0?'<span class="pend">covered, '+u(i-t)+' left over</span>':u(r2(t-i))};
+  $("payTbl").innerHTML='<tr><th></th><th class="num">Holley Hall</th><th class="num">Library</th><th class="num">Both</th></tr>'+
+    tr(["Known cost so far",u(hhKnown),u(lmlKnown),u(r2(hhKnown+lmlKnown))],"tot")+
+    tr(["State and federal grants",neg(KC.hhGrant),neg(KC.lmlAward),neg(r2(KC.hhGrant+KC.lmlAward))])+
+    tr(["Library Board funds","none",neg(boardT),neg(boardT)])+
+    tr(["Town money",u(hhTown),u(lmlTown),u(r2(hhTown+lmlTown))],"tot")+
+    tr(["Expected utility incentives",neg(KC.hhInc),neg(lmlIncT),neg(r2(KC.hhInc+lmlIncT))])+
+    tr(["Town money, if incentives arrive",u(r2(hhTown-KC.hhInc)),net(lmlTown,lmlIncT),u(r2(hhTown+lmlTown-KC.hhInc-lmlIncT))],"tot");
+  $("payTbl").insertAdjacentHTML("afterend",'<p class="note" style="margin-top:12px"><b>How to read this.</b> Holley Hall\'s grant was a fixed '+u(KC.hhGrant)+' and the work cost more, so the Town carries the difference; it set aside a '+usd(M.hhReserve,0)+' reserve toward it. The library grant, raised in 2026 after the PCB cleanup, covers nearly all of that project, and the Library Board paid for the front porch and part of the new floor. Holley Hall incentives are maximums: Green Mountain Power '+u(10652.05)+' and Efficiency Vermont '+u(10000)+'. Library incentives: '+M.lmlInc.map(function(x){return x[0]+' '+u(x[1])}).join(" and ")+'.</p>');
+  // board
+  $("boardTbl").innerHTML='<tr><th>For</th><th>What the record says</th><th class="num">Amount</th></tr>'+
+    M.board.map(function(b){return '<tr><td>'+b[0]+'</td><td>'+b[1]+'</td><td class="num">'+u(b[2])+'</td></tr>'}).join("")+
+    '<tr class="tot"><td>Library Board total</td><td></td><td class="num">'+u(boardT)+'</td></tr>';
+  // HH
+  $("hhCostTbl").innerHTML='<tr><th>Vendor</th><th>For</th><th class="num">Amount</th></tr>'+
+    M.hh.map(function(v){return '<tr><td>'+v[0]+'</td><td>'+v[1]+'</td><td class="num">'+u(v[2])+'</td></tr>'}).join("")+
+    '<tr class="tot"><td>Known cost</td><td>'+u(M.hhPaid)+' paid, '+u(M.hhSigned)+' signed for balcony repairs</td><td class="num">'+u(hhKnown)+'</td></tr>'+
+    '<tr><td>State MERP grant</td><td>Paid in full in five payments, February to August 2026</td><td class="num">'+neg(KC.hhGrant)+'</td></tr>'+
+    '<tr class="tot"><td>Town money</td><td>Of this, '+usd(M.hhReserve,0)+' was set aside as a reserve; '+u(r2(hhTown-M.hhReserve))+' is beyond it</td><td class="num">'+u(hhTown)+'</td></tr>';
+  // LML
+  var l3=function(k,p,sg){return '<tr><td>'+k+'</td><td class="num">'+(p?u(p):'')+'</td><td class="num">'+(sg?u(sg):'')+'</td><td class="num">'+u(r2(p+sg))+'</td></tr>'};
+  $("lmlCostTbl").innerHTML='<tr><th>Item</th><th class="num">Paid</th><th class="num">Signed, not paid</th><th class="num">Total</th></tr>'+
+    '<tr class="grp"><td colspan="4">Work of the kind the grant pays for</td></tr>'+M.lmlGrantWork.map(function(x){return l3(x[0],x[1],x[2])}).join("")+
+    '<tr class="tot"><td>Subtotal</td><td class="num">'+u(gwP)+'</td><td class="num">'+u(gwS)+'</td><td class="num">'+u(gw)+'</td></tr>'+
+    '<tr class="grp"><td colspan="4">Local costs outside the grant</td></tr>'+M.lmlLocal.map(function(x){return l3(x[0],x[1],x[2])}).join("")+
+    '<tr class="tot"><td>Subtotal</td><td class="num">'+u(lcP)+'</td><td class="num">'+u(lcS)+'</td><td class="num">'+u(lc)+'</td></tr>'+
+    '<tr class="tot"><td>Known cost</td><td class="num">'+u(r2(gwP+lcP))+'</td><td class="num">'+u(r2(gwS+lcS))+'</td><td class="num">'+u(lmlKnown)+'</td></tr>';
+  $("lmlCostTbl").insertAdjacentHTML("afterend",'<p class="note" style="margin-top:12px"><b>How the Town\'s share works out.</b> Grant-type work comes to '+u(gw)+' against the '+u(KC.lmlAward)+' award, '+u(past)+' past it. Add '+u(lc)+' in local costs outside the grant and take out the Library Board\'s '+u(boardT)+'. That leaves '+u(lmlTown)+' in Town money, before '+u(lmlIncT)+' in expected incentives. The finish flooring is carried at the '+u(25600)+' solid white oak quote; the engineered oak estimate of September 16 was '+u(27000)+'.</p>');
+  $("unpriced").innerHTML=M.unpriced.map(function(x){var c=x[0]==="Library"?"lml":x[0]==="Holley Hall"?"hh":"";return '<li><span class="who '+c+'"'+(c?'':' style="color:var(--muted)"')+'>'+x[0]+'</span>'+x[1]+'</li>'}).join("");
 
   // photo order for the lightbox = order of appearance on the page
   var ORDER=[];
