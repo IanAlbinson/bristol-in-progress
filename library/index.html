@@ -321,6 +321,23 @@
   .pnext button{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);border-radius:4px;
     padding:10px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
   .pnext button:hover{border-color:var(--ink)}
+
+  /* drawings */
+  .dwg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px 20px;margin-top:20px}
+  .dwg figure{margin:0;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--rule-strong);padding-top:12px}
+  .dwg a.im{display:block;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:#fff;cursor:zoom-in}
+  .dwg a.im img{width:100%;aspect-ratio:3/2;object-fit:contain;display:block;transition:transform .2s}
+  .dwg a.im:hover img{transform:scale(1.02)}
+  .dwg a.im:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+  .dwg .no{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .dwg .no b{color:var(--ink);font-weight:500}
+  .dwg .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;border:1px solid currentColor;border-radius:3px;padding:1px 5px}
+  .dwg .tag.pre{color:var(--accent)} .dwg .tag.prop{color:var(--signal)} .dwg .tag.iss{color:var(--muted)}
+  .dwg h3{font-family:var(--display);font-weight:400;font-size:20px;line-height:1.2;margin:0}
+  .dwg p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+  .dwg .lk{font-family:var(--mono);font-size:11px;letter-spacing:.05em;display:flex;gap:14px}
+  .dwg .lk a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+  .dwg .lk a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -368,6 +385,7 @@
     <div class="tablist" role="tablist">
       <button role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true" tabindex="0" data-tab="overview">Overview</button>
       <button role="tab" id="t-work" aria-controls="p-work" aria-selected="false" tabindex="-1" data-tab="work">The work</button>
+      <button role="tab" id="t-drawings" aria-controls="p-drawings" aria-selected="false" tabindex="-1" data-tab="drawings">Drawings</button>
       <button role="tab" id="t-money" aria-controls="p-money" aria-selected="false" tabindex="-1" data-tab="money">Money</button>
       <button role="tab" id="t-people" aria-controls="p-people" aria-selected="false" tabindex="-1" data-tab="people">People</button>
       <button role="tab" id="t-pcb" aria-controls="p-pcb" aria-selected="false" tabindex="-1" data-tab="pcb">PCB cleanup</button>
@@ -482,6 +500,85 @@
   <div class="lkkey"><span>Dashed lines: 0.50 per sq ft ("leaky" above it) and 0.30 per sq ft (code reference)</span></div>
   <p class="note" id="leaknote"></p>
 
+
+    <div class="pnext"><button type="button" data-goto="drawings">Next: Drawings <span aria-hidden="true">&rarr;</span></button></div>
+  </section>
+
+  <section class="panel" id="p-drawings" role="tabpanel" aria-labelledby="t-drawings" tabindex="0" hidden>
+  <h2 class="sec">The architect's drawings <span>Vermont Integrated Architecture</span></h2>
+  <p class="note"><b>About these drawings.</b> These are sheets from the architect's drawings for the
+    project, from the Town's project files. Tap a sheet to open it full size, or download the PDF.
+    Drawings show what was designed, and the finished work can differ in small ways. Most sheets
+    come from the March 19, 2026 drawing set. The sketch at the end was issued separately in April.</p>
+  <h3 class="subhd">Plans</h3>
+  <div class="dwg">
+    <figure>
+      <a class="im" href="drawings/A-0.0.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-0.0, Cover sheet, full size"><img loading="lazy" src="drawings/A-0.0-t.jpg" alt="Architect's drawing, sheet A-0.0: Cover sheet"></a>
+      <div class="no"><b>A-0.0</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Cover sheet</h3>
+      <p>Project information, building codes and the list of sheets.</p>
+      <div class="lk"><a href="drawings/A-0.0.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-0.0.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/A-2.1.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-2.1, Basement floor plan, full size"><img loading="lazy" src="drawings/A-2.1-t.jpg" alt="Architect's drawing, sheet A-2.1: Basement floor plan"></a>
+      <div class="no"><b>A-2.1</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Basement floor plan</h3>
+      <p>The lower level, with the new work marked.</p>
+      <div class="lk"><a href="drawings/A-2.1.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-2.1.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/A-2.2.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-2.2, First floor plan, full size"><img loading="lazy" src="drawings/A-2.2-t.jpg" alt="Architect's drawing, sheet A-2.2: First floor plan"></a>
+      <div class="no"><b>A-2.2</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>First floor plan</h3>
+      <p>The main floor, including the new quiet room.</p>
+      <div class="lk"><a href="drawings/A-2.2.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-2.2.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/A-3.1.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-3.1, Basement reflected ceiling plan, full size"><img loading="lazy" src="drawings/A-3.1-t.jpg" alt="Architect's drawing, sheet A-3.1: Basement reflected ceiling plan"></a>
+      <div class="no"><b>A-3.1</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Basement reflected ceiling plan</h3>
+      <p>The lower-level ceiling as seen from below: lights, grilles and other ceiling equipment.</p>
+      <div class="lk"><a href="drawings/A-3.1.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-3.1.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/A-3.2.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-3.2, First floor reflected ceiling plan, full size"><img loading="lazy" src="drawings/A-3.2-t.jpg" alt="Architect's drawing, sheet A-3.2: First floor reflected ceiling plan"></a>
+      <div class="no"><b>A-3.2</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>First floor reflected ceiling plan</h3>
+      <p>The same view for the main floor.</p>
+      <div class="lk"><a href="drawings/A-3.2.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-3.2.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+  </div>
+  <h3 class="subhd">Elevations, sections and details</h3>
+  <div class="dwg">
+    <figure>
+      <a class="im" href="drawings/A-4.1.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-4.1, Elevations, full size"><img loading="lazy" src="drawings/A-4.1-t.jpg" alt="Architect's drawing, sheet A-4.1: Elevations"></a>
+      <div class="no"><b>A-4.1</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Elevations</h3>
+      <p>All four sides of the building, including the rotted stair roof marked for replacement.</p>
+      <div class="lk"><a href="drawings/A-4.1.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-4.1.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/A-5.1.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-5.1, Building sections, full size"><img loading="lazy" src="drawings/A-5.1-t.jpg" alt="Architect's drawing, sheet A-5.1: Building sections"></a>
+      <div class="no"><b>A-5.1</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Building sections</h3>
+      <p>Cuts through the building showing the new quiet room and the mechanical spaces.</p>
+      <div class="lk"><a href="drawings/A-5.1.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-5.1.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/A-7.1.jpg" target="_blank" rel="noopener" aria-label="Open sheet A-7.1, Quiet room plan and elevations, full size"><img loading="lazy" src="drawings/A-7.1-t.jpg" alt="Architect's drawing, sheet A-7.1: Quiet room plan and elevations"></a>
+      <div class="no"><b>A-7.1</b><span>Mar 19, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Quiet room plan and elevations</h3>
+      <p>A close-up of the new quiet room.</p>
+      <div class="lk"><a href="drawings/A-7.1.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/A-7.1.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+    <figure>
+      <a class="im" href="drawings/SK-01.jpg" target="_blank" rel="noopener" aria-label="Open sheet SK-01, Roof at the basement stair, full size"><img loading="lazy" src="drawings/SK-01-t.jpg" alt="Architect's drawing, sheet SK-01: Roof at the basement stair"></a>
+      <div class="no"><b>SK-01</b><span>Apr 14, 2026</span><span class="tag iss">Issued</span></div>
+      <h3>Roof at the basement stair</h3>
+      <p>A sketch for replacing the rotted roof over the outside basement stairs.</p>
+      <div class="lk"><a href="drawings/SK-01.jpg" target="_blank" rel="noopener">Full size</a><a href="drawings/SK-01.pdf" target="_blank" rel="noopener">PDF</a></div>
+    </figure>
+  </div>
 
     <div class="pnext"><button type="button" data-goto="money">Next: Money <span aria-hidden="true">&rarr;</span></button></div>
   </section>
@@ -676,7 +773,7 @@
       Administrator's "Library and Holley Hall: Spend Against Funding," September 30, 2026, and its
       workbook, which tally the Town's check warrants through September 28, 2026. Air leakage comes
       from Green Mountain Enclosure Consulting's progress test report (test September 25, report
-      September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Project partner logos and roles follow Vermont Integrated Architecture's Project Partners sheet for Holley Hall (draft, October 20, 2026), adapted for the library. Photos come from the Town's
+      September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Project partner logos and roles follow Vermont Integrated Architecture's Project Partners sheet for Holley Hall (draft, October 20, 2026), adapted for the library. Architect's drawings are sheets from Vermont Integrated Architecture's drawing sets in the Town's project files, shown as issued; each sheet carries its own date. Photos come from the Town's
       project photo folder; dates are read from each photo's own camera data. They were resized for
       the web and all location and camera data was removed.
     </p>
