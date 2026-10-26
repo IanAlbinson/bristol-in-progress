@@ -1029,11 +1029,12 @@ const P = {
   [["paid",SP.paid,CK.paid],["signed",SP.signed,CK.signed],["total",SP.total,CK.total],["grant-type",SP.cpf,CK.cpf],["town",SP.town,CK.town]]
     .forEach(([k,a,b]) => { if (Math.abs(a-b) > 0.005) console.warn("Spend check failed:", k, a, b); });
 
+  const lkr = P.leak.rows, lcut = Math.round((1 - lkr[lkr.length-1].cfm / lkr[0].cfm) * 100);
   $("#stats").innerHTML = [
-    [usd(gTotal,true), "Grant as awarded", "Base plus contingency, 2024 agreement"],
-    [usd(known,true), "Grant as increased", "Per the State's grant ledger, September 9"],
-    [String(days), "Days to the deadline", "From " + fmt(P.asof) + " to December 31, 2026"],
-    [usd(SP.total,true), "Known cost so far", "Paid and signed, through the September 28 warrant"]
+    [usd(known,true), "State grant", "Including the State's increase"],
+    [usd(SP.total,false), "Known cost", "Paid plus signed, September 28, 2026"],
+    [lcut + "% less", "Air leakage", "Progress test, September 25, 2026"],
+    ["3,515", "Square feet", "Two levels, main floor and lower level"]
   ].map(s => `<div class="stat"><div class="n">${s[0]}</div><div class="l">${s[1]}</div><div class="sub2">${s[2]}</div></div>`).join("");
 
   // money bar (known amounts only)
