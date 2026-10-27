@@ -600,10 +600,10 @@
   </p>
 
   <!-- ============ SPEND ============ -->
-  <h2 class="sec">What it has cost so far <span>through the September 28 warrant</span></h2>
+  <h2 class="sec">What it has cost so far <span>through the October 26 warrant</span></h2>
   <p class="lede">
     The Town's check warrants record every payment the Selectboard approves. Here is where the
-    Holley Hall project stands through September 28: the totals first, then how they work out to the
+    Holley Hall project stands through the October 26 warrant: the totals first, then how they work out to the
     Town's share.
   </p>
   <div class="cost4" id="cost4"></div>
@@ -714,7 +714,7 @@
       airtightness test report (August 11, 2026), which restates the assessment's baseline test. Contract pricing comes from Silver Maple Construction's budget for contract (January 22,
       2026). Cost and payment figures come from the Town's spend-against-funding tally of every
       check warrant through September 28, 2026 and the State's grant payments (dated September
-      30, 2026). Incentive figures come from Green Mountain Power's letter of support (corrected
+      30, 2026). Project payments on the October 12, 2026 check warrant are added to that summary; the October 26 warrant has no project payments. Incentive figures come from Green Mountain Power's letter of support (corrected
       July 15, 2026) and Efficiency Vermont's weatherization offer (July 22, 2026). Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Milestones come from the weekly owner, architect and contractor meeting
       notes and project correspondence. Architect's drawings are sheets from Vermont Integrated Architecture's drawing sets in the Town's project files, shown as issued; each sheet carries its own date. Photos come from the Town's project photo folder, plus older photos from the Town's Holley Hall photo folder (the February 2019 photo is by Meridith McFarland); dates
       are read from each photo's own camera data. They were resized for the web and all location
@@ -747,7 +747,7 @@
 
 <script>
 var DATA={
- asof:"2026-09-30",
+ asof:"2026-10-27",
  grant:325853.52,
  sqft:7800,
  leak:[
@@ -797,14 +797,15 @@ var DATA={
   {d:"August 24, 2026",e:"<b>Grant paid in full.</b> The State makes its fifth and final payment, completing the $325,853.52 award."},
   {d:"September 9, 2026",ph:["1611","1607"],e:"<b>Fire marshal's final inspection.</b> The building passes and receives a conditional certificate of occupancy."},
   {d:"September 17, 2026",ph:["1617"],e:"Recreation staff move back into their office. Staff training on the new mechanical systems is scheduled the same day."},
-  {d:"September 25, 2026",e:"Change order for balcony repairs signed, $12,942.06."}
+  {d:"September 25, 2026",e:"Change order for balcony repairs signed, $12,942.06."},
+  {d:"October 12, 2026",e:"The Selectboard's warrant pays Silver Maple's seventh pay application, $13,980.06, and $2,158.35 to the architect."}
  ],
- paid:506451.23,
- signed:12942.06,
+ paid:522589.64,
+ signed:0,
  reserve:150000,
  vendors:[
-  {k:"Silver Maple Construction",sub:"General contractor, including the balcony change order",v:450888.76},
-  {k:"Vermont Integrated Architecture",sub:"Design and site visits, Holley Hall share",v:46724.63},
+  {k:"Silver Maple Construction",sub:"General contractor, including the balcony change order",v:451926.76},
+  {k:"Vermont Integrated Architecture",sub:"Design and site visits, Holley Hall share",v:48882.98},
   {k:"G. Helms Construction",sub:"Dormer flashing and slate",v:13444.10},
   {k:"The Royal Group",sub:"Alarm work",v:5059.80},
   {k:"Green Mountain Enclosure Consulting",sub:"Airtightness testing",v:2550.00},
@@ -900,7 +901,7 @@ var DATA={
 
   $("stats").innerHTML=[
     [usd(DATA.grant,1),"State grant","Paid in full, August 2026"],
-    [usd(known),"Known cost","Paid plus signed, September 28, 2026"],
+    [usd(known),"Known cost","Paid through the October 26 warrant"],
     [cut+"% less","Air leakage","Final test, August 10, 2026"],
     [DATA.sqft.toLocaleString(),"Square feet","Two stories, meeting hall upstairs"]
   ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
@@ -917,13 +918,13 @@ var DATA={
   ORDER.forEach(function(p,i){p.i=i;P[p.id]=p});
   var shortD=function(iso){var p=iso.split("-");return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString("en-US",{month:"short",day:"numeric"})};
   var CAT={hist:["Building and conditions","--c-hist"],money:["Money and approvals","--c-money"],work:["Construction","--c-work"],test:["Energy testing","--c-test"]};
-  var CATS=["hist","test","money","money","money","money","money","money","money","money","work","work","work","test","work","work","test","work","money","money","work","money"];
+  var CATS=["hist","test","money","money","money","money","money","money","money","money","work","work","work","test","work","work","test","work","money","money","work","money","money"];
   var CHAPTERS=[
     {t:"The building and the assessment",n:2,s:"The 2010 renovation left the upper-floor walls as they were. The 2024 energy assessment measured where things stood."},
     {t:"Funding and design",n:5,s:"The grant application and award, the call for design firms, the design contract and historic review."},
     {t:"Pricing and permits",n:4,s:"Contractor pricing, the first grant payment, permit applications and the Recreation office's move out."},
     {t:"Construction",n:5,s:"Demolition through insulation, the mid-project air test, drywall and storm windows."},
-    {t:"Testing, inspection and move-back",n:6,s:"The final air test, the punch list, the last grant payment, the fire marshal's inspection and the move back in."}
+    {t:"Testing, inspection and move-back",n:7,s:"The final air test, the punch list, the last grant payment, the fire marshal's inspection, the move back in and the last contractor payments."}
   ];
   if(CATS.length!==DATA.timeline.length)console.warn("Timeline categories",CATS.length,"entries",DATA.timeline.length);
   var ab=function(d){return d.replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/g,function(m){return m.slice(0,3)})};
@@ -967,9 +968,9 @@ var DATA={
     contracts:[
       {f:"Vermont Integrated Architecture",r:"Architect and engineering design, construction oversight. Covers the library too.",note:"Subconsultants DuBois &amp; King (mechanical and electrical) and Engineering Ventures (structural).",amt:118150,when:"Approved June 9, 2025"},
       {f:"Silver Maple Construction",r:"General contractor and mechanical",note:"Budget for contract presented January 22, 2026.",amt:399781.65,when:"Priced January 22, 2026"},
-      {f:"Silver Maple, balcony change order",r:"Balcony repairs",note:"Signed, not yet billed as of the September 28 warrant.",amt:12942.06,when:"Signed September 25, 2026"}
+      {f:"Silver Maple, balcony change order",r:"Balcony repairs",note:"Billed on Silver Maple's October 12 pay application.",amt:12942.06,when:"Signed September 25, 2026"}
     ],
-    signedBy:{"Silver Maple Construction":12942.06}
+    signedBy:{}
   };
   var u2=function(v){return usd(v,v%1!==0)}, u0=function(v){return usd(Math.round(v),0)};
   var inc=sum(DATA.incentives), past=Math.round((known-DATA.grant)*100)/100,
@@ -983,14 +984,14 @@ var DATA={
   document.querySelector("#money tbody").innerHTML=
     '<tr><td class="nm">State MERP grant</td><td class="num">'+u2(DATA.grant)+'</td><td>'+M.grantNote+'</td></tr>'+
     '<tr><td class="nm">Town reserve</td><td class="num">'+u2(DATA.reserve)+'</td><td>Set aside by the Town for the project.</td></tr>'+
-    '<tr><td class="nm">Town money beyond the reserve</td><td class="num">'+u2(overGR)+'</td><td>What the known cost runs past the grant and the reserve, through the September 28 warrant.</td></tr>'+
+    '<tr><td class="nm">Town money beyond the reserve</td><td class="num">'+u2(overGR)+'</td><td>What the known cost runs past the grant and the reserve, through the October 26 warrant.</td></tr>'+
     '<tr><td class="nm">Efficiency Vermont and GMP incentives</td><td class="num"><span class="pend">up to</span> '+u2(inc)+'</td><td>Not yet received: Green Mountain Power heat pump incentive ('+u2(gmp.v)+', '+gmp.st.toLowerCase()+') and Efficiency Vermont weatherization ('+u2(ev.v)+', '+ev.st.charAt(0).toLowerCase()+ev.st.slice(1)+'). Green Mountain Power pays after installation and inspection; Efficiency Vermont is waiting on the ventilation equipment invoices.</td></tr>'+
     '<tr class="tot"><td>Known cost</td><td class="num">'+u2(known)+'</td><td></td></tr>'+
     '<tr><td class="nm">Grant paid so far</td><td class="num">'+u2(DATA.grant)+'</td><td>Paid in full in five payments, February to August 2026. The fifth and final payment came August 24.</td></tr>';
   document.querySelector("#who tbody").innerHTML=M.contracts.map(function(w){
     return '<tr><td class="nm">'+w.f+'</td><td>'+w.r+(w.note?'<div class="sub2">'+w.note+'</div>':'')+'</td><td class="num">'+u2(w.amt)+'</td><td>'+w.when+'</td></tr>'}).join("");
   $("cost4").innerHTML=[
-    [u0(known),"Known cost so far",u0(DATA.paid)+" paid, "+u0(DATA.signed)+" signed and not yet paid"],
+    [u0(known),"Known cost so far",DATA.signed?u0(DATA.paid)+" paid, "+u0(DATA.signed)+" signed and not yet paid":"All paid; nothing signed and unbilled"],
     [u0(DATA.grant),"State grant","Paid in full"],
     [u0(past),"Past the grant","Work beyond what the grant covers",1],
     [u0(overGR),"Beyond the reserve","After the Town's "+u0(DATA.reserve)+" reserve",1]

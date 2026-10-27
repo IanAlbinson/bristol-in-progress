@@ -525,8 +525,8 @@
   <h3 class="sub">What it cost</h3>
   <div class="prose">
     <p>
-      Through the September 28, 2026 check warrant, the Town has paid or signed $519,393 for the
-      project, including design. The state grant, paid in full, covers $325,854 of that, about 63%.
+      Through the October 26, 2026 check warrant, the Town has paid $522,590 for the
+      project, including design. The state grant, paid in full, covers $325,854 of that, about 62%.
       Green Mountain Power and Efficiency Vermont incentives could return up to
       <span data-v="hhInc"></span> once inspections and paperwork are done. The final cost will not be
       known until change orders are settled at closeout.
@@ -679,10 +679,10 @@
     What has actually been paid and signed is below.
   </p>
 
-  <h2 class="sec">What it has cost so far <span>through the September 28 warrant</span></h2>
+  <h2 class="sec">What it has cost so far <span>through the October 26 warrant</span></h2>
   <p class="lede">
     The Town's check warrants record every payment the Selectboard approves. Here is where the two
-    projects stand through September 28: the totals first, then how they work out to the Town's share.
+    projects stand through the October 26 warrant: the totals first, then how they work out to the Town's share.
   </p>
   <div class="cost4" id="cost4"></div>
   <div class="spbar" id="spbar"></div>
@@ -781,7 +781,7 @@
 
   <footer>
     <p>
-      <b>Sources.</b> Costs: the Town Administrator's "Library and Holley Hall: Spend Against Funding" summary of September 30, 2026 and its workbook, which tally the Town's check warrants through September 28, 2026; the Vermont Department of Libraries grant ledger updated September 9, 2026; and the FY2027 budget presentation at the February 2, 2026 Town Meeting information session. Library Board funds: the September 30 summary and the Library Board's June 2, 2026 approval of the porch money. Holley Hall: building history from the Town's 2024 State Historic Preservation grant application and the Division for Historic Preservation's 2010 review; MERP implementation grant agreement #01155-A172-5443; Level II
+      <b>Sources.</b> Costs: the Town Administrator's "Library and Holley Hall: Spend Against Funding" summary of September 30, 2026 and its workbook, which tally the Town's check warrants through September 28, 2026, plus the project payments on the October 12, 2026 warrant (the October 26 warrant has none); the Vermont Department of Libraries grant ledger updated September 9, 2026; and the FY2027 budget presentation at the February 2, 2026 Town Meeting information session. Library Board funds: the September 30 summary and the Library Board's June 2, 2026 approval of the porch money. Holley Hall: building history from the Town's 2024 State Historic Preservation grant application and the Division for Historic Preservation's 2010 review; MERP implementation grant agreement #01155-A172-5443; Level II
       Energy Assessment (June 18, 2024); project scope of work (December 2024); blower door results
       from the 2024 baseline test and Green Mountain Enclosure Consulting's progress report (June 1,
       2026); the project estimate the Town reported to Efficiency Vermont (May 6, 2026); Green
@@ -957,17 +957,17 @@ var DATA={
   var V={combinedR:usd(Math.round(combined/100)*100,0),days:String(days),hhCut:"about "+cut+" percent",hhGrantR:usd(Math.round(H.grant),0),lmlGrantR:usd(Math.round(lmlGrant),0),hhIncR:usd(Math.round(inc),0),hhGrant:usd(H.grant,1),lmlGrant:usd(lmlGrant,1),hhEst:usd(H.est,0),hhShare:"about "+share+" percent",hhInc:usd(inc,1),lmlAdd:usd(L.stateAdd,0),lmlNewBase:usd(L.newBase,0),lmlLedgerAdd:usd(r2(L.newBase-L.base),0),lmlAlloc:usd(L.alloc,1)};
   document.querySelectorAll("[data-v]").forEach(function(e){e.textContent=V[e.getAttribute("data-v")]});
 
-  // Known cost and who pays, paid plus signed through the September 28, 2026 warrant.
+  // Known cost and who pays, paid plus signed through the October 26, 2026 warrant (Sept. 30 summary plus the Oct. 12 project payments).
   // Holley Hall: Town spend-against-funding tally. Library: Town Administrator's September 30 summary.
-  var KC={hhKnown:519393.29,hhGrant:325853.52,hhInc:20652.05,
-          lmlKnown:914807.55,lmlAward:857246.15,lmlBoard:54925.08,lmlTown:2636.32,lmlInc:14085.95};
+  var KC={hhKnown:522589.64,hhGrant:325853.52,hhInc:20652.05,
+          lmlKnown:918012.44,lmlAward:857246.15,lmlBoard:54925.08,lmlTown:5841.21,lmlInc:14085.95};
   var kTotal=r2(KC.hhKnown+KC.lmlKnown), kGrants=r2(KC.hhGrant+KC.lmlAward);
   var kTown=r2((KC.hhKnown-KC.hhGrant)+KC.lmlTown), kInc=r2(KC.hhInc+KC.lmlInc);
   if(Math.abs(r2(kGrants+kTown+KC.lmlBoard)-kTotal)>0.01) warn("grants, Town money and Library Board funds do not add up to the known cost.");
   if(Math.abs(r2(KC.lmlKnown-KC.lmlAward-KC.lmlBoard)-KC.lmlTown)>0.01) warn("library Town share does not reconcile.");
   var perDollar=kGrants/kTown;
   $("stats").innerHTML=[
-    [usd(kTotal,0),"Combined cost so far","Both buildings, paid and signed through September 28, 2026. Includes "+usd(KC.lmlBoard,0)+" from the Library Board."],
+    [usd(kTotal,0),"Combined cost so far","Both buildings, paid and signed through the October 26 warrant. Includes "+usd(KC.lmlBoard,0)+" from the Library Board."],
     [usd(kGrants,0),"State and federal grants",Math.round(kGrants/kTotal*100)+"% of the cost so far"],
     [usd(kTown,0),"Town's cost",Math.round(kTown/kTotal*100)+"% of the cost so far, before up to "+usd(kInc,0)+" in expected utility incentives"],
     ["$"+perDollar.toFixed(2),"In grants per Town dollar","For every dollar of Town money, both buildings"],
@@ -979,19 +979,18 @@ var DATA={
 
   // costs, from the Town Administrator's spend-against-funding summary (Sept. 30, 2026)
   var M={
-    hh:[["Silver Maple Construction","General contractor, including the balcony change order",450888.76],
-        ["Vermont Integrated Architecture","Design and site visits, Holley Hall share",46724.63],
+    hh:[["Silver Maple Construction","General contractor, including the balcony change order",451926.76],
+        ["Vermont Integrated Architecture","Design and site visits, Holley Hall share",48882.98],
         ["G. Helms Construction","Dormer flashing and slate",13444.10],
         ["The Royal Group","Alarm work",5059.80],
         ["Green Mountain Enclosure Consulting","Airtightness testing",2550.00],
         ["Dark Star Lighting","",520.00],
         ["Paquette","Storage container during the work",206.00]],
-    hhPaid:506451.23, hhSigned:12942.06, hhReserve:150000,
-    lmlGrantWork:[["Silver Maple Construction, contract and executed change orders",528443.48,74583.82],
-        ["Silver Maple Construction, change order 7 (new subfloor, radiant heat and plating)",0,76743.30],
+    hhPaid:522589.64, hhSigned:0, hhReserve:150000,
+    lmlGrantWork:[["Silver Maple Construction, contract, executed change orders and change order 7",609377.78,70392.82],
         ["Alloy (Prism Response), PCB abatement and change order 1",128413.00,0],
-        ["Vermont Integrated Architecture, design and administration",45829.12,0],
-        ["Stone Environmental, PCB testing",12824.68,7775.32],
+        ["Vermont Integrated Architecture, design and administration",49034.01,0],
+        ["Stone Environmental, PCB testing",15888.53,4711.47],
         ["Clay Point Associates, abatement oversight",3799.00,2415.00],
         ["Claimed in a reimbursement request, not yet matched to a check",1262.98,0]],
     lmlLocal:[["Moving costs paid to the library, and a $196 payment",1899.10,0],
@@ -1034,7 +1033,7 @@ var DATA={
   var srow=function(k,v,t){return '<tr><td class="nm">'+k+'</td><td class="num">'+v+'</td><td>'+t+'</td></tr>'};
   document.querySelector("#msrc tbody").innerHTML=
     srow(tag("Holley Hall")+'<br>State MERP grant',u2(KC.hhGrant),'Municipal Energy Resilience Program grant #01155-A172-5443, awarded December 16, 2024. No local match. Paid in full in five payments, February to August 2026.')+
-    srow(tag("Library")+'<br>Federal Capital Projects Fund grant',u2(KC.lmlAward),'Through the Vermont Department of Libraries: $483,000 base award and $58,246.15 contingency (agreement 01130-2024-CPF-003), plus a $316,000 State increase in August 2026 shown in the State\'s grant ledger. No local match. $467,117.19 reimbursed as of the September 9 ledger.')+
+    srow(tag("Library")+'<br>Federal Capital Projects Fund grant',u2(KC.lmlAward),'Through the Vermont Department of Libraries: $483,000 base award and $58,246.15 contingency (agreement 01130-2024-CPF-003), plus a $316,000 State increase in August 2026 shown in the State\'s grant ledger. No local match. $527,750.12 received as of October 5.')+
     srow(tag("Library")+'<br>Library Board funds',u2(boardT),M.board.map(function(b){return '<b>'+u2(b[2])+'</b> '+b[0].toLowerCase()+'. '+b[1]+'.'}).join(" ")+' Not Town money and not grant money.')+
     srow(tag("Holley Hall")+'<br>Town money',u2(hhTown),'What Holley Hall costs past its grant. The Town set aside a '+usd(M.hhReserve,0)+' reserve toward it; '+u2(r2(hhTown-M.hhReserve))+' is beyond the reserve.')+
     srow(tag("Library")+'<br>Town money',u2(lmlTown),'What is left after the grant and the Library Board funds.')+
@@ -1043,7 +1042,7 @@ var DATA={
   // contracts
   var C=[["Both","Vermont Integrated Architecture","Architect and engineering design, construction oversight for both buildings","Subconsultants DuBois &amp; King and Engineering Ventures.",118150,"Approved June 9, 2025"],
     ["Holley Hall","Silver Maple Construction","General contractor and mechanical","Budget for contract.",399781.65,"Priced January 22, 2026"],
-    ["Holley Hall","Silver Maple, balcony change order","Balcony repairs","Signed, not yet billed as of the September 28 warrant.",12942.06,"Signed September 25, 2026"],
+    ["Holley Hall","Silver Maple, balcony change order","Balcony repairs","Billed on Silver Maple's October 12 pay application.",12942.06,"Signed September 25, 2026"],
     ["Library","Silver Maple Construction","General contractor","Includes executed change orders, among them the front porch ($30,725.08).",598295.48,"Contract sum at pay application 6"],
     ["Library","Silver Maple, change order 7","New subfloor, radiant heat and plating on the first floor","Finish flooring is separate.",76743.30,"Signed August 20, 2026"],
     ["Library","Alloy (Prism Response LLC)","PCB abatement, first floor","Low of two bids.",57013,"Awarded June 22, 2026"],
