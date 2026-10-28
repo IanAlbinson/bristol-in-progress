@@ -444,7 +444,7 @@
       minutes; the amended agreement itself is not yet in the Town's project files.</li>
     <li><b>The final cost.</b> The known cost is a floor, not a ceiling: several items are not yet priced, including the subfloor rebuild and the September joist work.</li>
     <li><b>A reopening date.</b> The library's goal is the first week of December 2026, but no date is fixed. The grant deadline is December 31.</li>
-    <li><b>The PCB closure report.</b> Promised September 9; not yet on file.</li>
+    <li><b>The EPA notice.</b> The final PCB report is done (October 26). The Town must send it to the EPA as its cleanup completion notice; this page does not yet show that it has.</li>
   </ul>
 
 
@@ -750,7 +750,7 @@
 
   <section class="panel" id="p-pcb" role="tabpanel" aria-labelledby="t-pcb" tabindex="0" hidden>
   <!-- ============ PCB ============ -->
-  <h2 class="sec">The PCB cleanup <span>spring to September 2026</span></h2>
+  <h2 class="sec">The PCB cleanup <span>spring to October 2026</span></h2>
   <p class="lede">
     Before construction went further, environmental consultant Clay Point Associates tested the
     building on April 9, 2026 for asbestos, lead paint and PCBs (polychlorinated biphenyls, industrial
@@ -765,8 +765,7 @@
     floor beneath it came out.
   </p>
   <p class="lede">
-    After removal, a second firm, Stone Environmental, takes confirmation samples. The cleanup
-    standard is 1 mg/kg. There have been three rounds so far.
+    After removal, a second firm, Stone Environmental, takes confirmation samples. The cleanup standard is 1 mg/kg. It took three rounds to meet it, and Stone's final report, dated October 26, 2026, confirms the cleanup met that standard.
   </p>
   <div class="tbl">
     <table id="pcb">
@@ -775,10 +774,7 @@
     </table>
   </div>
   <p class="note">
-    <b>Where it stands.</b> The joist sections were removed under a structural engineer's review
-    (site visit September 10, written guidance September 11), and new framing and subfloor followed.
-    Stone Environmental said on September 9 it would prepare a closure report on the final results.
-    I have not yet seen that report, and this page will say when it is filed.
+    <b>The final report.</b> Stone Environmental's PCB Abatement Completion Report, dated October 26, 2026, finds that the cleanup met its goal. Every material left in the cleaned area tested at or below 1 mg/kg, and everything that tested above it was removed. The joist sections came out under a structural engineer's review (site visit September 10, written guidance September 11), and new framing and subfloor followed. Two other results are in the report: the old window glazing tested below the lab's reporting limit, and a leach test on the removed flooring found no PCBs above the lab's limit. The Town, as the owner, must send the report to the U.S. Environmental Protection Agency's New England office as its notice that the cleanup is complete, and keep the cleanup records for at least five years.
   </p>
 
 
@@ -824,7 +820,7 @@
   <footer>
     <p>
       <b>Sources.</b> Vermont Department of Libraries grant agreement 01130-2024-CPF-003, executed
-      September 26, 2024. Vermont Department of Libraries grant ledger for the Town, updated September 9, 2026. Selectboard minutes of June 9, 2025; June 22, July 13, July 27 and August 10,
+      September 26, 2024. Vermont Department of Libraries grant ledger for the Town, updated September 9, 2026. Stone Environmental's PCB Abatement Completion Report (October 26, 2026, signed October 27). Selectboard minutes of June 9, 2025; June 22, July 13, July 27 and August 10,
       2026 (approved); September 14, 2026 (draft, not yet approved). Vermont Integrated Architecture
       scope narrative (March 19, 2026) and design proposal (May 15, 2025). Silver Maple Construction
       quote 1105, revised budget for contract (February 19, 2026). Chimney removal scope change,
@@ -935,9 +931,9 @@ const P = {
     { k:"Progress test", sub:"GMEC, Sept 25, 2026", cfm:3231, rep:0.39, now:1 }
   ] },
   pcb: [
-    { r:"Round 1", d:"2026-08-10", res:"14 of 19 samples above the standard", hi:42, next:"Contamination had soaked into the wood subfloor. The first-floor deck was removed under Alloy change order 1, signed August 11." },
-    { r:"Round 2", d:"2026-08-31", res:"One joist above the standard", hi:1.4, next:"The subfloor above that joist had read 28 mg/kg. Neighboring joists were resampled September 2." },
-    { r:"Round 3", d:"2026-09-09", res:"Three joist sections above; everything else below", hi:null, next:"The three sections were removed after structural review. A closure report is to follow." }
+    { r:"Round 1", d:"2026-08-10", res:"13 of 19 subfloor samples above the standard", hi:42, next:"The PCBs had soaked into the wood subfloor; the readings above the standard ran from 1.2 to 42 mg/kg. The whole first-floor subfloor was removed under Alloy change order 1, signed August 11, except under built-in cabinets and large bookshelves, where the carpet and adhesive never reached." },
+    { r:"Round 2", d:"2026-08-31", res:"12 of 13 floor joist samples below the standard; one at 1.4 mg/kg", hi:1.4, next:"The subfloor above that joist had read 28 mg/kg. Stone sampled that joist run and the neighboring runs again on September 2, one piece of lumber at a time." },
+    { r:"Round 3", d:"2026-09-09", res:"3 of 14 joist sections above the standard, at 1.3, 1.5 and 2.5 mg/kg; the rest below", hi:2.5, next:"The three sections were removed whole after structural review. Every joist section left in place had tested below 1 mg/kg." }
   ],
   photos: [
     {id:"n27",dt:"2018-05-18",c:"The front steps and porch in 2018"},
@@ -1065,6 +1061,7 @@ const P = {
     { d:"2026-09-28", t:"Propane hooked up. The Selectboard's warrant that night includes Alloy's $59,400 change order payment." },
     { d:"2026-09-30", t:"The Town Administrator's spend summary puts the known cost at $914,807.55 against the $857,246.15 award, with some work not yet priced.", ph:["1911"] },
     { d:"2026-10-12", t:"The Selectboard's warrant pays Silver Maple's seventh pay application, $80,934.30, plus $3,063.85 to Stone Environmental and $3,204.89 to the architect." },
+        { d:"2026-10-26", t:"Stone Environmental issues its final PCB report: the cleanup met the 1 mg/kg standard." },
     { d:"2026-10-26", t:"Photos show the finish flooring going in on the first floor.", ph:["1146"] },
     { d:"2026-10-27", t:"Photos show more of the new floor down in the main room.", ph:["2207"] },
     { d:"2026-12-31", t:"<b>Grant deadline.</b> All project work must be complete." }
