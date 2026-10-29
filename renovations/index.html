@@ -460,6 +460,7 @@
         <li>Front steps, porch and center handrail rebuilt, attic insulated, heat pump units installed</li>
         <li>Propane hookup, September 28</li>
         <li>Final PCB report, October 26: the cleanup met the standard</li>
+        <li>Final air-leakage test, October 29: about 37.5% less leakage, passing Efficiency Vermont's target</li>
         <li class="o">Cleanup completion notice to the EPA, with the final PCB report</li>
         <li class="o">Finish flooring, going in as of October 26</li>
         <li class="o">Final cost and the amended grant agreement</li>
@@ -792,7 +793,7 @@
       minutes of June 9, 2025 and June 22 through August 10, 2026 (approved) and September 14, 2026
       (draft); building history from the 2022 Historic Assessment and the Northern Architects drawing
       set; temporary service dates from the library's construction updates on its website and the Addison Independent (July 2, 2026). Both: weekly owner, architect and contractor meeting notes and project correspondence
-      through September 2026. Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Heating oil: the Holley Hall figure is Green Mountain Power's estimate in its letter of support; the library figure is its 2022 oil use from the 2024 energy assessment. Library air-leakage figures come from Green Mountain Enclosure Consulting's progress test report (test September 25, report September 30, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Final air-leakage figures come from Green Mountain Enclosure Consulting's final airtightness test report (August 11, 2026). Photos come from the Town's project photo folders;  Dates are read from
+      through September 2026. Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Heating oil: the Holley Hall figure is Green Mountain Power's estimate in its letter of support; the library figure is its 2022 oil use from the 2024 energy assessment. Library air-leakage figures come from Green Mountain Enclosure Consulting's progress test report (test September 25, report September 30, 2026), its final test report (test and report October 29, 2026) and the MERP Level II Energy Assessment (June 18, 2024). Holley Hall's final air-leakage figures come from Green Mountain Enclosure Consulting's final airtightness test report (August 11, 2026). Photos come from the Town's project photo folders;  Dates are read from
       each photo's camera data, except the four joist photos, which had none and are dated by the day
       they were emailed, and the 2021 to 2024 library condition photos, which are dated from their
       file names in the Town's building records. The before-and-after pairs were lined up by scaling, shifting and slightly
@@ -931,6 +932,7 @@ var DATA={
     {d:"2026-10-26",b:"lml",t:"Final PCB report: the library cleanup met the 1 mg/kg standard."},
   {d:"2026-10-26",b:"lml",t:"Finish flooring going in on the library's first floor."},
   {d:"2026-10-27",b:"lml",t:"Last day of service at the library's pop-up.",f:1},
+  {d:"2026-10-29",b:"lml",t:"Final air-leakage test at the library: about 37.5% less leakage than before the project, passing Efficiency Vermont's rebate target."},
   {d:"2026-12-31",b:"both",t:"<b>Both grants end.</b> Work must be finished and paid for.",f:1}
  ]
 };
@@ -973,7 +975,7 @@ var DATA={
     [usd(kTown,0),"Town's cost",Math.round(kTown/kTotal*100)+"% of the cost so far, before up to "+usd(kInc,0)+" in expected utility incentives"],
     ["$"+perDollar.toFixed(2),"In grants per Town dollar","For every dollar of Town money, both buildings"],
     [cut+"% less","Air leaking at Holley Hall","Final test, August 10, 2026"],
-    [Math.round((1-3231/5172)*100)+"% less","Air leaking at the library","Progress test, September 25, 2026"],
+    [Math.round((1-3233/5172)*100)+"% less","Air leaking at the library","Final test, October 29, 2026"],
     [(1267+930).toLocaleString("en-US"),"Fewer gallons of heating oil a year","About 1,267 at Holley Hall, where heat pumps take over much of the heating and the oil boiler stays for the baseboards (Green Mountain Power's estimate), and 930 at the library, which is moving from oil to propane"],
     ["11,300","Square feet of public building","Holley Hall (about 7,800) and the library (3,515), both renovated in 2026"]
   ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
