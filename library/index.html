@@ -878,7 +878,7 @@
 
 <script>
 const P = {
-  asof: "2026-10-29",
+  asof: "2026-10-30",
   deadline: "2026-12-31",
   grant: { base: 483000.00, contingency: 58246.15, nte: 541246.15 },
   money: [
@@ -1020,6 +1020,12 @@ const P = {
     {id:"1146",dt:"2026-10-26",c:"New oak flooring going down over the subfloor in the main room"},
     {id:"2207",dt:"2026-10-27",c:"The main room with the new oak floor laid along the shelving, subfloor still showing toward the door"},
     {id:"2208",dt:"2026-10-27",c:"New flooring along the window shelving, seen past a column"},
+    {id:"2227",dt:"2026-10-30",c:"The new oak floor in the front reading room, looking toward the bay window"},
+    {id:"2228",dt:"2026-10-30",c:"The bay window alcove with the floor down and finishing work under way"},
+    {id:"2229",dt:"2026-10-30",c:"The main room with the new floor, looking toward the coffered ceiling and the circulation area"},
+    {id:"2230",dt:"2026-10-30",c:"A walkthrough of the main room on the new floor"},
+    {id:"2231",dt:"2026-10-30",c:"Looking through the columns to the stacks room, with the new floor throughout"},
+    {id:"2232",dt:"2026-10-30",c:"The view in from the entry doors across the new floor"},
     {id:"2114",dt:"2026-10-24",c:"A reading room ready for the new floor"},
     {id:"2115",dt:"2026-10-24",c:"The main room with the subfloor complete"},
     {id:"2116",dt:"2026-10-24",c:"A finished room on the lower level"},
@@ -1065,8 +1071,9 @@ const P = {
     { d:"2026-10-12", t:"The Selectboard's warrant pays Silver Maple's seventh pay application, $80,934.30, plus $3,063.85 to Stone Environmental and $3,204.89 to the architect." },
         { d:"2026-10-26", t:"Stone Environmental issues its final PCB report: the cleanup met the 1 mg/kg standard." },
     { d:"2026-10-26", t:"Photos show the finish flooring going in on the first floor.", ph:["1146"] },
-    { d:"2026-10-27", t:"Photos show more of the new floor down in the main room.", ph:["2207"] },
+    { d:"2026-10-27", t:"Photos show more of the new floor down in the main room." },
     { d:"2026-10-29", t:"Final blower door test: 3,233 cfm75 against the 5,172 baseline, about 37.5% less air leakage and essentially the same as the progress test. It passes Efficiency Vermont's rebate target." },
+    { d:"2026-10-30", t:"Photos show the new oak floor down through the main first-floor rooms.", ph:["2227"] },
     { d:"2026-12-31", t:"<b>Grant deadline.</b> All project work must be complete." }
   ]
 };
@@ -1194,7 +1201,7 @@ const P = {
   const key = s => { const p = s.split("-"); return p[0] + (p[1]||"00") + (p[2]||"00"); };
   for (let i=1;i<P.tl.length;i++) if (key(P.tl[i].d) < key(P.tl[i-1].d)) console.warn("Timeline out of order at", P.tl[i].d);
   const CAT = { hist:["Building and conditions","--c-hist"], money:["Money and approvals","--c-money"], work:["Construction","--c-work"], clean:["Hazardous materials","--c-clean"], test:["Energy testing","--c-test"] };
-  const CATOF = {"1911":"hist","1995":"hist","2022-02-22":"test","2022-08-22":"hist","2022-11-11":"hist","2024-03-07":"hist","2024-03-12":"money","2024-06-18":"test","2024-09-01":"money","2025-04-21":"hist","2025-06-09":"money","2026-02-19":"money","2026-04-02":"work","2026-04-09":"clean","2026-04-18":"work","2026-06-02":"money","2026-06-09":"work","2026-06-22":"clean","2026-07-13":"clean","2026-07-20":"work","2026-08-10":"clean","2026-08-11":"clean","2026-08-19":"money","2026-08-20":"money","2026-08-21":"clean","2026-08-27":"work","2026-08-31":"clean","2026-09-09":"clean","2026-09-10":"work","2026-10-12":"money","2026-10-26":"work","2026-10-27":"work","2026-10-29":"test","2026-09-14":"work","2026-09-16":"work","2026-09-21":"work","2026-09-23":"work","2026-09-25":"test","2026-09-28":"work","2026-09-30":"money","2026-12-31":"money"};
+  const CATOF = {"1911":"hist","1995":"hist","2022-02-22":"test","2022-08-22":"hist","2022-11-11":"hist","2024-03-07":"hist","2024-03-12":"money","2024-06-18":"test","2024-09-01":"money","2025-04-21":"hist","2025-06-09":"money","2026-02-19":"money","2026-04-02":"work","2026-04-09":"clean","2026-04-18":"work","2026-06-02":"money","2026-06-09":"work","2026-06-22":"clean","2026-07-13":"clean","2026-07-20":"work","2026-08-10":"clean","2026-08-11":"clean","2026-08-19":"money","2026-08-20":"money","2026-08-21":"clean","2026-08-27":"work","2026-08-31":"clean","2026-09-09":"clean","2026-09-10":"work","2026-10-12":"money","2026-10-26":"work","2026-10-27":"work","2026-10-30":"work","2026-10-29":"test","2026-09-14":"work","2026-09-16":"work","2026-09-21":"work","2026-09-23":"work","2026-09-25":"test","2026-09-28":"work","2026-09-30":"money","2026-12-31":"money"};
   const CHAPTERS = [
     {t:"The building before the project", from:"1911", to:"2023-12-31", s:"Built in 1911, an accessibility renovation in the 1990s, and energy and historic assessments in 2022."},
     {t:"Funding and design", from:"2024-01-01", to:"2025-12-31", s:"The grant application, the award and the choice of an architect."},
