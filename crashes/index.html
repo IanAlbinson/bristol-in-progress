@@ -839,10 +839,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div class="stat"><div class="n" id="s4">0</div><div class="l">Bristol PD share</div><div class="sub2" id="s4b"></div></div>
     </div>
 
-    <div class="tabs">
-      <button class="tab active" id="mzone">By district</button>
-      <button class="tab" id="mag">By agency</button>
-    </div>
 
     <h2 class="sec">Filter</h2>
     <div class="pills" id="agpills"></div>
@@ -931,7 +927,7 @@ function inRings(lon,lat,rings){var ins=false;
   return ins;}
 function inDistrict(lon,lat){for(var i=0;i<RINGS.length;i++) if(inRings(lon,lat,RINGS[i])) return true; return false;}
 function zoneOf(p){return p.lat!=null ? (inDistrict(p.lon,p.lat)?'District':'Town') : p.zone;}
-function colorOf(p){return mode==='zone'?CZN()[zoneOf(p)]:CAG()[p.ag];}
+function colorOf(p){var z=zoneOf(p);if(p.ag==='Bristol PD')return z==='District'?cv('--district'):z==='Town'?cv('--town'):cv('--uncl');return CAG()[p.ag];}
 
 var ALL=DATA.points.concat(DATA.unmapped);
 var YEARS=[]; (function(){var s={};ALL.forEach(function(p){if(p.yr)s[p.yr]=1;});
@@ -977,7 +973,7 @@ function pills(host,keys,bag,colors,labels){
 }
 function popup(items){
   var z=zoneOf(items[0]), C=CZN(), A=CAG();
-  var h='<div class="pop"><span class="z" style="background:'+C[z]+'">'+(z==='District'?'In district':z==='Town'?'Outside district':'Unclassified')+'</span>';
+  var h='<div class="pop"><span class="z" style="background:'+cv('--muted')+'">'+(z==='District'?'In district':z==='Town'?'Outside district':'Unclassified')+'</span>';
   h+='<b>'+esc(items[0].addr)+'</b>';
   if(items.length>1) h+='<small>'+items.length+' reports at this point</small>';
   items.slice(0,10).forEach(function(p){
@@ -1019,10 +1015,9 @@ function refresh(){
         fillColor:c,fillOpacity:.8}).addTo(ptLayer).bindPopup(popup(it),{maxWidth:330,maxHeight:340});});
   });
 
-  var C=mode==='zone'?CZN():CAG(), keys=mode==='zone'?ZN:AG;
-  var labels=mode==='zone'?['In district','Town','Unclassified']:['Bristol PD','VT State Police','Other agency'];
-  document.getElementById('legend').innerHTML=keys.map(function(k,i){
-    return '<span><i style="background:'+C[k]+'"></i>'+esc(labels[i])+'</span>';}).join('')+
+  var KEY=[[cv('--district'),'Bristol PD, in district'],[cv('--town'),'Bristol PD, outside'],[cv('--agy2'),'VT State Police'],[cv('--agy3'),'Other or unclassified']];
+  document.getElementById('legend').innerHTML=KEY.map(function(k){
+    return '<span><i style="background:'+k[0]+'"></i>'+esc(k[1])+'</span>';}).join('')+
     '<span><i class="line"></i>Police District</span><span><i class="tline"></i>Town of Bristol</span>'+
     (map.hasLayer(pLayer)?'<span><i style="background:'+cv('--district')+';opacity:.35"></i>Parcel in district</span><span><i style="background:'+cv('--muted')+';opacity:.3"></i>Parcel outside</span>':'');
 
@@ -1052,12 +1047,10 @@ function refresh(){
   var um=DATA.unmapped.filter(function(p){return p.yr>=a&&p.yr<=b;});
   document.getElementById('unsub').textContent=um.length+' of '+inYear.length;
   document.getElementById('tbl2').innerHTML='<tr><th class="l">Report</th><th></th></tr>'+
-    (um.map(function(p){return '<tr><td>'+esc(p.addr)+'<small>'+esc(p.date)+' &middot; '+esc(p.agf)+'</small></td><td class="n" style="color:'+CZN()[zoneOf(p)]+'">&bull;</td></tr>';}).join('')||'<tr><td>none in range</td><td class="n"></td></tr>');
+    (um.map(function(p){return '<tr><td>'+esc(p.addr)+'<small>'+esc(p.date)+' &middot; '+esc(p.agf)+'</small></td><td class="n" style="color:'+colorOf(p)+'">&bull;</td></tr>';}).join('')||'<tr><td>none in range</td><td class="n"></td></tr>');
 }
 pills('agpills',AG,state.ag,CAG(),['Bristol PD','VT State Police','Other']);
-pills('zpills',ZN,state.z,CZN(),['In district','Town','Unclassified']);
-document.getElementById('mzone').onclick=function(){mode='zone';this.className='tab active';document.getElementById('mag').className='tab';refresh();};
-document.getElementById('mag').onclick=function(){mode='ag';this.className='tab active';document.getElementById('mzone').className='tab';refresh();};
+pills('zpills',ZN,state.z,{District:cv('--muted'),Town:cv('--muted'),Unclassified:cv('--muted')},['In district','Town','Unclassified']);
 document.getElementById('lp').onchange=function(){
   if(this.checked){pLayer.addTo(map);pLayer.bringToBack();BASE['Map'].bringToBack();}
   else map.removeLayer(pLayer);
