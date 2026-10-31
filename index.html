@@ -283,6 +283,41 @@
     color:var(--muted); text-decoration:none;
   }
 
+
+  /* ---------- tool groups (draft 2026-10-31) ---------- */
+  .toolset { margin-bottom:30px; }
+  .toolset:last-child { margin-bottom:0; }
+  .setlabel {
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 10px;
+  }
+  /* two across keeps the display titles on one line; the grouping does the tidying */
+  @media (min-width:760px) { .tools { grid-template-columns:repeat(2, 1fr); } }
+  /* the figure is a fact, the source is a citation: stack them, don't justify them apart */
+  .tool .foot {
+    flex-direction:column;
+    align-items:flex-start;
+    gap:3px;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .tool .foot .fig {
+    color:var(--ink-2);
+    font-size:12px;
+    letter-spacing:0;
+  }
+  .tool .foot > span:last-child {
+    font-size:10.5px;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
   /* ---------- work ledger ---------- */
 
   .group { margin-bottom:34px; }
@@ -446,121 +481,122 @@
       <span class="aside">Public data, made readable</span>
     </div>
     <p class="lede">
-      Small standalone pages built from public records. Each one shows its sources and the date the
-      data was pulled. A few are other people's maps that deserve more readers than they get;
-      those are marked and open on the site that made them.
+      Small standalone pages built from public records. Each one shows its sources and the date
+      the data was pulled.
+    </p>
+
+      <div class="toolset">
+        <h3 class="setlabel">Money and votes</h3>
+        <div class="tools">
+        <a class="tool" href="elections/">
+          <h3>How Bristol voted</h3>
+          <p>The August 11 primary at three levels, from all of Vermont down to Bristol&rsquo;s own return.</p>
+          <div class="foot">
+            <span class="fig">785 ballots &middot; 22.8% turnout</span>
+            <span>Certified canvass &amp; Town return</span>
+          </div>
+        </a>
+        <a class="tool" href="appropriations/">
+          <h3>Where the appropriations go</h3>
+          <p>Every nonprofit Bristol voters fund at Town Meeting, beside what its IRS filings show.</p>
+          <div class="foot">
+            <span class="fig">Articles 13 to 15</span>
+            <span>IRS Form 990 filings</span>
+          </div>
+        </a>
+        <a class="tool" href="homesteads/">
+          <h3>Homesteads, parcel by parcel</h3>
+          <p>Every parcel mapped by whether its owner filed a homestead declaration.</p>
+          <div class="foot">
+            <span class="fig">315 of 1,306 with none</span>
+            <span>VCGI parcels &amp; 2025 grand list</span>
+          </div>
+        </a>
+        </div>
+      </div>
+
+      <div class="toolset">
+        <h3 class="setlabel">Streets, safety and land</h3>
+        <div class="tools">
+        <a class="tool" href="police/">
+          <h3>Policing Bristol, village and town</h3>
+          <p>Who pays for the Police District, and what Bristol PD&rsquo;s calls look like inside it and outside.</p>
+          <div class="foot">
+            <span class="fig">14% of calls outside</span>
+            <span>Bristol PD call records, FY2027 budget</span>
+          </div>
+        </a>
+        <a class="tool" href="crashes/">
+          <h3>Crash reports and the police district</h3>
+          <p>Every reported crash in town, placed against the district line.</p>
+          <div class="foot">
+            <span class="fig">678 crashes, 2010 to 2026</span>
+            <span>VTrans Crash Query Tool</span>
+          </div>
+        </a>
+        <a class="tool" href="traffic/">
+          <h3>Downtown traffic and the study area</h3>
+          <p>Traffic counts and downtown crashes on one map with the proposed study corridors.</p>
+          <div class="foot">
+            <span class="fig">2020 and 2024 counts</span>
+            <span>ACRPC counts &amp; crash dashboard</span>
+          </div>
+        </a>
+        <a class="tool" href="sidewalks/">
+          <h3>Sidewalk condition</h3>
+          <p>The Town&rsquo;s 2022 sidewalk inventory, walked point by point.</p>
+          <div class="foot">
+            <span class="fig">1,399 locations scored</span>
+            <span>Town of Bristol 2022 inventory</span>
+          </div>
+        </a>
+        <a class="tool" href="trees/">
+          <h3>Bristol&rsquo;s public trees</h3>
+          <p>Every public tree and empty planting site the Town inventoried, by condition and genus.</p>
+          <div class="foot">
+            <span class="fig">562 trees &middot; 106 empty sites</span>
+            <span>VT ANR Atlas &amp; 2015 Town inventory</span>
+          </div>
+        </a>
+        </div>
+      </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Written up</h2>
+      <span class="aside">One project, explained</span>
+    </div>
+    <p class="lede">
+      Longer pieces about a single project, written for anyone who wants the whole story rather
+      than a map to poke at.
     </p>
 
     <div class="tools">
-      <a class="tool" href="elections/">
-        <h3>How Bristol voted</h3>
-        <p>
-          The August 11, 2026 primary at three levels: all of Vermont, Addison County's 23 towns,
-          and Bristol. Bristol cast 785 ballots, 22.8% of its 3,442-name checklist, and took a
-          Democratic ballot 77.5% of the time.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>Certified canvass &amp; Town return</span>
-        </div>
-      </a>
-
-      <a class="tool" href="crashes/">
-        <h3>Crash reports and the police district</h3>
-        <p>
-          All 678 reported crashes in Bristol from 2010 to 2026, mapped by which agency responded
-          and whether the crash fell inside the police district. The district line is now the
-          Listers' own Tax Rate #3 parcels, so every crash is placed geometrically: Bristol PD
-          filed 199 of the 206 reports inside the district and 43 of the 470 outside it.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>VTrans Crash Query Tool</span>
-        </div>
-      </a>
-
-      <a class="tool" href="police/">
-        <h3>Policing Bristol, village and town</h3>
-        <p>
-          Who pays for the Police District, what Bristol PD's calls look like inside and outside
-          the district from 2022 to 2025, and what the merger charter says about going town-wide.
-          About 14% of Bristol PD's calls were outside the district, mostly traffic stops.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>Bristol PD call records, FY2027 budget</span>
-        </div>
-      </a>
-
-      <a class="tool" href="appropriations/">
-        <h3>Where the appropriations go</h3>
-        <p>
-          Every nonprofit Bristol voters fund at Town Meeting, next to what that organization's
-          public IRS filings show about its size and finances.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>IRS Form 990 filings</span>
-        </div>
-      </a>
-
-      <a class="tool" href="trees/">
-        <h3>Bristol's public trees</h3>
-        <p>
-          All 562 public trees and 106 empty planting sites the Town inventoried in 2014, mapped by
-          condition, genus and size. Nearly half are maple, against a diversity ceiling of 20% for any
-          one genus, and 68 trees were flagged for an arborist with no follow-up on record since.
-          Fourteen have been revisited in 2026.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>VT ANR Atlas &amp; 2015 Town inventory</span>
-        </div>
-      </a>
-
-      <a class="tool" href="sidewalks/">
-        <h3>Sidewalk condition</h3>
-        <p>
-          The Town's 2022 sidewalk inventory, walked point by point. 1,399 locations scored for
-          cracking, edge and joint wear, ledging and drainage, with 571 photos. Roughly a quarter
-          show no defect at all, and roughly a quarter carry at least one severe one. ACRPC holds
-          the survey; the map here is built from the same records, with the duplicate uploads
-          removed.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>Town of Bristol 2022 inventory</span>
-        </div>
-      </a>
-
-      <a class="tool" href="traffic/">
-        <h3>Downtown traffic and the study area</h3>
-        <p>
-          ACRPC's 2020 and 2024 traffic counts and 72 downtown crashes (Aug 2020–July 2025), on one
-          map with the four gateways of the proposed FY2027 Downtown Access Study. Color the count
-          pins by 85th-percentile speed or truck share; the study corridors follow the real streets
-          out to North &amp; Hazel, Stony Hill below Airport Drive, VT-17 before Lord's Prayer Rock,
-          and South Street over the bridge.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>ACRPC counts &amp; crash dashboard</span>
-        </div>
-      </a>
-
-      <a class="tool" href="homesteads/">
-        <h3>Homesteads, parcel by parcel</h3>
-        <p>
-          Every parcel in town, mapped by whether its owner filed a homestead declaration for the
-          2025 grand list. 315 of Bristol's 1,306 residential parcels (24%) have none on file.
-          That covers year-round rentals as well as second homes, and 210 of those 315 owners get
-          their mail in Bristol.
-        </p>
-        <div class="foot">
-          <span class="chip live">Live</span>
-          <span>VCGI parcels &amp; 2025 grand list</span>
-        </div>
-      </a>
+        <a class="tool" href="renovations/">
+          <h3>The 2026 renovations</h3>
+          <p>Two buildings rebuilt at once, with the same architect, the same builder and grant money behind both.</p>
+          <div class="foot">
+            <span class="fig">Holley Hall &amp; the library</span>
+            <span>MERP and CPF grants</span>
+          </div>
+        </a>
+        <a class="tool" href="holley-hall/">
+          <h3>Inside the Holley Hall retrofit</h3>
+          <p>Six months of work on the upper floor, from March to September 2026.</p>
+          <div class="foot">
+            <span class="fig">MERP grant</span>
+            <span>Municipal Energy Resilience Program</span>
+          </div>
+        </a>
+        <a class="tool" href="library/">
+          <h3>Inside the library renovation</h3>
+          <p>What is changing at 40 North Street, in a building that dates to 1911.</p>
+          <div class="foot">
+            <span class="fig">CPF grant</span>
+            <span>VT Dept. of Libraries, Capital Projects Fund</span>
+          </div>
+        </a>
     </div>
   </section>
 
