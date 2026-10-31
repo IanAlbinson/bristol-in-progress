@@ -927,6 +927,8 @@ function inRings(lon,lat,rings){var ins=false;
   return ins;}
 function inDistrict(lon,lat){for(var i=0;i<RINGS.length;i++) if(inRings(lon,lat,RINGS[i])) return true; return false;}
 function zoneOf(p){return p.lat!=null ? (inDistrict(p.lon,p.lat)?'District':'Town') : p.zone;}
+var CATS=['BPDin','BPDout','VSP','Other'];
+function catOf(p){var z=zoneOf(p);if(p.ag==='Bristol PD')return z==='District'?'BPDin':z==='Town'?'BPDout':'Other';return p.ag==='Vermont State Police'?'VSP':'Other';}
 function colorOf(p){var z=zoneOf(p);if(p.ag==='Bristol PD')return z==='District'?cv('--district'):z==='Town'?cv('--town'):cv('--uncl');return CAG()[p.ag];}
 
 var ALL=DATA.points.concat(DATA.unmapped);
@@ -962,7 +964,7 @@ document.getElementById('yrreset').onclick=function(){sel.a=Y0;sel.b=Y1;refresh(
 
 var groups={};
 DATA.points.forEach(function(p){var k=p.lat.toFixed(5)+','+p.lon.toFixed(5);(groups[k]=groups[k]||{lat:p.lat,lon:p.lon,items:[]}).items.push(p);});
-var state={ag:{},z:{}};
+var state={ag:{},z:{},c:{BPDin:true,BPDout:true,VSP:true,Other:true}};
 AG.forEach(function(a){state.ag[a]=true;}); ZN.forEach(function(z){state.z[z]=true;});
 function pills(host,keys,bag,colors,labels){
   document.getElementById(host).innerHTML=keys.map(function(k,i){
@@ -988,8 +990,8 @@ function refresh(){
   document.getElementById('yrsel').innerHTML = (a===b? '<b>'+a+'</b>' : '<b>'+a+'</b>&ndash;<b>'+b+'</b>');
 
   var inYear=ALL.filter(function(p){return p.yr>=a&&p.yr<=b;});
-  var shown=inYear.filter(function(p){return state.ag[p.ag]&&state.z[zoneOf(p)];});
-  AG.forEach(function(g){var e=document.querySelector('#agpills .k[data-c="'+g+'"]'); if(e) e.textContent=inYear.filter(function(p){return p.ag===g;}).length;});
+  var shown=inYear.filter(function(p){return state.c[catOf(p)]&&state.z[zoneOf(p)];});
+  CATS.forEach(function(g){var e=document.querySelector('#agpills .k[data-c="'+g+'"]'); if(e) e.textContent=inYear.filter(function(p){return catOf(p)===g;}).length;});
   ZN.forEach(function(z){var e=document.querySelector('#zpills .k[data-c="'+z+'"]'); if(e) e.textContent=inYear.filter(function(p){return zoneOf(p)===z;}).length;});
 
   var nd=shown.filter(function(p){return zoneOf(p)==='District';}).length;
@@ -1007,7 +1009,7 @@ function refresh(){
   ptLayer.clearLayers();
   Object.keys(groups).forEach(function(k){
     var g=groups[k];
-    var items=g.items.filter(function(p){return p.yr>=a&&p.yr<=b&&state.ag[p.ag]&&state.z[zoneOf(p)];});
+    var items=g.items.filter(function(p){return p.yr>=a&&p.yr<=b&&state.c[catOf(p)]&&state.z[zoneOf(p)];});
     if(!items.length) return;
     var by={};items.forEach(function(p){var c=colorOf(p);(by[c]=by[c]||[]).push(p);});
     Object.keys(by).forEach(function(c){var it=by[c];
@@ -1049,7 +1051,7 @@ function refresh(){
   document.getElementById('tbl2').innerHTML='<tr><th class="l">Report</th><th></th></tr>'+
     (um.map(function(p){return '<tr><td>'+esc(p.addr)+'<small>'+esc(p.date)+' &middot; '+esc(p.agf)+'</small></td><td class="n" style="color:'+colorOf(p)+'">&bull;</td></tr>';}).join('')||'<tr><td>none in range</td><td class="n"></td></tr>');
 }
-pills('agpills',AG,state.ag,CAG(),['Bristol PD','VT State Police','Other']);
+pills('agpills',CATS,state.c,{BPDin:cv('--district'),BPDout:cv('--town'),VSP:cv('--agy2'),Other:cv('--agy3')},['Bristol PD, in district','Bristol PD, outside','VT State Police','Other or unclassified']);
 pills('zpills',ZN,state.z,{District:cv('--muted'),Town:cv('--muted'),Unclassified:cv('--muted')},['In district','Town','Unclassified']);
 document.getElementById('lp').onchange=function(){
   if(this.checked){pLayer.addTo(map);pLayer.bringToBack();BASE['Map'].bringToBack();}
