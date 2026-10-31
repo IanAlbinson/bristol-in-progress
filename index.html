@@ -443,6 +443,16 @@
     color:var(--muted);
   }
   footer a { color:var(--signal); text-underline-offset:2px; }
+
+  /* ---------- draft marker on write-up cards (2026-10-31) ---------- */
+  .tool .dchip {
+    display:inline-block; width:fit-content;
+    font-family:var(--mono); font-size:10px; font-weight:500;
+    letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent); border:1px solid var(--accent);
+    border-radius:3px; padding:1px 6px;
+    margin-bottom:-1px;
+  }
 </style>
 </head>
 <body>
@@ -573,6 +583,7 @@
 
     <div class="tools">
         <a class="tool" href="renovations/">
+          <span class="dchip">Draft</span>
           <h3>The 2026 renovations</h3>
           <p>Two buildings rebuilt at once, with the same architect, the same builder and grant money behind both.</p>
           <div class="foot">
@@ -581,6 +592,7 @@
           </div>
         </a>
         <a class="tool" href="holley-hall/">
+          <span class="dchip">Draft</span>
           <h3>Inside the Holley Hall retrofit</h3>
           <p>Six months of work on the upper floor, from March to September 2026.</p>
           <div class="foot">
@@ -589,6 +601,7 @@
           </div>
         </a>
         <a class="tool" href="library/">
+          <span class="dchip">Draft</span>
           <h3>Inside the library renovation</h3>
           <p>What is changing at 40 North Street, in a building that dates to 1911.</p>
           <div class="foot">

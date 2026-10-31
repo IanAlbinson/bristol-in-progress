@@ -346,8 +346,55 @@
   #p-money details.more summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
   #p-money details.more summary span{color:var(--muted)}
 </style>
+
+<style>
+  /* ---------- draft prominence (2026-10-31) ---------- */
+  :root{ --dbar-h:28px; }
+  @media (max-width:760px){ :root{ --dbar-h:25px; } }
+
+  .dbar{
+    position:sticky; top:0; z-index:40;
+    height:var(--dbar-h);
+    background:var(--accent); color:#fff;
+    display:flex; align-items:center;
+    box-shadow:0 1px 0 rgba(0,0,0,.14);
+  }
+  .dbar-in{
+    max-width:1080px; width:100%; margin:0 auto; padding:0 26px;
+    display:flex; align-items:baseline; gap:9px;
+    font-family:var(--mono); font-size:11px; line-height:1.1;
+    letter-spacing:.05em; white-space:nowrap; overflow:hidden;
+  }
+  .dbar-tag{ font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+  .dbar-txt{ overflow:hidden; text-overflow:ellipsis; }
+  @media (max-width:760px){
+    .dbar-in{ padding:0 16px; gap:7px; font-size:10px; letter-spacing:.04em; }
+    .dbar-txt .d-long{ display:none; }
+  }
+
+  /* the tab bar parks below the draft bar, not under it */
+  .tabbar{ top:var(--dbar-h); }
+
+  /* every table says so for itself */
+  .tcap{
+    font-family:var(--mono); font-size:10px; font-weight:500;
+    letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); margin:22px 0 0;
+  }
+  .tcap .t{
+    border:1px solid var(--accent); border-radius:3px;
+    padding:1px 5px; margin-right:7px;
+  }
+  .tcap + .tbl{ margin-top:7px; }
+</style>
 </head>
 <body>
+<div class="dbar" role="note" aria-label="Draft notice">
+  <div class="dbar-in">
+    <span class="dbar-tag">Draft</span>
+    <span class="dbar-txt"><span class="d-long">Figures, names and dates are still being checked. </span>Last checked 31 Oct 2026</span>
+  </div>
+</div>
 <div class="wrap">
 
   <header class="masthead">
@@ -372,7 +419,7 @@
       <span class="flag">Draft</span>
       <p>
         This page is a draft. Figures, names, dates and photos are still being checked and may
-        change before it is final.
+        change before it is final. Last checked 31 October 2026.
       </p>
     </div>
   </header>
@@ -581,6 +628,7 @@
   <h2 class="sec">Where the money comes from <span>as of <span id="m-asof"></span></span></h2>
   <div class="srcbar" id="srcbar"></div>
   <div class="srclab" id="srclab"></div>
+  <div class="tcap"><span class="t">Draft</span> still being checked</div>
   <div class="tbl">
     <table id="money">
       <thead><tr><th>Source</th><th class="num">Amount</th><th>What the record says</th></tr></thead>
@@ -595,6 +643,7 @@
   </p>
 
   <h2 class="sec">Contracts on record <span>approved or signed</span></h2>
+  <div class="tcap"><span class="t">Draft</span> still being checked</div>
   <div class="tbl">
     <table id="who">
       <thead><tr><th>Firm</th><th>Role</th><th class="num">Amount</th><th>Approved or signed</th></tr></thead>
@@ -623,6 +672,7 @@
 
   <details class="more">
     <summary>Every vendor line <span id="sp-count"></span></summary>
+    <div class="tcap"><span class="t">Draft</span> still being checked</div>
     <div class="tbl">
       <table id="spend">
         <thead><tr><th>Vendor</th><th class="num">Paid</th><th class="num">Signed, not paid</th><th class="num">Total</th></tr></thead>
@@ -1041,7 +1091,7 @@ var DATA={
     tabs.forEach(t=>{const on=t.dataset.tab===k; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
       document.getElementById('p-'+t.dataset.tab).hidden=!on; if(on) t.scrollIntoView({block:'nearest',inline:'nearest'});});
     try{ history.replaceState(null,'',k===keys[0]?location.pathname+location.search:'#'+k); }catch(e){}
-    if(scroll){ const pn=document.getElementById('p-'+k); const y=Math.max(0,pn.getBoundingClientRect().top+scrollY-bar.offsetHeight-12); if(scrollY>y) window.scrollTo({top:y}); }
+    if(scroll){ const pn=document.getElementById('p-'+k); const y=Math.max(0,pn.getBoundingClientRect().top+scrollY-bar.offsetHeight-((document.querySelector('.dbar')||{offsetHeight:0}).offsetHeight)-12); if(scrollY>y) window.scrollTo({top:y}); }
     if(focus) document.getElementById('t-'+k).focus();
   }
   tabs.forEach((t,i)=>{
