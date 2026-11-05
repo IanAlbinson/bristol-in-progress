@@ -235,10 +235,10 @@
   .elsw a:hover{color:var(--ink);border-color:var(--ink-2)}
   .elsw a.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
   .pcard.oth .pn{color:var(--ink-2)}
-  details.more{margin-top:20px}
-  details.more summary{cursor:pointer;display:inline-block;font-size:13.5px;font-weight:600;color:var(--ink-2);
-    padding:8px 14px;border:1px solid var(--rule-strong);border-radius:4px;background:var(--surface)}
-  details.more summary:hover{color:var(--ink);border-color:var(--ink-2)}
+  .pcard.mine{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  h3.kind{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-2);margin:30px 0 0;display:flex;justify-content:space-between;gap:12px}
+  h3.kind span{color:var(--muted);letter-spacing:.02em;text-transform:none}
   .pcard .pn{color:var(--ink)}
   .row .rl .pty{color:var(--muted);font-size:11.5px}
   .row .rl{flex-wrap:nowrap}
@@ -479,13 +479,13 @@ function amendCards(){
 }
 
 /* ---------- district and county cards ---------- */
-function raceCard(r, bristol){
+function raceCard(r, bristol, mark){
   const t = tags(r.c, r.vf);
   const b = bristol && r.br;
   const rows = r.c.map((x,k)=>({...x, k, shown: b ? r.br.v[k] : x.v}));
   if(b) rows.sort((p,q)=>q.shown-p.shown);
   const base = b ? r.br.s : r.s;
-  return `<div class="pcard race"><div class="ph"><span class="pn">${OLBL(r.o)}</span><span class="pb">${r.d}${r.vf>1?` &middot; elect ${r.vf}`:''}</span></div>
+  return `<div class="pcard race${mark&&r.br?' mine':''}"><div class="ph"><span class="pn">${OLBL(r.o)}</span><span class="pb">${r.d}${r.vf>1?` &middot; elect ${r.vf}`:''}</span></div>
     ${rows.map(x=>rowHTML(tc(x.n),plbl(x.p),x.shown,base,pcol(x.p), b?'':(t[x.n]||''),
       b?`<div class="dw">${r.kind==='COUNTY'?'Countywide':'District-wide'}: ${n(x.v)} (${f1(pct(x.v,r.s))})${t[x.n]?' &middot; '+t[x.n].toLowerCase():''}</div>`:'')).join('')}
     ${b?extras(r.br.wi,r.br.ov,r.br.bl,base):extras(r.wi,r.ov,r.bl,base)}</div>`;
@@ -494,25 +494,21 @@ const RK = {SEN:0, HOUSE:1, COUNTY:2};
 const COUNTY_ORD = ['ASSISTANT JUDGE','PROBATE JUDGE',"STATE'S ATTORNEY",'SHERIFF','HIGH BAILIFF'];
 const byOrder = (a,b) => RK[a.kind]-RK[b.kind] || COUNTY_ORD.indexOf(a.o)-COUNTY_ORD.indexOf(b.o) || a.d.localeCompare(b.d);
 
-/* ---------- every candidate ---------- */
-let wq='', wOff='', candOpen=false;
-const ALLC = [];
-D.offices.forEach(o=>{ const a=agg(o,ALL), t=tags(a.c,o.vf);
-  a.c.forEach(x=>ALLC.push({o:o.name, d:'Statewide', n:x.n, p:x.p, v:x.v, pc:pct(x.v,a.s), t:t[x.n]||'', hi:false})); });
-D.races.forEach(r=>{ const t=tags(r.c,r.vf);
-  r.c.forEach(x=>ALLC.push({o:OLBL(r.o), d:r.d, n:x.n, p:x.p, v:x.v, pc:pct(x.v,r.s), t:t[x.n]||'', hi:!!r.br})); });
-function candidateTable(){
-  const q = wq.toLowerCase();
-  const rows = ALLC.filter(r=>(!wOff||r.o===wOff) && (!q||(r.n+' '+r.d+' '+r.o+' '+r.p).toLowerCase().includes(q)))
-    .map(r=>({hi:r.hi, cells:[cell(r.o), cell(r.d), cell(tc(r.n),'<b>'+tc(r.n)+'</b>'),
-      cell(plbl(r.p),`<span style="color:${pcol(r.p)};font-weight:600">${plbl(r.p)}</span>`),
-      cell(r.v,n(r.v)), cell(r.pc,f1(r.pc)), cell(r.t?0:1, r.t?`<span class="win">${r.t}</span>`:'')]}));
-  const offs = [...new Set(ALLC.map(r=>r.o))].sort();
+/* ---------- every district and county race ---------- */
+let wq='', wOff='';
+const raceText = r => (OLBL(r.o)+' '+r.d+' '+r.c.map(x=>x.n+' '+x.p).join(' ')).toLowerCase();
+const KINDS = [['SEN','State Senate'],['HOUSE','State House'],['COUNTY','County offices']];
+function everyRace(){
+  const q = wq.toLowerCase().trim();
+  const hit = D.races.filter(r=>(!wOff||OLBL(r.o)===wOff) && (!q||raceText(r).includes(q)));
+  const offs = [...new Set(D.races.map(r=>OLBL(r.o)))].sort();
+  const blocks = KINDS.map(([k,t])=>{ const rs=hit.filter(r=>r.kind===k).sort(byOrder); if(!rs.length) return '';
+    return `<h3 class="kind">${t} <span>${rs.length} ${rs.length===1?'race':'races'}</span></h3><div class="rgrid">${rs.map(r=>raceCard(r,false,true)).join('')}</div>`; }).join('');
   return `<div class="controls">
     <input type="search" id="wq" placeholder="Search candidate, party or district" value="${wq.replace(/"/g,'&quot;')}" style="flex:1;min-width:240px">
     <select id="woff" aria-label="Filter by office"><option value="">All offices</option>${offs.map(o=>`<option value="${o.replace(/"/g,'&quot;')}"${wOff===o?' selected':''}>${o}</option>`).join('')}</select>
-    <span class="count">${n(rows.length)} of ${n(ALLC.length)} candidates &middot; Bristol's districts highlighted</span></div>`
-    + table('wt',[{t:'Office'},{t:'District'},{t:'Candidate'},{t:'Party'},{t:'Votes',num:1},{t:'%',num:1},{t:'Status',num:1}],rows);
+    <span class="count">${hit.length} of ${D.races.length} races &middot; Bristol's races outlined</span></div>`
+    + (blocks || '<p class="empty">No races match.</p>');
 }
 
 /* ---------- panels ---------- */
@@ -531,11 +527,8 @@ function panelVT(o){
     + table('ctyt',[{t:'County'},{t:'Ballots',num:1},{t:'Turnout',num:1},{t:'Absentee',num:1},{t:'Leader'},{t:'Leader %',num:1},{t:'Margin',num:1}],rows)
     + `<h2 class="sec">Constitutional amendments <span>Bristol, Addison County and Vermont</span></h2>`
     + `<div class="note">Amendment results were last updated ${D.amendAsof}, so the statewide totals may still move.</div>` + amendCards()
-    + `<h2 class="sec">State Senate <span>Every district</span></h2>`
-    + `<div class="rgrid">${D.races.filter(r=>r.kind==='SEN').sort(byOrder).map(r=>raceCard(r)).join('')}</div>`
-    + `<h2 class="sec">Every candidate <span>Statewide, legislative and county offices</span></h2>`
-    + `<details id="allc" class="more"${candOpen?' open':''}><summary>Show all ${n(ALLC.length)} candidates, including every House district</summary>
-       <div class="note">Totals are for the whole district or county each candidate ran in, not for any one town.</div>${candidateTable()}</details>`;
+    + `<h2 class="sec">Every district and county race <span>Totals are for the whole district or county</span></h2>`
+    + everyRace();
 }
 
 function panelAD(o){
@@ -631,7 +624,6 @@ function render(){
   el.innerHTML = tab==='vt' ? panelVT(o) : tab==='ad' ? panelAD(o) : panelBR(o);
   document.getElementById('ctx').textContent =
     tab==='vt' ? `All 14 counties, ${T.length} towns and cities` : tab==='ad' ? 'Addison County, 23 towns' : 'Town of Bristol';
-  const allc = document.getElementById('allc'); if(allc) allc.ontoggle = () => { candOpen = allc.open; };
   const wqEl = document.getElementById('wq');
   if(wqEl){
     wqEl.oninput = e => { wq = e.target.value; render();
