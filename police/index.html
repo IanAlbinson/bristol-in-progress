@@ -358,10 +358,12 @@ const allCalls=yTot.reduce((a,b)=>a+b,0);
 const byType={}; YRS.forEach(y=>Object.entries(D.calls.years[y]).forEach(([t,n])=>byType[t]=(byType[t]||0)+n));
 const types=Object.entries(byType).sort((a,b)=>b[1]-a[1]);
 const CL=D.calls, sumv=o=>Object.values(o||{}).reduce((a,b)=>a+b,0);
+/* Mount Abe (Airport Dr) is outside the district: count it there, not as its own area */
+Object.entries(CL.mtabe||{}).forEach(([y,tc])=>{const o=CL.ood[y]=CL.ood[y]||{};Object.entries(tc).forEach(([t,n])=>o[t]=(o[t]||0)+n);});
 const oTot=YRS.map(y=>sumv(CL.ood[y])), allOod=oTot.reduce((a,b)=>a+b,0);
 const mTot=YRS.map(y=>sumv((CL.mtabe||{})[y])), allAbe=mTot.reduce((a,b)=>a+b,0);
 const vTot=YRS.map(y=>sumv(CL.vsp[y])), allVsp=vTot.reduce((a,b)=>a+b,0);
-const allBpd=allCalls+allOod+allAbe;
+const allBpd=allCalls+allOod;
 const ABEYRS=YRS.filter(y=>sumv((CL.mtabe||{})[y])>0);
 const CORR=CL.corrected||[], OLDYRS=YRS.filter(y=>!CORR.includes(y));
 const MY=CL.mapYear||YRS[YRS.length-1], PART=CL.partial||{};
@@ -373,7 +375,7 @@ document.getElementById('stats').innerHTML=[
  [pct(distAc,townAc,1),'Of the land in the town',fmt(Math.round(distAc))+' of '+fmt(Math.round(townAc))+' acres are in the district'],
  [usd0(expTotal),B.fy+' district budget','From the 2025 Annual Report'],
  [pct(tax,revTotal),'From the district tax',usd0(tax)+' that district property owners pay'],
- ['','Of Bristol PD calls are in the rest of the town','']
+ ['','Of Bristol PD calls are outside the district','']
 ].map((c,i)=>`<div class="stat"><div class="n"${i===3?' id="s4"':''}>${c[0]}</div><div class="l">${c[1]}</div><div class="sub2"${i===3?' id="s4b"':''}>${c[2]}</div></div>`).join('');
 
 document.getElementById('mapnote').innerHTML=
@@ -382,8 +384,7 @@ document.getElementById('mapnote').innerHTML=
   acres. There, the Vermont State Police give most of the police service. The district line on this
   map comes from the Tax Rate #3 parcels of the Listers. The <a href="../crashes/" style="color:var(--signal)">crash page</a>
   uses the same line. The orange dots show road intersections where Bristol PD recorded calls outside
-  the district in the years that you select. A larger dot shows more calls. The square shows the
-  Mount Abraham school campus on Airport Drive. Inside the district, the darker dots show calls at
+  the district in the years that you select. A larger dot shows more calls. Inside the district, the darker dots show calls at
   road intersections and the darker lines show calls that give only a street. A wider line shows
   more calls.`;
 
@@ -409,15 +410,15 @@ document.getElementById('exptab').innerHTML=`<thead><tr><th>Where the money goes
 /* calls: one cube, agency x area x year x type, filtered like the crash page */
 const ly=YRS[YRS.length-1];
 const AGS=['BPD','VSP'], AGL={BPD:'Bristol PD',VSP:'VT State Police'};
-const ZNS=['District','Town','MtAbe','None'], ZNL={District:'In district',Town:'Town',MtAbe:'Mount Abe',None:'Not given'};
-const CUBE={BPD:{District:CL.years,Town:CL.ood,MtAbe:CL.mtabe||{},None:{}},VSP:{District:{},Town:{},MtAbe:{},None:CL.vsp}};
+const ZNS=['District','Town','None'], ZNL={District:'In district',Town:'Town',None:'Not given'};
+const CUBE={BPD:{District:CL.years,Town:CL.ood,None:{}},VSP:{District:{},Town:{},None:CL.vsp}};
 const cnt=(g,z,y)=>sumv((CUBE[g][z]||{})[y]);
 const CAG=()=>({BPD:cssv('--bar'),VSP:cssv('--vsp')});
 const CZN=()=>({District:cssv('--bar'),Town:cssv('--out'),None:cssv('--vsp')});
 const CATS=['BPDin','BPDout','VSP'], CATL={BPDin:'Bristol PD, in district',BPDout:'Bristol PD, outside',VSP:'VT State Police'};
 const catOf=(g,z)=>g==='VSP'?'VSP':z==='District'?'BPDin':'BPDout';
 const CCAT=()=>({BPDin:cssv('--bar'),BPDout:cssv('--out'),VSP:cssv('--vsp')});
-const st={c:{BPDin:true,BPDout:true,VSP:true},z:{District:true,Town:true,MtAbe:true,None:true}}, sel={a:+YRS[0],b:+ly};
+const st={c:{BPDin:true,BPDout:true,VSP:true},z:{District:true,Town:true,None:true}}, sel={a:+YRS[0],b:+ly};
 const YN=YRS.map(Number), inSel=y=>+y>=sel.a&&+y<=sel.b;
 const YC={}; YRS.forEach(y=>YC[y]=AGS.reduce((s,g)=>s+ZNS.reduce((t,z)=>t+cnt(g,z,y),0),0));
 const YM=Math.max(...Object.values(YC));
@@ -453,20 +454,18 @@ function refresh(){
   CATS.forEach(c=>{const e=document.querySelector(`#agpills .k[data-c="${c}"]`);if(e)e.textContent=fmt(AGS.reduce((s,g)=>s+ZNS.reduce((t,z)=>t+(catOf(g,z)===c?n(g,z):0),0),0));});
   ZNS.forEach(z=>{const e=document.querySelector(`#zpills .k[data-c="${z}"]`);if(e)e.textContent=fmt(AGS.reduce((s,g)=>s+n(g,z),0));});
   // stat tile
-  const bd=n('BPD','District'), bt=n('BPD','Town'), ba=n('BPD','MtAbe'), bAll=bd+bt+ba;
+  const bd=n('BPD','District'), bt=n('BPD','Town'), bAll=bd+bt;
   document.getElementById('s4').textContent=bAll?pct(bt,bAll):'—';
-  document.getElementById('s4b').textContent=fmt(bt)+' of '+fmt(bAll)+' calls, '+rng+(ba?'. With Mount Abe calls: '+pct(bt+ba,bAll):'');
+  document.getElementById('s4b').textContent=fmt(bt)+' of '+fmt(bAll)+' calls, '+rng;
   // agency by district
   const A=CAG(), rows=AGS.map(g=>{const r={g,tot:0};ZNS.forEach(z=>{r[z]=n(g,z);r.tot+=r[z];});return r;});
   const td=v=>`<td class="num${v?'':' z'}">${fmt(v)}</td>`;
-  document.getElementById('xtab').innerHTML=`<thead><tr><th>Agency</th><th class="num">Dist.</th><th class="num">Town</th><th class="num">Mt. Abe</th><th class="num">Not given</th><th class="num">All</th></tr></thead><tbody>`
-   + rows.map(r=>`<tr><td><span class="ag"><i style="background:${A[r.g]}"></i>${AGL[r.g]}</span></td>${td(r.District)}${td(r.Town)}${td(r.MtAbe)}${td(r.None)}<td class="num">${fmt(r.tot)}</td></tr>`).join('')
+  document.getElementById('xtab').innerHTML=`<thead><tr><th>Agency</th><th class="num">Dist.</th><th class="num">Town</th><th class="num">Not given</th><th class="num">All</th></tr></thead><tbody>`
+   + rows.map(r=>`<tr><td><span class="ag"><i style="background:${A[r.g]}"></i>${AGL[r.g]}</span></td>${td(r.District)}${td(r.Town)}${td(r.None)}<td class="num">${fmt(r.tot)}</td></tr>`).join('')
    + `<tr class="tot"><td>All agencies</td>${ZNS.map(z=>`<td class="num">${fmt(rows.reduce((s,r)=>s+r[z],0))}</td>`).join('')}<td class="num">${fmt(rows.reduce((s,r)=>s+r.tot,0))}</td></tr></tbody>`;
   document.getElementById('xsub').textContent=rng;
   const vs=n('VSP','None');
-  document.getElementById('xnote').innerHTML=bAll?`Bristol PD recorded <b>${fmt(bt)} of its ${fmt(bAll)}</b> calls in the rest of the town, outside the district (${pct(bt,bAll)}).`
-   + (ba?` It also recorded ${fmt(ba)} calls at the Mount Abraham school campus, which is outside the district (${pct(ba,bAll)}). With these calls, ${pct(bt+ba,bAll)} of its calls are outside the district.`:'')
-   + ` The State Police recorded ${fmt(vs)} calls in the Town of Bristol. Their records do not give a location.`:'';
+  document.getElementById('xnote').innerHTML=bAll?`Bristol PD recorded <b>${fmt(bt)} of its ${fmt(bAll)}</b> calls outside the district (${pct(bt,bAll)}). The State Police recorded ${fmt(vs)} calls in the Town of Bristol. Their records do not give a location.`:'';
   // call types, by the filters
   const on=[]; AGS.forEach(g=>ZNS.forEach(z=>{if(st.c[catOf(g,z)]&&st.z[z])on.push([g,z]);}));
   const T={}; on.forEach(([g,z])=>ys.forEach(y=>Object.entries((CUBE[g][z]||{})[y]||{}).forEach(([t,k])=>{T[t]=T[t]||{};T[t][y]=(T[t][y]||0)+k;})));
@@ -492,7 +491,7 @@ document.getElementById('callnote').innerHTML=
   now "School Patrol" or "Business Check." Thus, do not compare the call types for ${rngOf(OLDYRS)}
   with the call types for ${rngOf(CORR)}.`:'')
   + (ABEYRS.length?` <b>The ${rngOf(OLDYRS)} records do not include the calls at the Mount Abraham
-  school campus.</b> The ${rngOf(ABEYRS)} records include these calls. They are in the "Mount Abe" area.`:'')
+  school campus.</b> The ${rngOf(ABEYRS)} records include these calls.`:'')
   + ` The department gives each incident a number in sequence through the year. For ${rngOf(OLDYRS)},
   ${gapTxt(OLDYRS)} numbers each year are not in the inside list or the outside list. The records do
   not tell what these calls are. Thus, the counts for these years are lower than the recorded work.`
@@ -505,8 +504,9 @@ function locNote(ys){
   const S=k=>ys.reduce((a,y)=>{Object.entries(CL.loc[y][k]).forEach(([t,n])=>a[t]=(a[t]||0)+n);return a;},{});
   const G=S('so'), I=S('si'), n=v=>fmt(v||0), rl=rngOf(ys);
   const ma=ys.reduce((s,y)=>s+sumv((CL.mtabe||{})[y]),0);
-  el.innerHTML=`<b>Locations of the ${rl} calls outside the district.</b>`
-  + (ma?` These counts do not include the ${fmt(ma)} calls at the Mount Abraham school campus.`:'')
+  el.innerHTML=`<b>Locations of the ${rl} calls outside the district.</b>`;
+  G.outside=(G.outside||0)+ma; G.total=(G.total||0)+ma;
+  el.innerHTML+= (ma?` These counts include the ${fmt(ma)} calls at the Mount Abraham school campus on Airport Drive. The map shows them as one dot.`:'')
   + ` The records give a street location for each call. We compared each location with the
   district line. ${n(G.outside)} of the ${n(G.total)} calls are clearly outside the line.
   ${n(G.edge)} ${G.edge===1?'call is':'calls are'} less than approximately 50 meters from the line.
@@ -594,19 +594,18 @@ function drawPts(){
        .bindPopup(popT(g[2],tc,`Calls here, ${rl}`)).addTo(oodL);});
   }
   if(!st.c.BPDout) return;
-  if(st.z.MtAbe&&MA.a&&CL.mtabePt){
-    L.marker([CL.mtabePt[0],CL.mtabePt[1]],{icon:L.divIcon({className:'',iconSize:[18,18],
-      html:`<div style="width:18px;height:18px;background:${cssv('--out')};border:2px solid ${cssv('--surface')};border-radius:3px;opacity:.9"></div>`})})
-     .bindPopup(popT('Mount Abraham school campus',MA.a,`Calls here, ${rl}`)).addTo(oodL);
-  }
   if(!st.z.Town) return;
+  if(MA.a&&CL.mtabePt){
+    L.circleMarker([CL.mtabePt[0],CL.mtabePt[1]],{radius:3+Math.sqrt(sumv(MA.a)/per)*2.2,color:cssv('--surface'),weight:1.4,fillColor:cssv('--out'),fillOpacity:.8})
+     .bindPopup(popT('Mount Abraham school campus, Airport Dr',MA.a,`Calls here, ${rl}`)).addTo(oodL);
+  }
   Object.entries(OUT).forEach(([k,tc])=>{const g=CL.geo.out[k];
     L.circleMarker([g[0],g[1]],{radius:3+Math.sqrt(sumv(tc)/per)*2.2,color:cssv('--surface'),weight:1.4,fillColor:cssv('--out'),fillOpacity:.8})
      .bindPopup(popT(g[2],tc,`Calls here, ${rl}`)).addTo(oodL);});
 }
 if(window.matchMedia){const mq2=window.matchMedia('(prefers-color-scheme: dark)');(mq2.addEventListener?mq2.addEventListener.bind(mq2,'change'):mq2.addListener.bind(mq2))(()=>{refresh();});}
 pills('agpills',CATS,st.c,CCAT(),CATL);
-pills('zpills',ZNS,st.z,{District:cssv('--muted'),Town:cssv('--muted'),MtAbe:cssv('--muted'),None:cssv('--muted')},ZNL);
+pills('zpills',ZNS,st.z,{District:cssv('--muted'),Town:cssv('--muted'),None:cssv('--muted')},ZNL);
 document.getElementById('lb').onchange=function(){this.checked?map.addLayer(distL):map.removeLayer(distL);document.getElementById('pbound').className='pill'+(this.checked?' on':' off');};
 document.getElementById('lpts').onchange=function(){document.getElementById('ppts').className='pill'+(this.checked?' on':' off');drawPts();};
 refresh();
@@ -614,7 +613,6 @@ document.getElementById('maplegend').innerHTML=
   `<span class="k"><i style="background:transparent;border:2px dashed var(--bound);border-radius:2px"></i>Police District</span>`+
   `<span class="k"><i style="background:transparent;border:2px dotted var(--townline);border-radius:2px"></i>Town of Bristol</span>`+
   `<span class="k"><i style="background:var(--out);border-radius:50%"></i>Calls outside the district, at road intersections</span>`+
-  (CL.mtabePt?`<span class="k"><i style="background:var(--out);border-radius:2px"></i>Mount Abraham school campus</span>`:'')+
   (CL.loc?`<span class="k"><i style="background:var(--bar);border-radius:50%"></i>Calls in the district, at intersections and on streets</span>`:'');
 
 /* ---------- footer ---------- */
@@ -634,9 +632,8 @@ document.getElementById('checked').innerHTML=
   `<b>How we checked the numbers.</b> The page calculates each number when it opens. The budget lines
   total ${usd(revTotal)} in revenue and ${usd(expTotal)} in spending. These agree with the printed
   totals of ${usd(B.printed_total)}. Taxes give ${usd(B.printed_tax)}. We counted the calls from the
-  record for each year: ${fmt(allCalls)} inside the district, ${fmt(allOod)} in the rest of the town
-  and ${fmt(allAbe)} at the Mount Abraham school campus. A call is in the "Mount Abe" area if its
-  location is Airport Drive or the school. In the corrected records, one 2024 incident number is in
+  record for each year: ${fmt(allCalls)} inside the district and ${fmt(allOod)} outside it. The outside count includes
+  ${fmt(allAbe)} calls at the Mount Abraham school campus on Airport Drive. In the corrected records, one 2024 incident number is in
   both the inside list and the outside list. We did not change the lists of the department. We
   compared each location for ${rngOf(LOCYRS)} with the state E911 road data and with the district line. Some
   locations give only a road name. If that road does not go into the district, we counted the call
