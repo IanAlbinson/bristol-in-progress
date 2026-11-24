@@ -656,10 +656,10 @@
   </p>
 
   <!-- ============ SPEND ============ -->
-  <h2 class="sec">What it has cost so far <span>through the October 26 warrant</span></h2>
+  <h2 class="sec">What it has cost so far <span>through the November 23 warrant</span></h2>
   <p class="lede">
     The Town's check warrants record every payment the Selectboard approves. Here is where the
-    Holley Hall project stands through the October 26 warrant: the totals first, then how they work out to the
+    Holley Hall project stands through the November 23 warrant: the totals first, then how they work out to the
     Town's share.
   </p>
   <div class="cost4" id="cost4"></div>
@@ -771,7 +771,7 @@
       airtightness test report (August 11, 2026), which restates the assessment's baseline test. Contract pricing comes from Silver Maple Construction's budget for contract (January 22,
       2026). Cost and payment figures come from the Town's spend-against-funding tally of every
       check warrant through September 28, 2026 and the State's grant payments (dated September
-      30, 2026). Project payments on the October 12, 2026 check warrant are added to that summary; the October 26 warrant has no project payments. Incentive figures come from Green Mountain Power's letter of support (corrected
+      30, 2026). Project payments on the October 12 and November 23, 2026 check warrants are added to that summary; the October 26 and November 9 warrants have no Holley Hall project payments. Incentive figures come from Green Mountain Power's letter of support (corrected
       July 15, 2026) and Efficiency Vermont's weatherization offer (July 22, 2026). Project partner roles and logos come from Vermont Integrated Architecture's Project Partners sheet (draft, October 20, 2026). Milestones come from the weekly owner, architect and contractor meeting
       notes and project correspondence. Architect's drawings are sheets from Vermont Integrated Architecture's drawing sets in the Town's project files, shown as issued; each sheet carries its own date. Photos come from the Town's project photo folder, plus older photos from the Town's Holley Hall photo folder (the February 2019 photo is by Meridith McFarland); dates
       are read from each photo's own camera data. They were resized for the web and all location
@@ -855,14 +855,15 @@ var DATA={
   {d:"September 9, 2026",ph:["1611","1607"],e:"<b>Fire marshal's final inspection.</b> The building passes and receives a conditional certificate of occupancy."},
   {d:"September 17, 2026",ph:["1617"],e:"Recreation staff move back into their office. Staff training on the new mechanical systems is scheduled the same day."},
   {d:"September 25, 2026",e:"Change order for balcony repairs signed, $12,942.06."},
-  {d:"October 12, 2026",e:"The Selectboard's warrant pays Silver Maple's seventh pay application, $13,980.06, and $2,158.35 to the architect."}
+  {d:"October 12, 2026",e:"The Selectboard's warrant pays Silver Maple's seventh pay application, $13,980.06, and $2,158.35 to the architect."},
+  {d:"November 23, 2026",e:"The Selectboard's warrant pays the architect $720.00 for Holley Hall."}
  ],
- paid:522589.64,
+ paid:523309.64,
  signed:0,
  reserve:150000,
  vendors:[
   {k:"Silver Maple Construction",sub:"General contractor, including the balcony change order",v:451926.76},
-  {k:"Vermont Integrated Architecture",sub:"Design and site visits, Holley Hall share",v:48882.98},
+  {k:"Vermont Integrated Architecture",sub:"Design and site visits, Holley Hall share",v:49602.98},
   {k:"G. Helms Construction",sub:"Dormer flashing and slate",v:13444.10},
   {k:"The Royal Group",sub:"Alarm work",v:5059.80},
   {k:"Green Mountain Enclosure Consulting",sub:"Airtightness testing",v:2550.00},
@@ -958,7 +959,7 @@ var DATA={
 
   $("stats").innerHTML=[
     [usd(DATA.grant,1),"State grant","Paid in full, August 2026"],
-    [usd(known),"Known cost","Paid through the October 26 warrant"],
+    [usd(known),"Known cost","Paid through the November 23 warrant"],
     [cut+"% less","Air leakage","Final test, August 10, 2026"],
     [DATA.sqft.toLocaleString(),"Square feet","Two stories, meeting hall upstairs"]
   ].map(function(s){return '<div class="stat"><div class="n">'+s[0]+'</div><div class="l">'+s[1]+'</div><div class="sub2">'+s[2]+'</div></div>'}).join("");
@@ -1041,7 +1042,7 @@ var DATA={
   document.querySelector("#money tbody").innerHTML=
     '<tr><td class="nm">State MERP grant</td><td class="num">'+u2(DATA.grant)+'</td><td>'+M.grantNote+'</td></tr>'+
     '<tr><td class="nm">Town reserve</td><td class="num">'+u2(DATA.reserve)+'</td><td>Set aside by the Town for the project.</td></tr>'+
-    '<tr><td class="nm">Town money beyond the reserve</td><td class="num">'+u2(overGR)+'</td><td>What the known cost runs past the grant and the reserve, through the October 26 warrant.</td></tr>'+
+    '<tr><td class="nm">Town money beyond the reserve</td><td class="num">'+u2(overGR)+'</td><td>What the known cost runs past the grant and the reserve, through the November 23 warrant.</td></tr>'+
     '<tr><td class="nm">Efficiency Vermont and GMP incentives</td><td class="num"><span class="pend">up to</span> '+u2(inc)+'</td><td>Not yet received: Green Mountain Power heat pump incentive ('+u2(gmp.v)+', '+gmp.st.toLowerCase()+') and Efficiency Vermont weatherization ('+u2(ev.v)+', '+ev.st.charAt(0).toLowerCase()+ev.st.slice(1)+'). Green Mountain Power pays after installation and inspection; Efficiency Vermont is waiting on the ventilation equipment invoices.</td></tr>'+
     '<tr class="tot"><td>Known cost</td><td class="num">'+u2(known)+'</td><td></td></tr>'+
     '<tr><td class="nm">Grant paid so far</td><td class="num">'+u2(DATA.grant)+'</td><td>Paid in full in five payments, February to August 2026. The fifth and final payment came August 24.</td></tr>';
@@ -1078,7 +1079,7 @@ var DATA={
   $("firms").innerHTML=DATA.firms.map(function(f){return '<li>'+f[0]+'<span>'+f[1]+'</span></li>'}).join("");
 
   $("asofshort").textContent=fmtDate(DATA.asof);
-  $("asof").textContent="Data as of "+fmtDate(DATA.asof)+" · Page updated October 26, 2026";
+  $("asof").textContent="Data as of "+fmtDate(DATA.asof)+" · Page updated November 24, 2026";
 })();
 </script>
 <script>
